@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {{#if (title_is_home title)}}
+        <title> BookStack </title>
+    {{else}}
+        <title> BookStack | {{ title }}</title>
+    {{/if}}
+    {{> css }}
+</head>
+<body>
+    {{> navbar_selector}}
+    {{{ body }}}
+    {{> javascript }}
+
+</body>
+
+
+
+</html>

@@ -2,12 +2,94 @@ let express = require("express"),
     http    = require("http"),
     path    = require("path"),
     exphbs     = require('express-handlebars');
+let mongoose = require("mongoose");
+let session = require("express-session");
+let mongoStore = require("connect-mongo")(session);
 
 const PORT = 8000;
 
 const app = express();
 const server = http.createServer(app);
 const io    = require("socket.io")(server);
+const formatMessage = require("./config/messages");
+
+
+require('dotenv').config();
+
+///////////////DATABASE DRIVER CODE
+
+
+
+const URI = `mongodb+srv://dbAdmin:${process.env.dbPassword}@basebookstack-zx7sx.mongodb.net/${process.env.dbDatabase}?retryWrites=true&w=majority`;
+
+mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true});
+let db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
+
+//Use sessions for tracking logins
+app.use(session({
+    secret: 'Server initialized',
+    resave: false,
+    saveUninitialized: true,
+    store: new mongoStore({
+        mongooseConnection: db
+    })
+}));
+
+
+////////////////////////
+
+
+
+
+
+
+
+
+
+const botName = "Chatbot";
+
+// Run when client connects
+io.on('connection', socket => {
+
+    socket.on('joinRoom', ({username, room}) => {
+
+        socket.emit('message', formatMessage(botName, 'Welcome to ChatMe'));
+        socket.broadcast.to(room).emit('message', formatMessage(botName, `A ${username} has joined the chat`));
+
+        socket.join(room);
+
+        //Runs when client disconnects
+        socket.on('disconnect', () => {
+            io.emit('message', formatMessage(botName, `${username} has left the chat`));
+        });
+
+        socket.on('chatMessage', (msg) => {
+            console.log(msg);
+            io.emit('message', formatMessage(username, msg));
+        });
+    });
+
+
+
+
+
+
+
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
 
 
 

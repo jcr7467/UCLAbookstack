@@ -10,4 +10,13 @@ router.get('/', (request, response) => {
 });
 
 
+router.get('/chat', (request, response) => {
+    response.render('chat', {
+        title: "Chat",
+        navbar: "dark"
+    })
+});
+
+
+
 module.exports = router;

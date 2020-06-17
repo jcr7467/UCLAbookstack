@@ -15,6 +15,7 @@ console.log(username, room)
 socket.emit('joinRoom', {username, room});
 
 socket.on('message', (message) => {
+
     console.log(message);
     outputMessage(message);
 

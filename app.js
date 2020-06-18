@@ -20,7 +20,7 @@ require('dotenv').config();
 
 
 
-const URI = `mongodb+srv://dbAdmin:${process.env.dbPassword}@basebookstack-zx7sx.mongodb.net/${process.env.dbDatabase}?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://dbAdmin:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
 
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true});
 let db = mongoose.connection;
@@ -38,8 +38,6 @@ app.use(session({
 
 
 ////////////////////////
-
-
 
 
 

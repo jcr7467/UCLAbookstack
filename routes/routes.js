@@ -31,6 +31,13 @@ router.get('/howitworks', (request, response) => {
     });
 });
 
+router.get('/howToFindISBN', (request, response) => {
+    response.render('findISBN', {
+        title: 'Find ISBN',
+        navbar: 'default'
+    });
+});
+
 
 router.get('/bookformtips',(request, response) => {
     response.render('bookformtips', {

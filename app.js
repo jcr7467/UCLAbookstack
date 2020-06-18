@@ -21,7 +21,6 @@ require('dotenv').config();
 
 
 const URI = `mongodb+srv://dbAdmin:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
-
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
@@ -102,12 +101,20 @@ let hbs = exphbs.create({
     defaultLayout: 'layout',
     layoutsDir: path.join(__dirname + '/views/layouts'),
     helpers: require('./config/handlebar_helpers.js'),
-    partialsDir: ['./views/partials/', './views/partials/navbars/']
+    partialsDir: [
+        './views/partials/',
+        './views/partials/navbars/',
+        './views/partials/footers/'
+    ]
 });
+
+
 //// SET VIEW ENGINE
 app.engine('hbs', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+
 
 
 

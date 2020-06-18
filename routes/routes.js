@@ -54,4 +54,25 @@ router.get('/privacyPolicy', (request, response) => {
     });
 });
 
+
+
+
+
+router.route('/signin').get((request, response) => {
+    response.render('partials/signinout/signin', {
+        title: 'Sign in',
+        layout: 'signinout_layout.hbs'
+    });
+});
+
+
+
+router.get('/uploadpics', (request, response) => {
+    response.render('multiple_pics_guide', {
+        title: 'Upload Multiple Pictures',
+        navbar: 'default'
+    })
+});
+
+
 module.exports = router;

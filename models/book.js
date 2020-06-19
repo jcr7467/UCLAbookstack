@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate");
+const mongoose = require('mongoose');
+let mongoosePaginate = require('mongoose-paginate');
+
 
 let BookSchema = new mongoose.Schema({
     title: {
@@ -33,7 +34,7 @@ let BookSchema = new mongoose.Schema({
     }],
     mainpic: {
         type: String,
-        default: '/img/no_image_available.jpeg'
+        default: '/img/no_image_available.jpg'
     },
     email: String,
     bookOwner: String,
@@ -48,9 +49,21 @@ let BookSchema = new mongoose.Schema({
     }
 });
 
-
-//We add in this plugin so that we can return a certain array and paginate between lots of books
 BookSchema.plugin(mongoosePaginate);
+
+
+BookSchema.pre("save", function (next) {
+    if (this.pictureLocations.length === 0)
+        this.pictureLocations.push('/img/no_image_available.jpg');
+
+    next();
+});
+
+
+
+
+
+
 
 let Book = mongoose.model('Book', BookSchema);
 module.exports = Book;

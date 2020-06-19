@@ -445,10 +445,3 @@ ul {
     display: none;
     margin-left: 100%;
 }
-
-
-#contact-bookstack {
-    background-image: url("/images/handwave.png");
-    background-repeat: no-repeat;
-    height: 300px;
-}

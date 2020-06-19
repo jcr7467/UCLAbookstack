@@ -81,6 +81,32 @@ router.get('/contact', (request, response) => {
 //
 
 
+
+
+
+
+
+
+
+router.get('/messages', (request, response, next) => {
+
+    response.render('chat', {
+        title: "Chat",
+        navbar: "default"
+    })
+
+
+
+
+});
+
+
+
+
+
+
+
+
 router.route('/signin')
     .get((request, response) => {
         response.render('partials/signinout/signin', {
@@ -150,6 +176,13 @@ router.route('/signup')
 });
 
 
+router.route('/forgot')
+    .get((request, response) => {
+        response.render('partials/signinout/forgot_password.hbs', {
+            title: 'Forgot password',
+            layout: 'signinout_layout.hbs'
+        });
+    });
 
 
 router.get('/signout', (request, response, next) => {

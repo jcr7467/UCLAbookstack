@@ -438,3 +438,10 @@ ul {
     min-height: 50px;
     border: 1px solid transparent;
 }
+
+
+
+#formfilt {
+    display: none;
+    margin-left: 100%;
+}

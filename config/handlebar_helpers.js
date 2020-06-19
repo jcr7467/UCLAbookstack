@@ -10,6 +10,10 @@ module.exports = {
     },
     navbar_requested_is_default: function (navbar_type) {
         return (navbar_type == 'default')
+    },
+    user_is_logged_in: function(userID){
+        return userID != null;
+
     }
 }
 

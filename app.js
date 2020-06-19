@@ -6,6 +6,13 @@ let mongoose = require("mongoose");
 let session = require("express-session");
 let mongoStore = require("connect-mongo")(session);
 
+
+
+let bodyParser = require("body-parser");
+
+
+
+
 const PORT = 8000;
 
 const app = express();
@@ -21,7 +28,7 @@ require('dotenv').config();
 
 
 const URI = `mongodb+srv://dbAdmin:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
-mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
 
@@ -39,9 +46,29 @@ app.use(session({
 ////////////////////////
 
 
+// SET USER VARIABLES TO USE IN TEMPLATES
+//Make user ID available in pug templates
+app.use((request, response, next) => {
+    response.locals.admin_level = request.session.admin_level;
+    response.locals.currentUser = request.session.userId;
+    next();
+});
 
 
 
+// PARSE INCOMING REQUESTS
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+
+
+
+////////////////////////
+
+
+// SOCKET HANDLING
 
 
 const botName = "Chatbot";
@@ -163,3 +190,6 @@ app.use((err, request, response, next) => {
 server.listen((process.env.PORT || PORT), () => {
     console.log("BookStack is running in port " + PORT);
 });
+
+
+

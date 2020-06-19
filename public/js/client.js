@@ -54,3 +54,13 @@ function outputMessage(msg){
     document.querySelector('.chat-messages').appendChild(div);
 
 }
+
+
+
+
+
+$(document).ready(
+    function() {
+        $('#formfilt').hide()
+    }
+);

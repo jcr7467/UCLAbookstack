@@ -27,7 +27,16 @@
 
         <div class="intro">
             <h1 class="customFadeInUp">Textbooks made easy</h1>
-            <p class="customFadeInUp" style="color:white; font-size:20px">Throw your textbook in the BookStack,<br/>        and let other UCLA students find<strong> you</strong></p><a class="nav-link nav-link--rounded" href="/signup">Sign Up Now</a>
+            <p class="customFadeInUp" style="color:white; font-size:20px">
+                Throw your textbook in the BookStack,<br/>and let other UCLA students find<strong> you</strong>
+            </p>
+            {{#if (user_is_logged_in currentUser)}}
+                <a href="/uploadbook" class="nav-link nav-link--rounded"> Stack a book</a>
+            {{else}}
+
+                <a class="nav-link nav-link--rounded" href="/signup">Sign Up Now</a>
+            {{/if}}
+
         </div>
         <nav><a class="prev" href=""><span class="icon-wrap"></span></a><a class="next" href=""><span class="icon-wrap"></span></a></nav>
     </div>

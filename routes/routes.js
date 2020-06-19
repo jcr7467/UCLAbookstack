@@ -66,17 +66,43 @@ router.get('/privacyPolicy', (request, response) => {
 
 
 
+router.get('/contact', (request, response) => {
+    response.render('contact', {
+        title: 'Contact Us',
+        navbar: 'clear'
+    });
+});
+
+
+
 //////////////////////////////////////////////
 // GET/POST PAGES
 // PAGES THAT DON'T HAVE POST REQUESTS
 //
 
 
-router.route('/signin').get((request, response) => {
-    response.render('partials/signinout/signin', {
-        title: 'Sign In',
-        layout: 'signinout_layout.hbs'
-    });
+router.route('/signin')
+    .get((request, response) => {
+        response.render('partials/signinout/signin', {
+            title: 'Sign In',
+            layout: 'signinout_layout.hbs'
+        });
+    }).post((request, response, next) => {
+        if (request.body.email && request.body.password){
+            User.authenticate(request.body.email, request.body.password, (err, user) => {
+                if (err || !user){
+                    return response.redirect('/signin');
+                }else{
+                    request.session.userId = user._id;
+                    request.session.admin_level = user.admin_level
+                    return response.redirect('/');
+                }
+            });
+        }else{
+            let err = new Error("Both fields are required");
+            err.status = 401;
+            return next(err);
+        }
 });
 
 router.route('/signup')

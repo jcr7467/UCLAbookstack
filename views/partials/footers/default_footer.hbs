@@ -10,30 +10,35 @@
                     <li><a href="/howtofindisbn">How to find ISBN</a></li>
                 </ul>
             </div>
-            <div class="col-md-6 newsletter">
-                <div class="title">Sign up now</div>
-                <form method="POST" action="/signup">
-                    <div class="form-field">
-                        <input class="form-control" type="text" placeholder="Full Name" name="name" required="required" />
-                    </div><br/>
-                    <div class="form-field">
-                        <input class="form-control" type="email" placeholder="Email" name="email" required="required" />
-                    </div><br/>
-                    <div class="form-field">
-                        <input class="form-control" type="password" placeholder="Password" name="password" minlength="6" required="required" />
-                    </div><br/>
-                    <div class="form-field">
-                        <label class="terms" style="color:white"><input id="termsCheckbox" type="checkbox" name="terms" required="required"/> I've read & agree with the<a href="/termsOfUse"> Terms</a> and<a href="/privacypolicy"> Privacy</a>.</label>
-                    </div>
-                    <div class="form-field" id="formfilt">
-                        <input type="text" name="formfilt">
-                    </div>
-                    <div class="form-action">
-                        <input class="btn-shadow btn-shadow-primary" id="signupButton" type="submit" value="Sign Up" />
-                    </div><br/>
-                    <div class="form-bottom" style="color:white">Already have an account?<a href="/signin">Sign in</a></div>
-                </form>
-            </div>
+
+
+            {{#unless (user_is_logged_in currentUser) }}
+                <div class="col-md-6 newsletter">
+                    <div class="title">Sign up now</div>
+                    <form method="POST" action="/signup">
+                        <div class="form-field">
+                            <input class="form-control" type="text" placeholder="Full Name" name="name" required="required" />
+                        </div><br/>
+                        <div class="form-field">
+                            <input class="form-control" type="email" placeholder="Email" name="email" required="required" />
+                        </div><br/>
+                        <div class="form-field">
+                            <input class="form-control" type="password" placeholder="Password" name="password" minlength="6" required="required" />
+                        </div><br/>
+                        <div class="form-field">
+                            <label class="terms" style="color:white"><input id="termsCheckbox" type="checkbox" name="terms" required="required"/> I've read & agree with the<a href="/termsOfUse"> Terms</a> and<a href="/privacypolicy"> Privacy</a>.</label>
+                        </div>
+                        <div class="form-field" id="formfilt">
+                            <input type="text" name="formfilt">
+                        </div>
+                        <div class="form-action">
+                            <input class="btn-shadow btn-shadow-primary" id="signupButton" type="submit" value="Sign Up" />
+                        </div><br/>
+                        <div class="form-bottom" style="color:white">Already have an account?<a href="/signin">Sign in</a></div>
+                    </form>
+                </div>
+            {{/unless}}
+
         </div>
         <div class="bottom">
             <ul>

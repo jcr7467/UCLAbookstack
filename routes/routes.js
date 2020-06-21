@@ -81,13 +81,6 @@ router.get('/contact', (request, response) => {
 //
 
 
-
-
-
-
-
-
-
 router.get('/messages', (request, response, next) => {
 
     response.render('chat', {
@@ -95,9 +88,6 @@ router.get('/messages', (request, response, next) => {
         navbar: "default"
     })
 
-
-
-
 });
 
 
@@ -106,94 +96,6 @@ router.get('/messages', (request, response, next) => {
 
 
 
-
-router.route('/signin')
-    .get((request, response) => {
-        response.render('partials/signinout/signin', {
-            title: 'Sign In',
-            layout: 'signinout_layout.hbs'
-        });
-    }).post((request, response, next) => {
-        if (request.body.email && request.body.password){
-            User.authenticate(request.body.email, request.body.password, (err, user) => {
-                if (err || !user){
-                    return response.redirect('/signin');
-                }else{
-                    request.session.userId = user._id;
-                    request.session.admin_level = user.admin_level
-                    return response.redirect('/');
-                }
-            });
-        }else{
-            let err = new Error("Both fields are required");
-            err.status = 401;
-            return next(err);
-        }
-});
-
-router.route('/signup')
-    .get((request, response) => {
-        response.render('partials/signinout/signup', {
-            title: 'Sign Up',
-            layout: 'signinout_layout.hbs'
-        });
-    })
-    .post((request, response) => {
-
-        if (request.body.formfilt){
-            // This will hopefully filter bots out,
-            // users will not see formfilt section, only robots will
-            response.redirect('/');
-
-        }else{
-
-            if (request.body.email &&
-                request.body.password &&
-                request.body.name){
-
-
-                //Creates Javascript object with form input data
-                let userData = {
-                    email: request.body.email,
-                    name: request.body.name,
-                    password: request.body.password
-                }
-
-                //Uses schema's 'create' method to insert document into Mongo
-                User.create(userData, (error, user) => {
-                    if (error){ return next(error);}
-                    request.session.userId = user._id; // By setting this, we are "logging" them in
-                    request.session.admin_level = user.admin_level
-                    return response.redirect('/');
-                });
-
-            }else{
-                let err = new Error('All fields required');
-                err.status = 400;
-                return next(err);
-            }
-        }
-});
-
-
-router.route('/forgot')
-    .get((request, response) => {
-        response.render('partials/signinout/forgot_password.hbs', {
-            title: 'Forgot password',
-            layout: 'signinout_layout.hbs'
-        });
-    });
-
-
-router.get('/signout', (request, response, next) => {
-    if (request.session) {
-        // Deletes session object that is required to login
-        request.session.destroy((err) => {
-            if (err) {return next(err);}
-            return response.redirect('/');
-        });
-    }
-});
 
 
 module.exports = router;

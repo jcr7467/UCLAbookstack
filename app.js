@@ -5,6 +5,8 @@ let express = require("express"),
 let mongoose = require("mongoose");
 let session = require("express-session");
 let mongoStore = require("connect-mongo")(session);
+let sslRedirect = require("heroku-ssl-redirect");
+
 
 
 
@@ -20,14 +22,18 @@ const server = http.createServer(app);
 const io    = require("socket.io")(server);
 const formatMessage = require("./config/messages");
 
-
+// Gives access to environmental variables
 require('dotenv').config();
+
+
+// Redirects all http traffic to https version
+app.use(sslRedirect());
 
 ///////////////DATABASE DRIVER CODE
 
 
 
-const URI = `mongodb+srv://dbAdmin:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
+const URI = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
@@ -47,7 +53,7 @@ app.use(session({
 
 
 // SET USER VARIABLES TO USE IN TEMPLATES
-//Make user ID available in pug templates
+//Make user ID available in handlbars templates
 app.use((request, response, next) => {
     response.locals.admin_level = request.session.admin_level;
     response.locals.currentUser = request.session.userId;
@@ -72,33 +78,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 const botName = "Chatbot";
-
+let message_routes = require('./routes/message_routes.js');
 // Run when client connects
 io.on('connection', socket => {
 
+    //console.log(socket.handshake.headers.cookie);
+
     socket.on('joinRoom', ({username, room}) => {
 
-        socket.emit('message', formatMessage(botName, 'Welcome to ChatMe'));
-        socket.broadcast.to(room).emit('message', formatMessage(botName, `A ${username} has joined the chat`));
 
         socket.join(room);
-
-        //Runs when client disconnects
-        socket.on('disconnect', () => {
-            io.emit('message', formatMessage(botName, `${username} has left the chat`));
-        });
 
         socket.on('chatMessage', (msg) => {
             console.log(msg);
             io.emit('message', formatMessage(username, msg));
         });
     });
-
-
-
-
-
-
 
 
 
@@ -147,7 +142,10 @@ app.set('view engine', 'hbs');
 
 //// INCLUDE ROUTES
 let routes = require('./routes/routes.js');
+let account_routes = require('./routes/account_routes');
 app.use('/', routes);
+app.use('/', account_routes);
+
 
 
 

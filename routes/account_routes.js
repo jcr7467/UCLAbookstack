@@ -5,6 +5,8 @@ const User = require('../models/user');
 
 let crypto = require('crypto');
 
+let bcryptjs = require('bcryptjs');
+
 //OUR GMAIL SERVICE ONLY ALLOWS 500 EMAILS A DAY AS OF 06/20/20
 //with more users, we will have to change this
 let nodemailer = require('nodemailer');
@@ -46,6 +48,8 @@ router.route('/signin')
             return next(err);
         }
 });
+
+
 
 router.route('/signup')
     .get((request, response) => {
@@ -106,9 +110,6 @@ router.route('/forgot')
     })
     .post((request, response, next) => {
 
-
-
-
         async.waterfall([
             function createToken(callback) {
                 crypto.randomBytes(20, function (err, buf) {
@@ -132,6 +133,7 @@ router.route('/forgot')
                     }
                     user.resetPasswordToken = token;
                     user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+                    user.resetPasswordTokenValid = true;
                     user.save(function (err) {
                         if(err){return callback(err, null)}
                         return callback(null, token, user);
@@ -147,6 +149,7 @@ router.route('/forgot')
                     text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                         'http://' + request.headers.host + '/reset?token=' + token + '\n\n' +
+                        'Note: This link will expire in 1 hour.\n\n' +
                         'If you did not request this, please ignore this email and your password will remain unchanged.\n'
                 };
                 transporter.sendMail(mailOptions, function (err) {
@@ -154,17 +157,105 @@ router.route('/forgot')
                     return callback(null);
                 });
             }
-
         ], function (err) {
             if (err) {
                 return next(err);
+            }else{
+                return response.redirect('/');
             }
-        });
 
+        });
     });
 
 
+router.route('/reset')
+    .get((request, response, next) => {
 
+        let { token } = request.query;
+
+        User.findOne({
+            resetPasswordToken:token,
+            resetPasswordExpires: {$gt : Date.now()},
+            resetPasswordTokenValid: true},
+            (error, user) => {
+
+            if (!user){
+                let err = new Error('The time limit of 1 hour has passed or an invalid url has been entered');
+                err.status = 401;
+                return next(err);
+            }else{
+                response.render('partials/signinout/resetpassword', {
+                    token: token,
+                    url: request.originalUrl,
+                    title: 'Reset',
+                    layout: 'signinout_layout.hbs'
+                });
+            }
+        });
+    })
+    .post((request, response, next) => {
+        async.waterfall([
+            function checkToken(callback) {
+                User.findOne({
+                    resetPasswordToken: request.body.token,
+                    resetPasswordExpires: {$gt: Date.now()},
+                    resetPasswordTokenValid: true
+                }, function (err, user) {
+                    if (!user) {
+                        let err = new Error('Password reset token is invalid or has expired.');
+                        err.status = 401;
+                        return callback(err, null);
+                    }
+
+                    user.resetPasswordTokenValid = false;
+                    user.save(function (err) {
+                        if(err){return callback(err, null)}
+                        return callback(null, user);
+                    });
+
+
+                });
+            },
+            function updatePassword(user, callback){
+                if (request.body.password === request.body.confirmpassword) {
+                    bcryptjs.hash(request.body.password, 10, (err, hash) => {
+                        if (err) {return next(err);}
+                        User.update({resetPasswordToken: request.body.token}, {$set: {password: hash}},
+                            function (err) {
+                                if(err){return callback(err, null);}
+                                request.session.userId = user._id;      //Gives unique user._id number to cookie on browser(Logs them in)
+                                return callback(null, user);
+                            });
+                    });
+                } else {
+                    let err = new Error('Passwords do not match');
+                    err.status = 401;
+                    return callback(err, null);
+                }
+            },
+            function sendEmailConfirmation(user, callback) {
+                let mailOptions = {
+                    from: 'BookStack <teambookstackucla@gmail.com>',
+                    to: user.email,
+                    subject: 'Your password has been changed',
+                    text: 'Hello ' + user.name + ', \n\n' +
+                        'This is a confirmation that the password for your account (' + user.email + ') has just been changed.\n'
+                };
+
+                transporter.sendMail(mailOptions, function (err) {
+                    if(err){return callback(err, null)}
+                    return callback(null);
+                });
+            }
+        ], function (err) {
+            if(err){next(err)}else{
+                return response.redirect('/');
+            }
+
+
+        });
+
+    });
 
 
 
@@ -179,6 +270,12 @@ router.get('/signout', (request, response, next) => {
     }
     return response.redirect('/');
 });
+
+
+
+
+
+
 
 
 module.exports = router;

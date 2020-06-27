@@ -23,6 +23,7 @@ let UserSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
+    resetPasswordTokenValid: Boolean,
     profilePictureLocation: {
         type: String,
         default: '/img/default-profile.png'

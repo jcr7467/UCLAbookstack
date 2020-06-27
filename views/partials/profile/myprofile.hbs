@@ -1,0 +1,31 @@
+<div class="usercontainer">
+    <div class="profilerow">
+        <div class="panel panel-defaultprofile">
+            <div class="panel-heading">
+                <h4>User Profile</h4>
+            </div>
+            <div class="panel-body">
+                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4"><img class="img-circle img-responsive" id="profile-image1" alt="User Pic" src="undefined" /></div>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8">
+                    <div class="container">
+                        <h2></h2>
+                    </div>
+                    <hr/>
+                    <ul class="usercontainer details">
+                        <li><a href="mailto:undefined"><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span></a></li>
+                    </ul>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+    </div><br/>
+    {{> profilenavigation }}
+</div>
+
+{{#if (equal_strings 'profile' page)}}
+    {{> profile_books }}
+{{else if (equal_strings 'upload' page)}}
+    {{> profile_uploadbooks }}
+{{else if (equal_strings 'settings' page)}}
+    {{> profile_settings}}
+{{/if}}

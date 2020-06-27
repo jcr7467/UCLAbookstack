@@ -126,7 +126,8 @@ let hbs = exphbs.create({
     partialsDir: [
         './views/partials/',
         './views/partials/navbars/',
-        './views/partials/footers/'
+        './views/partials/footers/',
+        './views/partials/profile/'
     ]
 });
 
@@ -143,8 +144,11 @@ app.set('view engine', 'hbs');
 //// INCLUDE ROUTES
 let routes = require('./routes/routes.js');
 let account_routes = require('./routes/account_routes');
+let profile_routes = require('./routes/profile_routes');
+
 app.use('/', routes);
 app.use('/', account_routes);
+app.use('/', profile_routes);
 
 
 

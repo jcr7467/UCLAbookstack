@@ -1,0 +1,27 @@
+<div class="agency-start-project-intro"></div>
+<div class="account-page">
+    <div class="container">
+        <div class="account-wrapper">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="/profile" role="tab">My books</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile/uploadbook" role="tab">Upload book</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile/settings" role="tab">My account</a></li>
+            </ul>
+            <!-- Tab panes-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="orders" role="tabpanel">
+                    <div class="tab-header clearfix">
+                        <h4 class="float-left">Your books</h4>
+                    </div>
+                    {{#if (greater_than_zero bookCount)}}
+                        <p>Books!!!!</p>
+                    {{else}}
+                        <p>You don't have any books up yet!</p>
+                    {{/if}}
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="agency-start-city-bg"></div>

@@ -1,0 +1,22 @@
+<div class="account-page">
+    <div class="container">
+        <div class="account-wrapper">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile" role="tab">My books</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link active" href="/profile/uploadbook" role="tab">Upload book</a></li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile/settings" role="tab">My account</a></li>
+            </ul>
+            <!-- Tab panes-->
+            <div class="tab-content">
+                <div class="tab-pane active" id="wishlist" role="tabpanel">
+                    <div class="tab-header clearfix">
+                        <h4 class="float-left">Upload Book</h4>
+                    </div><br/><br/>
+                    <div class="col-md-8">
+                        {{> upload_form }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

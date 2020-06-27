@@ -1,8 +1,8 @@
 
-{{#if (navbar_requested_is_clear navbar)}}
+{{#if (equal_strings 'clear' navbar)}}
     {{> clear_navbar}}
-{{else if (navbar_requested_is_dark navbar)}}
+{{else if (equal_strings 'dark' navbar)}}
     {{> dark_navbar}}
-{{else if (navbar_requested_is_default navbar)}}
+{{else if (equal_strings 'default' navbar)}}
     {{> default_navbar}}
 {{/if}}

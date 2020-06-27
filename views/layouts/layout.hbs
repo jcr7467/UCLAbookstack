@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {{> google_analytics_tracking_js_code }}
-    {{#if (title_is_home title)}}
+    {{#if (equal_strings 'Home' title)}}
         <title> BookStack </title>
     {{else}}
         <title> BookStack | {{ title }}</title>

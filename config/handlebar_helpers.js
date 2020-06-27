@@ -1,19 +1,17 @@
 module.exports = {
-    title_is_home: function (title) {
-        return (title === 'Home')
-    },
-    navbar_requested_is_clear: function (navbar_type) {
-        return (navbar_type == 'clear')
-    },
-    navbar_requested_is_dark: function (navbar_type) {
-        return (navbar_type == 'dark')
-    },
-    navbar_requested_is_default: function (navbar_type) {
-        return (navbar_type == 'default')
-    },
     user_is_logged_in: function(userID){
         return userID != null;
 
+    },
+
+    greater_than_zero: function(count){
+        /*
+        * Used in /profile to either display books or display that they dont have any books
+        * */
+        return (count > 0);
+    },
+    equal_strings: function(expected, actual){
+        return (expected === actual);
     }
 }
 

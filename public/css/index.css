@@ -112,9 +112,9 @@ button {
     line-height: inherit
 }
 
-button {
-    background-image: none
-}
+/*button {*/
+/*    background-image: none*/
+/*}*/
 
 a {
     color: #428bca;
@@ -444,4 +444,23 @@ ul {
 #formfilt {
     display: none;
     margin-left: 100%;
+}
+
+
+.hideBulletInUL{
+    list-style-type: none;
+}
+
+
+.search_submit_input{
+
+}
+
+
+.search_submit_button{
+
+    border-radius: 4px;
+    padding: 3px 5px;
+    background-color: transparent;
+    margin: 0px;
 }

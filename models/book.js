@@ -34,7 +34,7 @@ let BookSchema = new mongoose.Schema({
     }],
     mainpic: {
         type: String,
-        default: '/img/no_image_available.jpg'
+        default: '/images/no_image_available.jpg'
     },
     email: String,
     bookOwner: String,
@@ -54,7 +54,7 @@ BookSchema.plugin(mongoosePaginate);
 
 BookSchema.pre("save", function (next) {
     if (this.pictureLocations.length === 0)
-        this.pictureLocations.push('/img/no_image_available.jpg');
+        this.pictureLocations.push('/images/no_image_available.jpg');
 
     next();
 });

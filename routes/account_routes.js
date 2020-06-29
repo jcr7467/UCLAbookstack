@@ -25,7 +25,7 @@ let async = require('async')
 
 
 router.route('/signin')
-    .get((request, response) => {
+    .get((request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
             layout: 'signinout_layout.hbs'
@@ -52,13 +52,13 @@ router.route('/signin')
 
 
 router.route('/signup')
-    .get((request, response) => {
+    .get((request, response, next) => {
         response.render('partials/signinout/signup', {
             title: 'Sign Up',
             layout: 'signinout_layout.hbs'
         });
     })
-    .post((request, response) => {
+    .post((request, response, next) => {
 
         if (request.body.formfilt){
             // This will hopefully filter bots out,
@@ -69,13 +69,15 @@ router.route('/signup')
 
             if (request.body.email &&
                 request.body.password &&
-                request.body.name){
+                request.body.firstname &&
+                request.body.lastname){
 
 
                 //Creates Javascript object with form input data
                 let userData = {
                     email: request.body.email,
-                    name: request.body.name,
+                    firstname: request.body.firstname,
+                    lastname: request.body.lastname,
                     password: request.body.password
                 }
 
@@ -102,7 +104,7 @@ router.route('/signup')
 
 
 router.route('/forgot')
-    .get((request, response) => {
+    .get((request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
             title: 'Forgot password',
             layout: 'signinout_layout.hbs'

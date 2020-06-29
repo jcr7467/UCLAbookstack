@@ -1,9 +1,9 @@
 <p style="font-size: 11px; color:red">*required</p>
 <p style="font-size: 11px"><a href="/bookformtips" target="_blank">Tips for uploading books</a></p>
-<form id="listABookForm" method="POST" enctype="multipart/form-data" action="/uploadbook">
-    <div class="form-group"><label>Title<span style="font-size: 11px; color:red">*</span></label><input class="form-control" type="text" placeholder="Calculus: Early Transcendentals (2nd Edition)" name="title" required="required" /></div>
-    <div class="form-group"><label>Author<span style="font-size: 11px; color:red">*</span></label><input class="form-control" type="text" placeholder="Briggs, Cochran, Gillett" name="author" required="required" /></div>
-    <div class="form-group"><label>ISBN<span style="font-size: 11px; color:#ff0000">*</span></label><input class="form-control" type="text" placeholder="0321947347" name="isbn" required="required" />
+<form id="listABookForm" method="POST" enctype="multipart/form-data" action="/profile/uploadbook">
+    <div class="form-group"><label>Title<span style="font-size: 11px; color:red">*</span></label><input class="form-control" type="text" placeholder="Calculus: Early Transcendentals (2nd Edition)" name="title" required></div>
+    <div class="form-group"><label>Author<span style="font-size: 11px; color:red">*</span></label><input class="form-control" type="text" placeholder="Briggs, Cochran, Gillett" name="author" required></div>
+    <div class="form-group"><label>ISBN</label><input class="form-control" type="text" placeholder="0321947347" name="isbn" >
         <p style="font-size: 11px"><a href="/howToFindISBN" target="_blank">What's this?</a></p>
     </div>
     <div class="form-group"><label>Subject</label><select class="form-control" id="subjectChosen" name="subject" form="listABookForm"><option value="Art" selected="selected">Art</option><option value="Business &amp; Economics">Business & Economics</option><option value="Cooking">Cooking</option><option value="English">English</option><option value="Foreign Language">Foreign Language</option><option value="Health and Fitness">Health & Fitness</option><option value="History">History</option><option value="Law and Political Science">Law & Political Science</option><option value="Mathematics">Mathematics</option><option value="Medical">Medical</option><option value="Performing Arts">Performing Arts</option><option value="Philosophy and Social Science">Philosphy & Social Science</option><option value="Science">Science</option><option value="Technology and Engineering">Technology & Engineering</option><option value="Other">Other</option></select></div>

@@ -13,7 +13,11 @@ let UserSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
-    name: {
+    firstname: {
+        type: String,
+        trim: true,
+    },
+    lastname: {
         type: String,
         trim: true,
     },
@@ -24,13 +28,13 @@ let UserSchema = new mongoose.Schema({
     resetPasswordToken: String,
     resetPasswordExpires: Date,
     resetPasswordTokenValid: Boolean,
-    profilePictureLocation: {
+    profilePictureURL: {
         type: String,
-        default: '/img/default-profile.png'
+        default: '/images/profile/default-profile.png'
     },
     profilePictureKey: {
         type: String,
-        default: '/img/default-profile.png'
+        default: '/images/profile/default-profile.png'
     },
     emailverified:{
         type: Boolean,

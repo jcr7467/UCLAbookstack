@@ -13,8 +13,51 @@
                     <div class="tab-header clearfix">
                         <h4 class="float-left">Your books</h4>
                     </div>
+
+
                     {{#if (greater_than_zero bookCount)}}
-                        <p>Books!!!!</p>
+
+                        <table class="table table-striped table-responsive">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Price</th>
+                                <th>Edit Book</th>
+                                <th>Delete Book</th>
+                            </tr>
+                            </thead>
+
+
+                            <tbody>
+                            {{# each books}}
+                                <tr>
+                                    <td>
+                                        <a href="/book?id={{ this._id }}">{{ this.title }} </a>
+                                    </td>
+                                    <td>
+                                        {{ this.bookAuthor }}
+                                    </td>
+                                    <td>
+                                        {{ this.price }}
+                                    </td>
+                                    <td>
+                                        <a href="/editbook?id={{ this._id }}" class="btn btn-light"> Edit </a>
+
+                                    </td>
+                                    <td>
+                                        <form method="post" action="/deletebook">
+                                            <input type="hidden" name='bookId' value="{{ this._id }}" readonly>
+                                            <input type="submit" class="btn btn-light" value="Delete">
+
+                                        </form>
+                                    </td>
+                                </tr>
+                            {{/each}}
+
+                            </tbody>
+                        </table>
+
                     {{else}}
                         <p>You don't have any books up yet!</p>
                     {{/if}}

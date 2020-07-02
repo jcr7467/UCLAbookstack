@@ -1,0 +1,33 @@
+<div class="blog-cols-header">
+    <div class="container">
+        <h1> Results for "{{ title }}"</h1><br/><br/>
+        <form method="GET" action="/search"><label>Search by Title</label>
+            <div class="form-group" id="searchbar"><input class="col-sm-12 col-md-5" type="text" name="query" value="{{ searchedTerm }}" placeholder="Algebra" /><input type="hidden" name="subject" value="undefined" /><input class="col-sm-12 col-md-2 btn-primary" type="submit" value="Search" /></div>
+        </form><br/>
+        <hr/>
+        <p>Page {{ currentPageNumber }} of {{ numberOfPages }} </p><br/></div>
+</div>
+<div class="blog-cols-wrapper">
+    <div class="container">
+        {{#if (greater_than_zero numOfBooks)}}
+            {{#each array}}
+                <a href="/search/book?id={{ this._id }}" class="post">
+                    <div class="post-wrapper">
+                        <div class="post-bg" style="background-image: url('{{this.mainpicURL}}');"></div>
+                        <div class="post-intro">
+                            <div class="post-title" style='font-size:17px'>
+                                {{ this.title }}
+                            </div>
+                            <p class="post-description">
+                                By: {{ this.bookAuthor }}
+                            </p>
+                            <p class="post-description"></p>
+                        </div>
+                    </div>
+                </a>
+            {{/each}}
+        {{ else }}
+            <p>Sorry, no books match! As more users register and post books, more will become available for you</p>
+        {{/if}}
+    </div>
+</div>

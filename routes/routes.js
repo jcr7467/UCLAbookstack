@@ -2,6 +2,7 @@ let express = require("express"),
     router  = express.Router();
 
 const User = require('../models/user');
+const Book = require('../models/book');
 
 
 //////////////////////////////////////////////
@@ -93,6 +94,75 @@ router.get('/messages', (request, response, next) => {
 
 
 
+router.get('/search', (request,response, next) => {
+    let { subject } = request.query,
+        { pagenumber } = request.query,
+        userSearchTerm = request.query.query;
+    //userSearchTerm = 'tested'
+
+    if (userSearchTerm === undefined){userSearchTerm = ''}
+
+    userSearchTerm = userSearchTerm.toString();
+    if (pagenumber === undefined){pagenumber = 1}
+    if (subject === undefined){ subject = 'All'}
+
+    pagenumber = parseInt(pagenumber);
+    let nextpage = pagenumber + 1;
+    let previouspage = pagenumber - 1;
+
+    Book.paginate({title: {$regex: userSearchTerm, $options: 'i'}}, {lean: true, page:pagenumber, limit:15})
+    .then((books) => {
+
+        let numOfBooks = books.docs.length
+
+        response.render('search_for_books', {
+            array: books.docs,
+            subject: subject,
+            searchedTerm: userSearchTerm,
+            title: userSearchTerm,
+            currentPagenumber:books.page,
+            numberofPages:books.totalPages,
+            previouspage: previouspage,
+            nextpage:nextpage,
+            navbar: 'default',
+            numOfBooks: numOfBooks
+        })
+    }).catch((err) => {
+        next(err);
+    });
+});
+
+
+
+
+
+router.get('/search/book', (request, response, next) => {
+
+    let { id } = request.query;
+
+    Book.findOne({_id : id}).lean().then((book) => {
+        if(book == null){
+            return next(new Error('An unknown error occurred'))
+        }
+
+        return Promise.all([book, User.findOne({_id: book.bookOwner}).lean().exec()]);
+
+    }).then(([book, soldByThisUser]) => {
+
+        return response.render('bookpage', {
+            title: book.title,
+            navbar: 'default',
+            book: book,
+            soldByThisUser: soldByThisUser,
+
+        });
+    }).catch((err) => {
+        return next(err);
+    });
+
+
+
+});
 
 
 

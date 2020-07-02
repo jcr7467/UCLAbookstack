@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-let mongoosePaginate = require('mongoose-paginate');
+let mongoosePaginate = require('mongoose-paginate-v2');
 
 
 let BookSchema = new mongoose.Schema({
@@ -26,13 +26,13 @@ let BookSchema = new mongoose.Schema({
         required: true
     },
     subject: String,
-    pictureLocations: {
+    pictureURLs: {
         type: Array
     },
     pictureKeys: [{
         type: String
     }],
-    mainpic: {
+    mainpicURL: {
         type: String,
         default: '/images/no_image_available.jpg'
     },
@@ -53,8 +53,8 @@ BookSchema.plugin(mongoosePaginate);
 
 
 BookSchema.pre("save", function (next) {
-    if (this.pictureLocations.length === 0)
-        this.pictureLocations.push('/images/no_image_available.jpg');
+    if (this.pictureURLs.length === 0)
+        this.pictureURLs.push('/images/no_image_available.jpg');
 
     next();
 });

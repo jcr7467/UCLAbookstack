@@ -12,6 +12,10 @@ module.exports = {
     },
     equal_strings: function(expected, actual){
         return (expected === actual);
+    },
+    add_me_together: function(val1){
+        return parseInt(val1) + 1
+
     }
 }
 

@@ -98,60 +98,66 @@ router.route('/profile/uploadbook')
 
     })
     .post(upload.array('images', 7), (request, response, next) => {
-
-        let { files } = request;
-
+        let {files} = request;
+        let file_entries = request.files.length;
+        console.log(request.files.length)
+        console.log(request.files[0].mimetype)
         async.waterfall([
-            function filetype(callback){
-                let all_are_images = true;
-                if (files.length > 0){
-                    for (let i = 0 ; i < request.files.length ; i++){
+            function fileType(callback){
+                let allImages = true;
+                if(file_entries > 0) {
+
+                    for (let i = 0; i < file_entries; i++) {
+                        //console.log(i);
                         let fileType = request.files[i].mimetype.split('/')[0];
-                        if (fileType !== 'image'){
-                            all_are_images = false;
+                        if (fileType !== 'image') {
+                            allImages = false;
+
                         }
                     }
                 }
 
-                if (!all_are_images){
-                    return callback(new Error('All uploaded files must be images.'), null);
+
+                if(allImages === false){
+                    return callback(new Error('All uploaded files must be images'), null);
                 }else{
                     return callback(null);
                 }
 
             },
-            function getDetails(callback){
+            function getDetails(callback) {
                 if (request.body.title && request.body.author && request.body.price && request.body.subject){
 
+
+                    //Then makes an object and stores it in the mongoDB database
+                    //////////////////////////////////////////////////////
                     let picURLs = [];
                     let picKeys = [];
 
-                    let amazonBucketURL = 'https://ucla-bookstack-uploaded-photos.s3-us-west-1.amazonaws.com/';
 
-
-                    for (let i = 0 ; i < request.files.length ; i++){
+                    let amazonBucket = 'https://ucla-bookstack-uploaded-photos.s3-us-west-1.amazonaws.com/';
+                    for( let i = 0 ; i < file_entries; i++){
                         let datetimestamp = Date.now(),
-                            folderPrefix  = request.session.userId + '/',
-                            nameOfFile    = request.files[i].fieldname + '-' + datetimestamp,
-                            extension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+                            folderPrefix = request.session.userId + '/',
+                            nameOfFile = request.files[i].fieldname + '-' + datetimestamp;
+                            //extension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+                        let key = folderPrefix + nameOfFile + '.jpg';
 
-                        let key = folderPrefix + nameOfFile + extension;
-
-                        picURLs.push(amazonBucketURL + key);
+                        picURLs.push(amazonBucket + key);   // Makes an array of all the photo-storage-location references
                         picKeys.push(key);
 
 
-                        if (files.length > 0){
-                            let receivingParams = {
+                        if(file_entries > 0) {
+                            let receivingparams = {
                                 Bucket: process.env.S3_BUCKET,
                                 Key: key,
                                 Body: request.files[i].buffer,
                                 ACL: 'public-read'
-                            }
+                            };
 
-                            s3.putObject(receivingParams, (err, data) => {
-                                if (err){
-                                    return next(err);
+                            s3.putObject(receivingparams, function (err, data) {
+                                if (err) {
+                                    return next(err)
                                 }
                             });
                         }
@@ -159,10 +165,12 @@ router.route('/profile/uploadbook')
 
                     }
 
-                    User.findById(request.session.userId, (err, user) => {
-                        if (err){
-                            return next(err);
-                        }else{
+                    User.findById(request.session.userId, (error, user) => {
+                        if (error) {
+                            callback(error);
+                        }
+                        else {
+
                             let title = request.body.title;
                             let author = request.body.author;
                             //Creates 'book' object with the properties entered in form
@@ -177,32 +185,33 @@ router.route('/profile/uploadbook')
                                 pictureKeys: picKeys,
                                 email: user.email,
                                 subject: request.body.subject,
-                                mainpic: picURLs[0]
+                                mainpicURL: picURLs[0]
                             };
-                            callback(null, bookData);
+                            callback(null, bookData)
                         }
                     });
-
-
-                }else{
-
+                }else {
                     let err = new Error('Missing fields');
                     err.status = 400;
                     callback(err);
                 }
             },
             function createBook(bookData, callback){
-
                 //uses schema's 'create' method to insert document into Mongo
+
                 Book.create(bookData, (error) => {
-                    if (error) {return callback(error);}
-                    return callback(null)
+                    if (error) {return callback(error);}else{
+                        return callback(null);
+
+                    }
+
                 });
 
             }
-            ], function (err) {
-            if (err){next(err);}
-            return response.redirect('/profile');
+        ], function(err) {
+            if(err){return next(err)}
+
+            return response.redirect('/');
         });
     });
 

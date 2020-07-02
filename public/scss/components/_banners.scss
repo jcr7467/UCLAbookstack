@@ -1,0 +1,209 @@
+.banners-content{
+    padding-top: 10px;
+    
+    .container-fluid{
+        padding-left: 18px; 
+        padding-right: 18px;
+
+        [class^=col]{
+            padding-right: 5px;
+            padding-left: 5px;
+
+        }
+        figure{
+            position: relative;
+            border-radius: $border-radius;
+            overflow: hidden;
+            margin-bottom: 0px;
+            width: 100%;
+            
+            .captions{
+                position: relative;
+
+                > a{
+                    display: block;
+                    
+                }
+
+                img{
+                    width: 100%;                
+                    transition: transform 1s; /* Animation */
+                }
+                
+
+                &:hover {
+
+                    img {
+                       -webkit-transform: scale3d(1.1,1.1,1);
+                       transform: scale3d(1.1,1.1,1);
+                   }
+                }
+            }   
+            
+            
+            &.mt-image{
+                margin-top: 10px;
+            }
+            
+            &:after{
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                background-color: rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+        }
+        .banner-caption{
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            z-index: 2;
+
+            
+            h2{
+
+                font-family: $font-family-base-bold;
+                color: $white;
+                font-size: 28px;
+
+                small{
+                    display: block;
+                    font-family: $font-family-base;
+                    font-size: $font-size-lg;
+                    margin-top: 10px;
+                }
+                margin-top: -10px;
+                margin-bottom: -5px;
+            }
+            
+            
+            
+
+            &.left-caption{
+                
+                left: 0;
+                text-align: left;
+                padding-left:30px;
+                padding-right: 30px;
+                .btn{
+                    margin-top: 30px;
+                }
+            }
+           
+            
+        }
+
+      
+    
+        
+    }
+}
+
+
+.pro-full-screen-banner{
+    position: relative;
+    overflow: hidden;
+    margin-top: 100px;
+    padding-top: 0;
+    height: 550px;
+    
+
+
+    img{
+        width: 100%;
+        height: 100%;
+        transition: transform 1s; /* Animation */
+    }
+
+    &:hover {
+
+        img {
+           -webkit-transform: scale3d(1.1,1.1,1);
+           transform: scale3d(1.1,1.1,1);
+       }
+    }
+
+    .pro-full-screen-overlay{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        display: flex;
+        justify-content: center;
+        padding-left: 15px;
+    padding-right: 15px;
+        width: 100%;
+
+        .pro-full-screen{
+            text-align: center;
+        }
+        .pro-heading-title{
+            padding-left: 0;
+            margin-bottom: 35px;
+            h2, p{
+                color: $white;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width:992px) and (max-width:1199px){
+    .banners-content  {
+        .container-fluid {
+            .banner-caption {
+                h2 {
+                    font-size: 16px;
+                    margin-top: -4px;
+                    small {
+                        
+                        margin-top: 0;
+                    }
+                }
+                .btn {
+                    padding-top: 15px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    padding-bottom: 15px;
+                }
+
+            }
+        }
+    }
+}
+@media only screen and (max-width:991px){
+    .banners-content  {
+        .container-fluid {
+            .banner-caption.left-caption{
+                top: 50%;
+                transform: translateY(-50%);
+                text-align: center;
+
+                h2 {
+                    font-size: 16px;
+                    margin-top: -4px;
+                    small {
+                        
+                        margin-top: 0;
+                    }
+                }
+            }
+            
+            .mb0-image{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    
+}
+
+.bodyrtl{
+    .banners-content .container-fluid .banner-caption.left-caption {
+        right: 15px;
+        left: auto;
+        text-align: right;
+    }
+}

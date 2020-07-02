@@ -1,0 +1,128 @@
+// ....compare....
+
+.aboutus-content{
+  .pro-pera{
+    margin-top: 30px;
+    margin-bottom: -6px;
+  }
+  .bg-media{
+    background-color: $body-bg-secondary;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+  .pro-heading-title{
+    padding-bottom: 35px;
+   padding-left: 0;
+  }
+  p{
+    color: $body-color-secondary;
+  }
+  .peragraph{
+    &:last-child{
+      margin-bottom: -6px;
+    }
+  }
+  video{
+    width: 100%;
+  }
+  .media{
+      .rounded-circle{
+        margin-right: 30px;
+        margin-bottom: 0;
+      }
+      .media-body{
+          h4{
+            font-family: $font-family-base-bold;
+            font-size: $font-size-lg;
+              small{
+                font-size: $font-size-sm;
+                  color: $body-color-secondary;
+                  
+              }
+          }
+          p{
+            margin-bottom: 0;
+          }
+      }
+  }
+  
+   
+  .media-col{
+    justify-content: flex-end;
+    display: flex;
+    align-items: flex-end;
+  
+  }
+  .team-member{
+    text-align: center;
+    h3{
+      font-family: $font-family-base-bold;
+      font-size: $font-size-lg;
+      margin-top: 15px;
+    }
+    p{
+      color: $body-color-secondary;
+      margin: 0;
+    }
+  }
+
+  .accordion-container{
+    background-color:  $footer-bg;
+    padding-bottom: 60px;
+    padding-top: 60px;
+    margin-bottom: 100px;
+    margin-top: 100px;
+  }
+  .accordions{
+      .card-header{
+        h5{
+          font-size: $font-size-base;
+        }
+        a{
+          font-family: $font-family-base-bold;
+          
+          text-decoration: none;
+          .fas{
+            float: right;
+          }
+        }
+        a[aria-expanded="true"]:after{
+          content: "\f077";
+          font-family: "Font Awesome 5 Free"; font-weight: 900;
+          color: $body-color-secondary;
+          font-size: $font-size-sm;
+          position: absolute;
+          right: 20px;
+          top: 14px;
+      }
+      a[aria-expanded="false"]:after{
+          content: "\f078";
+          font-family: "Font Awesome 5 Free"; font-weight: 900;
+          color: $body-color-secondary;
+          font-size: $font-size-sm;
+          position: absolute;
+          right: 20px;
+          top: 14px;
+      }
+      }
+  }
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+.aboutus-content {
+  .media {
+    display: block;
+    text-align: center;
+    .rounded-circle {
+      margin-bottom: 15px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .media-body{
+      text-align: center;
+    }
+  }
+}
+}

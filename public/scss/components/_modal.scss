@@ -1,0 +1,286 @@
+ //....................Modal section...............
+ 
+ body:not(.touch-device).modal-open {
+    overflow-x: hidden;
+ }
+ .modal{
+    .modal-dialog {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) !important;
+        margin-top: 0;
+        margin-bottom: 0;
+        width: 100%;
+
+       .modal-body{
+           
+
+           .pro-description{
+               
+               .pro-title{
+font-family: $font-family-base-bold;
+                   font-size: ($font-size-lg + 0.5);
+                   color: $body-color;
+                   font-weight: $font-weight-bolder;
+                   line-height: 28px;
+               }
+               .pro-infos{
+                   margin-top: 10px;
+                   .pro-single-info{
+                       display: flex;
+                       line-height: 24px;
+
+                       b{
+                        font-family: $font-family-base-bold;
+                           font-size: $font-size-base;
+                           color:$body-color;
+                           margin-right: 10px;
+                       }
+
+                       ul{
+                           display: inline-block;
+                           padding-left: 0;
+                           margin-bottom: 0;
+
+                           li{
+                               display: inline-block;
+
+                               &:after{
+                                   content: ",";
+                               }
+                           }
+                       }
+                   }
+                   
+               }
+               
+               p{
+                   font-size: $font-size-base;
+                   color:$body-color-secondary;
+                   margin-top: 10px;
+                   padding: 8px 0;
+                   border-top: 1px solid #f4f4f4;
+                   border-bottom: 1px solid #f4f4f4;
+               }
+               .pro-price {
+                   display: flex;
+                   align-items: center;
+   
+                   ins{
+                    font-family: $font-family-base-bold;
+                       font-size: ($font-size-lg + 0.35);
+                       color: $secondary;
+                       text-decoration: none;
+                   }
+       
+                   del {
+                    font-family: $font-family-base-bold;
+                       font-size: $font-size-lg;
+                       color: $body-color-secondary;
+                       text-decoration: line-through;
+                       margin-right: 10px;
+                   }
+               }
+               
+           }
+
+           .close{
+               outline: none;
+            font-size: 40px;
+               font-weight: normal;
+               position: absolute;
+               top: 5px;
+               right: 12px;
+           }
+       }
+    }
+    .carousel{
+       
+       .carousel-inner{
+           .carousel-item{
+               border: $border-width solid #e1e1e1;
+               background-color: $light;
+               text-align: center;
+               a{
+                   position: absolute;
+                   bottom: 10px;
+                   right: 10px;
+                   font-size: 18px;
+                   color: darken($color: #e1e1e1, $amount: 10%);
+               }
+
+              
+           }
+       }
+       .carousel-control-prev,
+       .carousel-control-next{
+           background-color: $primary;
+           height: 40px;
+           width: 40px;
+           top: 50%;
+           margin-top: -20px;
+
+           .fas{
+               font-size: 18px;
+           }
+       }
+    }
+}
+
+
+#newsletterModal{
+    
+    .promo-box{
+        padding: 30px 0 30px 15px;
+        text-align: center;
+        z-index: 999;
+
+        .text-01{
+            z-index: 999;
+            font-family: $font-family-base-bold;
+            font-size: 40px;
+        line-height: 50px;
+        margin-bottom: 5px;
+        }
+        .text-03{ 
+             z-index: 999;
+            font-size: $font-size-lg;
+            color: $body-color-secondary;
+            margin-bottom: 15px;
+        line-height: 28px;
+        }
+
+        #mc_embed_signup{
+            .form-control{
+                font-family: $font-family-base;
+                font-size: $font-size-sm;
+                border:1px solid $input-border-color;
+                color: $input-color !important;
+                padding:0 10px !important;
+                line-height: normal !important;
+                width: 100% !important;
+
+                &:focus{
+                    border-right: 1px solid #666 !important;
+                }
+            }
+            .response{
+                text-align: left;
+                margin-bottom: 15px;
+            }
+
+            
+        }
+    }
+    
+}
+
+
+#mc_embed_signup{
+    .mc-field-group{
+        margin-bottom: 15px;
+    }
+    div.mce_inline_error{
+        position: relative;
+        text-indent: -488px;
+        overflow: hidden;
+        padding: 0 !important;
+        margin: 15px 0 0 0 !important;
+        font-weight: normal !important;
+        background-color: transparent !important;
+        line-height: 20px;
+        height: 20px;
+
+        &:after {
+            content: "Please enter a valid email";
+            left: 0;
+            position: absolute;
+            top: 0;
+            text-indent: 0;
+            color: $danger;
+            line-height: 20px;
+        }
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width:991px){
+    #newsletterModal .promo-box {
+        padding:15px 0px 0 15px;
+
+        .text-01 {
+            
+            font-size: 34px;
+            line-height: 40px;
+        }
+    }
+    .modal .pro-description .btn-secondary {
+        min-width: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+@media only screen and (max-width:767px){
+    .carousel{
+       
+        .carousel-control-prev {
+            left: 1px;
+        }
+        .carousel-control-next {
+            right: 1px;
+        }
+        
+    }
+    .modal{
+        .modal-dialog {
+            z-index: 25;
+            margin: 0;
+            width: calc(100% - 1rem);
+
+            .pro-image{
+                display: none;
+            }
+            .modal-body{
+                z-index: 25;
+                
+                .close {
+                    top: -35px;
+                    right: -2px;
+                    color: white;
+                    opacity: 1;
+                    text-shadow: none;
+                }
+            }
+        }
+        .pro-description{
+            margin-left: -15px;
+            margin-right: -15px;
+            padding-top: 15px;
+
+            .btn-secondary{
+                min-width: auto;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+        
+    }
+    #quickViewModal{
+        .modal-content{
+           .container{
+            height: 450px;
+            overflow-y: auto;
+           }
+        }
+        
+    }
+
+    
+}
+
+.bodyrtl{
+    .modal .modal-dialog .modal-body .pro-description .pro-price del {
+        margin-left: 10px;
+        margin-right: 0;
+    }
+}

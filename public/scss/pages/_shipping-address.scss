@@ -1,0 +1,108 @@
+// ....order....
+.star{
+    font-weight: $font-weight-bolder;
+    color:red; 
+    position: relative;
+    top: 3px;
+}
+.shipping-content{
+    margin-bottom: 30px;
+    .pro-heading-title{
+        padding-bottom: 35px;
+    }
+
+    .add-address{
+        padding: 15px 0;
+        
+        h4{
+            font-family: $font-family-base-bold;
+            margin-bottom: 15px;
+        }
+       
+    }
+
+    .table{
+        
+        th{
+            border-top: none;
+        }
+        tr{
+            
+            td{
+               
+                .form-check{
+                    padding-left: 35px;
+                    .form-check-input{
+                        position: absolute;
+                        left: 25px;
+                        top: 5px;
+                        margin-top: 0;
+                    }
+                    .form-check-label{
+                        text-align: start;
+                    }
+                }
+            }
+            
+            .controls{
+                display: flex;
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 0;
+                
+                li{
+                    margin-right: 15px;
+                    text-align: center;
+                }
+            }
+
+        }
+    }
+   
+}
+              
+@media only screen and (min-width:768px) and (max-width:991px){
+    .shipping-content {
+        .table{
+            margin-top: 30px;
+            
+        }
+        .btn{
+            margin-top: 15px;
+        }
+    }
+}
+@media only screen and (max-width:767px){
+    .shipping-content {
+        .table{
+            border-bottom: none;
+            thead{
+                display: none;
+            }
+            tbody{
+                .d-flex{
+                    flex-direction: column;
+                }
+                td:first-child{
+                    border: none;
+                }
+                td:last-child{
+                    padding-bottom: 35px;
+                    text-align: left;
+                }
+            }
+    
+            
+        }
+        .btn{
+            margin-top: 15px;
+        }
+    }
+}
+
+.bodyrtl{
+    .shipping-content .table tr .controls li{
+        margin-left: 15px;
+        margin-right:0;
+    }
+}

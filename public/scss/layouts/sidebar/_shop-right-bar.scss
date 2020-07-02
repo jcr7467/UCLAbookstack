@@ -1,0 +1,140 @@
+// ...shop right bar...
+.shop-bar-categories{
+    .card{
+        border:none;
+        margin-bottom: 15px;
+        
+        .card-header{
+            padding: 0;
+            background-color: transparent;
+            border: none;
+            a{
+                font-family: $font-family-base-bold;
+                font-size:($font-size-base + 0.3125rem);
+            }
+            a[aria-expanded="true"]:after{
+                content: "\f077";
+                font-family: "Font Awesome 5 Free"; font-weight: 900;
+                color: $body-color-secondary;
+                font-size: $font-size-sm;
+            }
+            a[aria-expanded="false"]:after{
+                content: "\f078";
+                font-family: "Font Awesome 5 Free"; font-weight: 900;
+                color: $body-color-secondary;
+                font-size: $font-size-sm;
+            }
+        }
+        .card-body{
+            ul{
+                padding-left: 0;
+                margin-bottom: 0;
+            }
+
+            .extra-controls.form-inline {
+                .form-group {
+                    display: flex;
+                    span{
+                        span{
+                            margin-top: 0;
+                            margin-right: 7px;
+                            margin-left: 7px;
+                        }
+                        .numaric1 .numaric2{
+                            float: left;
+                        }
+                      
+                        .form-control{
+                            width: 80px;
+                        }
+                    }
+                    .numaric2{
+                        margin: 0 0 5px 8px;
+                    }
+                }
+            }
+           
+            .pro-options .color-selection, .pro-options .size-selection {
+                margin-bottom: 0;
+            }
+            
+            .pro-options .color-selection ul, .pro-options .size-selection ul{
+                display: block;
+
+                li{
+                    display: inline-block;
+                    margin-bottom: 15px;
+                }
+            }
+            
+                
+                    .brands{
+                        
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                        li{
+                            a{
+                                padding-top: 0;
+                                padding-bottom: 0;
+                               .fas{
+                                   margin-right: 7px;
+                               }
+                               &:hover{
+                                   color:$secondary;
+                               }
+                            }
+                          
+                        }
+                    
+                    }
+              
+            
+        }
+    }
+}
+.right-menu{
+
+    
+
+.brands-main{
+    border: $border-width solid $gray-300;
+    padding: 20px 15px;
+    h2{
+        font-size: $font-size-base;
+        margin: 0;
+    }
+    .brands{
+        margin-top: 7px;
+        ul{
+            
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            li{
+                a{
+                    padding-top: 0;
+                    padding-bottom: 0;
+                   .fas{
+                       margin-right: 7px;
+                   }
+                   &:hover{
+                       color:$secondary;
+                   }
+                }
+              
+            }
+        
+        }
+    }
+}
+
+.img-main{
+    border: $border-width solid $gray-300;
+    margin-top: 15px;
+ 
+}
+}
+
+
+

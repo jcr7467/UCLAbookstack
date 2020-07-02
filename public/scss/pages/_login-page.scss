@@ -1,0 +1,103 @@
+.login-content{
+    .pro-heading-title{
+        
+        padding-bottom: 25px;
+    }
+    h2{
+        font-family: $font-family-base-bold;
+        font-size: $font-size-lg;
+    }
+    p{
+        font-size: $font-size-base;
+    }
+    .registration-process{
+        background-color: $white;
+    
+        margin-bottom: 30px;
+
+        
+        .btn-link{
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: 15px;
+        }
+        
+    }
+    .registration-socials{
+        background-color: $white;
+        padding:15px;
+        text-align: center;
+    }
+    label.error{
+        right: 15px;
+        
+    }
+}
+
+.center-content-page{
+    .pro-heading-title{
+       padding-left: 0;
+    }
+}
+
+
+#registerTab{
+    border:none;
+    .nav-link{
+        font-size: $font-size-lg;
+        font-weight: $font-weight-bold;
+        text-align: center;
+        background-color: #f4f4f4;
+        border:none;
+
+        &.active{
+             background-color: $secondary;
+             color: color-yiq($secondary);
+             border:none;
+        }
+    }
+}
+#registerTabContent{
+
+    .registration-process{
+        background-color: #f4f4f4;
+        padding:30px 15px;
+    }
+    .registration-socials{
+        background-color: transparent;
+    }
+}
+.bodyrtl{
+    .login-content label.error{
+        left: 15px;
+        right: auto;
+        text-align: left;
+    }
+}
+@media only screen and (max-width:767px){
+    .center-content-page{
+        .pro-heading-title {
+        padding-left: 0;
+            
+        }
+    }
+.login-content {
+    .pro-heading-title {
+        
+        padding-bottom: 20px;
+    }
+    p:last-child{
+        margin-bottom: 0;
+    }
+}
+#registerTabContent {
+    .registration-process {
+        padding: 15px 0;
+
+        .btn-primary, .btn-secondary{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+}

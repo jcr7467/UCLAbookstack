@@ -1,0 +1,182 @@
+// ...........footer.............
+$footer-bg : $gray-100;
+
+.footer-two {
+    margin-top: 100px;
+    background-color: $footer-bg;
+
+    .newsletter-content{
+        background-color: $white;
+
+        .pro-heading-title {
+            padding-bottom: 35px;
+            margin-top: -7px;
+            h2 {
+                font-family: $font-family-base-bold;
+                font-size: 32px;
+                text-align: center;
+                line-height: 38px;
+    margin-bottom: 0;
+            }
+            p{ 
+                
+                color: $body-color-secondary;
+                text-align: center;
+                margin-top: 15px;
+                margin-bottom: 0;
+            }
+        }
+
+        .newsletter-form{
+            display: flex;
+            input{
+                height: 55px;
+            }
+            .btn{
+                min-width: 160px;
+            }
+        }
+    }
+    .single-footer {
+        padding-bottom: 100px;
+        padding-top: 100px;
+        h5 {
+            font-family: $font-family-base-bold;
+            font-size: $font-size-lg;
+            color: $body-color;
+            margin-bottom: 15px;
+            margin-top: -4px;
+        } 
+        
+        .pro-about{
+            ul{
+                li{
+                    color: $body-color;
+                    font-size: $font-size-base;
+
+                    
+                }
+            }
+        }
+        ul{
+            margin-bottom: -5px !important;
+            li{
+                display: block;
+                width: 100%;
+                list-style: none;
+                font-size: $font-size-base;
+                margin-bottom: 10px;
+
+                &:last-child{
+                    margin-bottom: 0;
+                }
+
+                span{
+                    display: block;
+                }
+
+                a{
+                    color: $body-color;
+                    -webkit-transition: 0.4s;
+                        transition: 0.4s;
+                    &:hover{
+                        text-decoration: none;
+                        color: $secondary;
+                    } 
+                }
+            }
+        }        
+        
+        .pro-socials {
+            p{
+                color: $body-color;
+                font-size: $font-size-base;
+            }
+            ul{
+                display: flex;
+                padding-left: 0;
+                margin-bottom: -8px !important;
+                
+                li{
+                    font-size: ($font-size-lg + 0.50);
+                    width: auto;
+                    list-style: none;
+                    margin-right: 15px;
+                    margin-bottom: 0;
+                    a{
+                        color: $body-color-secondary;
+
+                        &.fb:hover{
+                            color: #3b5998;
+                        }
+                        &.tw:hover{
+                            color: #00acee;
+                        }
+                        &.sk:hover{
+                            color: #00aff0;
+                        }
+                        &.ln:hover{
+                            color: #0077B5;
+                        }
+                        &.ig:hover{
+                            color: #3f729b;
+                        }
+                    }
+                }
+            }
+              
+        }
+               
+               
+        
+    }
+    .copyright-content{
+        background-color:$primary;
+        color: color-yiq($primary);
+        padding-top: 30px;
+        padding-bottom: 30px;
+               
+    
+        .footer-info{
+            text-align: center;
+            font-size: $font-size-sm;
+            a{
+                color:color-yiq($primary);
+
+                &:hover{
+                    color: $secondary;
+                }
+            }
+        }
+        
+    } 
+} 
+
+.bodyrtl{
+    .footer-two {
+        .single-footer .pro-socials{
+            p{
+                direction: ltr;
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width:1025px){
+    .pro-about{
+        ul{
+            li{
+                .img-fluid {
+                    max-width: 48%;
+                }
+                
+            }
+        }
+    }
+}
+@media only screen and (max-width:991px){
+.footer-two {
+    margin-top: 70px;
+}
+}

@@ -1,0 +1,70 @@
+// Custom variables
+@import "private/variables";
+
+// Bootstrap and its default variables
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Custom Css
+@import "private/animation";
+@import "private/base";
+@import "private/button";
+@import "private/mixins";
+
+
+@import "components/banners";
+@import "components/categories-panel";
+@import "components/modal";
+@import "components/pagination";
+@import "components/product";
+@import "components/revolution-layer-carousel";
+@import "components/slick-carousel";
+
+
+@import "layouts/header/sticky-header";
+@import "layouts/header/header-one";
+@import "layouts/header/header-two";
+@import "layouts/header/header-three";
+@import "layouts/header/header-mobile";
+
+@import "layouts/footer/footer-one";
+@import "layouts/footer/footer-two";
+@import "layouts/footer/footer-three";
+@import "layouts/footer/footer-mobile";
+
+@import "layouts/sidebar/shop-right-bar";
+@import "layouts/sidebar/shop-top-bar";
+@import "layouts/sidebar/account-sidebar";
+@import "layouts/sidebar/blog-sidebar";
+
+
+@import "pages/home-page";
+@import "pages/shop-page";
+@import "pages/product-page";
+@import "pages/about-page";
+@import "pages/contact-page";
+@import "pages/blog-page";
+@import "pages/login-page";
+@import "pages/cart-page";
+@import "pages/orders";
+@import "pages/order-detail";
+@import "pages/shipping-address";
+@import "pages/profile";
+@import "pages/checkout";
+@import "pages/compare";
+@import "pages/wishlist";
+@import "pages/404";
+
+
+
+@import "api/bootstrap-select.min";
+@import "api/jquery.fancybox";
+@import "api/slick";
+@import "api/slick-theme";
+
+
+@import "_responsive";
+@import "_rtl";
+
+
+
+

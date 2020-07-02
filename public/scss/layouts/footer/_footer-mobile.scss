@@ -1,0 +1,188 @@
+$footer-bg : $gray-100;
+
+
+
+.footer-mobile{
+    padding-top: 70px;
+    margin-top: 70px;
+    background-color: $footer-bg;
+
+    .single-footer {
+        width: 100%;
+        display: block;
+
+        a[data-toggle="collapse"], h5 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: $font-size-lg ;
+            font-weight: $font-weight-bolder;
+            color: $body-color;
+            margin-bottom: 15px;
+            width: 100%;
+        } 
+        h5 {
+            
+            margin-bottom: 20px;
+        } 
+        a[aria-expanded="true"]:after{
+            content: "\f077";
+            font-family: "Font Awesome 5 Free"; font-weight: 900;
+            color: $body-color-secondary;
+            font-size: $font-size-sm;
+            float: right;
+        }
+        a[aria-expanded="false"]:after{
+            content: "\f078";
+            font-family: "Font Awesome 5 Free"; font-weight: 900;
+            color: $body-color-secondary;
+            font-size: $font-size-sm;
+            float: right;
+        }
+
+        .card{
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            margin-bottom: 15px;
+        }
+        
+        .pro-about{
+            ul{
+                li{
+                    color: $body-color;
+                    font-size: $font-size-base;
+
+                    img{
+                        width: 120px;
+                        margin-bottom: 8px;
+                    }
+                }
+            }
+        }
+        ul{
+            li{
+                float: left;
+                width: 100%;
+                list-style: none;
+                
+                margin-bottom: 10px;
+
+                
+
+                span{
+                    display: block;
+                }
+
+                a{
+                    color: $body-color;
+                    -webkit-transition: 0.4s;
+                        transition: 0.4s;
+                    &:hover{
+                        text-decoration: none;
+                        color: $secondary;
+                    } 
+                }
+            }
+        }        
+        
+        .pro-socials {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            ul{
+                display: flex;
+                padding-left: 0;
+                
+                li{
+                    font-size: ($font-size-lg + 0.50);
+                    width: auto;
+                    margin-left: 15px;
+                    margin-right: 0;
+                    margin-bottom: 0;
+                    list-style: none;
+                    
+                    a{
+                        color: $body-color-secondary;
+        
+                        &.fb:hover{
+                            color: #3b5998;
+                        }
+                        &.tw:hover{
+                            color: #00acee;
+                        }
+                        &.sk:hover{
+                            color: #00aff0;
+                        }
+                        &.ln:hover{
+                            color: #0077B5;
+                        }
+                        &.ig:hover{
+                            color: #3f729b;
+                        }
+                    }
+                }
+            }
+              
+        }
+               
+               
+        .pro-newsletter {
+            margin-bottom: 30px;
+
+            .search {
+                        
+                position: relative;
+                margin-bottom: 15px;
+                width: 100%;
+                
+                
+                input {
+                    float: right;
+                    height: 40px;
+                    padding: 8px 98px 8px 8px;
+                    width: 100%;
+                    border-radius: 0;
+                    outline: none !important;
+                    border: $border-width solid $border-color;
+                }
+                
+                .btn{
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    bottom: 0;
+                    height: 100%;
+                    width: 46px;
+                    padding: 0;
+                    
+                }              
+              
+            }
+            p{
+                font-size: $font-size-sm;
+                color: $body-color-secondary;
+            }
+
+        }
+    }
+    .copyright-content{
+        background-color:$primary;
+        color: color-yiq($primary);
+        padding-top: 20px;
+        padding-bottom: 20px;
+               
+    
+        .footer-info{
+            text-align: center;
+            a{
+                color:color-yiq($primary);
+
+                &:hover{
+                    color: $secondary;
+                }
+            }
+        }
+        
+    } 
+}            

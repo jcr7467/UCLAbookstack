@@ -1,122 +1,21 @@
+<!-- All custom scripts here -->
+<script src="/js/scripts.js"></script>
+<script src="/js/client.js"></script>
+
+<!-- Revolution JS Files -->
+<script src="revolution/js/jquery.themepunch.tools.min.js"></script>
+<script src="revolution/js/jquery.themepunch.revolution.min.js"></script>
 
 
 
-<script type="text/javascript">$(function () {
-    // Google maps
-    var mapLocation = new google.maps.LatLng(32.689593, -117.18039);
-    var map = new GMaps({
-        streetViewControl: false,
-        overviewMapControl: false,
-        mapTypeControl: false,
-        panControl: false,
-        scrollwheel: false,
-        center: mapLocation,
-        el: '#map',
-        zoom: 15,
-        styles: [
-            {
-                "featureType": "landscape",
-                "stylers": [
-                    {"saturation": -100},
-                    {"lightness": 65},
-                    {"visibility": "on"}
-                ]
-            },
-            {
-                "featureType": "poi",
-                "stylers": [
-                    {"saturation": -100},
-                    {"lightness": 51},
-                    {"visibility": "simplified"}
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "stylers": [
-                    {"saturation": -100},
-                    {"visibility": "simplified"}
-                ]
-            },
-            {
-                "featureType": "road.arterial",
-                "stylers": [
-                    {"saturation": -100},
-                    {"lightness": 30},
-                    {"visibility": "on"}
-                ]
-            },
-            {
-                "featureType": "road.local",
-                "stylers": [
-                    {"saturation": -100},
-                    {"lightness": 40},
-                    {"visibility": "on"}
-                ]
-            },
-            {
-                "featureType": "transit",
-                "stylers": [
-                    {"saturation": -100},
-                    {"visibility": "simplified"}
-                ]
-            },
-            {
-                "featureType": "administrative.province",
-                "stylers": [
-                    {"visibility": "off"}
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels",
-                "stylers": [
-                    {"visibility": "on"},
-                    {"lightness": -25},
-                    {"saturation": -100}
-                ]
-            }
-        ]
-    });
-    map.addMarker({
-        position: mapLocation,
-        icon: 'images/icons/map-icon.png'
-    });
-});
-</script>
+<!-- Slider Revolution extension scripts. ONLY NEEDED FOR LOCAL TESTING -->
+<script src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+<script src="revolution/js/extensions/revolution.extension.video.min.js"></script>
 
-<script type="text/javascript">$(function () {
-    $('#video').YTPlayer({
-        fitToBackground: false,
-        videoId: '9d8wWcJLnFI',
-        pauseOnScroll: false,
-        playerVars: {
-            modestbranding: 0,
-            autoplay: 1,
-            controls: 0,
-            showinfo: 0,
-            wmode: 'transparent',
-            branding: 0,
-            rel: 0,
-            autohide: 0
-        }
-    });
-});
-</script>
 
-<script type="text/javascript">$(function () {
-    $(".ion-search").click(function (e) {
-        e.preventDefault();
-        $(".search input:text").toggleClass("opened").focus();
-    });
-    var $header = $(".blog-sidebar-header"),
-            offset_top = $header.offset().top;
-    var scrollingFn = window.utils.debounce(function () {
-        var scroll = $(window).scrollTop();
-        if (scroll >= offset_top) {
-            $header.addClass("sticky");
-        } else {
-            $header.removeClass("sticky");
-        }
-    }, 10);
-    $(window).scroll(scrollingFn);
-});</script><!-- javascript--><!-- Google Analytics: change UA-XXXXX-X to be your site's ID.-->

@@ -1,0 +1,76 @@
+
+
+
+
+
+
+
+<div class="index-photography-header">
+    <div class="slider-component fxSoftScale" id="spacial-slider">
+
+        <div class="intro">
+            <h1 class="customFadeInUp">Textbooks made easy</h1>
+            <p class="customFadeInUp" style="color:white; font-size:20px">
+                Throw your textbook in the BookStack,<br/>and let other UCLA students find<strong> you</strong>
+            </p>
+            {{#if (user_is_logged_in currentUser)}}
+            <a href="/uploadbook" class="nav-link nav-link--rounded"> Stack a book</a>
+            {{else}}
+
+            <a class="nav-link nav-link--rounded" href="/signup">Sign Up Now</a>
+            {{/if}}
+
+        </div>
+        <nav><a class="prev" href=""><span class="icon-wrap"></span></a><a class="next" href=""><span class="icon-wrap"></span></a></nav>
+    </div>
+</div>
+<div class="index-features-files" style="padding-top: 0px">
+    <div class="container2">
+        <div class="container1">
+            <div class="col col-left">
+                <div class="features">
+                    <div class="feature clearfix">
+                        <div class="image"><img src="images/icons/features-icon-upload.png"/></div>
+                        <div class="info"><strong>Easy to use</strong>
+                            <p>Fill out a form with simple information about your book with a couple images and it will instantly be viewable to everyone</p>
+                        </div>
+                    </div>
+                    <div class="feature clearfix">
+                        <div class="image"><img src="images/icons/features-icon-earth.png"/></div>
+                        <div class="info"><strong>Your book in the stack</strong>
+                            <p>Your book will be visible to everyone in the UCLA, capturing a wide audience to sell your textbook to</p>
+                        </div>
+                    </div>
+                    <div class="feature clearfix">
+                        <div class="image"><img src="images/icons/features-icon-ok.png"/></div>
+                        <div class="info"><strong>Email connect</strong>
+                            <p>When a user finds you, they will simply send a message to the email you have stored with us, and ask where you would like to meet!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-right">
+                <div class="info">
+                    <h3>Why use BookStack?</h3>
+                    <h4>Someone on campus is looking for <strong>your</strong> book</h4>
+                    <p>Every quarter begins with the same process, hunting down a textbook your class requires in the bookstore and everywhere online. However, there is someone who just finished that<strong> same</strong> class and no longer needs the textbook. That's why we created BookStack: to help UCLA students connect with one another and negotiate a beneficial price for both sides.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="index-features-user">
+    <header>
+        <h3 style="margin-bottom:-115px">.</h3>
+    </header>
+</div>
+<script type="text/javascript">
+    window.slider_interval = setInterval(function () {
+        window.navigate_slider('next')
+    }, 5000)
+    $(function () {
+        if (!window.utils.isMobile()) {
+            skrollr.init()
+        }
+    })
+</script>

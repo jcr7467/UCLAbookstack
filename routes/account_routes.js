@@ -28,7 +28,7 @@ router.route('/signin')
     .get((request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
-            layout: 'signinout_layout.hbs'
+            layout: 'home-layout.hbs'
         });
     })
     .post((request, response, next) => {
@@ -55,7 +55,7 @@ router.route('/signup')
     .get((request, response, next) => {
         response.render('partials/signinout/signup', {
             title: 'Sign Up',
-            layout: 'signinout_layout.hbs'
+            layout: 'home-layout.hbs'
         });
     })
     .post((request, response, next) => {

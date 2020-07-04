@@ -464,3 +464,9 @@ ul {
     background-color: transparent;
     margin: 0px;
 }
+
+
+#signupButton {
+    background-color: #2774AE;
+    color: white;
+}

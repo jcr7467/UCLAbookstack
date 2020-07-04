@@ -12,7 +12,8 @@ const Book = require('../models/book');
 router.get('/', (request, response) => {
     response.render('index', {
         title: "Home",
-        navbar: "clear"
+        navbar: "clear",
+        layout: "home-layout"
     });
 });
 

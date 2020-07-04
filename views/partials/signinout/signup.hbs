@@ -1,3 +1,121 @@
+
+
+<!-- Signup Content -->
+<div class="container-fuild">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Signup</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+
+<section class="pro-content login-content">
+    <div class="container">
+
+        <div class="row">
+            <div class="pro-heading-title">
+                <h1>
+                    Signup Page
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+
+                <div class="registration-process">
+                    <h2 >New Customer</h2>
+                    <form action="/signup" method="post" name="general-form">
+                        <div class="from-group row mb-4">
+                            <div class="input-group col-12">
+
+                                <input type="text" name="firstname" class="form-control" id="inlineFormInputGroup00" placeholder="First Name" required>
+                            </div>
+                        </div>
+                        <div class="from-group row mb-4">
+                            <div class="input-group col-12">
+
+                                <input type="text" name="lastname" class="form-control" id="inlineFormInputGroup00" placeholder="Last Name" required>
+                            </div>
+                        </div>
+                        <div class="from-group row mb-4">
+
+                            <div class="input-group col-12">
+
+                                <input type="email" name="email" class="form-control" id="inlineFormInputGroup0" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="from-group row mb-4">
+
+                            <div class="input-group col-12">
+
+                                <input minlength="6" type="password" name="password" class="form-control" id="inlineFormInputGroup1" placeholder="Password" required>
+                            </div>
+                        </div>
+                        <div class="from-group row mb-4">
+
+                            <div class="input-group col-12">
+
+                                <label>
+                                    <input type="checkbox" class="form-control" id="inlineFormInputGroup2"  name="terms" required>I've read & agree with the<a href="/termsOfUse" target="_blank"> Terms</a> and<a href="/privacyPolicy" target="_blank"> Privacy</a>.
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="from-group row mb-4" id="formfilt">
+
+                            <div class="input-group col-12">
+
+                                <label>
+                                    <input type="text" name="formfilt" class="form-control" id="inlineFormInputGroup2"  required>I've read & agree with the<a href="/termsOfUse" target="_blank"> Terms</a> and<a href="/privacyPolicy" target="_blank"> Privacy</a>.
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="from-group">
+                            <button class="btn btn-secondary swipe-to-top">Create Account</button>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-6">
+                <h2>Already Registered?</h2>
+
+                <div class="registration-process">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae viverra nibh. Etiam a arcu sed mi suscipit rutrum. Sed a lorem pellentesque, dignissim risus in, feugiat ipsum. Nulla laoreet faucibus velit eget iaculis. Vivamus porttitor diam lectus, eu rhoncus lacus dignissim et. </p>
+                    <form>
+
+                        <div class="from-group">
+                            <a href="/signin" class="btn btn-primary swipe-to-top">Login</a>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
 <form method="POST" action="/signup">
     <div class="form-field">
         <input type="text" placeholder="First Name" name="firstname" required="required" />
@@ -22,3 +140,26 @@
     </div>
     <div class="form-bottom">Already have an account?<a href="/signin">Sign in</a></div>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

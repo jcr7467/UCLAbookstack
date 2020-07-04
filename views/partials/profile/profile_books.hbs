@@ -1,3 +1,175 @@
+
+
+
+
+<!-- wishlist Content -->
+<div class="container-fuild">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/profile">Profile</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Books</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+<section class="pro-content wishlist-content">
+    <div class="container">
+        <div class="row">
+            <div class="pro-heading-title">
+                <h1>
+                    My Books
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-12 col-lg-3">
+
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a class="nav-link" href="profile.html">
+                            <i class="fas fa-user"></i>
+                            Profile
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="/profile">
+                            <i class="fas fa-book"></i>
+                            My Books
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="/profile/uploadbook">
+                            <i class="fas fa-book"></i>
+                            Upload Book
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="orders.html">
+                            <i class="fas fa-shopping-cart"></i>
+                            Orders
+                        </a>
+                    </li>
+
+                    <li class="list-group-item">
+                        <a class="nav-link" href="/signout">
+                            <i class="fas fa-power-off"></i>
+                            Logout
+                        </a>
+                    </li>
+                    <li class="list-group-item">
+                        <a class="nav-link" href="change-password.html">
+                            <i class="fas fa-unlock-alt"></i>
+                            Change Password
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="col-12 col-lg-9 ">
+
+
+                {{#if (greater_than_zero bookCount)}}
+
+                    {{#each books}}
+
+                        <div class="media">
+                            <div class="media-thumb">
+                                <img class="img-fluid" src="images/product_images/product_image_02.jpg" alt="Product Image">
+                            </div>
+
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-12 col-md-8">
+                                        <h2><a href="product-page1.html">Crystal Water Drop Earrings</a></h2>
+                                        <div class="pro-price">
+                                            <ins>$450</ins>
+                                        </div>
+                                        <p class="d-none d-lg-block d-xl-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <div class="buttons">
+                                            <div class="input-group item-quantity">
+
+                                                <input type="text" id="quantity1" name="quantity" class="form-control" value="2" >
+
+                                                <span class="input-group-btn">
+                                          <button type="button" value="quantity1" class="quantity-plus btn"  data-type="plus" data-field="">
+                                            <span class="fas fa-plus"></span>
+                                          </button>
+
+                                          <button type="button" value="quantity1" class="quantity-minus btn" data-type="minus" data-field="">
+                                              <span class="fas fa-minus"></span>
+                                          </button>
+                                      </span>
+
+
+                                            </div>
+                                            <a href="cart-page1.html" class="btn btn-secondary swipe-to-top">
+                                                Add to Cart
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-4 detail">
+
+                                        <div class="share"><a href="#">Share &nbsp;<i class="fas fa-share"></i></a> </div>
+                                        <div class="share"><a href="#">Remove &nbsp;<i class="fas fa-trash-alt"></i></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <hr class="border-line">
+
+
+
+                    {{/each}}
+
+                {{ else }}
+
+                    <p>You don't have any books up yet!</p>
+
+                {{/if}}
+
+
+
+
+
+                <div class="pagination justify-content-between ">
+
+                    <label  class="col-form-label">Showing 1&ndash;<span class="showing_record">1</span>&nbsp;of&nbsp;<span class="showing_total_record">23</span>&nbsp;results.</label>
+
+                    <div class="col-12 col-sm-6">
+                        <ol class="loader-page">
+                            <li class="loader-page-item"><a href="#">
+                                <i class="fa fa-angle-double-left" style="font-size:12px"></i></a>
+                            </li>
+                            <li  class="loader-page-item"><a href="#">1</a></li>
+                            <li  class="loader-page-item"><a href="#">2</a></li>
+                            <li  class="loader-page-item"><a href="#">3</a></li>
+                            <li  class="loader-page-item"><a href="#">4</a></li>
+                            <li  class="loader-page-item"><a href="#">
+                                <i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- ............the end..... -->
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
 <div class="agency-start-project-intro"></div>
 <div class="account-page">
     <div class="container">
@@ -67,4 +239,3 @@
         </div>
     </div>
 </div>
-<div class="agency-start-city-bg"></div>

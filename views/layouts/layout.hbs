@@ -1,27 +1,42 @@
-<!doctype html >
-<html lang="en" class="js cssanimations">
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
 <head>
     {{> google_analytics_tracking_js_code }}
+    <meta charset="UTF-8">
+
     {{#if (equal_strings 'Home' title)}}
         <title> BookStack </title>
     {{else}}
         <title> BookStack | {{ title }}</title>
     {{/if}}
+
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="images/miscellaneous/fav.png">
+
     {{> css }}
 
 </head>
 
-<body>
-    {{> navbar_selector}}
-    {{{ body }}}
-    {{> javascript }}
+<body >
+<!-- Paste this code after body tag -->
+<div class="se-pre-con"></div>
+
+{{> search-header-index }}
+{{> sticky-header-index }}
+{{> mobile-header-index }}
+
+{{{ body }}}
 
 
 
-    {{> default_footer}}
+{{> default_footer }}
+
+
+{{> javascript }}
 
 </body>
-
-
-
 </html>
+
+

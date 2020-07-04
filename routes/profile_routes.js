@@ -103,10 +103,6 @@ router.route('/profile/uploadbook')
         let {files} = request;
         let file_entries = request.files.length;
 
-        console.log(request.body.title)
-        console.log(request.body.price)
-        console.log(request.body.subject)
-        console.log(request.body.description)
 
 
         async.waterfall([
@@ -218,7 +214,7 @@ router.route('/profile/uploadbook')
         ], function(err) {
             if(err){return next(err)}
 
-            return response.redirect('/');
+            return response.redirect('/profile');
         });
     });
 

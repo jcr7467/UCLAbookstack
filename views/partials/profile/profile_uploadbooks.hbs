@@ -22,55 +22,18 @@
         </div>
 
         <div class="row ">
-            <div class=" col-12 col-lg-3">
 
-
-                <ul class="list-group mb-4">
-                    <li class="list-group-item">
-                        <a class="nav-link" href="profile.html">
-                            <i class="fas fa-user"></i>
-                            Profile
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="nav-link" href="wishlist.html">
-                            <i class="fas fa-heart"></i>
-                            Wishlist
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="nav-link" href="orders.html">
-                            <i class="fas fa-shopping-cart"></i>
-                            Orders
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="nav-link" href="shipping-address.html">
-                            <i class="fas fa-map-marker-alt"></i>
-                            Shipping Address
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="nav-link" href="#">
-                            <i class="fas fa-power-off"></i>
-                            Logout
-                        </a>
-                    </li>
-                    <li class="list-group-item">
-                        <a class="nav-link" href="change-password.html">
-                            <i class="fas fa-unlock-alt"></i>
-                            Change Password
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            {{>profile_menu}}
             <div class="col-12 col-lg-9 ">
+
                 <form id="listABookForm" method="post" enctype="multipart/form-data" action="/profile/uploadbook" name="general-form">
                     <div class="row">
 
                         <div class="col-12 col-md-7">
                             <h5>Upload Form</h5>
+                            <a href="/bookformtips" target="_blank">Tips for uploading books</a>
                             <div class="from-group row mb-4 pt-3">
+
 
                                 <div class="input-group col-12">
 
@@ -88,7 +51,7 @@
 
                                 <div class="input-group col-12">
 
-                                    <input type="text" name="email" class="form-control" id="inlineFormInputGroup2" placeholder="ISBN">
+                                    <input type="text" name="isbn" class="form-control" id="inlineFormInputGroup2" placeholder="ISBN">
                                 </div>
                             </div>
 
@@ -97,12 +60,47 @@
                             <div class="from-group row mb-4">
 
                                 <div class="input-group col-12">
-                                    <select class="form-control" id="inlineFormInputGroup3">
-                                        <option>Subject</option>
-                                        <option>Male</option>
-                                        <option>Female</option>
 
+
+
+
+                                    <select class="form-control" id="subjectChosen" name="subject" form="listABookForm">
+                                        <option value="Art" selected="selected">Art</option>
+                                        <option value="Business &amp; Economics">Business & Economics</option>
+                                        <option value="Cooking">Cooking</option>
+                                        <option value="English">English</option>
+                                        <option value="Foreign Language">Foreign Language</option>
+                                        <option value="Health and Fitness">Health & Fitness</option>
+                                        <option value="History">History</option>
+                                        <option value="Law and Political Science">Law & Political Science</option>
+                                        <option value="Mathematics">Mathematics</option>
+                                        <option value="Medical">Medical</option>
+                                        <option value="Performing Arts">Performing Arts</option>
+                                        <option value="Philosophy and Social Science">Philosphy & Social Science</option>
+                                        <option value="Science">Science</option>
+                                        <option value="Technology and Engineering">Technology & Engineering</option>
+                                        <option value="Other">Other</option>
                                     </select>
+
+                            </div>
+                            </div>
+
+
+                            <div class="from-group row mb-4">
+
+                                <div class="input-group col-12">
+                                    <input min="0" type="number" name="price" id="price" step="0.01"  class="form-control" placeholder="Price" required>
+                                </div>
+                            </div>
+
+
+
+                            <div class="from-group row mb-4">
+
+                                <div class="input-group col-12">
+
+                                    <textarea class="form-control" id="description" type="text" name="description" form="listABookForm" placeholder="Description"></textarea>
+
                                 </div>
                             </div>
 
@@ -110,18 +108,18 @@
                             <div class="from-group row mb-4">
 
                                 <div class="input-group col-12">
-                                    <input type="text" name="phone" class="form-control" placeholder="Price" id="inlineFormInputGroup4">
-                                </div>
-                            </div>
 
-                            <div class="from-group row mb-4">
+                                    <p>Images</p>
+                                    <input class="form-control-file" type="file" name="images" multiple="multiple" />
 
-                                <div class="input-group col-12">
+                                    <a href="/uploadpics" target="_blank">How do I upload multiple pictures?</a>
 
-                                    <input type="text" name="email" class="form-control" id="inlineFormInputGroup2" placeholder="Description">
 
                                 </div>
                             </div>
+
+
+
 
 
 
@@ -131,7 +129,7 @@
                         <div class="col-12 col-md-5">
                             <ul>
                                 <li>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    While it is not required, we HIGHLY recommend uploading images of your book.
                                 </li>
                                 <li>
                                     Aliquam ac mi ultricies, congue ex vel, aliquam nisi.

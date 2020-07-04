@@ -4,6 +4,8 @@ let express = require("express"),
 const User = require('../models/user');
 const Book = require('../models/book');
 
+const mid = require('../middleware/middleware');
+
 const async = require('async');
 
 // For uploading pictures to AWS S3 for storage
@@ -27,7 +29,7 @@ let s3 = new AWS.S3({});
 
 
 
-router.get('/profile', (request, response, next) => {
+router.get('/profile',mid.requiresLogin, (request, response, next) => {
 
     let currentUser = request.session.userId;
 
@@ -100,8 +102,13 @@ router.route('/profile/uploadbook')
     .post(upload.array('images', 7), (request, response, next) => {
         let {files} = request;
         let file_entries = request.files.length;
-        console.log(request.files.length)
-        console.log(request.files[0].mimetype)
+
+        console.log(request.body.title)
+        console.log(request.body.price)
+        console.log(request.body.subject)
+        console.log(request.body.description)
+
+
         async.waterfall([
             function fileType(callback){
                 let allImages = true;

@@ -6,35 +6,9 @@
     <div class="header-mini bg-top-bar">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-12 col-md-5">
 
-                    <div class="navbar-lang">
 
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle">
-                                English
-                            </a>
-                            <div class="dropdown-menu" >
-                                <a class="dropdown-item" href="#">English</a>
-                                <a class="dropdown-item" href="#">Arabic</a>
-
-                            </div>
-                        </div>
-
-                        <div class="dropdown">
-                            <a href="javascript:void(0);" class="dropdown-toggle">
-                                USD
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="#">($)&nbsp;USD</a>
-                                <a class="dropdown-item" href="#">€&nbsp;EUR</a>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-md-7">
+                <div class="col-12 col-md-12">
                     <div class="pro-header-options">
                         <div class="dropdown">
 
@@ -42,15 +16,23 @@
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle">
-                                My Account
+                                Account
                             </a>
                             <div class="dropdown-menu" >
-                                <a class="dropdown-item" href="profile.html">Profile</a>
-                                <a class="dropdown-item" href="wishlist.html">Wishlist&nbsp;(3)</a>
-                                <a class="dropdown-item" href="compare.html">Compare&nbsp;(2)</a>
-                                <a class="dropdown-item" href="orders.html">Orders</a>
-                                <a class="dropdown-item" href="shipping-address.html">Shipping Address</a>
-                                <a class="dropdown-item" href="#">Logout</a>
+                                {{#if (user_is_logged_in currentUser)}}
+                                    <a class="dropdown-item" href="/profile">Profile</a>
+                                    <a class="dropdown-item" href="/signout">Sign Out</a>
+
+                                {{else}}
+
+
+                                    <a class="dropdown-item" href="/signup">Sign Up</a>
+                                    <a class="dropdown-item" href="/signin">Sign In</a>
+
+
+                                {{/if}}
+
+
                             </div>
                         </div>
                     </div>
@@ -74,15 +56,22 @@
                             <div class="search-field-select" >
                                 <select class="selectpicker">
                                     <option selected>All Categories</option>
-                                    <option value="1">Rings
-                                        &nbsp;</option>
-                                    <option value="1">Earrings&nbsp;</option>
-                                    <option value="1">Crowns&nbsp;</option>
-                                    <option value="1">Necklace&nbsp;</option>
-                                    <option value="1">Bracelet&nbsp;</option>
-                                    <option value="1">Anklet&nbsp;</option>
-                                    <option value="1">Hairpin&nbsp;</option>
-                                    <option value="2">Bangle&nbsp;</option>
+                                    <option value="1">Art</option>
+                                    <option value="1">Business & Economics</option>
+                                    <option value="1">Cooking</option>
+                                    <option value="1">English&nbsp;</option>
+                                    <option value="1">Foreign Language</option>
+                                    <option value="1">Health & Fitness</option>
+                                    <option value="1">History&nbsp;</option>
+                                    <option value="2">Law & Political Science</option>
+                                    <option value="3">Mathematics</option>
+                                    <option value="1">Medical</option>
+                                    <option value="1">Performing Arts&nbsp;</option>
+                                    <option value="1">Philosophy & Social Science&nbsp;</option>
+                                    <option value="1">Science&nbsp;</option>
+                                    <option value="1">Technology & Engineering&nbsp;</option>
+                                    <option value="1">Other&nbsp;</option>
+
 
                                 </select>
                             </div>

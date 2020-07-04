@@ -167,18 +167,24 @@
                             </div>
 
                         </li>
-                        <li>
-                            <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="Books">
-                                <i class="far fa-book"></i>
-                                <span class="badge badge-secondary">3</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="wishlist.html" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
-                                <i class="far fa-comment"></i>
-                                <span class="badge badge-secondary">3</span>
-                            </a>
-                        </li>
+
+                        {{#if (user_is_logged_in currentUser)}}
+
+                            <li>
+                                <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="Books">
+                                    <i class="far fa-book"></i>
+                                    <span class="badge badge-secondary">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="wishlist.html" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                    <i class="far fa-comment"></i>
+                                    <span class="badge badge-secondary">3</span>
+                                </a>
+                            </li>
+
+                        {{/if}}
+
 
                     </ul>
                 </div>

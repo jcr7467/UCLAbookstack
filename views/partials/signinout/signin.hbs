@@ -31,24 +31,24 @@
 
                 <div class="registration-process">
                     <h2>Already Registered?</h2>
-                    <form action="/"  name="login">
+                    <form action="/signin"  method="post" name="login">
                         <div class="from-group row mb-4">
 
                             <div class="input-group col-12">
 
-                                <input type="text" name="email" class="form-control" id="inlineFormInputGroup0" placeholder="Enter Your Email">
+                                <input type="email" name="email" class="form-control" id="inlineFormInputGroup0" placeholder="Email">
                             </div>
                         </div>
                         <div class="from-group row mb-4">
 
                             <div class="input-group col-12">
 
-                                <input type="password" name="password" class="form-control" id="inlineFormInputGroup1" placeholder="Enter Your Password">
+                                <input type="password" name="password" class="form-control" id="inlineFormInputGroup1" placeholder="Password">
                             </div>
                         </div>
                         <div class="from-group">
                             <button class="btn btn-secondary swipe-to-top">Login</button>
-                            <a href="change-password.html" class="btn btn-link">Forgot Password</a>
+                            <a href="/forgot" class="btn btn-link">Forgot Password</a>
                         </div>
                     </form>
                 </div>

@@ -148,21 +148,25 @@ io.on('connection', socket => {
 
         socket.on('chatMessage', (msg) => {
 
-            let messageObject = formatMessage(username, msg)
+            let messageObject = formatMessage(username, msg);
+
 
 
             axios.post('http://localhost:8000/sendmessage', {
-                msgObj: messageObject
+                msgObj: messageObject,
+                room: room
             }).then(response => {
-                console.log('worked');
-                console.log(response.data);
+
+
+
+
             }).catch(error => {
 
-                //console.log(error)
+                console.log(error)
             });
 
 
-            console.log(msg);
+
             io.emit('message', messageObject);
 
         });

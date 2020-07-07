@@ -5,7 +5,6 @@ const axios = require('axios');
 function formatMessage(username, text){
     let myMoment = moment();
 
-
     return {
         username,
         text,

@@ -71,5 +71,7 @@ $(document).ready(
         $('#formfilt').hide()
         $('#theirUserID').hide()
         $('#myUserID').hide()
+        chatMessages.scrollTop = chatMessages.scrollHeight;
     }
+
 );

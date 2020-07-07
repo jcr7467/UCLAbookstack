@@ -38,8 +38,9 @@ router.route('/signin')
                     return response.redirect('/signin');
                 }else{
                     request.session.userId = user._id;
-                    request.session.admin_level = user.admin_level
-                    return response.redirect('/');
+                    request.session.admin_level = user.admin_level;
+                    request.session.userObject = user;
+                    return response.redirect('/profile');
                 }
             });
         }else{
@@ -86,6 +87,7 @@ router.route('/signup')
                     if (error){ return next(error);}
                     request.session.userId = user._id; // By setting this, we are "logging" them in
                     request.session.admin_level = user.admin_level
+                    request.session.userObject = user;
                     return response.redirect('/');
                 });
 

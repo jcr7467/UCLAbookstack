@@ -3,8 +3,7 @@
 <div class="chat-wrapper">
     <div class="chat-container">
         <header class="chat-header">
-            <h1><i class="fas fa-smile"></i> Messages with *USER*</h1>
-            <a href="index.html" class="btn">Leave Room</a>
+            <h1> Messages with {{ messagesWith }}</h1>
         </header>
 
         <main class="chat-main">
@@ -19,6 +18,8 @@
 
         <div class="chat-form-container">
             <form id="chat-form">
+                <input type="text"  value="{{ currentUserObject._id }}" id="myUserID">
+                <input type="text"  value="{{ messagesWith }}" id="theirUserID">
                 <input
                         id="msg"
                         type="text"
@@ -38,6 +39,11 @@
         integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4="
         crossorigin="anonymous"
 ></script>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
+<script src="/js/client.js"></script>
 
 
 

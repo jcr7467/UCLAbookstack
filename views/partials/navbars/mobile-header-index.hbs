@@ -18,7 +18,7 @@
                             {{#if (user_is_logged_in currentUser)}}
                                 <div class="logout-main">
                                     <div class="welcome">
-                                        <span>Welcome&nbsp!</span>
+                                        <span>Welcome {{ currentUserObject.firstname }}!</span>
                                     </div>
                                     <div class="logout">
                                         <a href="/signout" class="">Logout</a>
@@ -40,7 +40,7 @@
                             {{else}}
                                 <div class="logout-main">
                                     <div class="welcome">
-                                        <span>Welcome!</span>
+                                        <span>Welcome to BookStack!</span>
                                     </div>
 
 

@@ -38,7 +38,7 @@
 
                         <div class="media">
                             <div class="media-thumb">
-                                <img class="img-fluid" src="images/product_images/product_image_02.jpg" alt="Product Image">
+                                <img class="img-fluid" src="{{ this.mainpicURL}}" alt="Product Image">
                             </div>
 
                             <div class="media-body">
@@ -48,33 +48,20 @@
                                         <div class="pro-price">
                                             <ins>${{ this.price }}</ins>
                                         </div>
-                                        <p class="d-none d-lg-block d-xl-block">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                        <p class="d-none d-lg-block d-xl-block">Author: {{ this.bookAuthor }}</p>
+                                        <p class="d-none d-lg-block d-xl-block">{{ this.description }}</p>
                                         <div class="buttons">
                                             <div class="input-group item-quantity">
 
-                                                <input type="text" id="quantity1" name="quantity" class="form-control" value="2" >
-
-                                                <span class="input-group-btn">
-                                          <button type="button" value="quantity1" class="quantity-plus btn"  data-type="plus" data-field="">
-                                            <span class="fas fa-plus"></span>
-                                          </button>
-
-                                          <button type="button" value="quantity1" class="quantity-minus btn" data-type="minus" data-field="">
-                                              <span class="fas fa-minus"></span>
-                                          </button>
-                                      </span>
-
 
                                             </div>
-                                            <a href="cart-page1.html" class="btn btn-secondary swipe-to-top">
-                                                Add to Cart
-                                            </a>
+
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-4 detail">
 
-                                        <div class="share"><a href="#">Edit &nbsp;<i class="fas fa-share"></i></a> </div>
-                                        <div class="share"><a href="#">Remove &nbsp;<i class="fas fa-trash-alt"></i></a> </div>
+                                        <div class="share"><a href="/editbook?id={{ this._id }}">Edit &nbsp;<i class="fas fa-share"></i></a> </div>
+                                        <div class="share"><a href="/deletebook?id={{ this._id }}">Delete &nbsp;<i class="fas fa-trash-alt"></i></a> </div>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +85,7 @@
 
                 <div class="pagination justify-content-between ">
 
-                    <label  class="col-form-label">Showing 1&ndash;<span class="showing_record">1</span>&nbsp;of&nbsp;<span class="showing_total_record">23</span>&nbsp;results.</label>
+                    <label  class="col-form-label">Showing 1&ndash;<span class="showing_record">1</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ bookCount }}</span>&nbsp;results.</label>
 
                     <div class="col-12 col-sm-6">
                         <ol class="loader-page">
@@ -125,76 +112,3 @@
 
 
 
-
-
-
-
-<div class="agency-start-project-intro"></div>
-<div class="account-page">
-    <div class="container">
-        <div class="account-wrapper">
-            <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item" role="presentation"><a class="nav-link active" href="/profile" role="tab">My books</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile/uploadbook" role="tab">Upload book</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="/profile/settings" role="tab">My account</a></li>
-            </ul>
-            <!-- Tab panes-->
-            <div class="tab-content">
-                <div class="tab-pane active" id="orders" role="tabpanel">
-                    <div class="tab-header clearfix">
-                        <h4 class="float-left">Your books</h4>
-                    </div>
-
-
-                    {{#if (greater_than_zero bookCount)}}
-
-                        <table class="table table-striped table-responsive">
-                            <thead>
-                            <tr>
-                                <th>Title</th>
-                                <th>Author</th>
-                                <th>Price</th>
-                                <th>Edit Book</th>
-                                <th>Delete Book</th>
-                            </tr>
-                            </thead>
-
-
-                            <tbody>
-                            {{# each books}}
-                                <tr>
-                                    <td>
-                                        <a href="/search/book?id={{ this._id }}">{{ this.title }} </a>
-                                    </td>
-                                    <td>
-                                        {{ this.bookAuthor }}
-                                    </td>
-                                    <td>
-                                        {{ this.price }}
-                                    </td>
-                                    <td>
-                                        <a href="/editbook?id={{ this._id }}" class="btn btn-light"> Edit </a>
-
-                                    </td>
-                                    <td>
-                                        <form method="post" action="/deletebook">
-                                            <input type="hidden" name='bookId' value="{{ this._id }}" readonly>
-                                            <input type="submit" class="btn btn-light" value="Delete">
-
-                                        </form>
-                                    </td>
-                                </tr>
-                            {{/each}}
-
-                            </tbody>
-                        </table>
-
-                    {{else}}
-                        <p>You don't have any books up yet!</p>
-                    {{/if}}
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>

@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 :root {
-    --dark-color-a: #667aff;
-    --dark-color-b: #7386ff;
-    --light-color: #e6e9ff;
+    --dark-color-a: #2D68C4;
+    --dark-color-b: #2D68C4;
+    --light-color: #a6c4db;
     --success-color: #5cb85c;
     --error-color: #d9534f;
+    --back-color: #ffffff
 }
 
 * {
@@ -17,8 +18,7 @@
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 16px;
-    background: var(--light-color);
-
+    background: var(--back-color);
 }
 
 .chat-sidebar ul {
@@ -32,7 +32,7 @@ a {
 .btn {
     cursor: pointer;
     padding: 5px 15px;
-    background: var(--light-color);
+    background: var(--back-color);
     color: var(--dark-color-a);
     border: 0;
     font-size: 17px;

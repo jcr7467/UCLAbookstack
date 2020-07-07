@@ -8,6 +8,9 @@ let mongoStore = require("connect-mongo")(session);
 let sslRedirect = require("heroku-ssl-redirect");
 
 
+let axios = require("axios");
+
+
 
 
 let bodyParser = require("body-parser");
@@ -57,6 +60,7 @@ app.use(session({
 app.use((request, response, next) => {
     response.locals.admin_level = request.session.admin_level;
     response.locals.currentUser = request.session.userId;
+    response.locals.currentUserObject = request.session.userObject;
     next();
 });
 
@@ -66,38 +70,6 @@ app.use((request, response, next) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-
-
-
-
-////////////////////////
-
-
-// SOCKET HANDLING
-
-
-const botName = "Chatbot";
-let message_routes = require('./routes/message_routes.js');
-// Run when client connects
-io.on('connection', socket => {
-
-    //console.log(socket.handshake.headers.cookie);
-
-    socket.on('joinRoom', ({username, room}) => {
-
-
-        socket.join(room);
-
-        socket.on('chatMessage', (msg) => {
-            console.log(msg);
-            io.emit('message', formatMessage(username, msg));
-        });
-    });
-
-
-
-});
 
 
 
@@ -145,11 +117,60 @@ app.set('view engine', 'hbs');
 let routes = require('./routes/routes.js');
 let account_routes = require('./routes/account_routes');
 let profile_routes = require('./routes/profile_routes');
+let message_routes = require('./routes/message_routes');
 
 app.use('/', routes);
 app.use('/', account_routes);
 app.use('/', profile_routes);
+app.use('/', message_routes);
 
+
+
+
+
+
+////////////////////////
+
+
+// SOCKET HANDLING
+
+
+const botName = "Chatbot";
+
+// Run when client connects
+io.on('connection', socket => {
+
+    //console.log(socket.handshake.headers.cookie);
+
+    socket.on('joinRoom', ({username, room}) => {
+
+        socket.join(room);
+
+        socket.on('chatMessage', (msg) => {
+
+            let messageObject = formatMessage(username, msg)
+
+
+            axios.post('http://localhost:8000/sendmessage', {
+                msgObj: messageObject
+            }).then(response => {
+                console.log('worked');
+                console.log(response.data);
+            }).catch(error => {
+
+                //console.log(error)
+            });
+
+
+            console.log(msg);
+            io.emit('message', messageObject);
+
+        });
+    });
+
+
+
+});
 
 
 

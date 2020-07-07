@@ -1,3 +1,398 @@
+
+
+<div class="container-fuild">
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Product</li>
+            </ol>
+        </div>
+    </nav>
+</div>
+
+
+<section class="pro-content product-content">
+    <div class="container">
+
+        <div class="product-detail-info">
+
+            <div class="row">
+
+                <div class="col-12 col-sm-12">
+                    <div class="row">
+
+                        <div class="col-12 col-md-6">
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+
+                                    <h1 class="pro-title">{{ book.title }}</h1>
+
+                                    <div class="pro-price">
+                                        <ins>${{ book.price}}</ins>
+                                    </div>
+
+                                    <div class="pro-infos">
+
+                                        <div class="pro-single-info"><b>Category :</b>{{ book.subject }}</div>
+
+
+                                    </div>
+
+
+
+
+
+
+                                    <div class="pro-sub-buttons">
+                                        <div class="buttons">
+                                            <a href="/deletebook" type="button" class="btn  btn-link" onclick="notificationWishlist();"><i class="fas fa-trash"></i>Delete</a>
+
+                                            <a href="/editbook" type="button" class="btn btn-link" onclick="notificationCompare();"><i class="fa icon-edit"></i>Edit</a>
+                                            {{#if (user_is_logged_in currentUser)}}
+                                                <form class="btn btn-link" action="/chat" method="post">
+                                                    <input name="bookOwner" type="text" value="{{ book.bookOwner }}" hidden>
+                                                    <button type="submit" class="btn btn-link"><i class="fa fa-comment"></i>Send Message</button>
+                                                </form>
+                                            {{/if}}
+
+                                        </div>
+
+                                        <script async src="https://static.addtoany.com/menu/page.js"></script>
+                                        <!-- AddToAny END -->
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 col-md-12">
+                                    <div class="nav nav-pills" role="tablist">
+                                        <a class="nav-link nav-item  active" href="#description" id="description-tab" data-toggle="pill" role="tab">Description</a>
+                                        <a class="nav-link nav-item " href="#additionalInfo" id="additional-info-tab" data-toggle="pill" role="tab" >Additional information</a>
+                                        <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >Reviews</a>
+                                    </div>
+                                    <div class="tab-content">
+                                        <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
+                                            <p>{{ book.description }}</p>
+                                            <ul>
+                                                <li>Pellentesque consectetur lorem gravida lacinia mollis.</li>
+                                                <li>Phasellus vel nisl consequat, sagittis mi nec, dignissim turpis.</li>
+                                                <li>Morbi ornare lorem non lacus ultricies fermentum.</li>
+                                                <li>Mauris aliquam turpis ut orci egestas luctus.</li>
+                                            </ul>
+
+
+
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade" id="additionalInfo" aria-labelledby="additional-info-tab">
+                                            <table class="table table-striped table-borderless">
+
+                                                <tbody>
+                                                <tr>
+                                                    <th scope="row">Brand Name:</th>
+                                                    <td>lindoMetals</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Metals Type:</th>
+                                                    <td>Silver</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Main Stone:</th>
+                                                    <td>Pearl</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Style:</th>
+                                                    <td>Trendy</td>
+
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div role="tabpanel" class="tab-pane fade " id="review" aria-labelledby="review-tab">
+                                            <div class="reviews">
+                                                <div class="review-bubbles">
+                                                    <h2>
+                                                        Customer Reviews
+                                                    </h2>
+                                                    <div class="review-bubble-single">
+                                                        <div class="review-bubble-bg">
+                                                            <div class="pro-rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star-half-alt"></i>
+
+                                                            </div>
+                                                            <h4>Good</h4>
+                                                            <span>Sep 20, 2019</span>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="review-bubble-single">
+                                                        <div class="review-bubble-bg">
+                                                            <div class="pro-rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star-half-alt"></i>
+
+                                                            </div>
+                                                            <h4>NICE WORK!!!</h4>
+                                                            <span>Sep 20, 2019</span>
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                                <div class="write-review">
+                                                    <h2>Write a Review</h2>
+                                                    <div class="write-review-box">
+                                                        <div class="from-group row mb-3">
+                                                            <div class="col-12"> <label for="inlineFormInputGroup0">Name</label></div>
+                                                            <div class="input-group col-12">
+
+                                                                <input type="text" class="form-control" id="inlineFormInputGroup0" placeholder="Enter Your Name">
+                                                            </div>
+                                                        </div>
+                                                        <div class="from-group row mb-3">
+                                                            <div class="col-12"> <label for="inlineFormInputGroup1">Email Address</label></div>
+                                                            <div class="input-group col-12">
+
+                                                                <input type="text" class="form-control" id="inlineFormInputGroup1" placeholder="Enter Your Email">
+                                                            </div>
+                                                        </div>
+                                                        <div class="from-group row mb-3">
+                                                            <div class="col-12"> <label for="inlineFormInputGroup2">Rating</label></div>
+                                                            <div class="pro-rating  col-12">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star-half-alt"></i>
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="from-group row mb-3">
+                                                            <div class="col-12"> <label for="inlineFormInputGroup2">Review Title</label></div>
+                                                            <div class="input-group col-12">
+
+                                                                <input type="text" class="form-control" id="inlineFormInputGroup2" placeholder="Title of Review">
+                                                            </div>
+                                                        </div>
+                                                        <div class="from-group row mb-3">
+                                                            <div class="col-12"> <label for="inlineFormInputGroup3">Review Body</label></div>
+                                                            <div class="input-group col-12">
+
+                                                                <textarea class="form-control" id="inlineFormInputGroup3" placeholder="Write Your Review"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="from-group">
+                                                            <button type="button" class="btn btn-secondary swipe-to-top">Submit</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="slider-wrapper">
+                                <div class="slider-for">
+
+                                    <p>{{book.pictureURLs.length}}</p>
+                                    {{#each book.pictureURLs}}
+
+                                        <a class="slider-for__item ex1 fancybox-button" href="/" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit affmet">
+                                            <img src="{{ this }}" alt="Zoom Image" />
+                                        </a>
+                                        <p>im here</p>
+
+                                    {{/each}}
+
+                                    <a class="slider-for__item ex1 fancybox-button" href="images/gallery/preview/Product_image_03.jpg" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
+                                        <img src="images/gallery/preview/Product_image_03.jpg" alt="Zoom Image" />
+                                    </a>
+
+
+
+                                </div>
+
+                                <div class="slider-nav">
+
+                                    {{#each book.pictureURLs}}
+                                        <div class="slider-nav__item">
+                                            <img src="{{ this }}" alt="Zoom Image"/>
+                                        </div>
+
+                                    {{/each}}
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+
+
+<!-- Product Modal -->
+<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-md-6">
+                            <div class="row ">
+                                <div id="quickViewCarousel" class="carousel slide" data-ride="carousel">
+                                    <!-- The slideshow -->
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+
+                                            <img class="img-fluid" src="images/gallery/preview/Product_image_01.jpg" alt="image">
+                                        </div>
+                                        <div class="carousel-item">
+
+                                            <img class="img-fluid" src="images/gallery/preview/Product_image_02.jpg" alt="image">
+                                        </div>
+                                        <div class="carousel-item">
+
+                                            <img class="img-fluid" src="images/gallery/preview/Product_image_03.jpg" alt="image">
+                                        </div>
+                                        <div class="carousel-item">
+
+                                            <img class="img-fluid" src="images/gallery/preview/Product_image_04.jpg" alt="image">
+                                        </div>
+                                    </div>
+                                    <!-- Left and right controls -->
+                                    <a class="carousel-control-prev" href="#quickViewCarousel" data-slide="prev">
+                                        <span class="fas fa-angle-left "></span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#quickViewCarousel" data-slide="next">
+                                        <span class="fas fa-angle-right "></span>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="pro-description">
+                                <h2 class="pro-title">Stylish Necklace Women Heart</h2>
+
+                                <div class="pro-price">
+                                    <del>$120</del><ins>$110</ins>
+                                </div>
+
+                                <div class="pro-infos">
+                                    <div class="pro-single-info"><b>Product ID :</b>1004</div>
+                                    <div class="pro-single-info"><b>Categroy :</b><a href="#">Rings</a></div>
+                                    <div class="pro-single-info">
+                                        <b>Tags :</b>
+                                        <ul>
+                                            <li><a href="#">bracelets</a></li>
+                                            <li><a href="#">diamond</a></li>
+                                            <li><a href="#">ring</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pro-single-info"><b>Available :</b><span class="text-secondary">InStock</span></div>
+                                </div>
+
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                    sed do eiusmod.
+                                </p>
+                                <div class="pro-counter">
+                                    <div class="input-group item-quantity">
+
+                                        <input type="text" id="quantity2" name="quantity" class="form-control" value="10">
+
+                                        <span class="input-group-btn">
+                                          <button type="button"  value="quantity2" class="quantity-plus btn" data-type="plus" data-field="">
+                                              <i class="fas fa-plus"></i>
+                                          </button>
+
+                                          <button type="button" value="quantity2" class="quantity-minus btn" data-type="minus" data-field="">
+                                              <i class="fas fa-minus"></i>
+                                          </button>
+                                      </span>
+                                    </div>
+                                    <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="mobile-overlay"></div>
+<a href="#" id="back-to-top" class="swipe-to-top" title="Back to top">&uarr;</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div class="blog-sidebar-posts">
     <div class="container">
         <div class="row">
@@ -35,7 +430,7 @@
                         <!--img.avatar(src=`${avatar}`, alt='author')-->
                     </div>
                     <p class="intro"></p>
-                    <h5>Description</h5>N/A
+                    <h5>Description</h5>{{ book.description }}
                     <p></p>
                 </div>
             </div>

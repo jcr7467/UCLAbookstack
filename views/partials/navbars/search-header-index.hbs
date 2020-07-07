@@ -12,7 +12,7 @@
                     <div class="pro-header-options">
                         <div class="dropdown">
 
-                            <a class="pro-avatar">Welcome&nbsp;User</a>
+                            <a class="pro-avatar">Welcome&nbsp;{{ currentUserObject.firstname }}</a>
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle">
@@ -51,32 +51,32 @@
                 </div>
 
                 <div class="col-12 col-sm-8">
-                    <form class="form-inline" >
+                    <form class="form-inline" method="get" action="/search">
                         <div class="search-field-module">
                             <div class="search-field-select" >
-                                <select class="selectpicker">
-                                    <option selected>All Categories</option>
-                                    <option value="1">Art</option>
-                                    <option value="1">Business & Economics</option>
-                                    <option value="1">Cooking</option>
-                                    <option value="1">English&nbsp;</option>
-                                    <option value="1">Foreign Language</option>
-                                    <option value="1">Health & Fitness</option>
-                                    <option value="1">History&nbsp;</option>
-                                    <option value="2">Law & Political Science</option>
-                                    <option value="3">Mathematics</option>
-                                    <option value="1">Medical</option>
-                                    <option value="1">Performing Arts&nbsp;</option>
-                                    <option value="1">Philosophy & Social Science&nbsp;</option>
-                                    <option value="1">Science&nbsp;</option>
-                                    <option value="1">Technology & Engineering&nbsp;</option>
-                                    <option value="1">Other&nbsp;</option>
+                                <select name="subject" class="selectpicker">
+                                    <option value="All" selected>All Categories</option>
+                                    <option value="Art">Art</option>
+                                    <option value="Business &amp; Economics">Business & Economics</option>
+                                    <option value="Cooking">Cooking</option>
+                                    <option value="English">English&nbsp;</option>
+                                    <option value="Foreign Language">Foreign Language</option>
+                                    <option value="Health and Fitness">Health & Fitness</option>
+                                    <option value="History">History&nbsp;</option>
+                                    <option value="Law and Political Science">Law & Political Science</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Medical">Medical</option>
+                                    <option value="Performing Arts">Performing Arts&nbsp;</option>
+                                    <option value="Philosophy and Social Science">Philosophy & Social Science&nbsp;</option>
+                                    <option value="Science">Science&nbsp;</option>
+                                    <option value="Technology and Engineering">Technology & Engineering&nbsp;</option>
+                                    <option value="Other">Other&nbsp;</option>
 
 
                                 </select>
                             </div>
                             <div class="search-field-wrap">
-                                <input  type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
+                                <input  name="query" type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
                                 <button class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="Search Products">
                                     <i class="fa fa-search"></i></button>
                             </div>
@@ -86,55 +86,18 @@
                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                     <ul class="pro-header-right-options">
                         <li>
-                            <a href="wishlist.html" class="btn" data-toggle="tooltip" data-placement="bottom" title="Wishlist">
-                                <i class="far fa-heart"></i>
+                            <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="Wishlist">
+                                <i class="far fa-book"></i>
                                 <span class="badge badge-secondary">3</span>
                             </a>
                         </li>
-                        <li class="dropdown" data-toggle="tooltip" data-placement="bottom" title="cart">
-                            <button class="btn dropdown-toggle" type="button" id="headerOneCartButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                                <i class="fas fa-shopping-cart"></i>
-                                <span class="badge badge-secondary">2</span>
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="headerOneCartButton">
-                                <ul class="shopping-cart-items">
-                                    <li>
-                                        <div class="item-thumb">
-
-                                            <div class="image">
-                                                <img class="img-fluid" src="images/product_images/product_image_02.jpg" alt="Product Image">
-                                            </div>
-                                        </div>
-                                        <div class="item-detail">
-                                            <h2>Crystal Water Drop Earrings</h2>
-                                            <div class="item-s">2 x $285.00 <i class="fas fa-trash"></i></div>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="item-thumb">
-
-                                            <div class="image">
-                                                <img class="img-fluid" src="images/product_images/product_image_03.jpg" alt="Product Image">
-                                            </div>
-                                        </div>
-                                        <div class="item-detail">
-                                            <h2>Crytal Wedding Engagement Rings</h2>
-                                            <span class="item-s">4 x $85.00 <i class="fas fa-trash"></i></span>
-                                        </div>
-                                    </li>
-                                    <li>
-                              <span class="item-summary">Total&nbsp;:&nbsp;<span>$910.00</span>
-                              </span>
-                                    </li>
-                                    <li>
-                                        <a class="btn btn-link btn-block " href="cart-page1.html">View Cart</a>
-                                        <a class="btn btn-secondary btn-block  swipe-to-top" href="checkout.html">Checkout</a>
-                                    </li>
-                                </ul>
-
-
-                            </div>
+                        <li>
+                            <a href="wishlist.html" class="btn" data-toggle="tooltip" data-placement="bottom" title="Wishlist">
+                                <i class="far fa-comment"></i>
+                                <span class="badge badge-secondary">3</span>
+                            </a>
                         </li>
+
                     </ul>
                 </div>
             </div>

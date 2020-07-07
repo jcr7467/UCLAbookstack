@@ -1,22 +1,27 @@
 const socket = io();
 const chatForm = document.getElementById('chat-form')
-const chatMessages = document.querySelector('.chat-messages');
+const chatMessages = document.querySelector('.chat-messages')
+
+const myUserID = document.getElementById('myUserID').value
+const theirUserID = document.getElementById('theirUserID').value
 
 
 
-//Get username and room
-const { username, room} = Qs.parse(location.search, {
-    ignoreQueryPrefix: true
-});
+let userIDs = [myUserID, theirUserID]
 
-console.log(username, room)
+userIDs.sort();
+
+let room = userIDs[0].concat(userIDs[1])
+let username = myUserID;
+
+
 
 //join chatroom
 socket.emit('joinRoom', {username, room});
 
 socket.on('message', (message) => {
 
-    console.log(message);
+
     outputMessage(message);
 
 
@@ -28,6 +33,8 @@ socket.on('message', (message) => {
 
 
 chatForm.addEventListener('submit', (e) => {
+
+
    e.preventDefault();
 
 
@@ -62,5 +69,7 @@ function outputMessage(msg){
 $(document).ready(
     function() {
         $('#formfilt').hide()
+        $('#theirUserID').hide()
+        $('#myUserID').hide()
     }
 );

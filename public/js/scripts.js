@@ -645,7 +645,7 @@ jQuery(document).ready(function () {
         jQuery('.mobile-overlay').addClass('active');
 
         //put this when popup opens, to stop body scrolling
-        bodyScrollLock.disableBodyScroll(targetElement);
+        //bodyScrollLock.disableBodyScroll(targetElement);
         jQuery('html').css('overflow', 'hidden');
         jQuery('body').css('overflow', 'hidden');
     });
@@ -655,7 +655,7 @@ jQuery(document).ready(function () {
         jQuery('.mobile-overlay').removeClass('active');
 
         //put this when close popup and show scrollbar in body
-        bodyScrollLock.enableBodyScroll(targetElement);
+        //bodyScrollLock.enableBodyScroll(targetElement);
 
         jQuery('html').css('overflow', 'auto');
         jQuery('body').css('overflow', 'auto');

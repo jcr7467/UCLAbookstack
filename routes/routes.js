@@ -24,12 +24,7 @@ router.get('/uploadpics', (request, response) => {
     })
 });
 
-router.get('/chat', (request, response) => {
-    response.render('chat', {
-        title: "Chat",
-        navbar: "dark"
-    })
-});
+
 
 router.get('/termsOfUse', (request, response) => {
     response.render('terms_and_conditions',{
@@ -111,26 +106,59 @@ router.get('/search', (request,response, next) => {
     let nextpage = pagenumber + 1;
     let previouspage = pagenumber - 1;
 
-    Book.paginate({title: {$regex: userSearchTerm, $options: 'i'}}, {lean: true, page:pagenumber, limit:15})
-    .then((books) => {
 
-        let numOfBooks = books.docs.length
+    if (subject === 'All'){
+        Book.paginate({
+            title: {$regex: userSearchTerm, $options: 'i'}
+        }, {lean: true, page:pagenumber, limit:15})
+            .then((books) => {
 
-        response.render('search_for_books', {
-            array: books.docs,
-            subject: subject,
-            searchedTerm: userSearchTerm,
-            title: userSearchTerm,
-            currentPagenumber:books.page,
-            numberofPages:books.totalPages,
-            previouspage: previouspage,
-            nextpage:nextpage,
-            navbar: 'default',
-            numOfBooks: numOfBooks
-        })
-    }).catch((err) => {
-        next(err);
-    });
+                let numOfBooks = books.docs.length
+
+                response.render('search_for_books', {
+                    array: books.docs,
+                    subject: subject,
+                    searchedTerm: userSearchTerm,
+                    title: userSearchTerm,
+                    currentPagenumber:books.page,
+                    numberofPages:books.totalPages,
+                    previouspage: previouspage,
+                    nextpage:nextpage,
+                    navbar: 'default',
+                    numOfBooks: numOfBooks
+                })
+            }).catch((err) => {
+            next(err);
+        });
+    }else{
+        Book.paginate({
+            title: {$regex: userSearchTerm, $options: 'i'},
+            subject: subject
+        }, {lean: true, page:pagenumber, limit:15})
+            .then((books) => {
+
+                let numOfBooks = books.docs.length
+
+                response.render('search_for_books', {
+                    array: books.docs,
+                    subject: subject,
+                    searchedTerm: userSearchTerm,
+                    title: userSearchTerm,
+                    currentPagenumber:books.page,
+                    numberofPages:books.totalPages,
+                    previouspage: previouspage,
+                    nextpage:nextpage,
+                    navbar: 'default',
+                    numOfBooks: numOfBooks
+                })
+            }).catch((err) => {
+            next(err);
+        });
+    }
+
+
+
+
 });
 
 

@@ -111,7 +111,7 @@ router.route('/profile/uploadbook')
                 if(file_entries > 0) {
 
                     for (let i = 0; i < file_entries; i++) {
-                        //console.log(i);
+
                         let fileType = request.files[i].mimetype.split('/')[0];
                         if (fileType !== 'image') {
                             allImages = false;
@@ -238,6 +238,33 @@ router.get('/profile/settings', (request, response, next) => {
         navbar: 'default'
 
     });
+
+});
+
+router.post('/profile/settings', (request, response, next) => {
+    let { firstname } = request.body,
+        { lastname } = request.body,
+        { email } = request.body;
+
+
+    User.findOne({_id: request.session.userId})
+        .then(user=> {
+            user.firstname = firstname;
+            user.lastname  = lastname;
+            user.email     = email;
+            user.save();
+            request.session.userObject = user;
+        })
+        .then(() => {
+            response.redirect('/profile')
+        })
+        .catch(err => {
+            next(err);
+        })
+
+
+
+
 
 });
 

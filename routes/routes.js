@@ -96,7 +96,6 @@ router.get('/search', (request,response, next) => {
         userSearchTerm = request.query.query;
     //userSearchTerm = 'tested'
 
-    if (userSearchTerm === undefined){userSearchTerm = ''}
 
     userSearchTerm = userSearchTerm.toString();
     if (pagenumber === undefined){pagenumber = 1}

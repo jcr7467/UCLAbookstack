@@ -123,7 +123,7 @@ router.route('/forgot')
             },
             function verifyEmailExists(token, callback) {
 
-                console.log(request.body.email);
+
 
 
                 let case_insensitive_email = new RegExp('\\b' + request.body.email + '\\b', 'i');

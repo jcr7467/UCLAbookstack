@@ -49,8 +49,6 @@ router.post('/chat', (request, response, next) => {
 
 router.post('/sendmessage', (request, response, next) => {
 
-
-    //console.log(request)
     let { msgObj } = request.body;
     let { room } = request.body;
 
@@ -76,7 +74,7 @@ router.post('/sendmessage', (request, response, next) => {
                     msgSentBy: msgObj.username
                 })
                 conversation.save()
-                console.log('i found it already actually awkward')
+
             }
         })
         .then(()=> {

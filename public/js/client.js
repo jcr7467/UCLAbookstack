@@ -14,10 +14,11 @@ userIDs.sort();
 let room = userIDs[0].concat(userIDs[1])
 let username = myUserID;
 
-
+console.log(myUserID)
+console.log(theirUserID)
 
 //join chatroom
-socket.emit('joinRoom', {username, room});
+socket.emit('joinRoom', {myUserID, theirUserID, room});
 
 socket.on('message', (message) => {
 

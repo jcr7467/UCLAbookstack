@@ -1,1 +1,19 @@
 Make sure no one can tamper with room form input
+
+downgrade mongo below 3 for
+Error connecting to mongodb Error: querySrv ECONNREFUSED _mongodb._tcp.basebookstack-zx7sx.mongodb.net
+
+
+
+make admin page
+
+
+fix error that happens when a duplicate email is used to create an account that is already in the database. make it look prettier
+
+
+
+Make it so that you can delete your messages from your message list
+
+
+
+Turn message page from post to get method

@@ -5,17 +5,18 @@ const mongoose = require('mongoose');
 
 let ConversationSchema = new mongoose.Schema({
     room: String,
+    penpal1: String,
+    penpal2: String,
     messages: [{
         text: String,
-        dateSent: {
-            type: Date,
-            default: Date.now()},
-        msgSentBy: String,
-        createdAt: { type: Date, default: Date.now, expires: '10m' }//1 week
-
+        msgSentByMe: String,
+        msgSentToThem: String,
+        timeSentText: String,
+        dateSentText: String
     }]
 });
 
 
 let Conversation = mongoose.model('Conversation', ConversationSchema);
+
 module.exports = Conversation;

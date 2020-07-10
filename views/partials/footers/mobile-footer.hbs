@@ -1,0 +1,110 @@
+
+<!-- Footer Mobile -->
+<footer id="footerMobile" class="footer-area footer-mobile d-lg-none d-xl-none">
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-12 col-lg-2">
+
+                <div class=" single-footer">
+
+                    <h5 ><a class="my-footer-element" href="/">Home</a></h5>
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+
+                <div class=" single-footer">
+
+                    <h5 ><a class="my-footer-element" href="/contact">Contact Us</a></h5>
+
+                </div>
+            </div>
+            <div class="col-12 col-lg-2">
+
+                <div class=" single-footer">
+
+                    <h5 ><a class="my-footer-element" href="/howtofindisbn">How to find ISBN</a></h5>
+
+                </div>
+            </div>
+
+
+            {{#unless (user_is_logged_in currentUser) }}
+                <div class="col-12 col-lg-3">
+                    <div class="single-footer">
+
+
+                        <div class="pro-newsletter">
+                            <h5><a class="my-footer-element" href="/signup">Sign up now</a></h5>
+
+                            <form class="form-inline" method="post" action="signup">
+
+                                <div class="search">
+                                    <input  type="text" placeholder="First Name" name="firstname" required>
+                                </div>
+
+                                <div class="search">
+                                    <input  type="text" placeholder="Last Name" name="lastname" required>
+                                </div>
+
+                                <div class="search">
+                                    <input  type="email" placeholder="Email" name="email" required>
+                                </div>
+
+                                <div class="search">
+                                    <input  type="password" placeholder="Password" name="password" minlength="6" required>
+                                </div>
+
+                                <div class="search">
+                                    <p class="terms" ><input  type="checkbox" name="terms" required="required"/> I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</p>
+
+                                </div>
+
+
+
+                                <div class="search"  id="formfilt">
+                                    <input type="text" placeholder="email" name="formfilt">
+
+                                </div>
+
+
+                                <div class="search">
+                                    <input id="signupButton"  type="submit" valuer="Sign up" >
+
+                                </div>
+
+
+                            </form>
+
+                            <p>By entering your email, you agree to our Terms of Service and Privacy Policy.</p>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            {{/unless}}
+        </div>
+    </div>
+    <div class="container-fluid p-0">
+        <div class="copyright-content">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-12 col-sm-12">
+                        <div class="footer-info">
+                            &copy;&nbsp;2020 BookStack, Inc. <a href="/privacypolicy">Privacy</a>&nbsp;&bull;&nbsp;<a href="/termsOfUse">Terms</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</footer>

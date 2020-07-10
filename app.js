@@ -142,37 +142,30 @@ io.on('connection', socket => {
 
     //console.log(socket.handshake.headers.cookie);
 
-    socket.on('joinRoom', ({username, room}) => {
+    socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
+        //console.log(username)
+        let username = myUserID,
+            penpalusername = theirUserID;
 
         socket.join(room);
 
         socket.on('chatMessage', (msg) => {
+            //console.log("Here is my id" + username.string())
 
-            let messageObject = formatMessage(username, msg);
-
-
+            let messageObject = formatMessage(msg, username, penpalusername);
 
             axios.post('http://localhost:8000/sendmessage', {
                 msgObj: messageObject,
                 room: room
-            }).then(response => {
-
-
-
-
             }).catch(error => {
 
                 console.log(error)
             });
 
-
-
             io.emit('message', messageObject);
 
         });
     });
-
-
 
 });
 

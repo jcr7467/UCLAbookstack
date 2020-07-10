@@ -15,9 +15,8 @@
             </div>
             <div class="chat-messages">
                 {{#each messages}}
-
                     <div class="message">
-                        <p class="meta">{{ this.msgSentBy }} <span>October</span> <span>12</span></p>
+                        <p class="meta"> {{ this.msgSentByMe }} <span>{{ this.timeSentText }}</span> <span>{{ this.dateSentText }}</span></p>
                         <p class="text">
                             {{ this.text }}
                         </p>
@@ -55,8 +54,7 @@
 
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
-<script src="/js/client.js"></script>
+
 
 
 

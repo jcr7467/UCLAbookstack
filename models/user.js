@@ -44,7 +44,10 @@ let UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
-    major: String
+    major: String,
+    hasConversationsWith: [{
+        thePenPal: String
+    }]
 });
 
 

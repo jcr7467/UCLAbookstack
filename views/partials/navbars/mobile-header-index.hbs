@@ -61,7 +61,7 @@
                     <div class="cart-dropdown dropdown">
                         <a class="cart-dropdown-toggle" href="/conversations" role="button"  aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-comment" aria-hidden="true"></i>
-                            <span class="badge badge-secondary">2</span>
+
                         </a>
 
 
@@ -76,10 +76,10 @@
 
     <div class="header-navbar bg-menu-bar">
         <div class="container">
-            <form class="form-inline">
+            <form class="form-inline" method="get" action="/search">
                 <div class="search-field-module">
                     <div class="search-field-select" >
-                        <select class="form-control">
+                        <select name="subject" class="form-control">
                             <option selected value="All">All Categories</option>
                             <option value="Art">Art
                                 &nbsp;</option>
@@ -100,7 +100,7 @@
                         </select>
                     </div>
                     <div class="search-field-wrap">
-                        <input  type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
+                        <input  name="query" type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
                         <button class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="Search Products">
                             <i class="fa fa-search"></i></button>
                     </div>

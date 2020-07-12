@@ -124,7 +124,8 @@ router.post('/sendmessage', (request, response, next) => {
             }
         })
         .then(()=> {
-            response.send({msgPostSucceeded: true});
+            // response.send({msgPostSucceeded: true});
+            console.log('hey')
         })
         .catch(err => {
             response.send(err)
@@ -133,21 +134,6 @@ router.post('/sendmessage', (request, response, next) => {
 
 
 
-router.route('/messagelist').get((request, response, next) => {
-
-    User.findById(request.session.userId).lean()
-        .then(user => {
-            response.render('messages_list', {
-                messagesWith: user.hasConversationsWith,
-                title: 'Messages'
-            })
-        })
-        .catch(err => {
-            console.log(err)
-        })
-
-
-})
 
 
 module.exports = router;

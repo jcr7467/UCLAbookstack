@@ -134,6 +134,22 @@ router.post('/sendmessage', (request, response, next) => {
 
 
 
+router.route('/conversations').get((request, response, next) => {
+
+    User.findById(request.session.userId).lean()
+        .then(user => {
+            response.render('conversation_list', {
+                title: 'Conversations',
+                messagesWith: user.hasConversationsWith
+            })
+        })
+        .catch(err => {
+            next(err)
+        })
+})
+
+
+
 
 
 module.exports = router;

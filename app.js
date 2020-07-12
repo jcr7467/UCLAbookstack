@@ -154,11 +154,15 @@ io.on('connection', socket => {
 
             let messageObject = formatMessage(msg, username, penpalusername);
 
-            axios.post('http://localhost:8000/sendmessage', {
+            axios.post(process.env.MYFULLMESSAGEPATH, {
                 msgObj: messageObject,
                 room: room
-            }).catch(error => {
-
+            })
+                .then(response => {
+                    //io.emit('serverObject', retVal)
+                })
+                .catch(error => {
+                    //io.emit('serverObject', error)
                 console.log(error)
             });
 

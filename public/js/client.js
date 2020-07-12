@@ -29,6 +29,11 @@ socket.on('message', (message) => {
     chatMessages.scrollTop = chatMessages.scrollHeight;
 });
 
+socket.on('serverObject', (obj) => {
+    console.log("Server's response")
+    console.log(obj)
+
+})
 
 
 

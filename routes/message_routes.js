@@ -111,6 +111,7 @@ router.post('/sendmessage', (request, response, next) => {
 
 
             }else {
+
                 console.log(username)
                 conversation.messages.push({
                     text: msgObj.text,
@@ -121,14 +122,12 @@ router.post('/sendmessage', (request, response, next) => {
                 })
                 conversation.save()
 
+                return response.send({text: 'i passed apparently'})
+
             }
         })
-        .then(()=> {
-            // response.send({msgPostSucceeded: true});
-            console.log('hey')
-        })
         .catch(err => {
-            response.send(err)
+            console.log(err)
         });
 });
 

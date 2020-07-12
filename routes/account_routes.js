@@ -92,6 +92,7 @@ router.route('/signup')
                 });
 
             }else{
+
                 let err = new Error('All fields required');
                 err.status = 400;
                 return next(err);

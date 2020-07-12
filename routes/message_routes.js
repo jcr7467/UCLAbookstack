@@ -64,8 +64,6 @@ router.post('/sendmessage', (request, response, next) => {
     let { date } = msgObj;
 
 
-
-
     Conversation.findOne({room: room})
         .then((conversation) => {
             if (conversation === null){
@@ -107,7 +105,7 @@ router.post('/sendmessage', (request, response, next) => {
                         penpaluser.save()
                     })
                     .catch(err => {
-                        console.log(err)
+                        response.send(err)
                     })
 
 
@@ -129,7 +127,7 @@ router.post('/sendmessage', (request, response, next) => {
             response.send({msgPostSucceeded: true});
         })
         .catch(err => {
-            console.log(err)
+            response.send(err)
         });
 });
 

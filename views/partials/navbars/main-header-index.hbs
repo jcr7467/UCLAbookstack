@@ -1,34 +1,32 @@
-
-
 <!-- //header style Two -->
 <header id="headerTwo" class="header-area header-two header-desktop">
-
 
 
     <div class="header-mini bg-top-bar">
         <div class="container">
             <div class="row align-items-center">
 
-                <div class="col-12 col-md-4 ">
 
-                </div>
-                <div class="col-12 col-md-8">
+                <div class="col-12 col-md-12">
                     <div class="pro-header-options">
 
+                        {{#if (user_is_logged_in currentUser)}}
+                            <div class="dropdown"><a class="pro-avatar">Hi {{currentUserObject.firstname}}!</a></div>
+
+                        {{/if}}
 
 
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle">
-                                Hi {{ currentUserObject.firstname }}! Account
+                                Account
                             </a>
                             <div class="dropdown-menu">
                                 {{#if (user_is_logged_in currentUser)}}
                                     <a class="dropdown-item" href="/profile">Profile</a>
-                                    <a class="dropdown-item" href="/signout">Sign Out</a>
-                                {{ else }}
+                                    <a class="dropdown-item" href="/signout">Sign out</a>
+                                {{else}}
                                     <a class="dropdown-item" href="/signin">Sign In</a>
                                     <a class="dropdown-item" href="/signup">Sign Up</a>
-
                                 {{/if}}
 
 
@@ -46,7 +44,7 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-sm-12 col-lg-2">
-                    <a href="/" class="logo" data-toggle="tooltip" data-placement="bottom"  >
+                    <a href="index.html" class="logo" data-toggle="tooltip" data-placement="bottom"  >
                         <img class="img-fluid" src="/images/logo/logo-full-blackblue.png"  alt="logo here">
                     </a>
                 </div>
@@ -58,11 +56,7 @@
                             <ul class="navbar-nav">
 
 
-
-
-
-
-                                <li style="margin-left: 300%" class="nav-item dropdown mega-dropdown">
+                                <li class="nav-item dropdown mega-dropdown">
                                     <a class="nav-link dropdown-toggle" href="#"  >
                                         Categories
 
@@ -80,7 +74,6 @@
                                                         <li><a class="dropdown-item" href="/search?subject=English&query=">English</a></li>
                                                         <li><a class="dropdown-item" href="/search?subject=Foreign Language&query=">Foreign Language</a></li>
                                                         <li><a class="dropdown-item" href="/search?subject=Health and Fitness&query=">Health & Fitness</a></li>
-
                                                     </ul>
                                                 </div>
                                                 <div class="col-md-3">
@@ -98,6 +91,7 @@
                                                 </div>
 
 
+
                                                 <div class="col-md-6">
                                                     <div class="row">
                                                         <div class="col-6 col-lg-6">
@@ -112,7 +106,7 @@
                                                                         <div class="pro-buttons">
                                                                             <div class="pro-icons">
                                                                                 <a href="wishlist.html" class="icon active swipe-to-top">
-                                                                                    <i class="fas fa-heart"></i>
+                                                                                    <i class="fas fa-book"></i>
                                                                                 </a>
                                                                                 <div class="icon swipe-to-top" data-toggle="modal" data-target="#quickViewModal">
                                                                                     <i class="fas fa-eye"></i>
@@ -179,6 +173,8 @@
                                     </div>
                                 </li>
 
+
+
                             </ul>
                         </div>
                     </nav>
@@ -192,9 +188,9 @@
                                 <i class="fas fa-search"></i>
                             </button>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSearch2">
-                                <form method="get" action="/search">
+                                <form>
                                     <div class="pt-col">
-                                        <input type="text" name="query" class="pt-search-input" placeholder="Search products...">
+                                        <input type="text" class="pt-search-input" placeholder="Search products...">
                                         <button class="btn pt-btn-search" type="submit">
                                             <i class="fas fa-search"></i>
                                         </button>
@@ -203,32 +199,20 @@
                             </div>
 
                         </li>
-
-                        {{#if (user_is_logged_in currentUser)}}
-
-                            <li>
-                                <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="Books">
-                                    <i class="far fa-book"></i>
-                                    <span class="badge badge-secondary">3</span>
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="/messagelist" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
-                                    <i class="far fa-comment"></i>
-                                    <span class="badge badge-secondary">3</span>
-                                </a>
-                            </li>
-
-                        {{/if}}
-
-
-                    </ul>
+                        <li>
+                            <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="My Books">
+                                <i class="far fa-book"></i>
+                                <span class="badge badge-secondary">3</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/conversations" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                <i class="far fa-comment"></i>
+                                <span class="badge badge-secondary">3</span>
+                            </a>
+                        </li></ul>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-
-

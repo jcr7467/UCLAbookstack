@@ -4,8 +4,8 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-12 col-sm-12 col-lg-2">
-                    <a href="/" class="logo" data-toggle="tooltip" data-placement="bottom" title="logo" >
-                        <img class="img-fluid" src="/images/logo/logo-full-blackblue.png"  alt="logo here">
+                    <a href="/" class="logo" data-toggle="tooltip" data-placement="bottom"  >
+                        <img class="img-fluid" src="images/logo/logo-full-blackblue.png"  alt="logo here">
                     </a>
                 </div>
 
@@ -16,11 +16,9 @@
                             <ul class="navbar-nav">
 
 
-
-                                <li style="margin-left: 200%" class="nav-item dropdown mega-dropdown">
+                                <li class="nav-item dropdown mega-dropdown">
                                     <a class="nav-link dropdown-toggle" href="javascript:void(0);"  >
                                         Categories
-
                                     </a>
                                     <div class="dropdown-menu mega-dropdown-menu row ">
                                         <div class="container">
@@ -152,7 +150,7 @@
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownSearch">
                                 <form method="get" action="/search">
                                     <div class="search-field-module">
-                                        <input  name="query" type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
+                                        <input  type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" name="query" title="search item">
                                         <button class="btn" type="submit">
                                             <i class="fas fa-search"></i>
                                         </button>
@@ -161,25 +159,17 @@
                             </div>
 
                         </li>
+                        <li>
+                            <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="My Books">
+                                <i class="far fa-book"></i>
+                            </a>
+                        </li>
 
-                        {{#if (user_is_logged_in currentUser)}}
-
-                            <li>
-                                <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="My Books">
-                                    <i class="far fa-book"></i>
-                                    <span class="badge badge-secondary">3</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="wishlist.html" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
-                                    <i class="far fa-comment"></i>
-                                    <span class="badge badge-secondary">3</span>
-                                </a>
-                            </li>
-
-                        {{/if}}
-
-
+                        <li>
+                            <a href="/messagelist" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
+                                <i class="far fa-comment"></i>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

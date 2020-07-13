@@ -84,6 +84,7 @@
                         </div>
                     </form>
                 </div>
+    {{#if (user_is_logged_in currentUser) }}
                 <div class="col-6 col-sm-6 col-md-4 col-lg-2">
                     <ul class="pro-header-right-options">
                         <li>
@@ -101,6 +102,7 @@
 
                     </ul>
                 </div>
+    {{/if}}
             </div>
         </div>
     </div>

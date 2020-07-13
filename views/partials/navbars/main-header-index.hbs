@@ -199,6 +199,7 @@
                             </div>
 
                         </li>
+                        {{#if (user_is_logged_in currentUser)}}
                         <li>
                             <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="My Books">
                                 <i class="far fa-book"></i>
@@ -211,6 +212,7 @@
 
                             </a>
                         </li></ul>
+                        {{/if}}
                 </div>
             </div>
         </div>

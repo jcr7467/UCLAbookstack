@@ -84,7 +84,7 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 
 
 
-router.route('/profile/uploadbook')
+router.route('/profile/uploadbook', mid.requiresLogin)
     .get((request, response, next) => {
 
 
@@ -227,7 +227,7 @@ router.route('/profile/uploadbook')
 
 
 
-router.get('/profile/settings', (request, response, next) => {
+router.get('/profile/settings', mid.requiresLogin, (request, response, next) => {
 
 
     let currentUser = request.session.userId;
@@ -241,7 +241,7 @@ router.get('/profile/settings', (request, response, next) => {
 
 });
 
-router.post('/profile/settings', (request, response, next) => {
+router.post('/profile/settings', mid.requiresLogin, (request, response, next) => {
     let { firstname } = request.body,
         { lastname } = request.body,
         { email } = request.body;

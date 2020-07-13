@@ -56,17 +56,18 @@
                         <img class="img-fluid" src="/images/logo/logo-full-blackblue.png" alt="logo here">
                     </a>
                 </div>
-
+                {{#if (user_is_logged_in currentUser) }}
                 <div class="col-2 pl-0">
                     <div class="cart-dropdown dropdown">
                         <a class="cart-dropdown-toggle" href="/conversations" role="button"  aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-comment" aria-hidden="true"></i>
-
                         </a>
-
 
                     </div>
                 </div>
+                {{/if}}
+
+
             </div>
         </div>
     </div>

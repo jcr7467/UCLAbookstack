@@ -1,3 +1,5 @@
+
+
 module.exports = {
     user_is_logged_in: function(userID){
         return userID != null;
@@ -16,7 +18,16 @@ module.exports = {
     add_me_together: function(val1){
         return parseInt(val1) + 1
 
+    },
+    isNew: function (dateAdded) {
+        //If the book is less than a week old, it will have a new stamp on it
+        let currentTime = Date.now();
+
+        //604800000 is 1 week in milliseconds
+        return (currentTime - dateAdded < 604800000)
+
     }
+
 }
 
 

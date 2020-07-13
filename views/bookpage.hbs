@@ -12,6 +12,8 @@
 </div>
 
 
+
+
 <section class="pro-content product-content">
     <div class="container">
 
@@ -25,46 +27,92 @@
                         <div class="col-12 col-md-6">
                             <div class="row">
                                 <div class="col-12 col-md-12">
+                                    <div class="pro-tags">
 
-                                    <h1 class="pro-title">{{ book.title }}</h1>
+                                        {{#if (isNew book.dateAdded) }}
+                                            <div class="pro-tag bg-success">New</div>
+                                        {{/if}}
+
+
+                                    </div>
+                                    <h1 class="pro-title">{{ title }}</h1>
 
                                     <div class="pro-price">
-                                        <ins>${{ book.price}}</ins>
+                                        <ins>${{ book.price }}</ins>
                                     </div>
-
+                                    <div class="pro-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <a href="#review" class="btn-link">2 reviews</a>
+                                    </div>
                                     <div class="pro-infos">
+                                        <div class="pro-single-info"><b>Product ID :</b>1004</div>
+                                        <div class="pro-single-info"><b>Categroy :</b><a href="#">Rings</a></div>
+                                        <div class="pro-single-info">
+                                            <b>Tags :</b>
+                                            <ul>
+                                                <li><a href="#">bracelets</a></li>
+                                                <li><a href="#">diamond</a></li>
+                                                <li><a href="#">ring</a></li>
 
-                                        <div class="pro-single-info"><b>Category :</b>{{ book.subject }}</div>
-
-
+                                            </ul>
+                                        </div>
+                                        <div class="pro-single-info"><b>Available :</b><span class="text-secondary">InStock</span></div>
+                                        <div class="pro-single-info"><b>Min Order Limit :</b><a href="#">5</a></div>
                                     </div>
 
+                                    <div class="pro-options">
+                                        <div class="color-selection">
+                                            <h4><b>Color : </b>Silver</h4>
+                                            <ul>
+                                                <li class="active"><a class="green " href="javascript:void(0);"></a></li>
+                                                <li ><a class="red " href="javascript:void(0);"></a></li>
 
-
-
-
-
-                                    <div class="pro-sub-buttons">
-                                        <div class="buttons">
-                                            <a href="/deletebook" type="button" class="btn  btn-link" onclick="notificationWishlist();"><i class="fas fa-trash"></i>Delete</a>
-
-                                            <a href="/editbook" type="button" class="btn btn-link" onclick="notificationCompare();"><i class="fa icon-edit"></i>Edit</a>
-                                            {{#if (user_is_logged_in currentUser)}}
-                                                <form class="btn btn-link" action="/chat" method="post">
-                                                    <input name="bookOwner" type="text" value="{{ book.bookOwner }}" hidden>
-                                                    <button type="submit" class="btn btn-link"><i class="fa fa-comment"></i>Send Message</button>
-                                                </form>
-                                            {{/if}}
-
+                                            </ul>
                                         </div>
 
-                                        <script async src="https://static.addtoany.com/menu/page.js"></script>
-                                        <!-- AddToAny END -->
+                                    </div>
+
+
+
+
+                                    <div class="pro-counter">
+                                        <div class="input-group item-quantity">
+
+                                            <input type="text" id="quantity1" name="quantity" class="form-control " value="10">
+
+                                            <span class="input-group-btn">
+                                          <button type="button" value="quantity1" class="quantity-plus btn" data-type="plus" data-field="">
+                                              <i class="fas fa-plus"></i>
+                                          </button>
+
+                                          <button type="button" value="quantity1" class="quantity-minus btn" data-type="minus" data-field="">
+                                              <i class="fas fa-minus"></i>
+                                          </button>
+                                      </span>
+                                        </div>
+                                        <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
+
+
+                                    </div>
+                                    <div class="pro-sub-buttons">
+                                        <div class="buttons">
+                                            <button type="button" class="btn  btn-link" onclick="notificationWishlist();"><i class="fas fa-heart"></i>Add to Wishlist</button>
+                                            <button type="button" class="btn btn-link" onclick="notificationCompare();"><i class="fas fa-align-right"></i>Add to Compare</button>
+                                        </div>
+
+
+
+                                        
 
                                     </div>
 
                                 </div>
                             </div>
+                            
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="nav nav-pills" role="tablist">
@@ -74,7 +122,7 @@
                                     </div>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
-                                            <p>{{ book.description }}</p>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
                                             <ul>
                                                 <li>Pellentesque consectetur lorem gravida lacinia mollis.</li>
                                                 <li>Phasellus vel nisl consequat, sagittis mi nec, dignissim turpis.</li>
@@ -216,32 +264,23 @@
                             <div class="slider-wrapper">
                                 <div class="slider-for">
 
-                                    <p>{{book.pictureURLs.length}}</p>
                                     {{#each book.pictureURLs}}
-
-                                        <a class="slider-for__item ex1 fancybox-button" href="/" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit affmet">
-                                            <img src="{{ this }}" alt="Zoom Image" />
+                                        <a class="slider-for__item ex1 fancybox-button" href="/images/gallery/preview/Product_image_01.jpg" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
+                                            <img src="{{this}}" alt="Zoom Image" />
                                         </a>
-                                        <p>im here</p>
-
                                     {{/each}}
-
-                                    <a class="slider-for__item ex1 fancybox-button" href="images/gallery/preview/Product_image_03.jpg" data-fancybox-group="fancybox-button" title="Lorem ipsum dolor sit amet">
-                                        <img src="images/gallery/preview/Product_image_03.jpg" alt="Zoom Image" />
-                                    </a>
 
 
 
                                 </div>
 
                                 <div class="slider-nav">
-
                                     {{#each book.pictureURLs}}
                                         <div class="slider-nav__item">
-                                            <img src="{{ this }}" alt="Zoom Image"/>
+                                            <img src="{{ this}}" alt="Zoom Image"/>
                                         </div>
-
                                     {{/each}}
+
 
 
 
@@ -261,103 +300,16 @@
 
 
 
-<!-- Product Modal -->
-<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-hidden="true">
 
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
 
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md-6">
-                            <div class="row ">
-                                <div id="quickViewCarousel" class="carousel slide" data-ride="carousel">
-                                    <!-- The slideshow -->
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
 
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_01.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
 
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_02.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
 
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_03.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
 
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_04.jpg" alt="image">
-                                        </div>
-                                    </div>
-                                    <!-- Left and right controls -->
-                                    <a class="carousel-control-prev" href="#quickViewCarousel" data-slide="prev">
-                                        <span class="fas fa-angle-left "></span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#quickViewCarousel" data-slide="next">
-                                        <span class="fas fa-angle-right "></span>
-                                    </a>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="pro-description">
-                                <h2 class="pro-title">Stylish Necklace Women Heart</h2>
 
-                                <div class="pro-price">
-                                    <del>$120</del><ins>$110</ins>
-                                </div>
 
-                                <div class="pro-infos">
-                                    <div class="pro-single-info"><b>Product ID :</b>1004</div>
-                                    <div class="pro-single-info"><b>Categroy :</b><a href="#">Rings</a></div>
-                                    <div class="pro-single-info">
-                                        <b>Tags :</b>
-                                        <ul>
-                                            <li><a href="#">bracelets</a></li>
-                                            <li><a href="#">diamond</a></li>
-                                            <li><a href="#">ring</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pro-single-info"><b>Available :</b><span class="text-secondary">InStock</span></div>
-                                </div>
 
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod.
-                                </p>
-                                <div class="pro-counter">
-                                    <div class="input-group item-quantity">
-
-                                        <input type="text" id="quantity2" name="quantity" class="form-control" value="10">
-
-                                        <span class="input-group-btn">
-                                          <button type="button"  value="quantity2" class="quantity-plus btn" data-type="plus" data-field="">
-                                              <i class="fas fa-plus"></i>
-                                          </button>
-
-                                          <button type="button" value="quantity2" class="quantity-minus btn" data-type="minus" data-field="">
-                                              <i class="fas fa-minus"></i>
-                                          </button>
-                                      </span>
-                                    </div>
-                                    <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 
@@ -366,89 +318,3 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="blog-sidebar-posts">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9">
-                <div class="post">
-                    <div class="col-sm-9">
-                        <div class="carousel slide" id="bookStackcarousel" data-ride="carousel" style="background-color: darkgrey;">
-                            <ol class="carousel-indicators">
-                                <li class="active" data-target="#bookStackcarousel" data-slide-to="1"></li>
-                                <li data-target="#bookStackcarousel" data-slide-to="2" class=""></li>
-                            </ol>
-                            <div class="carousel-inner" role="listbox">
-                                <div class="carousel-item">
-                                    <img class="d-block img-fluid" src="https://bookstackrotatedphotos.s3.amazonaws.com/59dbeffa44c9d4041c2e3a24/images-1519895303059.jpeg" alt="0">
-                                </div>
-                                <div class="carousel-item active">
-                                    <img class="d-block img-fluid" src="https://bookstackrotatedphotos.s3.amazonaws.com/59dbeffa44c9d4041c2e3a24/images-1519895305248.jpeg" alt="1">
-                                </div>
-                            </div>
-                            <a class="carousel-control-prev" href="#bookStackcarousel" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Previous</span>
-                            </a>
-                            <a class="carousel-control-next" href="#bookStackcarousel" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Next</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="title">
-                        <p>The Hot Zone</p>
-                    </div>
-                    <p>By Richard Preston</p>
-                    <div class="author">
-                        <!--img.avatar(src=`${avatar}`, alt='author')-->
-                    </div>
-                    <p class="intro"></p>
-                    <h5>Description</h5>{{ book.description }}
-                    <p></p>
-                </div>
-            </div>
-            <div class="col-lg-3 sidebar">
-                <div class="updates">
-                    <strong>Details</strong>
-                    <p>ISBN: 978-0385495226
-                        <br>Subject: English
-                        <br>Price: $5
-                    </p>
-                </div>
-                <br>
-                <a class="btn btn-dark btn-primary col-md-8 col-lg-12" href="/editbook?id=5a97c30cb5242700048060e5">Edit book</a>
-                <br>
-                <br>
-                <br>
-                <br>
-            </div>
-        </div>
-    </div>
-</div>

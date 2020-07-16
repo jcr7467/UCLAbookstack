@@ -100,8 +100,16 @@
                                     </div>
                                     <div class="pro-sub-buttons">
                                         <div class="buttons">
-                                            <button type="button" class="btn  btn-link" onclick="notificationWishlist();"><i class="fas fa-heart"></i>Add to Wishlist</button>
-                                            <button type="button" class="btn btn-link" onclick="notificationCompare();"><i class="fas fa-align-right"></i>Add to Compare</button>
+                                            <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
+                                            <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
+
+
+                                            <form id="send_message" action="/chat" method="post">
+                                                <input name="bookOwner" type="text" value="{{soldByThisUser._id}}" readonly hidden>
+                                            </form>
+                                            <button form="send_message" type="submit" class="btn btn-link" ><i class="fas fa-comment"></i>Send Message</button>
+
+
                                         </div>
 
 

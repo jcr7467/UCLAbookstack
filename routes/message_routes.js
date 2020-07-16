@@ -16,7 +16,7 @@ router.post('/chat', (request, response, next) => {
     userIDs.sort();
 
     let room = userIDs[0].concat(userIDs[1]);
-    //console.log(room)
+    console.log(room)
 
 
     Conversation.findOne({room: room }).lean()
@@ -67,6 +67,7 @@ router.post('/sendmessage', (request, response, next) => {
     Conversation.findOne({room: room})
         .then((conversation) => {
             if (conversation === null){
+
                 let conversationData = {
                     room: room,
                     penpal1: username,
@@ -142,13 +143,49 @@ router.route('/conversations').get((request, response, next) => {
 
     User.findById(request.session.userId).lean()
         .then(user => {
+
+            let userMap = []
+            console.log('I made it')
+
+        console.log(user.hasConversationsWith)
+
             response.render('conversation_list', {
-                title: 'Conversations',
-                messagesWith: user.hasConversationsWith
+                title: 'Messages',
+                myPenPals: user.hasConversationsWith
             })
+            /*
+            for (let i = 0 ; i < user.hasConversationsWith.length ; i++){
+
+                User.findById(user.hasConversationsWith[i])
+                    .then(conversationUser => {
+                        if (conversationUser !== null){
+                            console.log(conversationUser)
+                            userMap.push({
+                                userId: conversationUser._id,
+                                firstname: conversationUser.firstname,
+                                lastname: conversationUser.lastname
+
+                            })
+
+                        }
+                    })
+            }
+*/
+            console.log('I even made it out of the loop')
+            console.log(userMap)
+
+
+
+
+
+
+
+
+
         })
+
         .catch(err => {
-            next(err)
+            return next(err)
         })
 })
 

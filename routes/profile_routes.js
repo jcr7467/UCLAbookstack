@@ -113,10 +113,18 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                     for (let i = 0; i < file_entries; i++) {
 
                         let fileType = request.files[i].mimetype.split('/')[0];
+                        console.log(fileType)
                         if (fileType !== 'image') {
                             allImages = false;
 
                         }
+
+                        let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+
+                        if (picextension.toLowerCase() === ".heic"){
+
+                        }
+
                     }
                 }
 
@@ -138,13 +146,17 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                     let picKeys = [];
 
 
-                    let amazonBucket = 'https://ucla-bookstack-uploaded-photos.s3-us-west-1.amazonaws.com/';
+                    let amazonBucket = process.env.S3_URL_PREFIX_FOR_RETRIEVAL;
+                    let amazonHEICBucket = process.env.S3_URL_PREFIX_FOR_RETRIEVAL_HEIC;
                     for( let i = 0 ; i < file_entries; i++){
                         let datetimestamp = Date.now(),
                             folderPrefix = request.session.userId + '/',
                             nameOfFile = request.files[i].fieldname + '-' + datetimestamp;
-                            //extension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
-                        let key = folderPrefix + nameOfFile + '.jpg';
+                            picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+
+
+
+                        let key = folderPrefix + nameOfFile + picextension;
 
                         picURLs.push(amazonBucket + key);   // Makes an array of all the photo-storage-location references
                         picKeys.push(key);
@@ -270,3 +282,4 @@ router.post('/profile/settings', mid.requiresLogin, (request, response, next) =>
 
 
 module.exports = router;
+

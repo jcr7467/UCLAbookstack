@@ -37,12 +37,21 @@
                             <a href="/" class="main-manu btn ">
                                 Home
                             </a>
+                            {{#if (user_is_logged_in currentUser)}}
                             <a href="/profile" class="main-manu btn ">
                                 Profile
                             </a>
                             <a href="/profile/settings" class="main-manu btn ">
                                 Settings
                             </a>
+                            {{else}}
+                            <a href="/signin" class="main-manu btn ">
+                                Sign In
+                            </a>
+                            <a href="/signup" class="main-manu btn ">
+                                Sign Up
+                            </a>
+                            {{/if}}
 
                         </nav>
                     </div>

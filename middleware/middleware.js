@@ -1,3 +1,7 @@
+let convert = require('heic-convert');
+
+
+
 let ifLoggedOut = (request, response, next) => {
     if(request.session && request.session.userId){
         return response.redirect('/mybooks');
@@ -34,10 +38,10 @@ let setFlash = (request, response, next) => {
         error: request.flash('error'),
         success: request.flash('success')
     };
+
     next();
+    
 };
-
-
 
 
 

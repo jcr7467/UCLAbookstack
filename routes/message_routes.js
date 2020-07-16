@@ -112,7 +112,9 @@ router.post('/sendmessage', (request, response, next) => {
 
             }else {
 
+
                 console.log(username)
+
                 conversation.messages.push({
                     text: msgObj.text,
                     msgSentByMe: username,
@@ -127,8 +129,11 @@ router.post('/sendmessage', (request, response, next) => {
             }
         })
         .catch(err => {
+
             console.log(err)
+
         });
+
 });
 
 

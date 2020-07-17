@@ -113,7 +113,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                     for (let i = 0; i < file_entries; i++) {
 
                         let fileType = request.files[i].mimetype.split('/')[0];
-                        console.log(fileType)
+                        // console.log(fileType)
                         if (fileType !== 'image') {
                             allImages = false;
 

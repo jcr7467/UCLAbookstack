@@ -18,7 +18,8 @@ router.post('/chat', (request, response, next) => {
     userIDs.sort();
 
     let room = userIDs[0].concat(userIDs[1]);
-    console.log(room)
+
+
 
 
     Conversation.findOne({room: room }).lean()
@@ -116,7 +117,6 @@ router.post('/sendmessage', (request, response, next) => {
             }else {
 
 
-                console.log(username)
 
                 conversation.messages.push({
                     text: msgObj.text,
@@ -154,7 +154,7 @@ router.route('/conversations').get((request, response, next) => {
              */
             let push_penpal_to_userMap = (penpalObj, userMap) => {
                 // on first pass, accum will be undefined, so make it an array
-                let penPalUserId= penpalObj.thePenPal
+                let penPalUserId = penpalObj.thePenPal
                 userMap = Array.isArray(userMap) ? userMap : []
                 return new Promise((resolve, reject) => {
 
@@ -188,7 +188,6 @@ router.route('/conversations').get((request, response, next) => {
                     // results will contain the accumulated results from all
                     // the mapped operations
 
-                    console.log('ya', userMap, 'no')
 
                     //For some reason, this userMap is a two dimensional array,
                     // So in handlebars, we must have a two dimmensional array for each loop
@@ -202,28 +201,6 @@ router.route('/conversations').get((request, response, next) => {
                 .catch(err => {
                     next(err)
                 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         }).catch(err => {

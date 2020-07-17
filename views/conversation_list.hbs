@@ -1,11 +1,13 @@
 {{#each myPenPals}}
 {{#each this}}
-    <p>{{ penpalFirstName }}</p>
+    <div style="margin: 50px">
+        <p>{{ penpalFirstName }}</p>
 
         <form class="btn btn-link" action="/chat" method="post">
             <input name="bookOwner" type="text" value="{{ penpalUserId }}" hidden>
             <button type="submit" class="btn btn-link"><i class="fa fa-comment"></i>Send Message</button>
         </form>
+    </div>
     <hr>
 
 

@@ -3,12 +3,14 @@ let express = require("express"),
 
 const User = require('../models/user');
 const Book = require('../models/book');
+const mid = require('../middleware/middleware');
 
 
 //////////////////////////////////////////////
 // STATIC PAGES
 // PAGES THAT DON'T HAVE POST REQUESTS
 // ONLY RENDERING PAGE
+
 router.get('/', (request, response) => {
     response.render('index', {
         title: "Home",
@@ -164,7 +166,7 @@ router.get('/search', (request,response, next) => {
 
 
 
-router.get('/search/book', (request, response, next) => {
+router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
     let { id } = request.query;
 

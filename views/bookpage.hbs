@@ -40,60 +40,20 @@
                                     <div class="pro-price">
                                         <ins>${{ book.price }}</ins>
                                     </div>
-                                    <div class="pro-rating">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star-half-alt"></i>
-                                        <a href="#review" class="btn-link">2 reviews</a>
-                                    </div>
+
                                     <div class="pro-infos">
-                                        <div class="pro-single-info"><b>Product ID :</b>1004</div>
-                                        <div class="pro-single-info"><b>Categroy :</b><a href="#">Rings</a></div>
-                                        <div class="pro-single-info">
-                                            <b>Tags :</b>
-                                            <ul>
-                                                <li><a href="#">bracelets</a></li>
-                                                <li><a href="#">diamond</a></li>
-                                                <li><a href="#">ring</a></li>
 
-                                            </ul>
-                                        </div>
-                                        <div class="pro-single-info"><b>Available :</b><span class="text-secondary">InStock</span></div>
-                                        <div class="pro-single-info"><b>Min Order Limit :</b><a href="#">5</a></div>
-                                    </div>
-
-                                    <div class="pro-options">
-                                        <div class="color-selection">
-                                            <h4><b>Color : </b>Silver</h4>
-                                            <ul>
-                                                <li class="active"><a class="green " href="javascript:void(0);"></a></li>
-                                                <li ><a class="red " href="javascript:void(0);"></a></li>
-
-                                            </ul>
-                                        </div>
+                                        <div class="pro-single-info"><b>Category :</b><a href="/search?subject={{book.subject}}&query=">{{book.subject}}</a></div>
 
                                     </div>
+
+
 
 
 
 
                                     <div class="pro-counter">
-                                        <div class="input-group item-quantity">
 
-                                            <input type="text" id="quantity1" name="quantity" class="form-control " value="10">
-
-                                            <span class="input-group-btn">
-                                          <button type="button" value="quantity1" class="quantity-plus btn" data-type="plus" data-field="">
-                                              <i class="fas fa-plus"></i>
-                                          </button>
-
-                                          <button type="button" value="quantity1" class="quantity-minus btn" data-type="minus" data-field="">
-                                              <i class="fas fa-minus"></i>
-                                          </button>
-                                      </span>
-                                        </div>
                                         <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
 
 
@@ -103,13 +63,13 @@
                                             <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
                                             <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
 
-
+                                            {{#unless (equal_strings currentUser book.bookOwner)}}
                                             <form id="send_message" action="/chat" method="post">
                                                 <input name="bookOwner" type="text" value="{{soldByThisUser._id}}" readonly hidden>
                                             </form>
                                             <button form="send_message" type="submit" class="btn btn-link" ><i class="fas fa-comment"></i>Send Message</button>
 
-
+                                            {{/unless}}
                                         </div>
 
 

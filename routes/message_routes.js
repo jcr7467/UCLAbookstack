@@ -1,6 +1,8 @@
 let express = require("express"),
     router  = express.Router();
 
+let Promise = require('bluebird')
+
 
 const User = require('../models/user');
 const Conversation = require('../models/conversation');
@@ -144,35 +146,62 @@ router.route('/conversations').get((request, response, next) => {
     User.findById(request.session.userId).lean()
         .then(user => {
 
-            let userMap = []
-            console.log('I made it')
-
-        console.log(user.hasConversationsWith)
-
-            response.render('conversation_list', {
-                title: 'Messages',
-                myPenPals: user.hasConversationsWith
-            })
             /*
-            for (let i = 0 ; i < user.hasConversationsWith.length ; i++){
+             * given a value and an optional array (accum),
+             * pass the value to the async func and add its result to accum
+             * if accum is not an array, make it one
+             * return accum
+             */
+            let push_penpal_to_userMap = (penpalObj, userMap) => {
+                // on first pass, accum will be undefined, so make it an array
+                let penPalUserId= penpalObj.thePenPal
+                userMap = Array.isArray(userMap) ? userMap : []
+                return new Promise((resolve, reject) => {
 
-                User.findById(user.hasConversationsWith[i])
-                    .then(conversationUser => {
-                        if (conversationUser !== null){
-                            console.log(conversationUser)
+                    User.findById(penPalUserId).lean().exec((err, penpal)=> {
+                        if (err){reject(err)}
+                        if (penpal !== null){
+
                             userMap.push({
-                                userId: conversationUser._id,
-                                firstname: conversationUser.firstname,
-                                lastname: conversationUser.lastname
-
+                                penpalUserId: penpal._id,
+                                penpalFirstName: penpal.firstname,
+                                penpalLastName: penpal.lastname
                             })
 
+                            resolve(userMap)
                         }
-                    })
+                    });
+                })
             }
-*/
-            console.log('I even made it out of the loop')
-            console.log(userMap)
+
+
+            /*
+             * for each member of input array, apply do_something
+             * then operate on accumulated result.
+             */
+
+
+
+
+            Promise.map(user.hasConversationsWith, push_penpal_to_userMap)
+                .then(userMap => {
+                    // results will contain the accumulated results from all
+                    // the mapped operations
+
+                    console.log('ya', userMap, 'no')
+
+                    //For some reason, this userMap is a two dimensional array,
+                    // So in handlebars, we must have a two dimmensional array for each loop
+                    //But every
+                    response.render('conversation_list', {
+                        title: 'Messages',
+                        myPenPals: userMap
+                    })
+
+                })
+                .catch(err => {
+                    next(err)
+                })
 
 
 
@@ -182,9 +211,22 @@ router.route('/conversations').get((request, response, next) => {
 
 
 
-        })
 
-        .catch(err => {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }).catch(err => {
             return next(err)
         })
 })

@@ -13,15 +13,9 @@ module.exports = {
         return (count > 0);
     },
     equal_strings: function(expected, actual){
-        console.log('Val1: ', expected)
-        console.log('Val2: ', actual)
-
         return (expected === actual);
     },
     equal_strings_soft: function(expected, actual){
-        console.log('Val1: ', expected)
-        console.log('Val2: ', actual)
-
         return (expected == actual);
     },
     add_me_together: function(val1){

@@ -157,22 +157,19 @@ app.use('/', message_routes);
 // SOCKET HANDLING
 
 
-const botName = "Chatbot";
-
 // Run when client connects
 io.on('connection', socket => {
 
     //console.log(socket.handshake.headers.cookie);
 
     socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
-        //console.log(username)
+
         let username = myUserID,
             penpalusername = theirUserID;
 
         socket.join(room);
 
         socket.on('chatMessage', (msg) => {
-            //console.log("Here is my id" + username.string())
 
             let messageObject = formatMessage(msg, username, penpalusername);
 
@@ -181,7 +178,7 @@ io.on('connection', socket => {
                 room: room
             })
                 .then(response => {
-                    console.log(response)
+
                     //io.emit('serverObject', retVal)
                     io.emit('message', {
                         messageObject: messageObject,

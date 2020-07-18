@@ -1,3 +1,32 @@
+/*
+    Dependencies:
+
+    express:                Framework for nodejs
+    http:                   Used to create a server
+    path:                   Used to combine relative paths and show our app where its static files are, etc.
+    express-handlebars:     Used to configure handlebars in an express session
+    mongoose:               Used as a wrapper for mongodb, we use it to connect to the database
+    express-session:        Allows sessions which are basically how users log in to their account
+    connect-mongo:          Used for storing sessions in our database
+    heroku-ssl-redirect:    Used so that we can easily use our https and reroute anyone who tries to access http version
+    axios:                  Used to make requests to routes from inside socket.io, so that we can save our conversation in
+                            our database
+    body-parser:            Used to parse information from forms mainly
+    socket.io:              Create a socket connection with server and client, how we send messages without reloading
+
+
+
+    Other:
+
+    PORT:           The default port number that the server will run on if there is no environmental
+                    variable configured (which would happen when deployed on heroku)
+    formatMessage:  A utility function that returns a formatted message easy for the client code to use.
+
+
+*/
+
+
+
 let express = require("express"),
     http    = require("http"),
     path    = require("path"),
@@ -6,24 +35,17 @@ let mongoose = require("mongoose");
 let session = require("express-session");
 let mongoStore = require("connect-mongo")(session);
 let sslRedirect = require("heroku-ssl-redirect");
-
-
 let axios = require("axios");
-
-
-
-
 let bodyParser = require("body-parser");
-
-
-
-
 const PORT = 8000;
-
 const app = express();
 const server = http.createServer(app);
 const io    = require("socket.io")(server);
-const formatMessage = require("./config/messages");
+const formatMessage = require("./util/messages");
+
+
+
+
 
 // Gives access to environmental variables
 require('dotenv').config();
@@ -32,10 +54,10 @@ require('dotenv').config();
 // Redirects all http traffic to https version
 app.use(sslRedirect());
 
-///////////////DATABASE DRIVER CODE
+////////////////////////////////////////////////
+//DATABASE DRIVER CODE
 
-
-
+//URI: The uri given to us by MongoDb in order to remotely connect to our DB
 const URI = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 let db = mongoose.connection;
@@ -52,7 +74,7 @@ app.use(session({
 }));
 
 
-////////////////////////
+////////////////////////////////////////////////////////////////
 
 
 // SET USER VARIABLES TO USE IN TEMPLATES
@@ -94,7 +116,7 @@ let hbs = exphbs.create({
     extname: 'hbs',
     defaultLayout: 'layout',
     layoutsDir: path.join(__dirname + '/views/layouts'),
-    helpers: require('./config/handlebar_helpers.js'),
+    helpers: require('./util/handlebar_helpers.js'),
     partialsDir: [
         './views/partials/',
         './views/partials/navbars/',
@@ -159,14 +181,25 @@ io.on('connection', socket => {
                 room: room
             })
                 .then(response => {
+                    console.log(response)
                     //io.emit('serverObject', retVal)
+                    io.emit('message', {
+                        messageObject: messageObject,
+                        currentUserid: response.data.currentUserid,
+                        currentUserfirstname: response.data.currentUserfirstname,
+                        penpalUserid: response.data.penpalUserId,
+                        penpalUserfirstname: response.data.penpalUserfirstname
+                    });
                 })
                 .catch(error => {
+
                     //io.emit('serverObject', error)
+
+
                 console.log(error)
             });
 
-            io.emit('message', messageObject);
+
 
         });
     });

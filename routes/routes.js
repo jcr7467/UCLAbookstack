@@ -11,64 +11,72 @@ const mid = require('../middleware/middleware');
 // PAGES THAT DON'T HAVE POST REQUESTS
 // ONLY RENDERING PAGE
 
+
+//Renders the home page
 router.get('/', (request, response) => {
     response.render('index', {
         title: "Home",
-        navbar: "clear",
         layout: "home-layout"
     });
 });
 
+
+// Renders informational page which displays how to upload multiple pictures on BookStack
 router.get('/uploadpics', (request, response) => {
     response.render('multiple_pics_guide', {
-        title: 'Upload Multiple Pictures',
-        navbar: 'default'
+        title: 'Upload Multiple Pictures'
     })
 });
 
 
-
+// Renders informational terms of use page
 router.get('/termsOfUse', (request, response) => {
     response.render('terms_and_conditions',{
-        title: 'Terms and Conditions',
-        navbar: 'default'
+        title: 'Terms and Conditions'
     });
 });
 
+
+// Renders how it works page, just a description of what BookStack is
+// Currently, we are not using this page, but is here for reference in case of future use
 router.get('/howitworks', (request, response) => {
     response.render('howitworks',{
-        title:'How it works',
-        navbar: 'clear'
+        title:'How it works'
     });
 });
 
+
+// Renders informational page showing users what a isbn number is and how to generally find it
 router.get('/howToFindISBN', (request, response) => {
     response.render('findISBN', {
-        title: 'Find ISBN',
-        navbar: 'default'
+        title: 'Find ISBN'
     });
 });
 
+
+// Renders informational page giving general tips for uploading a book/item
+// Would ideally start speaking more about other items you can post, not just books
 router.get('/bookformtips',(request, response) => {
     response.render('bookformtips', {
-        title: 'Book Form Tips',
-        navbar: 'dark'
+        title: 'Book Form Tips'
     });
 });
 
+
+// Renders informational page of the privacy policy
 router.get('/privacyPolicy', (request, response) => {
     response.render('privacy', {
-        title: 'Privacy Policy',
-        navbar: 'default'
+        title: 'Privacy Policy'
     });
 });
 
 
 
+
+// Renders informational page of an email where we can be reached
 router.get('/contact', (request, response) => {
     response.render('contact', {
-        title: 'Contact Us',
-        navbar: 'clear'
+        title: 'Contact Us'
     });
 });
 
@@ -80,14 +88,8 @@ router.get('/contact', (request, response) => {
 //
 
 
-router.get('/messages', (request, response, next) => {
 
-    response.render('chat', {
-        title: "Chat",
-        navbar: "default"
-    })
 
-});
 
 
 

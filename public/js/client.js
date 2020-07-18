@@ -22,6 +22,7 @@ socket.emit('joinRoom', {myUserID, theirUserID, room});
 
 socket.on('message', (message) => {
 
+    console.log(message);
 
     outputMessage(message);
 
@@ -58,11 +59,28 @@ chatForm.addEventListener('submit', (e) => {
 
 function outputMessage(msg){
     const div = document.createElement('div');
-    div.classList.add('message');
-    div.innerHTML = `<p class="meta">${msg.username} <span>${msg.time}</span> <span>${msg.date}</span></p>
-    <p class="text">
-        ${msg.text}
-    </p>`;
+
+    console.log('mine', myUserID)
+    console.log('msgcurrent', msg.currentUserid)
+
+    if (myUserID == msg.currentUserid){
+        div.classList.add('message');
+        div.innerHTML = `<p class="meta">${msg.currentUserfirstname} <span>${msg.messageObject.time}</span> <span>${msg.messageObject.date}</span></p>
+        <p class="text">
+            ${msg.messageObject.text}
+        </p>`;
+    }else{
+
+        div.classList.add('penpalmessage');
+        div.innerHTML = `<p class="meta">${msg.currentUserfirstname} <span>${msg.messageObject.time}</span> <span>${msg.messageObject.date}</span></p>
+        <p class="text">
+            ${msg.messageObject.text}
+        </p>`;
+
+    }
+
+
+
     document.querySelector('.chat-messages').appendChild(div);
 
 }

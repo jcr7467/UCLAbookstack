@@ -52,35 +52,28 @@
 
 
 
-                                    <div class="pro-counter">
-
-                                        <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
-
-
-                                    </div>
                                     <div class="pro-sub-buttons">
                                         <div class="buttons">
+                                            <!--<button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
                                             <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
-                                            <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
-
+                                            -->
                                             {{#unless (equal_strings currentUser book.bookOwner)}}
                                             <form id="send_message" action="/chat" method="post">
                                                 <input name="bookOwner" type="text" value="{{soldByThisUser._id}}" readonly hidden>
                                             </form>
                                             <button form="send_message" type="submit" class="btn btn-link" ><i class="fas fa-comment"></i>Send Message</button>
-
                                             {{/unless}}
                                         </div>
 
 
 
-                                        
+
 
                                     </div>
 
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <div class="col-12 col-md-12">
                                     <div class="nav nav-pills" role="tablist">
@@ -90,8 +83,9 @@
                                     </div>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
+                                            <p> {{ book.description }}</p>
                                             <ul>
+                                                <li>This is dummy text</li>
                                                 <li>Pellentesque consectetur lorem gravida lacinia mollis.</li>
                                                 <li>Phasellus vel nisl consequat, sagittis mi nec, dignissim turpis.</li>
                                                 <li>Morbi ornare lorem non lacus ultricies fermentum.</li>

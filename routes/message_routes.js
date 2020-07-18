@@ -13,39 +13,33 @@ router.post('/chat', (request, response, next) => {
     * This post request pops up when a user clicks on the 'Send Message' button on a book
     * */
 
+
+
+
+
     let userIDs = [request.session.userId, request.body.bookOwner];
 
     userIDs.sort();
 
     let room = userIDs[0].concat(userIDs[1]);
 
-
-
-
     Conversation.findOne({room: room }).lean()
         .then(conversation => {
-            if (conversation !== null) {
-                //console.log(conversation.messages)
-                response.render('chat', {
-                    title: "Messages",
-                    messagesWith: request.body.bookOwner,
-                    messages: conversation.messages,
-                    thisuser: request.session.userId
-                })
-            }else{
-                response.render('chat', {
-                    title: "Messages",
-                    messagesWith: request.body.bookOwner
-                })
-            }
+
+            return Promise.all([conversation, User.findById(request.body.bookOwner).lean()])
+
+
+        }).then(([conversation, penpal]) => {
+
+        return response.render('chat', {
+            title: "Messages",
+            myPenpal: penpal,
+            messages: conversation.messages,
+            thisuser: request.session.userId
         })
-        .catch(err => {
-            next(err);
-        })
-
-
-
-
+    }).catch(err => {
+        next(err);
+    })
 });
 
 

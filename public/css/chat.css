@@ -6,7 +6,8 @@
     --light-color: #a6c4db;
     --success-color: #5cb85c;
     --error-color: #d9534f;
-    --back-color: #ffffff
+    --back-color: #ffffff;
+    --penpalmessage-color: #dedede
 }
 
 * {
@@ -96,6 +97,16 @@ a {
     background-color: var(--light-color);
     border-radius: 5px;
 }
+
+.chat-messages .penpalmessage {
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--penpalmessage-color);
+    border-radius: 5px;
+}
+
+
+
 
 .chat-messages .message .meta {
     font-size: 15px;

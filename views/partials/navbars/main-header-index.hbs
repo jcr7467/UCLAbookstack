@@ -202,16 +202,24 @@
                         {{#if (user_is_logged_in currentUser)}}
                         <li>
                             <a href="/profile" class="btn" data-toggle="tooltip" data-placement="bottom" title="My Books">
-                                <i class="far fa-book"></i>
+                                <i class="fas fa-book"></i>
 
                             </a>
                         </li>
                         <li>
                             <a href="/conversations" class="btn" data-toggle="tooltip" data-placement="bottom" title="Messages">
-                                <i class="far fa-comment"></i>
+                                <i class="fas fa-comment"></i>
 
                             </a>
-                        </li></ul>
+                        </li>
+
+                            <li>
+                                <a href="/profile/uploadbook" class="btn" data-toggle="tooltip" data-placement="bottom" title="Upload">
+                                    <i class="fas fa-upload"></i>
+
+                                </a>
+                            </li>
+                        </ul>
                         {{/if}}
                 </div>
             </div>

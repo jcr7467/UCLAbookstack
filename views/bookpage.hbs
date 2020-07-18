@@ -57,12 +57,16 @@
                                             <!--<button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
                                             <button type="button" class="btn  btn-link" ><i class="fas fa-heart"></i>Add to Wishlist</button>
                                             -->
+
+
                                             {{#unless (equal_strings currentUser book.bookOwner)}}
                                             <form id="send_message" action="/chat" method="post">
                                                 <input name="bookOwner" type="text" value="{{soldByThisUser._id}}" readonly hidden>
                                             </form>
                                             <button form="send_message" type="submit" class="btn btn-link" ><i class="fas fa-comment"></i>Send Message</button>
                                             {{/unless}}
+
+
                                         </div>
 
 

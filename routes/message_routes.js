@@ -30,13 +30,23 @@ router.post('/chat', (request, response, next) => {
 
 
         }).then(([conversation, penpal]) => {
+        if(conversation == null){
 
-        return response.render('chat', {
-            title: "Messages",
-            myPenpal: penpal,
-            messages: conversation.messages,
-            thisuser: request.session.userId
-        })
+            return response.render('chat', {
+                title: "Messages",
+                myPenpal: penpal,
+                thisuser: request.session.userId
+            })
+
+        }else{
+            return response.render('chat', {
+                title: "Messages",
+                myPenpal: penpal,
+                messages: conversation.messages,
+                thisuser: request.session.userId
+            })
+        }
+
     }).catch(err => {
         next(err);
     })

@@ -222,6 +222,7 @@ router.route('/reset')
                             function (err) {
                                 if(err){return callback(err, null);}
                                 request.session.userId = user._id;      //Gives unique user._id number to cookie on browser(Logs them in)
+                                request.session.userObject = user
                                 return callback(null, user);
                             });
                     });

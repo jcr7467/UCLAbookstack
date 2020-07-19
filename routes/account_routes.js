@@ -109,8 +109,7 @@ router.route('/signup')
 router.route('/forgot')
     .get((request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
-            title: 'Forgot password',
-            layout: 'signinout_layout.hbs'
+            title: 'Forgot password'
         });
     })
     .post((request, response, next) => {
@@ -124,12 +123,7 @@ router.route('/forgot')
             },
             function verifyEmailExists(token, callback) {
 
-
-
-
                 let case_insensitive_email = new RegExp('\\b' + request.body.email + '\\b', 'i');
-
-
                 User.findOne({email: case_insensitive_email}, function (err, user) {
                     if (!user) {
                         let err = new Error('No account with that email exists in our records(email is case-sensitive)');
@@ -192,8 +186,7 @@ router.route('/reset')
                 response.render('partials/signinout/resetpassword', {
                     token: token,
                     url: request.originalUrl,
-                    title: 'Reset',
-                    layout: 'signinout_layout.hbs'
+                    title: 'Reset'
                 });
             }
         });
@@ -243,7 +236,7 @@ router.route('/reset')
                     from: 'BookStack <teambookstackucla@gmail.com>',
                     to: user.email,
                     subject: 'Your password has been changed',
-                    text: 'Hello ' + user.name + ', \n\n' +
+                    text: 'Hello ' + user.firstname + ', \n\n' +
                         'This is a confirmation that the password for your account (' + user.email + ') has just been changed.\n'
                 };
 

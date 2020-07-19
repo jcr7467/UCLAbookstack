@@ -50,7 +50,7 @@
 
                                 <div class="input-group col-12">
 
-                                    <input type="text" value="{{ currentUserObject.firstname }}" name="firstname" class="form-control" id="inlineFormInputGroup0" placeholder="Enter Your First Name">
+                                    <input autocomplete="off" type="text" value="{{ currentUserObject.firstname }}" name="firstname" class="form-control" id="inlineFormInputGroup0" placeholder="Enter Your First Name">
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
 
                                 <div class="input-group col-12">
 
-                                    <input type="text" value="{{ currentUserObject.lastname }}" class="form-control" id="inlineFormInputGroup1" name="lastname" placeholder="Enter Your Last Name">
+                                    <input autocomplete="off" type="text" value="{{ currentUserObject.lastname }}" class="form-control" id="inlineFormInputGroup1" name="lastname" placeholder="Enter Your Last Name">
                                 </div>
                             </div>
 
@@ -70,7 +70,7 @@
                                 <div class="input-group col-12">
 
                                     <br>
-                                    <input type="text" name="email" value="{{ currentUserObject.email }}" class="form-control" id="inlineFormInputGroup2"  placeholder="Enter Your Email">
+                                    <input autocomplete="off" type="text" name="email" value="{{ currentUserObject.email }}" class="form-control" id="inlineFormInputGroup2"  placeholder="Enter Your Email">
                                 </div>
                             </div>
 
@@ -83,6 +83,7 @@
                             <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Update</button>
 
                         </div>
+                        <!--
                         <div class="col-12 col-md-5">
                             <ul>
                                 <li>
@@ -103,6 +104,8 @@
 
                             </ul>
                         </div>
+
+                        -->
 
                     </div>
                 </form>

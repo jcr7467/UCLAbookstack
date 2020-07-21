@@ -48,7 +48,12 @@
                                         <div class="pro-price">
                                             <ins>${{ this.price }}</ins>
                                         </div>
+
+
+                                        {{#unless (equal_strings this.bookAuthor "")}}
                                         <p class="d-none d-lg-block d-xl-block">Author: {{ this.bookAuthor }}</p>
+                                        {{/unless}}
+
                                         <p class="d-none d-lg-block d-xl-block">{{ this.description }}</p>
                                         <div class="buttons">
                                             <div class="input-group item-quantity">

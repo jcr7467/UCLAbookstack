@@ -80,6 +80,8 @@
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
                                             <p> {{ book.description }}</p>
+
+                                            <!--
                                             <ul>
                                                 <li>This is dummy text</li>
                                                 <li>Pellentesque consectetur lorem gravida lacinia mollis.</li>
@@ -87,6 +89,7 @@
                                                 <li>Morbi ornare lorem non lacus ultricies fermentum.</li>
                                                 <li>Mauris aliquam turpis ut orci egestas luctus.</li>
                                             </ul>
+                                            -->
 
 
 
@@ -96,19 +99,19 @@
 
                                                 <tbody>
 
-                                                {{#unless (equal_strings book.isbn "N/A")}}
+                                                {{#unless (equal_strings book.isbn "")}}
                                                     <tr>
                                                         <th scope="row">ISBN:</th>
-                                                        <td>1133947271</td>
+                                                        <td>{{ book.isbn }}</td>
 
                                                     </tr>
                                                 {{/unless}}
 
 
-                                                {{#unless (equal_strings book.isbn "N/A")}}
+                                                {{#unless (equal_strings book.bookAuthor "")}}
                                                     <tr>
                                                         <th scope="row">Author:</th>
-                                                        <td>JK Rowling</td>
+                                                        <td>{{ book.bookAuthor }}</td>
 
                                                     </tr>
                                                 {{/unless}}

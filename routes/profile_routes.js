@@ -137,7 +137,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
             },
             function getDetails(callback) {
-                if (request.body.title && request.body.author && request.body.price && request.body.subject){
+                if (request.body.title  && request.body.price && request.body.subject){
 
 
                     //Then makes an object and stores it in the mongoDB database

@@ -10,13 +10,11 @@ let BookSchema = new mongoose.Schema({
     },
     bookAuthor: {
         type: String,
-        trim: true,
-        default: "N/A"
+        trim: true
     },
     isbn: {
         type: String,
-        trim: true,
-        default: "N/A"
+        trim: true
     },
     description: {
         type: String,

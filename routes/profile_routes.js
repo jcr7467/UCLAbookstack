@@ -233,8 +233,138 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
 
+router.route('/editbook')
+    .get(mid.requiresLogin, (request, response, next) => {
+        let {id} = request.query;
+        Book.findOne({_id: id}, (error, book) => {
+            if (error) {
+                return next(error.message)
+            } else {
+                User.findById(book.bookOwner)
+                    .exec((error, user) => {
+                        if (error) {
+                            return next(error)
+                        } else {
+                            return response.render('editpost', {
+                                book: book,
+                                avatar: user.profilePictureLocation
+                            });
+                        }
+                    });
+            }
+        });
+    })
+    .post(upload.array('photos', 7),(request, response, next) => {
+        let {isbn} = request.body,
+            {title} = request.body,
+            {author} = request.body,
+            {subject} = request.body,
+            {description} = request.body,
+            {price} = request.body,
+            {mainpic} = request.body,
+            {id} = request.body,
+            {files} = request;
+
+        if (files.length > 0){ //This code only executes if a file is uploaded
+            for(let i = 0 ; i < files.length ; i++){
+
+                const fileType = files[i].mimetype.split('/')[0];
+                let datetimestamp = Date.now(),
+                    folderPrefix = request.session.userId + '/',
+                    nameOfFile = files[i].fieldname + '-' + datetimestamp,
+                    extension = '.' + files[i].originalname.split('.')[files[i].originalname.split('.').length - 1];
+
+                let picturekey = folderPrefix + nameOfFile + extension;
+                //^ example: "userid/image-3478932.jpg"^
+
+                if (fileType !== 'image') { return next(new Error('File must be an image')); }
+
+                let receivingparams = {
+                    Bucket: "bookstackuploadedphotos",
+                    Key: picturekey,
+                    Body: request.files[i].buffer,
+                    ACL: 'public-read'
+                };
+
+                s3.putObject(receivingparams, function(err, data){
+                    if(err){return next(err)}
+                });
+
+                Book.findByIdAndUpdate(id, {$push:
+                            {pictureKeys: picturekey,
+                                pictureLocations:'https://bookstackrotatedphotos.s3.amazonaws.com/' + picturekey}
+                    }, {new: true},
+                    function(err, book){
+                        if(err){return next(new Error('An error occurred while updating book'));}
+                    });
+                Book.findByIdAndUpdate(id, {$pull: {pictureLocations: '/img/no_image_available.jpeg'}}, //removes the default "No image available" jpg if no image was initially uploaded
+                    {new: true},
+                    function(err, book){
+                        if(err){return next(new Error('An error occurred while updating book'))}
+                    });
+
+            }
+        }
+
+        Book.findByIdAndUpdate(id,
+            {
+                $set: {
+                    'isbn': isbn,
+                    'title': title,
+                    'bookAuthor': author,
+                    'description': description,
+                    'price': price,
+                    'subject': subject,
+                    'mainpic': mainpic
+                }
+            },
+            function (err, doc) {
+                request.flash('success', 'Book successfully updated');
+                return response.redirect('/mybooks');
+            });
+    });
 
 
+
+router.get('/profile/delete', (request, response, next) => {
+
+    Book.findById(request.query.id)
+        .then(book => {
+            //For security purposes, made sure that the "author" of the book is the same as the current user's ID just in case a user changes the client html
+            //This section grabs the keys of all the pictures in the 'book'
+            // and adds them into the AWS method for deleting
+            // from the Amazon Bucket used to store pictures
+            if (request.session.userId === book.bookOwner){
+                return book
+            }else{
+                throw new Error("User id did not match the owner's id")
+            }
+        }).then(book => {
+            for (let i = 0 ; i < book.pictureURLs.length ; i++){
+                s3.deleteObject({
+                    Bucket: process.env.S3_BUCKET,
+                    Key: book.pictureKeys[i]
+                }, function (err, data) {                         //
+                    if (err) {
+                        return err
+                    }
+                    else {
+                        console.log('Successfully deleted from S3!');             //
+                    }
+                });
+            }
+
+            return book
+        }).then(book => {
+            book.remove()
+
+        }).then(() => {
+            response.redirect('/profile')
+        }).catch(err => {
+            next(err)
+    })
+
+});
 
 
 

@@ -1737,12 +1737,12 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #3d6db5;
+  background-color: #b38741;
   border-color: #b38741; }
   .btn-secondary:hover {
     color: #fff;
     background-color: rgba(61, 109, 181, 0.75);
-    border-color: #3d6db5; }
+    border-color: #b38741; }
   .btn-secondary:focus, .btn-secondary.focus {
     box-shadow: 0 0 0 0.2rem rgba(190, 153, 94, 0.5); }
   .btn-secondary.disabled, .btn-secondary:disabled {

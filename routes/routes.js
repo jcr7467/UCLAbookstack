@@ -186,6 +186,9 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
             navbar: 'default',
             book: book,
             soldByThisUser: soldByThisUser,
+            monthAdded: book.dateAdded.getMonth(),
+            dayOfMonthAdded: book.dateAdded.getDate(),
+            yearAdded: book.dateAdded.getFullYear()
 
         });
     }).catch((err) => {

@@ -4,7 +4,7 @@
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Product</li>
             </ol>
         </div>
@@ -75,7 +75,7 @@
                                     <div class="nav nav-pills" role="tablist">
                                         <a class="nav-link nav-item  active" href="#description" id="description-tab" data-toggle="pill" role="tab">Description</a>
                                         <a class="nav-link nav-item " href="#additionalInfo" id="additional-info-tab" data-toggle="pill" role="tab" >Additional information</a>
-                                        <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >Reviews</a>
+                                        <a class="nav-link nav-item" href="#review" id="review-tab" data-toggle="pill" role="tab" >Comments</a>
                                     </div>
                                     <div class="tab-content">
                                         <div role="tabpanel" class="tab-pane fade active show" id="description" aria-labelledby="description-tab">
@@ -95,26 +95,31 @@
                                             <table class="table table-striped table-borderless">
 
                                                 <tbody>
+
+                                                {{#unless (equal_strings book.isbn "N/A")}}
+                                                    <tr>
+                                                        <th scope="row">ISBN:</th>
+                                                        <td>1133947271</td>
+
+                                                    </tr>
+                                                {{/unless}}
+
+
+                                                {{#unless (equal_strings book.isbn "N/A")}}
+                                                    <tr>
+                                                        <th scope="row">Author:</th>
+                                                        <td>JK Rowling</td>
+
+                                                    </tr>
+                                                {{/unless}}
+
                                                 <tr>
-                                                    <th scope="row">Brand Name:</th>
-                                                    <td>lindoMetals</td>
+                                                    <th scope="row">Date Posted:</th>
+                                                    <td>{{ convertToStringMonth monthAdded }} {{ dayOfMonthAdded }} {{ yearAdded }}</td>
 
                                                 </tr>
-                                                <tr>
-                                                    <th scope="row">Metals Type:</th>
-                                                    <td>Silver</td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Main Stone:</th>
-                                                    <td>Pearl</td>
 
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Style:</th>
-                                                    <td>Trendy</td>
-
-                                                </tr>
                                                 </tbody>
                                             </table>
                                         </div>
@@ -122,18 +127,12 @@
                                             <div class="reviews">
                                                 <div class="review-bubbles">
                                                     <h2>
-                                                        Customer Reviews
+                                                        Comments
                                                     </h2>
                                                     <div class="review-bubble-single">
                                                         <div class="review-bubble-bg">
-                                                            <div class="pro-rating">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star-half-alt"></i>
 
-                                                            </div>
+
                                                             <h4>Good</h4>
                                                             <span>Sep 20, 2019</span>
                                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
@@ -142,14 +141,8 @@
                                                     </div>
                                                     <div class="review-bubble-single">
                                                         <div class="review-bubble-bg">
-                                                            <div class="pro-rating">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star-half-alt"></i>
 
-                                                            </div>
+
                                                             <h4>NICE WORK!!!</h4>
                                                             <span>Sep 20, 2019</span>
                                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</p>
@@ -159,46 +152,34 @@
 
                                                 </div>
                                                 <div class="write-review">
-                                                    <h2>Write a Review</h2>
+                                                    <h2>Write a Comment</h2>
                                                     <div class="write-review-box">
+
+
+
+
+
                                                         <div class="from-group row mb-3">
-                                                            <div class="col-12"> <label for="inlineFormInputGroup0">Name</label></div>
+                                                            <div class="col-12"> <label for="inlineFormInputGroup0">Comment Title</label></div>
                                                             <div class="input-group col-12">
 
-                                                                <input type="text" class="form-control" id="inlineFormInputGroup0" placeholder="Enter Your Name">
+                                                                <input type="text" class="form-control" id="inlineFormInputGroup0" placeholder="Title of Comment">
                                                             </div>
                                                         </div>
                                                         <div class="from-group row mb-3">
-                                                            <div class="col-12"> <label for="inlineFormInputGroup1">Email Address</label></div>
+                                                            <div class="col-12"> <label for="inlineFormInputGroup1">Comment Body</label></div>
                                                             <div class="input-group col-12">
 
-                                                                <input type="text" class="form-control" id="inlineFormInputGroup1" placeholder="Enter Your Email">
-                                                            </div>
-                                                        </div>
-                                                        <div class="from-group row mb-3">
-                                                            <div class="col-12"> <label for="inlineFormInputGroup2">Rating</label></div>
-                                                            <div class="pro-rating  col-12">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star-half-alt"></i>
-
+                                                                <textarea class="form-control" id="inlineFormInputGroup1" placeholder="Write Your Comment"></textarea>
                                                             </div>
                                                         </div>
 
                                                         <div class="from-group row mb-3">
-                                                            <div class="col-12"> <label for="inlineFormInputGroup2">Review Title</label></div>
+
                                                             <div class="input-group col-12">
 
-                                                                <input type="text" class="form-control" id="inlineFormInputGroup2" placeholder="Title of Review">
-                                                            </div>
-                                                        </div>
-                                                        <div class="from-group row mb-3">
-                                                            <div class="col-12"> <label for="inlineFormInputGroup3">Review Body</label></div>
-                                                            <div class="input-group col-12">
-
-                                                                <textarea class="form-control" id="inlineFormInputGroup3" placeholder="Write Your Review"></textarea>
+                                                                <input name="checkForAnonymousComment" type="checkbox" class="col-1 form-control" id="inlineFormInputGroup2">
+                                                                <label class="col-11">Remain Anonymous</label>
                                                             </div>
                                                         </div>
                                                         <div class="from-group">

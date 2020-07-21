@@ -147,7 +147,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
                     let amazonBucket = process.env.S3_URL_PREFIX_FOR_RETRIEVAL;
-                    let amazonHEICBucket = process.env.S3_URL_PREFIX_FOR_RETRIEVAL_HEIC;
+
                     for( let i = 0 ; i < file_entries; i++){
                         let datetimestamp = Date.now(),
                             folderPrefix = request.session.userId + '/',

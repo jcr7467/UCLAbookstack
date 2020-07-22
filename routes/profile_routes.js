@@ -233,26 +233,22 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
 
-router.route('/editbook')
+router.route('/profile/edit')
     .get(mid.requiresLogin, (request, response, next) => {
+
+
         let {id} = request.query;
-        Book.findOne({_id: id}, (error, book) => {
-            if (error) {
-                return next(error.message)
-            } else {
-                User.findById(book.bookOwner)
-                    .exec((error, user) => {
-                        if (error) {
-                            return next(error)
-                        } else {
-                            return response.render('editpost', {
-                                book: book,
-                                avatar: user.profilePictureLocation
-                            });
-                        }
-                    });
-            }
-        });
+
+        Book.findById(id).lean()
+            .then(book => {
+                response.render('partials/profile/myprofile', {
+                    title: 'Edit',
+                    page: 'edit',
+                    book: book
+                });
+            })
+
+
     })
     .post(upload.array('photos', 7),(request, response, next) => {
         let {isbn} = request.body,
@@ -326,6 +322,10 @@ router.route('/editbook')
 
 
 
+
+
+
+
 router.get('/profile/delete', (request, response, next) => {
 
     Book.findById(request.query.id)
@@ -344,12 +344,12 @@ router.get('/profile/delete', (request, response, next) => {
                 s3.deleteObject({
                     Bucket: process.env.S3_BUCKET,
                     Key: book.pictureKeys[i]
-                }, function (err, data) {                         //
+                }, function (err, data) {
                     if (err) {
                         return err
                     }
                     else {
-                        console.log('Successfully deleted from S3!');             //
+                        console.log('Successfully deleted from S3!');
                     }
                 });
             }
@@ -365,6 +365,8 @@ router.get('/profile/delete', (request, response, next) => {
     })
 
 });
+
+
 
 
 

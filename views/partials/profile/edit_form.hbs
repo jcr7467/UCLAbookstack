@@ -1,0 +1,122 @@
+<form id="listABookForm"  enctype="multipart/form-data" ] name="general-form">
+    <div class="row">
+
+        <div class="col-12 col-md-7">
+            <h5>Edit Form</h5>
+            <a href="/bookformtips" target="_blank">Tips for uploading books</a>
+            <div class="from-group row mb-4 pt-3">
+
+                <label for="title">Title</label>
+                <div class="input-group col-12">
+
+                    <input required autocomplete="off" type="text" value="{{ book.title }}" name="title" class="form-control" id="inlineFormInputGroup0" placeholder="Title">
+                </div>
+            </div>
+            <div class="from-group row mb-4">
+
+                <label for="author">Author</label>
+                <div class="input-group col-12">
+
+                    <input type="text" autocomplete="off" value="{{ book.bookAuthor }}" class="form-control" id="inlineFormInputGroup1" placeholder="Author" name="author">
+                </div>
+            </div>
+
+            <div class="from-group row mb-4">
+                <label for="isbn">ISBN</label>
+
+                <div class="input-group col-12">
+
+                    <input type="text" autocomplete="off" value="{{ book.isbn }}" name="isbn" class="form-control" id="inlineFormInputGroup2" placeholder="ISBN">
+
+                </div>
+                <a href="/howToFindISBN" target="_blank">What's this?</a>
+
+            </div>
+
+
+
+
+
+            <div class="from-group row mb-4">
+                <label for="subject">Category</label>
+                <div class="input-group col-12">
+                    {{#selectSelected book.subject }}
+                    <select class="form-control" id="subjectChosen" name="subject" form="listABookForm" required>
+                        <option value="" >Select Category</option>
+                        <option value="Art" >Art</option>
+                        <option value="Business &amp; Economics">Business & Economics</option>
+                        <option value="Cooking">Cooking</option>
+                        <option value="English">English</option>
+                        <option value="Foreign Language">Foreign Language</option>
+                        <option value="Health and Fitness">Health & Fitness</option>
+                        <option value="History">History</option>
+                        <option value="Law and Political Science">Law & Political Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Medical">Medical</option>
+                        <option value="Performing Arts">Performing Arts</option>
+                        <option value="Philosophy and Social Science">Philosphy & Social Science</option>
+                        <option value="Science">Science</option>
+                        <option value="Technology and Engineering">Technology & Engineering</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    {{/selectSelected}}
+
+                </div>
+            </div>
+
+
+            <div class="from-group row mb-4">
+                <label for="price">Price</label>
+                <div class="input-group col-12">
+                    <input min="0" type="number" value="{{ book.price }}" name="price" id="price" step="0.01"  class="form-control" placeholder="Price" required>
+                </div>
+            </div>
+
+
+
+            <div class="from-group row mb-4">
+                <label for="description">Description</label>
+                <div class="input-group col-12">
+
+                    <textarea autocomplete="off" class="form-control" id="description" type="text" name="description" form="listABookForm" placeholder="Description">{{ book.description }}
+                    </textarea>
+
+                </div>
+            </div>
+
+
+            <div class="from-group row mb-4">
+                <label for="images">Images</label>
+                <div class="input-group col-12">
+
+
+                    <input class="form-control-file" type="file" name="images" multiple="multiple" />
+
+                    <a href="/uploadpics" target="_blank">How do I upload multiple pictures?</a>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+            <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Upload</button>
+
+        </div>
+        <div class="col-12 col-md-5">
+            <ul>
+                <li>
+                    While it is not required, we HIGHLY recommend uploading images of your book.
+                </li>
+                <li>
+                    Fill out fields that apply to your item.
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+</form>

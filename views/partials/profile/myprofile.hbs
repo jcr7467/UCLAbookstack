@@ -4,4 +4,6 @@
     {{> profile_uploadbooks }}
 {{else if (equal_strings 'settings' page)}}
     {{> profile_settings}}
+{{else if (equal_strings 'edit' page)}}
+    {{>profile_editbooks}}
 {{/if}}

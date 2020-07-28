@@ -205,28 +205,28 @@
             </div>
         </div>
 
-        <!--
+
         <div class="pagination justify-content-between ">
 
 
-            <label  class="col-form-label">Showing 1&ndash;<span class="showing_record">1</span>&nbsp;of&nbsp;<span class="showing_total_record">23</span>&nbsp;results.</label>
+            <label  class="col-form-label">Showing {{ lowerRange }}&ndash;<span class="showing_record">{{ upperRange }}</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ numOfBooks }}</span>&nbsp;results.</label>
 
             <div class="col-12 col-sm-6">
                 <ol class="loader-page">
-                    <li class="loader-page-item "><a href="#">
+                    <li class="loader-page-item "><a href="/search/1?query={{ title }}">
                         <i class="fa fa-angle-double-left " style="font-size:12px"></i></a>
                     </li>
                     <li  class="loader-page-item "><a href="#">1</a></li>
                     <li  class="loader-page-item "><a href="#">2</a></li>
                     <li  class="loader-page-item "><a href="#">3</a></li>
                     <li  class="loader-page-item "><a href="#">4</a></li>
-                    <li  class="loader-page-item "><a href="#">
+                    <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}">
                         <i class="fa fa-angle-double-right " style="font-size:12px"></i></a>
                     </li>
                 </ol>
             </div>
         </div>
-        -->
+
     </div>
 </section>
 
@@ -351,27 +351,3 @@
 
 <div class="mobile-overlay"></div>
 <a href="#" id="back-to-top" class="swipe-to-top" title="Back to top">&uarr;</a>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--
-
-<div class="blog-cols-header">
-    <div class="container">
-
-        <p>Page {{ currentPageNumber }} of {{ numberOfPages }} </p><br/></div>
-</div>
--->

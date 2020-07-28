@@ -94,41 +94,55 @@ router.get('/contact', (request, response) => {
 
 
 
-router.get('/search', (request,response, next) => {
+router.get('/search/:pagenumber', (request,response, next) => {
     let { subject } = request.query,
-        { pagenumber } = request.query,
+
         userSearchTerm = request.query.query;
-    //userSearchTerm = 'tested'
+    let { pagenumber } = request.params;
+    pagenumber = parseInt(pagenumber);
 
 
     userSearchTerm = userSearchTerm.toString();
     if (pagenumber === undefined){pagenumber = 1}
     if (subject === undefined){ subject = 'All'}
 
-    pagenumber = parseInt(pagenumber);
+
     let nextpage = pagenumber + 1;
     let previouspage = pagenumber - 1;
+    let itemOnPageLimit = 10;
 
 
     if (subject === 'All'){
+
         Book.paginate({
             title: {$regex: userSearchTerm, $options: 'i'}
-        }, {lean: true, page:pagenumber, limit:15})
+        }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
+                if (books.docs.length === 0){
+                    let redirectURL = '/search/' + books.totalPages.toString() + '?query=' + userSearchTerm + '&subject=' + subject.toString()
 
-                let numOfBooks = books.docs.length
+                    return response.redirect(redirectURL)
+                }
+
+                let numOfBooks = books.totalDocs;
+                    lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+                    upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
+                    //^  Subtracts any pages that are missing to render the correct last item  ^
+
+
 
                 response.render('search_for_books', {
                     array: books.docs,
                     subject: subject,
                     searchedTerm: userSearchTerm,
                     title: userSearchTerm,
-                    currentPagenumber:books.page,
-                    numberofPages:books.totalPages,
+                    currentPageNumber:pagenumber,
+                    numberOfPages: books.totalPages,
                     previouspage: previouspage,
                     nextpage:nextpage,
-                    navbar: 'default',
-                    numOfBooks: numOfBooks
+                    numOfBooks: numOfBooks,
+                    lowerRange: lowerRange,
+                    upperRange: upperRange
                 })
             }).catch((err) => {
             next(err);

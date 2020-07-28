@@ -100,6 +100,16 @@ router.get('/search/:pagenumber', (request,response, next) => {
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;
     pagenumber = parseInt(pagenumber);
+    let itemOnPageLimit = request.query.limit;
+    if (itemOnPageLimit === undefined){itemOnPageLimit = 15}
+
+
+    if (itemOnPageLimit !== '10' && itemOnPageLimit !== '30' && itemOnPageLimit !== '50'){
+        let limitError = new Error('Ineligable limit');
+        limitError.status = 403
+        next(limitError)
+    }
+
 
 
     userSearchTerm = userSearchTerm.toString();
@@ -109,7 +119,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
 
     let nextpage = pagenumber + 1;
     let previouspage = pagenumber - 1;
-    let itemOnPageLimit = 10;
+
 
 
     if (subject === 'All'){
@@ -142,7 +152,10 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     nextpage:nextpage,
                     numOfBooks: numOfBooks,
                     lowerRange: lowerRange,
-                    upperRange: upperRange
+                    upperRange: upperRange,
+                    hasNextPage: books.hasNextPage,
+                    hasPrevPage: books.hasPrevPage,
+                    itemOnPageLimit: itemOnPageLimit
                 })
             }).catch((err) => {
             next(err);

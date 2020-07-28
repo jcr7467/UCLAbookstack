@@ -79,33 +79,19 @@
                             </div>
 
 
-                            <!--<div class="col-12 col-lg-4">
+                            <div class="col-12 col-lg-4">
                                 <form class="form-inline justify-content-end">
 
                                     <div class="form-group">
-                                        <label>Sort by</label>
+                                        <label>Items per page</label>
                                         <div class="select-control">
-                                            <select class="form-control ">
-
-                                                <option selected>Popular</option>
-                                                <option  value="1">Newest</option>
-                                                <option value="2">Offers</option>
-                                                <option value="3">Old</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Items</label>
-                                        <div class="select-control">
-                                            <select class="form-control ">
-                                                <option selected>08</option>
-                                                <option value="1">20</option>
-                                                <option value="2">16</option>
-                                                <option value="3">12</option>
-                                                <option value="4">08</option>
-                                                <option value="5">04</option>
-                                            </select>
+                                            {{#selectSelectedByID itemOnPageLimit}}
+                                                <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                                    <option id="10" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=10">10</option>
+                                                    <option id="30" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=30">30</option>
+                                                    <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=50">50</option>-->
+                                                </select>
+                                            {{/selectSelectedByID}}
                                         </div>
 
                                     </div>
@@ -114,7 +100,7 @@
 
 
                                 </form>
-                            </div> -->
+                            </div>
 
 
                         </div>
@@ -216,10 +202,15 @@
                     <li class="loader-page-item "><a href="/search/1?query={{ title }}">
                         <i class="fa fa-angle-double-left " style="font-size:12px"></i></a>
                     </li>
-                    <li  class="loader-page-item "><a href="#">1</a></li>
-                    <li  class="loader-page-item "><a href="#">2</a></li>
-                    <li  class="loader-page-item "><a href="#">3</a></li>
-                    <li  class="loader-page-item "><a href="#">4</a></li>
+
+                    {{# if hasPrevPage }}
+                    <li  class="loader-page-item "><a href="/search/{{ previouspage }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ previouspage }}</a></li>
+                    {{/if}}
+                    <li  class="loader-page-item "><a href="/search/{{ currentPageNumber }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ currentPageNumber }}</a></li>
+                    {{# if hasNextPage }}
+                        <li  class="loader-page-item "><a href="/search/{{ nextpage }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ nextpage }}</a></li>
+                    {{/if}}
+
                     <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}">
                         <i class="fa fa-angle-double-right " style="font-size:12px"></i></a>
                     </li>

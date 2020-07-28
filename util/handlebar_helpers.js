@@ -5,7 +5,6 @@ module.exports = {
         return userID != null;
 
     },
-
     greater_than_zero: function(count){
         /*
         * Used in /profile to either display books or display that they dont have any books
@@ -79,6 +78,13 @@ module.exports = {
 
         return options.fn(this).replace(
             new RegExp(' value=\"' + selected + '\"'),
+            '$& selected="selected"');
+
+    },
+    selectSelectedByID:function(selected, options) {
+
+        return options.fn(this).replace(
+            new RegExp(' id=\"' + selected + '\"'),
             '$& selected="selected"');
 
     },

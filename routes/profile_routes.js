@@ -1,21 +1,24 @@
 let express = require("express"),
     router  = express.Router();
-
 const User = require('../models/user');
 const Book = require('../models/book');
-
 const mid = require('../middleware/middleware');
-
 const async = require('async');
+
+
+
 
 // For uploading pictures to AWS S3 for storage
 const multer = require('multer'),
     AWS = require('aws-sdk');
 
+
 let storage = multer.memoryStorage(),
     upload  = multer({storage: storage});
 
+
 require('dotenv').config();
+
 
 AWS.config.credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -24,9 +27,6 @@ AWS.config.credentials = {
 
 
 let s3 = new AWS.S3({});
-
-
-
 
 
 router.get('/profile',mid.requiresLogin, (request, response, next) => {
@@ -79,11 +79,6 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 });
 
 
-
-
-
-
-
 router.route('/profile/uploadbook', mid.requiresLogin)
     .get((request, response, next) => {
 
@@ -122,7 +117,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                         let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
 
                         if (picextension.toLowerCase() === ".heic"){
-
+                            console.log(request.files[i].originalname)
+                            return callback(new Error('Image was HEIC'), null)
                         }
 
                     }
@@ -231,8 +227,6 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-
-
 router.route('/profile/edit')
     .get(mid.requiresLogin, (request, response, next) => {
 
@@ -321,11 +315,6 @@ router.route('/profile/edit')
     });
 
 
-
-
-
-
-
 router.get('/profile/delete', (request, response, next) => {
 
     Book.findById(request.query.id)
@@ -367,51 +356,41 @@ router.get('/profile/delete', (request, response, next) => {
 });
 
 
+router.route('profile/settings')
+    .get(mid.requiresLogin, (request, response, next) => {
+        response.render('partials/profile/myprofile', {
+            title: 'Settings',
+            page: 'settings',
+            navbar: 'default'
+
+        });
+    })
+    .post(mid.requiresLogin, (request, response, next) => {
+        let { firstname } = request.body,
+            { lastname } = request.body,
+            { email } = request.body;
+
+
+        User.findOne({_id: request.session.userId})
+            .then(user=> {
+                user.firstname = firstname;
+                user.lastname  = lastname;
+                user.email     = email;
+                user.save();
+                request.session.userObject = user;
+            })
+            .then(() => {
+                response.redirect('/profile')
+            })
+            .catch(err => {
+                next(err);
+            })
 
 
 
-
-router.get('/profile/settings', mid.requiresLogin, (request, response, next) => {
-
-
-    let currentUser = request.session.userId;
-
-    response.render('partials/profile/myprofile', {
-        title: 'Settings',
-        page: 'settings',
-        navbar: 'default'
-
-    });
-
-});
-
-router.post('/profile/settings', mid.requiresLogin, (request, response, next) => {
-    let { firstname } = request.body,
-        { lastname } = request.body,
-        { email } = request.body;
+    })
 
 
-    User.findOne({_id: request.session.userId})
-        .then(user=> {
-            user.firstname = firstname;
-            user.lastname  = lastname;
-            user.email     = email;
-            user.save();
-            request.session.userObject = user;
-        })
-        .then(() => {
-            response.redirect('/profile')
-        })
-        .catch(err => {
-            next(err);
-        })
-
-
-
-
-
-});
 
 
 module.exports = router;
-

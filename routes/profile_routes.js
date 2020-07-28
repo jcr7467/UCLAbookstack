@@ -83,13 +83,11 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     .get((request, response, next) => {
 
 
-    let currentUser = request.session.userId;
 
-    response.render('partials/profile/myprofile', {
-        title: 'Upload Book',
-        page: 'upload',
-        navbar: 'default'
-    });
+        response.render('partials/profile/myprofile', {
+            title: 'Upload Book',
+            page: 'upload'
+        });
 
 
 
@@ -221,7 +219,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
             }
         ], function(err) {
             if(err){return next(err)}
-
+            request.flash('success', 'Successfully uploaded to the BookStack')
             return response.redirect('/profile');
         });
     });
@@ -348,6 +346,7 @@ router.get('/profile/delete', (request, response, next) => {
             book.remove()
 
         }).then(() => {
+            request.flash('success', 'Successfully deleted item from BookStack')
             response.redirect('/profile')
         }).catch(err => {
             next(err)
@@ -360,8 +359,7 @@ router.route('profile/settings')
     .get(mid.requiresLogin, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',
-            page: 'settings',
-            navbar: 'default'
+            page: 'settings'
 
         });
     })
@@ -380,6 +378,7 @@ router.route('profile/settings')
                 request.session.userObject = user;
             })
             .then(() => {
+                request.flash('success', 'Successfully updated preferences')
                 response.redirect('/profile')
             })
             .catch(err => {

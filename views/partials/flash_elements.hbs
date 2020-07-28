@@ -1,0 +1,13 @@
+{{#if (hasFlashContent flash 'isNotice' )}}
+
+    <p class="alert alert-info">{{ flash.notice }}</p>
+
+{{else if (hasFlashContent flash 'isError')}}
+
+    <p class="alert alert-danger">{{ flash.error }}</p>
+
+{{else if (hasFlashContent flash 'isSuccess')}}
+
+    <p class="alert alert-success">{{ flash.success }}</p>
+
+{{/if}}

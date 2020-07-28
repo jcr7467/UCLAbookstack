@@ -13,6 +13,8 @@
                             our database
     body-parser:            Used to parse information from forms mainly
     socket.io:              Create a socket connection with server and client, how we send messages without reloading
+    connect-flash:          This is in order to flash messages from the server such as 'Incorrect password'
+                            and other things of that nature
 
 
 
@@ -21,6 +23,8 @@
     PORT:           The default port number that the server will run on if there is no environmental
                     variable configured (which would happen when deployed on heroku)
     formatMessage:  A utility function that returns a formatted message easy for the client code to use.
+
+
 
 
 */
@@ -42,6 +46,7 @@ const app = express();
 const server = http.createServer(app);
 const io    = require("socket.io")(server);
 const formatMessage = require("./util/messages");
+const flash = require("connect-flash");
 
 
 
@@ -73,18 +78,30 @@ app.use(session({
     })
 }));
 
+app.use(flash())
+
 
 ////////////////////////////////////////////////////////////////
 
 
 // SET USER VARIABLES TO USE IN TEMPLATES
-//Make user ID available in handlbars templates
+// 1. Makes user's admin level
+// 2. Sets the id of the current user
+// 3. Sets the user object of the current user
+// 4. Sets the flash messages that will be flashed
+//    e.g. 'Successfully changed password'
 app.use((request, response, next) => {
     response.locals.admin_level = request.session.admin_level;
     response.locals.currentUser = request.session.userId;
     response.locals.currentUserObject = request.session.userObject;
+    response.locals.flash = {
+        notice: request.flash('notice'),
+        error: request.flash('error'),
+        success: request.flash('success'),
+    }
     next();
 });
+
 
 
 

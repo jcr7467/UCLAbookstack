@@ -1,6 +1,3 @@
-let convert = require('heic-convert');
-
-
 
 let ifLoggedOut = (request, response, next) => {
     if(request.session && request.session.userId){

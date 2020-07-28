@@ -77,11 +77,33 @@ module.exports = {
     },
     selectSelected:function(selected, options) {
 
-
-
         return options.fn(this).replace(
             new RegExp(' value=\"' + selected + '\"'),
             '$& selected="selected"');
+
+    },
+    hasFlashContent: function(flashObject, expectedTypeOfFlash) {
+        /*
+        *  This helper function checks for three types of flash objects, for
+        * 1. Notice
+        * 2. Error
+        * 3. Success
+        *
+        * */
+
+
+
+        //If we ever want to add types of flash messages, we would just add it here
+        switch (expectedTypeOfFlash) {
+            case 'isNotice':
+                return (flashObject && flashObject.notice && flashObject.notice.length > 0)
+            case 'isError':
+                return (flashObject && flashObject.error && flashObject.error.length > 0)
+            case 'isSuccess':
+                return (flashObject && flashObject.success && flashObject.success.length > 0)
+            default:
+                return false
+        }
 
     }
 

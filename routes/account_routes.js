@@ -35,6 +35,7 @@ router.route('/signin')
         if (request.body.email && request.body.password){
             User.authenticate(request.body.email, request.body.password, (err, user) => {
                 if (err || !user){
+                    request.flash('error', 'Incorrect email/password');
                     return response.redirect('/signin');
                 }else{
                     request.session.userId = user._id;
@@ -160,6 +161,7 @@ router.route('/forgot')
             if (err) {
                 return next(err);
             }else{
+                request.flash('success', 'Password Reset Email succesfully sent')
                 return response.redirect('/');
             }
 
@@ -248,6 +250,7 @@ router.route('/reset')
             }
         ], function (err) {
             if(err){next(err)}else{
+                request.flash('success', 'Password successfully updated');
                 return response.redirect('/');
             }
 

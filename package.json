@@ -37,6 +37,6 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "BookStack",
   "license": "ISC"
 }

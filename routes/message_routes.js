@@ -33,21 +33,19 @@ router.get('/messages', (request, response, next) => {
 
 
 //
+// This post request pops up when a user clicks on the 'Send Message' button on a book
+//
 router.post('/chat', (request, response, next) => {
-    /*
-    * This post request pops up when a user clicks on the 'Send Message' button on a book
-    * */
 
-
-
-
-
+    // In order to make the room deterministic, we take both the user's ids, and sort them.
+    // We then concatinate the ids and use this as the room number
     let userIDs = [request.session.userId, request.body.bookOwner];
-
     userIDs.sort();
-
     let room = userIDs[0].concat(userIDs[1]);
 
+
+    // Lean command in order for handlebars to read it.
+    // In order to turn it into a json object
     Conversation.findOne({room: room }).lean()
         .then(conversation => {
 
@@ -57,6 +55,7 @@ router.post('/chat', (request, response, next) => {
         }).then(([conversation, penpal]) => {
         if(conversation == null){
 
+            //If there are no messages, dont send a null object
             return response.render('chat', {
                 title: "Messages",
                 myPenpal: penpal,
@@ -201,7 +200,6 @@ router.route('/conversations').get((request, response, next) => {
              * return accum
              */
             let push_penpal_to_userMap = (penpalObj, userMap) => {
-                console.log(penpalObj)
                 // on first pass, accum will be undefined, so make it an array
                 let penPalUserId = penpalObj.thePenPal
                 userMap = Array.isArray(userMap) ? userMap : []
@@ -231,8 +229,6 @@ router.route('/conversations').get((request, response, next) => {
              */
 
 
-
-
             Promise.map(user.hasConversationsWith, push_penpal_to_userMap)
                 .then(userMap => {
                     // results will contain the accumulated results from all
@@ -241,7 +237,7 @@ router.route('/conversations').get((request, response, next) => {
 
                     //For some reason, this userMap is a two dimensional array,
                     // So in handlebars, we must have a two dimmensional array for each loop
-                    //But every
+                    //
                     response.render('conversation_list', {
                         title: 'Messages',
                         myPenPals: userMap

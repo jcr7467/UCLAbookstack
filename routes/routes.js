@@ -101,10 +101,10 @@ router.get('/search/:pagenumber', (request,response, next) => {
     let { pagenumber } = request.params;
     pagenumber = parseInt(pagenumber);
     let itemOnPageLimit = request.query.limit;
-    if (itemOnPageLimit === undefined){itemOnPageLimit = 15}
+    if (itemOnPageLimit === undefined){itemOnPageLimit = '12'}
 
 
-    if (itemOnPageLimit !== '10' && itemOnPageLimit !== '30' && itemOnPageLimit !== '50'){
+    if (itemOnPageLimit !== '12' && itemOnPageLimit !== '32' && itemOnPageLimit !== '80'){
         let limitError = new Error('Ineligable limit');
         limitError.status = 403
         next(limitError)

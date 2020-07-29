@@ -87,9 +87,9 @@
                                         <div class="select-control">
                                             {{#selectSelectedByID itemOnPageLimit}}
                                                 <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                                    <option id="10" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=10">10</option>
-                                                    <option id="30" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=30">30</option>
-                                                    <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=50">50</option>-->
+                                                    <option id="12" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=12">12</option>
+                                                    <option id="32" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=32">32</option>
+                                                    <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=80">80</option>-->
                                                 </select>
                                             {{/selectSelectedByID}}
                                         </div>
@@ -199,19 +199,19 @@
 
             <div class="col-12 col-sm-6">
                 <ol class="loader-page">
-                    <li class="loader-page-item "><a href="/search/1?query={{ title }}">
+                    <li class="loader-page-item "><a href="/search/1?query={{ title }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">
                         <i class="fa fa-angle-double-left " style="font-size:12px"></i></a>
                     </li>
 
                     {{# if hasPrevPage }}
-                    <li  class="loader-page-item "><a href="/search/{{ previouspage }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ previouspage }}</a></li>
+                    <li  class="loader-page-item "><a href="/search/{{ previouspage }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ previouspage }}</a></li>
                     {{/if}}
-                    <li  class="loader-page-item "><a href="/search/{{ currentPageNumber }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ currentPageNumber }}</a></li>
+                    <li  class="loader-page-item "><a href="/search/{{ currentPageNumber }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ currentPageNumber }}</a></li>
                     {{# if hasNextPage }}
-                        <li  class="loader-page-item "><a href="/search/{{ nextpage }}?query={{ userSearchedTerm }}&subject={{ subject }}">{{ nextpage }}</a></li>
+                        <li  class="loader-page-item "><a href="/search/{{ nextpage }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ nextpage }}</a></li>
                     {{/if}}
 
-                    <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}">
+                    <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">
                         <i class="fa fa-angle-double-right " style="font-size:12px"></i></a>
                     </li>
                 </ol>

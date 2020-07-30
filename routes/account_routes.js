@@ -325,16 +325,17 @@ router.get('/verify/verifyemail',(request, response, next) => {
     let {salt} = request.query; // This is going to be the user's ID (deception)
 
     User.findOne({_id: salt, verifyEmailToken: token}, (err, user) => {
+        if (err){next(err)}
 
-            user.emailverified = true
-            user.save()
+        user.emailverified = true
+        user.save()
 
-            request.session.userId = user._id; // By setting this, we are "logging" them in
-            request.session.admin_level = user.admin_level
-            request.session.userObject = user;
-            request.flash('success', 'Thank you for confirming your email!');
-            return response.redirect('/profile/uploadbook');
-        });
+        request.session.userId = user._id; // By setting this, we are "logging" them in
+        request.session.admin_level = user.admin_level
+        request.session.userObject = user;
+        request.flash('success', 'Thank you for confirming your email!');
+        return response.redirect('/profile/uploadbook');
+    });
 });
 
 

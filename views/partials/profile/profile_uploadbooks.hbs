@@ -28,7 +28,7 @@
 
 
 
-                {{#if (currentUserObject.emailverified) }}
+                {{#if (equal_strings_soft currentUserObject.emailverified true) }}
                     {{> upload_form }}
                 {{else}}
                     <h5>It seems you haven't verified your email yet! </h5>

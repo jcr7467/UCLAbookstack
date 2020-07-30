@@ -26,7 +26,21 @@
             {{>profile_menu}}
             <div class="col-12 col-lg-9 ">
 
-                {{> upload_form }}
+
+
+                {{#if (currentUserObject.emailverified) }}
+                    {{> upload_form }}
+                {{else}}
+                    <h5>It seems you haven't verified your email yet! </h5>
+                    <h5>Once you're verified, you'll be able to upload to BookStack</h5>
+                    <p>Note: This does not need to be your UCLA email</p>
+                    <form id="verify_email" action="/verify/sendemail" method="get" hidden>
+                    </form>
+                    <br>
+                    <button form="verify_email" type="submit" class="btn btn-secondary btn-lg swipe-to-top" ><i class="fas fa-check"></i>Verify Email</button>
+                {{/if}}
+
+
                 <!-- ............the end..... -->
             </div>
         </div>

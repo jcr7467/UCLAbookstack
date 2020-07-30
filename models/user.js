@@ -51,7 +51,9 @@ let UserSchema = new mongoose.Schema({
     appearAnonymousInPosts: {
         type: Boolean,
         default: false
-    }
+    },
+    verifyEmailToken: String
+
 });
 
 

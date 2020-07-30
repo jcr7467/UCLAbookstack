@@ -280,4 +280,72 @@ router.get('/signout', (request, response, next) => {
 
 
 
+
+
+router.get('/verify/sendemail',(request, response, next) => {
+    User.findById(request.session.userId)
+        .exec((error, user) => {
+            if (error) {
+                return next(error)
+
+            } else {
+                crypto.randomBytes(20, function (err, buf) {
+                    let token = buf.toString('hex');
+
+
+
+                    let mailOptions = {
+                        from: 'BookStack <teambookstackucla@gmail.com>',
+                        to: user.email,
+                        subject: 'Email Confirmation',
+                        text: 'Dear ' + user.firstname + '\n\n' +
+                            'Please click the following link to confirm your email address:\n\n' +
+                            'http://' + request.headers.host + '/verify/verifyemail?token=' + token +
+                            '&salt=' + request.session.userId
+                    };
+
+                    transporter.sendMail(mailOptions, function (err) {
+                        if (err) {
+                            return next(err);
+                        }
+                        user.verifyEmailToken = token
+                        user.save()
+
+                        request.flash('success', 'Verification email successfully sent');
+                        return response.redirect('/profile/uploadbook')
+                    });
+
+                });
+            }
+        });
+});
+
+//
+// This one is implemented differently from when we make a token to reset a password
+// In this one, we don't care about a 1 hour limit for the link to expire,
+// We just care about making sure this is indeed them
+// Every time a user clicks the verify email button, the token they had before is overwritten
+// I.e. Only one email will ever be valid at a time
+//
+router.get('/verify/verifyemail',(request, response, next) => {
+    let {token} = request.query; // This is actually a generated token
+    let {salt} = request.query; // This is going to be the user's ID (deception)
+
+    User.findOne({_id: salt, verifyEmailToken: token}, (err, user) => {
+
+            user.emailverified = true
+            user.save()
+
+            request.session.userId = user._id; // By setting this, we are "logging" them in
+            request.session.admin_level = user.admin_level
+            request.session.userObject = user;
+            request.flash('success', 'Thank you for confirming your email!');
+            return response.redirect('/profile/uploadbook');
+        });
+});
+
+
+
+
+
 module.exports = router;

@@ -355,7 +355,7 @@ router.get('/profile/delete', (request, response, next) => {
 });
 
 
-router.route('profile/settings')
+router.route('/profile/settings')
     .get(mid.requiresLogin, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',

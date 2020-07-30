@@ -64,7 +64,7 @@ app.use(sslRedirect());
 
 //URI: The uri given to us by MongoDb in order to remotely connect to our DB
 const URI = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
-mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
 

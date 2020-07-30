@@ -146,7 +146,7 @@ router.route('/forgot')
                     from: 'BookStack <teambookstackucla@gmail.com>',
                     to: user.email,
                     subject: 'BookStack Reset Password',
-                    text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+                    text: 'You are receiving this because you have requested the reset of the password for your account.\n\n' +
                         'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
                         'http://' + request.headers.host + '/reset?token=' + token + '\n\n' +
                         'Note: This link will expire in 1 hour.\n\n' +
@@ -161,7 +161,7 @@ router.route('/forgot')
             if (err) {
                 return next(err);
             }else{
-                request.flash('success', 'Password Reset Email succesfully sent')
+                request.flash('success', 'Password Reset Email successfully sent')
                 return response.redirect('/');
             }
 
@@ -194,26 +194,21 @@ router.route('/reset')
         });
     })
     .post((request, response, next) => {
+
+
+
         async.waterfall([
             function checkToken(callback) {
                 User.findOne({
                     resetPasswordToken: request.body.token,
-                    resetPasswordExpires: {$gt: Date.now()},
-                    resetPasswordTokenValid: true
+                    resetPasswordExpires: {$gt: Date.now()}
                 }, function (err, user) {
                     if (!user) {
                         let err = new Error('Password reset token is invalid or has expired.');
                         err.status = 401;
                         return callback(err, null);
                     }
-
-                    user.resetPasswordTokenValid = false;
-                    user.save(function (err) {
-                        if(err){return callback(err, null)}
-                        return callback(null, user);
-                    });
-
-
+                    return callback(null, user);
                 });
             },
             function updatePassword(user, callback){
@@ -236,11 +231,11 @@ router.route('/reset')
             },
             function sendEmailConfirmation(user, callback) {
                 let mailOptions = {
-                    from: 'BookStack <teambookstackucla@gmail.com>',
+                    from: 'BookStack <teambookstackuclaucla@gmail.com>',
                     to: user.email,
                     subject: 'Your password has been changed',
-                    text: 'Hello ' + user.firstname + ', \n\n' +
-                        'This is a confirmation that the password for your account (' + user.email + ') has just been changed.\n'
+                    text: 'Hey ' + user.firstname + ', \n\n' +
+                        'This is a confirmation that the password for your account(' + user.email + ') has just been changed.\n'
                 };
 
                 transporter.sendMail(mailOptions, function (err) {
@@ -249,13 +244,11 @@ router.route('/reset')
                 });
             }
         ], function (err) {
-            if(err){next(err)}else{
-                request.flash('success', 'Password successfully updated');
-                return response.redirect('/');
-            }
-
-
+            if(err){request.flash('error', err.message + ' Error code: ' + err.status); return response.redirect(request.body.url)}
+            request.flash('success', 'Successfully updated password');
+            return response.redirect('/search/1?query=');
         });
+
 
     });
 

@@ -93,13 +93,14 @@
                     <div class="col-12 col-sm-6">
                         <ol class="loader-page">
 
+                            {{# if hasPrevPage}}
                             <li class="loader-page-item">
                                 <a href="/profile?pagenumber=1">
                                 <i class="fa fa-angle-double-left" style="font-size:12px"></i>
                                 </a>
                             </li>
 
-                            {{# if hasPrevPage}}
+
                             <li  class="loader-page-item"><a href="/profile?pagenumber={{ previouspage }}">{{previouspage}}</a></li>
                             {{/if}}
                             <li  class="loader-page-item">
@@ -110,11 +111,12 @@
                                 <a href="/profile?pagenumber={{ nextpage }}"> {{ nextpage }}</a>
                             </li>
 
-                            {{/if}}
+
 
                             <li  class="loader-page-item"><a href="/profile?pagenumber={{numberOfPages}}">
                                 <i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
                             </li>
+                            {{/if}}
 
 
                         </ol>

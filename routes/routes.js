@@ -226,7 +226,6 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     numberofPages:books.totalPages,
                     previouspage: previouspage,
                     nextpage:nextpage,
-                    navbar: 'default',
                     numOfBooks: numOfBooks
                 })
             }).catch((err) => {

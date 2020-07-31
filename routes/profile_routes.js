@@ -31,24 +31,69 @@ let s3 = new AWS.S3({});
 
 router.get('/profile',mid.requiresLogin, (request, response, next) => {
 
+    let { pagenumber } = request.query;
+    let itemOnPageLimit = 5;
+    if (pagenumber === undefined){
+        pagenumber = 1
+    }
+    let nextpage = parseInt(pagenumber) + 1;
+    let previouspage = parseInt(pagenumber) - 1;
+
     let currentUser = request.session.userId;
 
-    User.findById(currentUser).lean()
-    .then((user) => {
-        return Promise.all([user, Book.find({bookOwner: currentUser}).lean()]);
 
-    }).then(([user, books]) => {
-        return response.render('partials/profile/myprofile', {
-            title: 'Books',
-            page: 'profile',
-            navbar: 'default',
-            bookCount: books.length,
-            books: books,
-            user: user
-        });
-    }).catch((err) => {
+    Book.paginate({bookOwner: currentUser}, {lean: true, page:pagenumber, limit: itemOnPageLimit})
+        .then((books) => {
+
+
+
+            let numOfBooks = books.totalDocs;
+            lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+            upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
+            //^  Subtracts any pages that are missing to render the correct last item  ^
+
+
+
+
+            console.log(previouspage,pagenumber, nextpage)
+            return response.render('partials/profile/myprofile', {
+                books: books.docs,
+                page: 'profile',
+                title: 'Books',
+                currentPageNumber:pagenumber,
+                numberOfPages: books.totalPages,
+                previouspage: previouspage,
+                nextpage:nextpage,
+                bookCount: numOfBooks,
+                lowerRange: lowerRange,
+                upperRange: upperRange,
+                hasNextPage: books.hasNextPage,
+                hasPrevPage: books.hasPrevPage,
+                itemOnPageLimit: itemOnPageLimit
+            })
+
+
+        }).catch((err) => {
         next(err);
-    })
+    });
+
+
+
+
+    // User.findById(currentUser).lean()
+    // .then((user) => {
+    //     return Promise.all([user, Book.find({bookOwner: currentUser}).lean()]);
+    //
+    // }).then(([user, books]) => {
+    //     return response.render('partials/profile/myprofile', {
+    //         title: 'Books',
+    //         page: 'profile',
+    //         bookCount: books.length,
+    //         books: books
+    //     });
+    // }).catch((err) => {
+    //     next(err);
+    // })
 
 
 

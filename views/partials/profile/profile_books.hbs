@@ -85,28 +85,44 @@
 
 
 
-                <!--
+
                 <div class="pagination justify-content-between ">
 
-                    <label  class="col-form-label">Showing 1&ndash;<span class="showing_record">1</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ bookCount }}</span>&nbsp;results.</label>
+                    <label  class="col-form-label">Showing {{ lowerRange }}&ndash;<span class="showing_record">{{ upperRange }}</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ bookCount }}</span>&nbsp;results.</label>
 
                     <div class="col-12 col-sm-6">
                         <ol class="loader-page">
-                            <li class="loader-page-item"><a href="#">
-                                <i class="fa fa-angle-double-left" style="font-size:12px"></i></a>
+
+                            <li class="loader-page-item">
+                                <a href="/profile?pagenumber=1">
+                                <i class="fa fa-angle-double-left" style="font-size:12px"></i>
+                                </a>
                             </li>
-                            <li  class="loader-page-item"><a href="#">1</a></li>
-                            <li  class="loader-page-item"><a href="#">2</a></li>
-                            <li  class="loader-page-item"><a href="#">3</a></li>
-                            <li  class="loader-page-item"><a href="#">4</a></li>
-                            <li  class="loader-page-item"><a href="#">
+
+                            {{# if hasPrevPage}}
+                            <li  class="loader-page-item"><a href="/profile?pagenumber={{ previouspage }}">{{previouspage}}</a></li>
+                            {{/if}}
+                            <li  class="loader-page-item">
+                                <a href="/profile?pagenumber={{ currentPageNumber }}">{{ currentPageNumber }}</a>
+                            </li>
+                            {{#if hasNextPage}}
+                            <li  class="loader-page-item">
+                                <a href="/profile?pagenumber={{ nextpage }}"> {{ nextpage }}</a>
+                            </li>
+
+                            {{/if}}
+
+                            <li  class="loader-page-item"><a href="/profile?pagenumber={{numberOfPages}}">
                                 <i class="fa fa-angle-double-right" style="font-size:12px"></i></a>
                             </li>
+
+
                         </ol>
                     </div>
                 </div>
-                -->
+
                 <!-- ............the end..... -->
+
             </div>
         </div>
     </div>

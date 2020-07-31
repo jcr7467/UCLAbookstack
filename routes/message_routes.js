@@ -7,6 +7,7 @@
 
     User:       Our user model used to interact with MongoDb
     Conversation: Our conversation model where we store our messages between users
+    Conversation: Our middleware that we use to perform functions before they get to our requests
 
 * */
 
@@ -15,6 +16,7 @@ let express = require("express"),
 let Promise = require('bluebird')
 const User = require('../models/user');
 const Conversation = require('../models/conversation');
+const mid = require('../middleware/middleware');
 
 
 
@@ -35,7 +37,7 @@ router.get('/messages', (request, response, next) => {
 //
 // This post request pops up when a user clicks on the 'Send Message' button on a book
 //
-router.post('/chat', (request, response, next) => {
+router.post('/chat', mid.mustHaveEmailVerified,  (request, response, next) => {
 
     // In order to make the room deterministic, we take both the user's ids, and sort them.
     // We then concatinate the ids and use this as the room number

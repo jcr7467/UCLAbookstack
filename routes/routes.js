@@ -14,6 +14,7 @@ const mid = require('../middleware/middleware');
 
 //Renders the home page
 router.get('/', (request, response) => {
+    console.log('supss')
     response.render('index', {
         title: "Home",
         layout: "home-layout"
@@ -94,9 +95,51 @@ router.get('/contact', (request, response) => {
 
 
 
+
+
+
+
+
+
+router.get('/search/book', mid.requiresLogin, (request, response, next) => {
+    console.log('heynowheynow')
+    let { id } = request.query;
+
+
+    Book.findOne({_id : id}).lean().then((book) => {
+
+        if(book === null){
+            return next(new Error('An unknown error occurred'))
+        }
+
+        return Promise.all([book, User.findOne({_id: book.bookOwner}).lean().exec()]);
+
+    }).then(([book, soldByThisUser]) => {
+
+        return response.render('bookpage', {
+            title: book.title,
+            navbar: 'default',
+            book: book,
+            soldByThisUser: soldByThisUser,
+            monthAdded: book.dateAdded.getMonth(),
+            dayOfMonthAdded: book.dateAdded.getDate(),
+            yearAdded: book.dateAdded.getFullYear()
+
+        });
+    }).catch((err) => {
+        return next(err);
+    });
+
+
+
+});
+
+
+
+
+
 router.get('/search/:pagenumber', (request,response, next) => {
     let { subject } = request.query,
-
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;
     pagenumber = parseInt(pagenumber);
@@ -107,12 +150,17 @@ router.get('/search/:pagenumber', (request,response, next) => {
     if (itemOnPageLimit !== '12' && itemOnPageLimit !== '32' && itemOnPageLimit !== '80'){
         let limitError = new Error('Ineligable limit');
         limitError.status = 403
-        next(limitError)
+        next(limitError);
     }
 
-
-
     userSearchTerm = userSearchTerm.toString();
+    console.log(userSearchTerm)
+
+
+
+
+
+
     if (pagenumber === undefined){pagenumber = 1}
     if (subject === undefined){ subject = 'All'}
 
@@ -135,9 +183,9 @@ router.get('/search/:pagenumber', (request,response, next) => {
                 }
 
                 let numOfBooks = books.totalDocs;
-                    lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+                lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
                     upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
-                    //^  Subtracts any pages that are missing to render the correct last item  ^
+                //^  Subtracts any pages that are missing to render the correct last item  ^
 
 
 
@@ -190,44 +238,6 @@ router.get('/search/:pagenumber', (request,response, next) => {
 
 
 });
-
-
-
-
-
-router.get('/search/book', mid.requiresLogin, (request, response, next) => {
-
-    let { id } = request.query;
-
-    Book.findOne({_id : id}).lean().then((book) => {
-        if(book == null){
-            return next(new Error('An unknown error occurred'))
-        }
-
-        return Promise.all([book, User.findOne({_id: book.bookOwner}).lean().exec()]);
-
-    }).then(([book, soldByThisUser]) => {
-
-        return response.render('bookpage', {
-            title: book.title,
-            navbar: 'default',
-            book: book,
-            soldByThisUser: soldByThisUser,
-            monthAdded: book.dateAdded.getMonth(),
-            dayOfMonthAdded: book.dateAdded.getDate(),
-            yearAdded: book.dateAdded.getFullYear()
-
-        });
-    }).catch((err) => {
-        return next(err);
-    });
-
-
-
-});
-
-
-
 
 
 module.exports = router;

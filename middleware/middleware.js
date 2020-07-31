@@ -8,6 +8,7 @@ let ifLoggedOut = (request, response, next) => {
 
 
 let requiresLogin = (request, response, next) => {
+    console.log('sup bro000')
     if(request.session && request.session.userId){
         return next();
     } else{
@@ -42,7 +43,22 @@ let setFlash = (request, response, next) => {
 
 
 
+let mustHaveEmailVerified = (request, response, next) => {
 
+    if (response.locals.currentUserObject.emailverified === false){
+
+        request.flash('error', 'Please verify your email first you do that!')
+        return response.redirect('/profile/uploadbook')
+    }else{
+        return next();
+    }
+
+
+};
+
+
+
+module.exports.mustHaveEmailVerified = mustHaveEmailVerified;
 module.exports.setFlash = setFlash;
 module.exports.adminOnly = adminOnly;
 module.exports.ifLoggedOut = ifLoggedOut;

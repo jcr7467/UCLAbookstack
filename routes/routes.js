@@ -14,7 +14,7 @@ const mid = require('../middleware/middleware');
 
 //Renders the home page
 router.get('/', (request, response) => {
-    console.log('supss')
+
     response.render('index', {
         title: "Home",
         layout: "home-layout"
@@ -31,7 +31,7 @@ router.get('/uploadpics', (request, response) => {
 
 
 // Renders informational terms of use page
-router.get('/termsOfUse', (request, response) => {
+router.get('/termsofuse', (request, response) => {
     response.render('terms_and_conditions',{
         title: 'Terms and Conditions'
     });
@@ -80,6 +80,13 @@ router.get('/contact', (request, response) => {
         title: 'Contact Us'
     });
 });
+
+
+router.get('/heicimages', (request, response, next) => {
+    response.render('heic_issues', {
+        title: 'HEIC Images'
+    })
+})
 
 
 

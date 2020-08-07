@@ -1,25 +1,34 @@
-{{#each myPenPals}}
-{{#each this}}
 
+<h3 style="margin-left: 40px; margin-top: 40px">Messages</h3>
 
-    <div style="margin: 100px">
-
-        <form id="{{ penpalUserId }}" class="btn btn-link" action="/chat" method="post">
-            <input name="bookOwner" type="text" value="{{ penpalUserId }}" hidden>
-        </form>
-
-        <div style="background-color: #9fcaf8">
-            <img style="max-height: 50px; width: auto" src="{{penpalObject.profilePictureURL}}" class="col-3" alt="">
-            <button  style="background-color: #9fcaf8; text-align: left" form="{{ penpalUserId }}" type="submit" class="col-9 btn btn-link">{{ penpalFirstName }}<i class="fa fa-comment"></i></button>
-        </div>
-
+{{#if (equal_strings penpalCount 0)}}
+    <div style="margin: 70px">
+        <hr>
+        <p>Hmmm... you don't seem to have any messages yet :/</p>
+        <hr>
     </div>
-    <hr>
+
+{{else}}
+    {{#each myPenPals}}
+
+        <div style="margin: 100px">
+
+            <form id="{{ penpalUserId }}" class="btn btn-link" action="/chat" method="post">
+                <input name="bookOwner" type="text" value="{{ penpalUserId }}" hidden>
+            </form>
+
+            <div style="background-color: #9fcaf8">
+                <img style="max-height: 50px; width: auto" src="{{penpalObject.profilePictureURL}}" class="col-3" alt="">
+                <button  style="background-color: #9fcaf8; text-align: left" form="{{ penpalUserId }}" type="submit" class="col-9 btn btn-link">{{ penpalFirstName }}<i class="fa fa-comment"></i></button>
+            </div>
+
+        </div>
+        <hr>
+
+    {{/each}}
+{{/if}}
 
 
 
-{{/each}}
-
-{{/each}}
 
 

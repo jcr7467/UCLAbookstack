@@ -246,4 +246,17 @@ router.get('/search/:pagenumber', (request,response, next) => {
 });
 
 
+
+router.get('/invalidheic', (request, response, next) => {
+    let err = new Error("These are HEIC images! Check out our guide on how to fix this issue");
+    err.status = 400
+    next(err);
+})
+
+router.get('/invalidfiletype', (request, response, next) => {
+    let err = new Error("Invalid file type detected");
+    err.status = 400
+    next(err);
+})
+
 module.exports = router;

@@ -55,7 +55,7 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 
 
 
-            console.log(previouspage,pagenumber, nextpage)
+
             return response.render('partials/profile/myprofile', {
                 books: books.docs,
                 page: 'profile',

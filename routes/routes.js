@@ -146,6 +146,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 
 router.get('/search/:pagenumber', (request,response, next) => {
+    console.log('imsearching')
     let { subject } = request.query,
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;
@@ -183,7 +184,8 @@ router.get('/search/:pagenumber', (request,response, next) => {
             title: {$regex: userSearchTerm, $options: 'i'}
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
-                if (books.docs.length === 0){
+                if (books.docs.length === 0 && pagenumber != 1){
+                    console.log(books.totalPages.toString())
                     let redirectURL = '/search/' + books.totalPages.toString() + '?query=' + userSearchTerm + '&subject=' + subject.toString()
 
                     return response.redirect(redirectURL)

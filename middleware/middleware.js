@@ -8,7 +8,6 @@ let ifLoggedOut = (request, response, next) => {
 
 
 let requiresLogin = (request, response, next) => {
-    console.log('sup bro000')
     if(request.session && request.session.userId){
         return next();
     } else{

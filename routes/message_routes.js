@@ -213,6 +213,7 @@ router.route('/conversations').get((request, response, next) => {
                         if (penpal !== null){
 
                             userMap.push({
+                                penpalObject: penpal,
                                 penpalUserId: penpal._id,
                                 penpalFirstName: penpal.firstname,
                                 penpalLastName: penpal.lastname

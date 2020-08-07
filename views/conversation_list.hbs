@@ -1,14 +1,21 @@
 {{#each myPenPals}}
 {{#each this}}
-    <div style="margin: 50px">
-        <p>{{ penpalFirstName }}</p>
 
-        <form class="btn btn-link" action="/chat" method="post">
+
+    <div style="margin: 100px">
+
+        <form id="{{ penpalUserId }}" class="btn btn-link" action="/chat" method="post">
             <input name="bookOwner" type="text" value="{{ penpalUserId }}" hidden>
-            <button type="submit" class="btn btn-link"><i class="fa fa-comment"></i>Send Message</button>
         </form>
+
+        <div style="background-color: #9fcaf8">
+            <img style="max-height: 50px; width: auto" src="{{penpalObject.profilePictureURL}}" class="col-3" alt="">
+            <button  style="background-color: #9fcaf8; text-align: left" form="{{ penpalUserId }}" type="submit" class="col-9 btn btn-link">{{ penpalFirstName }}<i class="fa fa-comment"></i></button>
+        </div>
+
     </div>
     <hr>
+
 
 
 {{/each}}

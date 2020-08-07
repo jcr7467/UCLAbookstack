@@ -15,6 +15,7 @@
     socket.io:              Create a socket connection with server and client, how we send messages without reloading
     connect-flash:          This is in order to flash messages from the server such as 'Incorrect password'
                             and other things of that nature
+    User:                   User model which we use here to delete unverified accounts on an interval
 
 
 
@@ -47,6 +48,7 @@ const server = http.createServer(app);
 const io    = require("socket.io")(server);
 const formatMessage = require("./util/messages");
 const flash = require("connect-flash");
+const User = require("./models/user")
 
 
 
@@ -167,7 +169,7 @@ app.use('/', message_routes);
 
 
 
-
+//////////////////////////////////
 ////////////////////////
 
 
@@ -222,9 +224,43 @@ io.on('connection', socket => {
 
 
 
+//////////////////////////////
+
+// This setInterval function will clean our database every set amount of time
+// This is mostly because we are using cheap online services with limited resources, we have to delete where we can
+// In this implementation, we check every week for accounts that are older than 4 weeks(1 month)
+
+
+deleteOldUnverifiedUsers = () => {
 
 
 
+    User.find({emailverified: false}).then(users => {
+        console.log(users)
+        for(let i = 0 ; i < users.length ; i++){
+            //600,000 is 10 minutes in milliseconds,
+            let fourWeeksInMilliseconds = 2419200000
+            let isOld = (Date.now() - users[i].datejoined) > fourWeeksInMilliseconds
+
+            if (isOld){
+                User.deleteOne({_id: users[i]._id}, (err) => {
+                    if (err){
+                        console.log(err)
+                    }else{
+                        console.log('Successfully deleted old users')
+                    }
+                })
+            }
+        }
+    })
+}
+
+
+intervalFunc = () => {
+    deleteOldUnverifiedUsers()
+}
+
+setInterval(intervalFunc, 604800000); //1 week is 604800000 milliseconds
 
 
 ////////////////////////////////////////////////////////////////////////////

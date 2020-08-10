@@ -261,4 +261,19 @@ router.get('/invalidfiletype', (request, response, next) => {
     next(err);
 })
 
+
+
+
+
+
+
+
+
+
+router.get('/chattest', (request, response, next) => {
+    response.render('chattest')
+})
+
+
+
 module.exports = router;

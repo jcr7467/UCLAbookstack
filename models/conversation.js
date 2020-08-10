@@ -8,6 +8,10 @@ let ConversationSchema = new mongoose.Schema({
     penpal1: String,
     penpal2: String,
     messages: [{
+        dateSentFromServer: {
+            type: Date,
+            default: Date.now()
+        },
         text: String,
         msgSentByMe: String,
         msgSentToThem: String,

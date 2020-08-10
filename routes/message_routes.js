@@ -241,7 +241,7 @@ router.route('/conversations').get((request, response, next) => {
                     //For some reason, this userMap is a two dimensional array,
                     // So in handlebars, we must have a two dimmensional array for each loop
                     //
-                    console.log(userMap)
+                    //console.log(userMap)
                     if (userMap[0] == undefined){
                         penpalCount = 0
                     }else{

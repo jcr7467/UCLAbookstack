@@ -16,7 +16,7 @@
     connect-flash:          This is in order to flash messages from the server such as 'Incorrect password'
                             and other things of that nature
     User:                   User model which we use here to delete unverified accounts on an interval
-
+    Conversation:           Conversation model which we use to lookup old messages and delete them
 
 
     Other:
@@ -49,6 +49,7 @@ const io    = require("socket.io")(server);
 const formatMessage = require("./util/messages");
 const flash = require("connect-flash");
 const User = require("./models/user")
+const Conversation = require('./models/conversation');
 
 
 
@@ -228,15 +229,15 @@ io.on('connection', socket => {
 
 // This setInterval function will clean our database every set amount of time
 // This is mostly because we are using cheap online services with limited resources, we have to delete where we can
-// In this implementation, we check every week for accounts that are older than 4 weeks(1 month)
+// In this implementation, we check every week for accounts that are older than 4 weeks(1 month). It will also remove messages that are older than 1 month because those will take the most amount of storage
 
 
-deleteOldUnverifiedUsers = () => {
+let deleteOldUnverifiedUsers = () => {
 
 
 
     User.find({emailverified: false}).then(users => {
-        console.log(users)
+        //console.log(users)
         for(let i = 0 ; i < users.length ; i++){
             //600,000 is 10 minutes in milliseconds,
             let fourWeeksInMilliseconds = 2419200000
@@ -252,12 +253,94 @@ deleteOldUnverifiedUsers = () => {
                 })
             }
         }
+    }).catch(err => {
+        console.log(err)
     })
 }
 
 
-intervalFunc = () => {
+// This function does have a weakness, where it doesn't necessarily delete the
+// oldest as a guarantee because the for loop is still asynchronous
+// This should not be an issue because we are only deleting messages older than a month
+// and we run this function once a week
+let deleteOldMessages = () => {
+//when date.now - 30000 is greater than date.thencreated
+/*
+    let dateValid = Date.now() - 300000;
+    console.log(Date.now() > Date.now() + 4000)
+    Conversation.updateMany({}, {$pull: {messages: {dateSentFromServer: {$lt: dateValid}}  }}, {safe: true}, (err, obj) => {
+        if(err){console.log('houston we have a problem')}
+        else{console.log('I guess not', obj.nModified)}
+    })
+    console.log('yes baby')
+*/
+
+    let timeValidFor = 2419200000 // 28 days, or four weeks
+
+    Conversation.find({}).then(conversations => {
+
+        if (conversations){ // if not equal to null
+            console.log('in here!')
+            for (let i = 0 ; i < conversations.length ; i++){
+
+                for (let j = 0 ; j < conversations[i].messages.length ; j ++){
+                    //We need to call getTime in order to conver the object/string into seconds since 1970 and then compare those
+                    let expires = conversations[i].messages[j].dateSentFromServer.getTime() + timeValidFor;
+
+
+
+                    console.log(conversations[i].messages[j].text)
+                    //let expires = new Date(Date.now() + timeValidFor)
+
+
+
+
+                    console.log(expires < Date.now())
+
+                    if (expires < Date.now()){
+
+                        async function atomicallyRemove(){
+                            let deleteMe =  (conversationIndex, messageIndex) => {
+
+                                return new Promise((resolve, reject) => {
+                                    conversations[conversationIndex].messages.splice(messageIndex, 1)//We give the index and how many elements we want to remove
+
+                                    console.log("we removed a message")
+
+                                    console.log(conversations[conversationIndex].messages)
+
+                                    conversations[conversationIndex].save((err) => {
+                                        if(err){reject(false)}else{resolve(true)}
+                                    })
+                                })
+                            }
+
+
+
+
+
+
+                            let finished = deleteMe(i, j);
+
+                        }
+
+                        atomicallyRemove()
+
+
+
+                    }
+                }
+            }
+        }
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+let intervalFunc = () => {
     deleteOldUnverifiedUsers()
+    deleteOldMessages()
+    console.log("interval function ran")
 }
 
 setInterval(intervalFunc, 604800000); //1 week is 604800000 milliseconds

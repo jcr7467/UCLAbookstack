@@ -53,7 +53,7 @@
                                     <div class="pro-counter">
 
                                         {{#unless (equal_strings currentUser book.bookOwner)}}
-                                        <form id="send_message" action="/chat" method="post">
+                                        <form id="send_message" action="/conversations" method="get">
                                             <input name="bookOwner" type="text" value="{{soldByThisUser._id}}" readonly hidden>
                                         </form>
 

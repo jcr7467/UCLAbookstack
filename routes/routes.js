@@ -109,7 +109,7 @@ router.get('/heicimages', (request, response, next) => {
 
 
 router.get('/search/book', mid.requiresLogin, (request, response, next) => {
-    console.log('heynowheynow')
+
     let { id } = request.query;
 
 
@@ -146,7 +146,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 
 router.get('/search/:pagenumber', (request,response, next) => {
-    console.log('imsearching')
+
     let { subject } = request.query,
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;
@@ -162,7 +162,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
     }
 
     userSearchTerm = userSearchTerm.toString();
-    console.log(userSearchTerm)
+
 
 
 
@@ -185,7 +185,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
                 if (books.docs.length === 0 && pagenumber != 1){
-                    console.log(books.totalPages.toString())
+
                     let redirectURL = '/search/' + books.totalPages.toString() + '?query=' + userSearchTerm + '&subject=' + subject.toString()
 
                     return response.redirect(redirectURL)
@@ -273,6 +273,9 @@ router.get('/invalidfiletype', (request, response, next) => {
 router.get('/chattest', (request, response, next) => {
     response.render('chattest')
 })
+
+
+
 
 
 

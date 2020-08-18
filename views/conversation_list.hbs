@@ -1,5 +1,186 @@
 
-<h3 style="margin-left: 40px; margin-top: 40px">Messages</h3>
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="chat-wrapper row">
+
+        <div class="message-container col-5 col-md-4">
+
+            <div class="message-header row">
+                <div class="col-9 col-lg-10">
+                    <h4>Messages</h4>
+                </div>
+
+            </div>
+
+            <div class="message-search-container row">
+                <i class="fa fa-search col-2"></i>
+                <input class="message-search col-9 pl-0" type="text" placeholder="Search People"/>
+            </div>
+
+
+            <div class="message-filter-select row">
+                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying">
+                    <img src="images/icons/buy%20arrow.svg"/>
+                    <p>
+                        Buy
+                    </p>
+                </div>
+                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Selling">
+                    <img src="images/icons/sell%20arrow.svg"/>
+                    <p>
+                        Sell
+                    </p>
+                </div>
+                <div class="filter-button btn btn-light swipe-to-top col-lg-4 active" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying and Selling">
+                    <img src="images/icons/buy%20and%20sell%20arrow.svg"/>
+                    <p>
+                        Both
+                    </p>
+                </div>
+            </div>
+
+
+
+
+            <!--***************************************-->
+            <!--Section for people icons and data START-->
+            <!--***************************************-->
+            <div class="people-select-container row">
+
+
+{{#if (equal_strings penpalCount 0)}}
+        <div style="margin: 70px">
+            <hr>
+            <p>Hmmm... you don't seem to have any messages yet :/</p>
+            <hr>
+        </div>
+{{else}}
+
+
+
+    {{#each myPenPals}}
+
+        <div class="person-container row no-gutters chatdivlink">
+            <div class="person-icon-container col-2">
+                <div class="person-icon">
+                    <img src="{{ penpalObject.profilePictureURL }}"/>
+                </div>
+            </div>
+            <div class="person-info col-10">
+                <div class="person-name-and-icon row">
+                    <h5 class="col-10">{{ penpalFirstName}} {{ penpalLastName }}</h5>
+                    <img class="col-2" src="images/icons/sell%20arrow.svg"/>
+                    <p class="theirUserID">{{ penpalUserId }}</p>
+                    <p class="myUserID">{{ ../currentUser }}</p>
+                </div>
+                <div class="book-name row">
+                    <h6 class="col-12">Calculus Early Transcendentals</h6>
+                </div>
+            </div>
+        </div>
+
+
+
+    {{/each}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{/if}}
+
+
+
+
+
+            </div>
+            <!--***************************************-->
+            <!--Section for people icons and data END-->
+            <!--***************************************-->
+
+        </div>
+
+        <div class="chat-container col-7  col-md-8">
+            <div class="chat-header row">
+                <div class="chat-person-book-info col-10 col-xl-11">
+                    <div class="row">
+                        {{#if bookOwner }}
+                            <h4 class="col replace-name">New Message</h4>
+                        {{else}}
+                            <h4 class="col replace-name">Messages</h4>
+                        {{/if}}
+                    </div>
+                    <div class="chat-book-info row">
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!--This div contains all messages-->
+            <div class="chat-messages-container row"></div>
+
+            <div class="chat-new-container row">
+                <form id="send-message-form" class="hideme chat-input col-10">
+                    <input id="sendMessageInput" class="" type="text" placeholder="Type a message.."/>
+                    <input type="text"  value="{{ currentUserObject._id }}" id="myUserID">
+                    {{#if bookOwner }}
+                        <input type="text"  value="{{ bookOwner }}" id="theirUserID">
+                    {{else}}
+                        <input type="text"  value="" id="theirUserID">
+                    {{/if}}
+
+                </form>
+                <div  id="sendMessageButtonWrapper" class="hideme chat-message-attach col-2">
+                    <a id="sendMessageButton">
+
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{#if bookOwner }}
+    <h3 style="margin-left: 40px; margin-top: 40px">New Message</h3>
+{{else}}
+    <h3 style="margin-left: 40px; margin-top: 40px">Messajjges</h3>
+{{/if}}
+
+
 
 {{#if (equal_strings penpalCount 0)}}
     <div style="margin: 70px">

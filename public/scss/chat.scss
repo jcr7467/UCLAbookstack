@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "private/variables";
 
 //Icons
 .buy-arrow {
-  background-image: url("../../images/icons/buy arrow.svg");
+  background-image: url("../images/icons/buy arrow.svg");
   height: 20px;
   width: 20px;
 }
@@ -293,6 +294,7 @@ body {
 
   .chat-messages-container {
     height: 439px;
+    overflow-y: scroll;
   }
 
   .chat-new-container {
@@ -329,3 +331,34 @@ body {
     }
   }
 }
+
+
+// Made by me the noob, I don't know how to wrap the overflow text in the x direction
+// I also don't know how to make it autoscroll with this html
+.chat-messages-container{
+
+  padding: 30px;
+  max-height: 500px;
+  overflow-y: scroll;
+
+  .message{
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    overflow-wrap: break-word;
+
+    .meta{
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--dark-color-b);
+      opacity: 0.7;
+      margin-bottom: 7px;
+      span{
+        color: #777;
+      }
+    }
+  }
+}
+
+

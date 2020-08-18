@@ -1,0 +1,7 @@
+#To compile scss, I have installed node-sass as a developer dependency. Run:
+
+node-sass public/scss -o public/scss --source-map public/scss
+
+
+
+

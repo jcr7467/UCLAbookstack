@@ -15,7 +15,7 @@ $gray-800: #343a40 !default;
 $gray-900: #1d1d1d !default;  // All Text Color
 $black:    #000 !default;
 
-$blue:    #479af1 !default;
+$blue:    #2d68c4 !default;
 $indigo:  #6610f2 !default;
 $purple:  #6f42c1 !default;
 $pink:    #e83e8c !default;
@@ -31,8 +31,8 @@ $cyan:    #17a2b8 !default;
 $primary-dark:  #000;
 $primary-light: #444;
 
-$primary:       #333 !default;  // Main color or Primary color of the website
-$secondary: #1b3c9a !default;  // Main color for buttons
+$primary:       #333333 !default;  // Main color or Primary color of the website
+$secondary: #3776d5 !default;  // Main color for buttons
 $success:       $green !default;
 $info:          $blue !default;
 $warning:       $yellow !default;
@@ -72,7 +72,7 @@ $emphasized-link-hover-darken-percentage: 15% !default;
 
 
 $border-width:                1px !default;
-$border-color:                #ddd !default;
+$border-color:                #dddddd !default;
 
 $border-radius:               0 !default;
 $border-radius-lg:            0 !default;
@@ -127,3 +127,10 @@ $font-size-sm:                0.8125rem !default;
 $font-weight-normal:           400 !default;
 $font-weight-bold:             700 !default;
 $font-weight-bolder:           800 !default;
+
+
+//breakpoints
+$bp-sm:                        576px;
+$bp-md:                        768px;
+$bp-lg:                        992px;
+$bp-xl:                        1200px;

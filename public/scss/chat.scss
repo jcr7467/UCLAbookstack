@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "private/variables";
+
+//Icons
+.buy-arrow {
+  background-image: url("../images/icons/buy arrow.svg");
+  height: 20px;
+  width: 20px;
+}
+
+.sell-arrow {
+  background: url("../../images/icons/sell arrow.svg");
+  height: 20px;
+  width: 20px;
+}
+
+.both-arrow {
+  background: url("../../images/icons/buy and sell arrow.svg");
+  height: 20px;
+  width: 20px;
+}
+
+:root {
+  --dark-color-a: #2D68C4;
+  --dark-color-b: #2D68C4;
+  --light-color: #a6c4db;
+  --success-color: #5cb85c;
+  --error-color: #d9534f;
+  --back-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  background: var(--back-color);
+}
+
+.chat-wrapper {
+  width: 100%;
+  height: 75vh;
+  border-radius: 20px;
+  border: $border-width solid $border-color;
+  overflow: hidden;
+
+  i {
+    color: $blue;
+    margin: auto;
+  }
+
+  h4 {
+    font-family: "Montserrat-Bold", sans-serif;
+    font-size: 16pt;
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $white;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $gray-400;
+    //border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $gray-500;
+  }
+}
+
+.message-container {
+
+  .message-header {
+    border-bottom: $border-width solid $border-color;
+
+    a {
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .message-search-container {
+    height: 40px;
+    border-bottom: $border-width solid $border-color;
+    display: flex;
+    align-items: center;
+
+    .message-search {
+      margin: auto;
+      height: 30px;
+      border: none;
+      outline: none;
+    }
+
+    i {
+      margin: auto;
+    }
+  }
+
+  .message-filter-select {
+    min-height: 25px;
+
+    .filter-button {
+      cursor: pointer;
+      //background-color: $gray-200;
+      height: 25px;
+      width: 100%;
+      outline: none;
+      border-bottom: $border-width solid $border-color;
+      border-top: none;
+      display: flex;
+      align-items: center;
+
+      img {
+        height: 1em;
+        width: 1em;
+        position: absolute;
+      }
+
+      p {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+        //color: $white !important;
+      }
+    }
+
+    @media (max-width: $bp-lg) {
+      .filter-button {
+        height: 50px;
+
+        p {
+          align-self: center;
+        }
+      }
+    }
+
+    .filter-button:hover {
+      //background-color: $gray-500;
+      //border: $border-width solid $gray-500;
+    }
+
+    .active {
+      color: $white;
+      background-color: $gray-500;
+      border: $border-width solid $gray-500;
+      border-top: none;
+    }
+
+    .message-filter-select:first-child {
+      border-left: none;
+    }
+
+    .message-filter-select:last-child {
+      border-right:none;
+    }
+  }
+
+  .people-select-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .person-container {
+      border-bottom: $border-width solid $border-color;
+      height: 60px;
+      width: 100%;
+
+      .person-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .person-icon {
+          height: 40px;
+          width: 40px;
+          border-radius: 50%;
+          overflow: hidden;
+
+          img {
+            height: auto;
+            width: 100%;
+          }
+        }
+      }
+
+      .person-info {
+        align-self: center;
+
+        .person-name-and-icon {
+          align-items: center;
+
+          h5 {
+            font-family: "Montserrat-Regular", sans-serif;
+            font-size: 1em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0;
+          }
+
+          img {
+            height: 1em;
+            margin-left: 0;
+            padding-left: 0;
+          }
+        }
+
+        .book-name h6 {
+          font-family: "Montserrat-Regular", sans-serif;
+          font-size: .8em;
+          color: $gray-600;
+          line-height: 1.1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 0;
+          letter-spacing: 0;
+        }
+      }
+    }
+
+    .person-container:hover {
+      background-color: $gray-200;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: $gray-200;
+    }
+  }
+}
+
+.chat-container {
+  border-left: 1px solid $gray-500;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .chat-header {
+    background-color: $gray-200;
+    border-top-right-radius: 20px;
+    border-bottom: $border-width solid $border-color;
+    margin-right: -16px;
+
+    .chat-person-book-info {
+
+      h4 {
+        margin-bottom: 0;
+      }
+
+      .chat-buy-sell {
+        font-family: "Montserrat-Bold", sans-serif;
+        color: $blue;
+      }
+
+      .chat-book-name {
+        font-family: "Montserrat-Regular", sans-serif;
+        color: $gray-600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0;
+      }
+    }
+
+    .chat-more-data {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      a i {
+        color: $blue;
+        font-size: 30px
+      }
+    }
+  }
+
+  .chat-messages-container {
+    height: 439px;
+    overflow-y: scroll;
+  }
+
+  .chat-new-container {
+    height: 40px;
+    margin-bottom: 0;
+    border-top: $border-width solid $border-color;
+
+    .chat-input {
+      background-color: $gray-200;
+    }
+
+    .chat-input {
+      display: flex;
+
+      input {
+        background: rgba(216, 216, 216, 0);
+        margin: auto 0;
+        height: 30px;
+        border: none;
+        outline: none;
+        width: 100%;
+      }
+    }
+
+    .chat-message-attach {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-left: $border-width solid $border-color;
+
+      a i {
+          font-size: 30px;
+      }
+    }
+  }
+}
+
+
+// Made by me the noob, I don't know how to wrap the overflow text in the x direction
+// I also don't know how to make it autoscroll with this html
+.chat-messages-container{
+
+  padding: 30px;
+  max-height: 500px;
+  overflow-y: scroll;
+
+  .message{
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: var(--light-color);
+    border-radius: 5px;
+    overflow-wrap: break-word;
+
+    .meta{
+      font-size: 15px;
+      font-weight: bold;
+      color: var(--dark-color-b);
+      opacity: 0.7;
+      margin-bottom: 7px;
+      span{
+        color: #777;
+      }
+    }
+  }
+}
+
+

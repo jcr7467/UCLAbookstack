@@ -235,24 +235,3 @@ body {
       border-left: 1px solid #dddddd; }
       .chat-container .chat-new-container .chat-message-attach a i {
         font-size: 30px; }
-
-.chat-messages-container {
-  padding: 30px;
-  max-height: 500px;
-  overflow-y: scroll; }
-  .chat-messages-container .message {
-    padding: 10px;
-    margin-bottom: 15px;
-    background-color: var(--light-color);
-    border-radius: 5px;
-    overflow-wrap: break-word; }
-    .chat-messages-container .message .meta {
-      font-size: 15px;
-      font-weight: bold;
-      color: var(--dark-color-b);
-      opacity: 0.7;
-      margin-bottom: 7px; }
-      .chat-messages-container .message .meta span {
-        color: #777; }
-
-/*# sourceMappingURL=../scss/chat.css.map */

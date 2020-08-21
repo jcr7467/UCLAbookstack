@@ -214,25 +214,14 @@ router.route('/reset')
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
                     console.log(request.body.password, "pass")
-                    /*
-                    User.update({resetPasswordToken: request.body.token}, {$set:{password: request.body.password}}, (err) => {
-                        if(err){return callback(err, null);}
-                        request.session.userId = user._id;//Gives unique user._id number to cookie on browser(Logs them in)
-                        request.session.useObject = user; //Makes user object accessible in all handlebars templates, for convenience
-                    });*/
 
+                    User.findOne({resetPasswordToken: request.body.token}).then((user) => {
+                        user.password = request.body.password;
+                        user.save()
 
-                    bcryptjs.hash(request.body.password, 10, (err, hash) => {
-                        console.log(hash, "newhashreset")
-                        if (err) {return next(err);}
-                        User.update({resetPasswordToken: request.body.token}, {$set: {password: hash}},
-                            function (err) {
-                                if(err){return callback(err, null);}
-                                request.session.userId = user._id;
-                                request.session.userObject = user
-                                return callback(null, user);
-                            });
+                        return callback(null, user)
                     });
+
                 } else {
                     let err = new Error('Passwords do not match');
                     err.status = 401;

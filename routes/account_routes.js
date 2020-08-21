@@ -213,12 +213,22 @@ router.route('/reset')
             },
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
+                    console.log(request.body.password, "pass")
+                    /*
+                    User.update({resetPasswordToken: request.body.token}, {$set:{password: request.body.password}}, (err) => {
+                        if(err){return callback(err, null);}
+                        request.session.userId = user._id;//Gives unique user._id number to cookie on browser(Logs them in)
+                        request.session.useObject = user; //Makes user object accessible in all handlebars templates, for convenience
+                    });*/
+
+
                     bcryptjs.hash(request.body.password, 10, (err, hash) => {
+                        console.log(hash, "newhashreset")
                         if (err) {return next(err);}
                         User.update({resetPasswordToken: request.body.token}, {$set: {password: hash}},
                             function (err) {
                                 if(err){return callback(err, null);}
-                                request.session.userId = user._id;      //Gives unique user._id number to cookie on browser(Logs them in)
+                                request.session.userId = user._id;
                                 request.session.userObject = user
                                 return callback(null, user);
                             });
@@ -291,7 +301,7 @@ router.get('/verify/sendemail',(request, response, next) => {
                         from: 'BookStack <teambookstackucla@gmail.com>',
                         to: user.email,
                         subject: 'Email Confirmation',
-                        text: 'Dear ' + user.firstname + '\n\n' +
+                        text: 'Hey ' + user.firstname + '\n\n' +
                             'Please click the following link to confirm your email address:\n\n' +
                             'http://' + request.headers.host + '/verify/verifyemail?token=' + token +
                             '&salt=' + request.session.userId

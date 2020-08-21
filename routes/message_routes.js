@@ -234,6 +234,7 @@ router.route('/conversations').get((request, response, next) => {
                                 penpalLastName: penpal.lastname
                             })
 
+
                             resolve(userMap)
                         }
                     });
@@ -252,7 +253,7 @@ router.route('/conversations').get((request, response, next) => {
                     // results will contain the accumulated results from all
                     // the mapped operations
 
-
+                    // console.log('start', userMap, 'end')
                     //For some reason, this userMap is a two dimensional array,
                     // So in handlebars, we must have a two dimmensional array for each loop
                     //
@@ -262,11 +263,12 @@ router.route('/conversations').get((request, response, next) => {
                     }else{
                         penpalCount = userMap[0].length
                     }
+                    //console.log(userMap)
 
 
                     response.render('conversation_list', {
                         title: 'Messages',
-                        myPenPals: userMap[0],
+                        myPenPals: userMap,
                         penpalCount: penpalCount,
                         bookOwner : bookOwner
                     })
@@ -294,6 +296,7 @@ router.post('/ajaxmessageload', (request, response, next) => {
     let userIDs = [request.session.userId, request.body.theirUserID];
     userIDs.sort();
     let room = userIDs[0].concat(userIDs[1]);
+    //console.log(room, userIDs)
 
 
     // Lean command in order for handlebars to read it.
@@ -318,7 +321,8 @@ router.post('/ajaxmessageload', (request, response, next) => {
             return response.send({
                 myPenpal: penpal,
                 messages: conversation.messages,
-                thisuser: request.session.userId
+                thisuserId: request.session.userId,
+                thisuserFirstname: request.session.userObject.firstname
             })
 
         }

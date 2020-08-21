@@ -4,7 +4,7 @@ button.classList.remove("hideme")
 input.classList.remove("hideme")
 let theirUserID = document.getElementById("theirUserID").value
 let myUserID = document.getElementById("myUserID").value
-console.log(theirUserID, myUserID)
+console.log(myUserID, theirUserID)
 
 let userIDs = [myUserID, theirUserID]
 userIDs.sort();

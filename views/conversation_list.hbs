@@ -18,26 +18,7 @@
             </div>
 
 
-            <div class="message-filter-select row">
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying">
-                    <img src="images/icons/buy%20arrow.svg"/>
-                    <p>
-                        Buy
-                    </p>
-                </div>
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Selling">
-                    <img src="images/icons/sell%20arrow.svg"/>
-                    <p>
-                        Sell
-                    </p>
-                </div>
-                <div class="filter-button btn btn-light swipe-to-top col-lg-4 active" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying and Selling">
-                    <img src="images/icons/buy%20and%20sell%20arrow.svg"/>
-                    <p>
-                        Both
-                    </p>
-                </div>
-            </div>
+
 
 
 
@@ -57,8 +38,9 @@
 {{else}}
 
 
-
+    <!-- only bc this is a 2d array , second array only has one element-->
     {{#each myPenPals}}
+        {{#each this }}
 
         <div class="person-container row no-gutters chatdivlink">
             <div class="person-icon-container col-2">
@@ -69,17 +51,16 @@
             <div class="person-info col-10">
                 <div class="person-name-and-icon row">
                     <h5 class="col-10">{{ penpalFirstName}} {{ penpalLastName }}</h5>
-                    <img class="col-2" src="images/icons/sell%20arrow.svg"/>
                     <p class="theirUserID">{{ penpalUserId }}</p>
-                    <p class="myUserID">{{ ../currentUser }}</p>
+                    <p class="myUserID">{{ ../../currentUser }}</p>
                 </div>
                 <div class="book-name row">
-                    <h6 class="col-12">Calculus Early Transcendentals</h6>
+
                 </div>
             </div>
         </div>
 
-
+        {{/each}}
 
     {{/each}}
 

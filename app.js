@@ -180,29 +180,34 @@ app.use('/', message_routes);
 // Run when client connects
 io.on('connection', socket => {
 
+    //This variable will be used to track if a user is already in a room
+    // If this variable is not null, then we leave the room it is set to and set it to the new room
+    let currentRoom = null;
+
 
     socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
 
         let username = myUserID,
             penpalusername = theirUserID;
 
-        if(socket.rooms){
-            //If we are in a room, we first leave it.
-            //This only leaves the first room because
-            // we will never be in more than one, so if
-            // there are rooms, it will be the first one in the array
-            socket.leave(socket.rooms[0])
-            socket.join(room);
-        }else{
-            socket.join(room);
 
+        /*
+        If we are in a room, we first leave it.
+        There will only ever be one room because
+        everytime we join a new one we leave the old one
+        */
+        if (currentRoom == null){
+            socket.join(room)
+            currentRoom = room
+        }else{
+            socket.leave(currentRoom)
+            socket.join(room);
+            currentRoom = room;
         }
 
 
 
         socket.on('chatMessage', (msg) => {
-
-
 
             let messageObject = formatMessage(msg, username, penpalusername);
             //Made this environmental bc axios required it to be a full hard coded link
@@ -215,7 +220,7 @@ io.on('connection', socket => {
 
 
                     //io.emit('serverObject', retVal)
-                    io.emit('serverToClientMessage', {
+                    io.in(currentRoom).emit('serverToClientMessage', {
                         messageObject: messageObject,
                         currentUserid: response.data.currentUserid,
                         currentUserfirstname: response.data.currentUserfirstname,
@@ -304,11 +309,6 @@ let deleteOldMessages = () => {
                                     })
                                 })
                             }
-
-
-
-
-
 
                             let finished = deleteMe(i, j);
 

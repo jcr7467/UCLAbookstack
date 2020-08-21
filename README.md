@@ -36,24 +36,22 @@ When making changes to CSS/SCSS
 Technologies Used
 -----------------
 
-#### Front-End
+### Front-End
 
-HTML 
-SCSS
-CSS
-Handlebars Templating Engine
+#### HTML 
+#### SCSS
+#### CSS
+#### Handlebars Templating Engine
 
-#### Back-End
+### Back-End
 
-NodeJS
-Express
+#### NodeJS
+#### Express
 
-#### Services
+### Services
 
-###### To host our database
-MongoDB
-###### To store user image uploads
-Amazon Web Services
+#### MongoDB (To host our database)
+#### Amazon Web Services (To store user image uploads)
 
 
 

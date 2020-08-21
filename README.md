@@ -16,7 +16,7 @@ Run **_npm install_** from the base of the repository
 
 Running Developement Server
 ---------------------------
-###### Once you have installed all the packages necessary, this will run nodemon, which automatically restarts server any time changes are made to the files 
+###### Once you have installed all the packages necessary, nodemon will automatically restarts server any time changes are made to the files 
 ###### This is really convenient
 ###### Type **_localhost:8000_** into your browser
 ###### If this port changes, you can see it at the top of app.js
@@ -28,6 +28,32 @@ When making changes to CSS/SCSS
 ###### I have installed node-sass as a developer dependency. Run:
 
 **_node-sass public/scss -o public/scss --source-map public/scss_**
+
+
+
+
+
+Technologies Used
+-----------------
+
+#### Front-End
+
+HTML 
+SCSS
+CSS
+Handlebars Templating Engine
+
+#### Back-End
+
+NodeJS
+Express
+
+#### Services
+
+###### To host our database
+MongoDB
+###### To store user image uploads
+Amazon Web Services
 
 
 

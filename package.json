@@ -39,7 +39,8 @@
   },
   "scripts": {
     "start": "node app.js",
-    "dev-server": "nodemon app.js"
+    "dev-server": "nodemon app.js",
+    "compile-scss": "node-sass public/scss -o public/scss --source-map public/scss"
   },
   "keywords": [],
   "author": "BookStack",

@@ -1,6 +1,6 @@
 {
 	"version": 3,
-	"file": "../css/chat.css",
+	"file": "chat.css",
 	"sources": [
 		"chat.scss",
 		"private/_variables.scss"

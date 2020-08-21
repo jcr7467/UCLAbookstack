@@ -25,9 +25,9 @@ Running Developement Server
 
 When making changes to CSS/SCSS
 -------------------------------
-###### I have installed node-sass as a developer dependency. Run:
+###### In order to make changes, **_always_** make them to scss and compile it into css. To compile scss to css, run:
 
-##### **_node-sass public/scss -o public/scss --source-map public/scss_**
+##### **_npm run compile-scss_**
 
 
 

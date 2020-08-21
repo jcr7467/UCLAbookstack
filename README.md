@@ -9,19 +9,19 @@ Getting Started
 ----------------
 
 #### Installing all dependencies
-##### If you just cloned this project, you must have NodeJS and NPM installed beforehand
+##### If you just cloned this project, you must have NodeJS and NPM installed beforehand, from the base of the repository, run:
 
-Run **_npm install_** from the base of the repository
+**_npm install_**
 
 
 Running Developement Server
 ---------------------------
-###### Once you have installed all the packages necessary, nodemon will automatically restarts server any time changes are made to the files 
-###### This is really convenient
+###### Once you have installed all the packages necessary, nodemon will automatically restarts server any time changes are made to the files (super convenient) 
 ###### Type **_localhost:8000_** into your browser
-###### If this port changes, you can see it at the top of app.js
+###### If this port changes(8000), you can see it at the top of app.js
+###### Run
 
-Run **_npm run dev-server_**
+**_npm run dev-server_**
 
 When making changes to CSS/SCSS
 -------------------------------

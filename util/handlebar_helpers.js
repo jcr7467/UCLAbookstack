@@ -111,6 +111,9 @@ module.exports = {
                 return false
         }
 
+    },
+    notHelper: function(bool){
+        return !bool;
     }
 
 }

@@ -29,7 +29,13 @@
             <div class="people-select-container row">
 
 
-{{#if (equal_strings penpalCount 0)}}
+{{#if  (notHelper currentUserObject.emailverified)}}
+    <div style="margin: 70px">
+        <hr>
+        <p>Well this is awkward... Please verify your email in profile before sending messages :)</p>
+        <hr>
+    </div>
+{{else if (equal_strings penpalCount 0)}}
         <div style="margin: 70px">
             <hr>
             <p>Hmmm... you don't seem to have any messages yet :/</p>

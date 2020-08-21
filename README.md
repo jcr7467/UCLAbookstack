@@ -10,15 +10,15 @@ Getting Started
 
 #### First things first
 
-##### You will need to install **_npm_** and **_nodejs_**. Check the **_package.json_** file to see which version to download.
-##### E.g.     
-##### "node": "12.16.3",
-##### "npm": "6.14.5"
+###### You will need to install **_npm_** and **_nodejs_**. Check the **_package.json_** file to see which version to download.
+###### E.g.     
+###### "node": "12.16.3",
+###### "npm": "6.14.5"
 
-##### Find tutorial or Youtube video online on how to install **_npm_** and **_nodejs_**
+###### Find tutorial or Youtube video online on how to install **_npm_** and **_nodejs_**
 
 #### Installing all dependencies
-##### If you just cloned this project, you must have NodeJS and NPM installed beforehand, from the base of the repository, run:
+###### If you just cloned this project, you must have NodeJS and NPM installed beforehand, from the base of the repository, run:
 
 ##### **_npm install_**
 

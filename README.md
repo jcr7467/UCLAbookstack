@@ -11,9 +11,13 @@ Getting Started
 #### First things first
 
 ###### You will need to install **_npm_** (node package manager) and **_nodejs_**. Check the **_package.json_** file to see which version to download.
-###### E.g.     
+###### E.g.    
+###### ...
+###### engines: { 
 ###### "node": "12.16.3",
 ###### "npm": "6.14.5"
+###### }
+###### ...
 
 ###### Go to https://nodejs.org/en/download/ and download the version specified in **_package.json_** to install both NodeJS and npm
 ###### I would suggest finding a tutorial or Youtube video online on how to install **_npm_** and **_nodejs_** to see a visual example
@@ -33,12 +37,12 @@ Getting Started
 
 Running Development Server
 ---------------------------
-###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient) 
-###### Type **_localhost:8000_** into your browser
-###### If this port changes(8000), you can see it at the top of app.js
+###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient)
 ###### Run
+##### **_npm run dev-server_** 
+###### Type **_localhost:8000_** into your browser
+###### If this port changes (currently set at 8000), you can see it at the top of app.js
 
-##### **_npm run dev-server_**
 
 When making changes to CSS/SCSS
 -------------------------------
@@ -52,7 +56,7 @@ Adding new packages with **_NPM_**
 -----------------------------------
 ###### For the purpose of this project, say we want to install a new module (e.g. express)
 ###### Always pass in **_--save-exact_** flag in order for modules to not auto update to newer version and risk breaking stuff
-###### If the package/module just makes developement easier (like **_nodemon_**) then pass in **_--save-dev_** flag
+###### If the package/module just makes development easier but not necessarily needed to host the application, (like **_nodemon_**) then pass in **_--save-dev_** flag
 
 
 ##### **_npm install --save-exact express_**
@@ -166,7 +170,7 @@ source
 |
 |
 └─── node_modules - This is all the dependencies, this is the largest part of the project, so they are not
-|                   included in the github, but running 'npm install' 
+|                   included in the github repo, but running 'npm install' 
 |                   from the base directory will install all dependencies and create this directory
 |
 |

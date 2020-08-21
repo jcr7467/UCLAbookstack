@@ -57,12 +57,13 @@ Adding new packages with **_NPM_**
 ###### For the purpose of this project, say we want to install a new module (e.g. express)
 ###### Always pass in **_--save-exact_** flag in order for modules to not auto update to newer version and risk breaking stuff
 ###### If the package/module just makes development easier but not necessarily needed to host the application, (like **_nodemon_**) then pass in **_--save-dev_** flag
+###### https://www.youtube.com/watch?v=rv2xcy0u3y8 <- watch this to understand npm versioning
 
 
 ##### **_npm install --save-exact express_**
 ##### **_npm install --save-exact --save-dev nodemon_**
 
-###### We can check that we saved exact version by verifying that a carret '^' is not next to the version
+###### We can check that we saved exact version by verifying that a caret '^' is not next to the version
 ###### **_Good_**:    "express": "4.17.1"   Will not update automatically
 ###### **_Bad_**:    "express": "^4.17.1"   Will update automatically, happens by default if we pass in only **_--save_** flag
 

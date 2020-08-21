@@ -16,7 +16,7 @@ Getting Started
 
 Running Development Server
 ---------------------------
-###### Once you have installed all the packages necessary, nodemon will automatically restarts server any time changes are made to the files (super convenient) 
+###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient) 
 ###### Type **_localhost:8000_** into your browser
 ###### If this port changes(8000), you can see it at the top of app.js
 ###### Run

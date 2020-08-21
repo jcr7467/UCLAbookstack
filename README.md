@@ -75,7 +75,6 @@ Technologies Used
 
 ##### MongoDB (To host our database)
 ##### Amazon Web Services (To store user image uploads)
-
-
+##### Heroku (To host our application)
 
 

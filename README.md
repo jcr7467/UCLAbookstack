@@ -1,7 +1,7 @@
 
 UCLABookStack
 ==============
-https://www.uclabookstack.com
+######https://www.uclabookstack.com
 
 
 
@@ -38,20 +38,20 @@ Technologies Used
 
 ### Front-End
 
-#### HTML 
-#### SCSS
-#### CSS
-#### Handlebars Templating Engine
+##### HTML 
+##### SCSS
+##### CSS
+##### Handlebars Templating Engine
 
 ### Back-End
 
-#### NodeJS
-#### Express
+##### NodeJS
+##### Express
 
 ### Services
 
-#### MongoDB (To host our database)
-#### Amazon Web Services (To store user image uploads)
+##### MongoDB (To host our database)
+##### Amazon Web Services (To store user image uploads)
 
 
 

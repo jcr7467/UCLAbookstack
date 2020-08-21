@@ -41,7 +41,9 @@ Adding new packages with **_NPM_**
 ##### **_npm install --save-exact express_**
 ##### **_npm install --save-exact --save-dev nodemon_**
 
-
+###### We can check that we saved exact version by verifying that a carret '^' is not next to the version
+###### **_Good_**:    "express": "4.17.1"   Will not update automatically
+###### **_Bad_**:    "express": "^4.17.1"   Will update automatically, happens by default if we pass in only **_--save_** flag
 
 Removing packages with **_NPM_**
 -----------------------------------

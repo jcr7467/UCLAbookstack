@@ -11,7 +11,7 @@ Getting Started
 #### Installing all dependencies
 ##### If you just cloned this project, you must have NodeJS and NPM installed beforehand, from the base of the repository, run:
 
-**_npm install_**
+##### **_npm install_**
 
 
 Running Developement Server
@@ -21,13 +21,36 @@ Running Developement Server
 ###### If this port changes(8000), you can see it at the top of app.js
 ###### Run
 
-**_npm run dev-server_**
+##### **_npm run dev-server_**
 
 When making changes to CSS/SCSS
 -------------------------------
 ###### I have installed node-sass as a developer dependency. Run:
 
-**_node-sass public/scss -o public/scss --source-map public/scss_**
+##### **_node-sass public/scss -o public/scss --source-map public/scss_**
+
+
+
+Adding new packages with **_NPM_**
+-----------------------------------
+###### For the purpose of this project, say we want to install a new module (e.g. express)
+###### Always pass in **_--save-exact_** flag in order for modules to not auto update to newer version and risk breaking stuff
+###### If the package/module just makes developement easier (like **_nodemon_**) then pass in **_--save-dev_** flag
+
+
+##### **_npm install --save-exact express_**
+##### **_npm install --save-exact --save-dev nodemon_**
+
+
+
+Removing packages with **_NPM_**
+-----------------------------------
+###### The same as installing but with **_uninstall_** keyword
+##### **_npm uninstall --save-exact express_**
+##### **_npm uninstall --save-exact --save-dev nodemon_**
+
+
+
 
 
 

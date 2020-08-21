@@ -14,7 +14,7 @@ Getting Started
 ##### **_npm install_**
 
 
-Running Developement Server
+Running Development Server
 ---------------------------
 ###### Once you have installed all the packages necessary, nodemon will automatically restarts server any time changes are made to the files (super convenient) 
 ###### Type **_localhost:8000_** into your browser

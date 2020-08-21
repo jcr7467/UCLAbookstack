@@ -67,6 +67,116 @@ Removing packages with **_NPM_**
 
 
 
+
+
+
+
+File Structure
+---------------
+```
+source
+|
+└─── README.md - Documentation
+|
+└─── package.json - File full of dependencies and scripts to manage our project
+│    
+|
+└─── app.js - Driving file that ties everything together
+│           - This file calls all routing files, supports the messagin through sockets,
+|             and configures app details. Connects to database
+└─── Procfile - Just a file Heroku needs in order to host our website online
+|
+└─── .env - Where we set our environmental variables
+|
+|
+└─── views -Contains all the Handlebars templates that are rendered into HTML
+│   │   
+|   └───layouts - If when rendering, no outline is specified, it defaults to layout.hbs
+|   |      └─── ...
+│   │   
+|   └─── partials
+│   │
+│   └─── bookformtips.hbs
+|   |
+|   └─── ...    
+│       
+|
+└─── util - Used for miscellaneous pages that are mainly used as tools
+│      │
+|      └───   handlebar_helpers.js - Used to create custom helper functions used in handlebars templates
+|      |                           - Handlebar helper functions typically must return boolean value
+│      │   
+|      └─── ...
+|
+|
+└─── routes - These are the routes that handle the url requests of the user (both post and get requests)
+│      │
+|      └─── account_routes.js - Routes that are used for user account actions. E.g. sign up, sign in, create account, etc.
+|      |                        
+│      │   
+|      └─── message_routes.js - Routes that handle the messaging feature of BookStack.
+|      |
+|      |
+|      └─── profile_routes.js - Routes that handle profile actions, like uploading book, updating settings, delete books, etc.
+│      |  
+|      |
+|      └─── routes.js - Routes that are mostly static, where we just serve a html page 
+|                       with no data from database, and miscellanous pages as well that didnt fit in files above.
+|
+└─── public - This directory is what html pages can see. E.g. 
+|      |      if we access /js/client.js or /css/chat.css, they will refer to the ones in public
+│      │
+|      └─── ...
+|      |                        
+│      │   
+|      └─── ...
+|
+|
+└─── node_modules - This is all the dependencies, this is the largest part of the project, so they are not
+|                   included in the github, but running 'npm install' 
+|                   from the base directory will install all dependencies and create this directory
+|
+|
+└─── models - This directory stores all the objects that will be stored in the database is what html pages can see. E.g. 
+|      |      if we access /js/client.js or /css/chat.css, they will refer to the ones in public
+│      │
+|      |                        
+|      └─── book.js - book object that has the traits that will be stored in db
+|      |                        
+│      │   
+|      └─── user.js- user object that has the traits that will be stored in db
+|      |                        
+│      │   
+|      └─── conversation.js- conversation object that has the traits that will be stored in db, with all messages
+|
+|
+|
+└─── middleware - This directory stores all the middleware functions that can be called during a route.
+|      |          E.g. we would use a middleware function to make sure that a user
+|      |          is logged in/out before accessing page, etc. 
+│      │
+|      |                        
+|      └─── middleware.js - Declarations of middleware functions used in routes
+|
+|
+|
+└─── .lambda_functions - This directory is just a backup of the lambda functions that are used on AWS
+       |      
+       │
+       |                        
+       └─── ...
+       |                        
+       │   
+       └─── ...
+       |                        
+       │   
+       └─── ...
+
+
+```
+
+
+
 Technologies Used
 -----------------
 

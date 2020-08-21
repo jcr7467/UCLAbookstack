@@ -70,6 +70,31 @@ Removing packages with **_NPM_**
 
 
 
+Technologies Used
+-----------------
+
+### Front-End
+
+##### HTML 
+##### SCSS
+##### CSS
+##### Handlebars Templating Engine
+
+### Back-End
+
+##### NodeJS
+##### Express
+
+### Services
+
+##### MongoDB (To host our database)
+##### Amazon Web Services (To store user image uploads)
+##### Heroku (To host our application)
+
+
+
+
+
 
 File Structure
 ---------------
@@ -138,7 +163,7 @@ source
 |
 |
 └─── models - This directory stores all the objects that will be stored in the database is what html pages can see. E.g. 
-|      |      if we access /js/client.js or /css/chat.css, they will refer to the ones in public
+|      |      
 │      │
 |      |                        
 |      └─── book.js - book object that has the traits that will be stored in db
@@ -174,28 +199,5 @@ source
 
 
 ```
-
-
-
-Technologies Used
------------------
-
-### Front-End
-
-##### HTML 
-##### SCSS
-##### CSS
-##### Handlebars Templating Engine
-
-### Back-End
-
-##### NodeJS
-##### Express
-
-### Services
-
-##### MongoDB (To host our database)
-##### Amazon Web Services (To store user image uploads)
-##### Heroku (To host our application)
 
 

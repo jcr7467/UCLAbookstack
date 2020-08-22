@@ -100,7 +100,8 @@ body {
     border-bottom: $border-width solid $border-color;
 
     div {
-      display: inline-grid;
+      display: flex;
+      align-items: center;
 
       i {
         font-size: 22px;

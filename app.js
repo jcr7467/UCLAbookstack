@@ -276,7 +276,7 @@ let deleteOldUnverifiedUsers = () => {
             if (isOld){
                 User.deleteOne({_id: users[i]._id}, (err) => {
                     if (err){
-                        (err)
+                        console.log(err)
                     }else{
                         console.log('Successfully deleted old users')
                     }

@@ -541,3 +541,18 @@ transform: translate(0px,10px);}
         transform: translateY(0);
     } 
 }
+
+.fade {
+	@include transition($transition-fade);
+
+	&:not(.show) {
+		opacity: 0;
+	}
+}
+
+.collapsing {
+	&.sidebar-collapse {
+		height: auto;
+		transition: margin 0.35s ease;
+	}
+}

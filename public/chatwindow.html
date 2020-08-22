@@ -5,11 +5,11 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-    
+
         gtag('config', 'UA-170459256-1');
     </script>    <meta charset="UTF-8">
 
-        <title> BookStack | Messages</title>
+    <title> BookStack | Messages</title>
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,11 +17,11 @@
 
     <!-- Fontawesome CSS Files -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
+
     <!-- Core CSS Files -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" href="css/index.css">
-    
+
     <!-- Slider Revolution CSS Files -->
     <link rel="stylesheet" type="text/css" href="revolution/css/settings.css">
     <link rel="stylesheet" type="text/css" href="revolution/css/layers.css">
@@ -53,8 +53,8 @@
                                 Account
                             </a>
                             <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="/profile">Profile</a>
-                                    <a class="dropdown-item" href="/signout">Sign Out</a>
+                                <a class="dropdown-item" href="/profile">Profile</a>
+                                <a class="dropdown-item" href="/signout">Sign Out</a>
 
 
 
@@ -100,7 +100,7 @@
 
                                 </select>
 
-<div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div></div>
+                                    <div class="dropdown-menu " role="combobox"><div class="inner show" role="listbox" aria-expanded="false" tabindex="-1"><ul class="dropdown-menu inner show"></ul></div></div></div>
                             </div>
                             <div class="search-field-wrap">
                                 <input name="query" type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="" data-original-title="search item">
@@ -317,15 +317,15 @@
                         </a>
                         <nav id="navigation-mobile">
 
-                                <div class="logout-main">
-                                    <div class="welcome">
-                                        <span>Welcome&nbsp;Bob !</span>
-                                    </div>
-                                    <div class="logout">
-                                        <a href="/signout" class="">Logout</a>
-                                    </div>
-
+                            <div class="logout-main">
+                                <div class="welcome">
+                                    <span>Welcome&nbsp;Bob !</span>
                                 </div>
+                                <div class="logout">
+                                    <a href="/signout" class="">Logout</a>
+                                </div>
+
+                            </div>
 
 
                             <a href="/" class="main-manu btn ">
@@ -405,305 +405,254 @@
 
 <link rel="stylesheet" href="css/chat.css">
 
+
 <div class="container d-flex justify-content-center mt-5">
     <div class="chat-wrapper row">
 
-        <div class="message-container col-5 col-md-4">
+        <div id="expand-right-container">
+            <i id="expand-right" class="fas fa-angle-double-right btn-icon d-none d-sm-flex"></i>
+        </div>
 
+        <div id="message-container" class="col-12 col-sm-5 col-md-4">
             <div class="message-header row">
-                <div class="col-9 col-lg-10">
+                <div class="col-10 col-sm-8 col-md-9">
                     <h4>Messages</h4>
                 </div>
-                <a class="col-3 col-lg-2" href="#"><i class="fas fa-edit"></i></a>
+                <div class="col-2 col-sm-4 col-md-3 justify-content-end">
+                    <i id="collapse-left" class="fas fa-angle-double-left btn-icon d-none d-sm-inline-block"></i>
+                </div>
             </div>
 
             <div class="message-search-container row">
-                <i class="fa fa-search col-1"></i>
-                <input class="message-search col-10 pl-0" type="text" placeholder="Search People"/>
+                <div class="col">
+                    <i class="fa fa-search"></i>
+                    <input id="message-search" type="text" placeholder="Search People..."/>
+                </div>
             </div>
 
             <div class="message-filter-select row">
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying">
-                    <img src="images/icons/buy%20arrow.svg"/>
-                    <p>
-                        Buy
-                    </p>
+                <div id="buying-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                    <p>Buying</p>
                 </div>
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Selling">
-                    <img src="images/icons/sell%20arrow.svg"/>
-                    <p>
-                        Sell
-                    </p>
+                <div id="selling-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                    <p>Selling</p>
                 </div>
-                <div class="filter-button btn btn-light swipe-to-top col-lg-4 active" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Filter Buying and Selling">
-                    <img src="images/icons/buy%20and%20sell%20arrow.svg"/>
-                    <p>
-                        Both
-                    </p>
+                <div id="all-filter" class="filter-button btn btn-light swipe-to-top col-lg-4 active">
+                    <i class="fas fa-arrows-alt-h"></i>
+                    <p>All</p>
                 </div>
             </div>
 
-<!--***************************************-->
-<!--Section for people icons and data START-->
-<!--***************************************-->
-            <div class="people-select-container row">
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/UCD%20Job%20Fair.jpg"/>
+<!-- Example card for person -->
+<!-- Needs to be inserted in people-select-container div-->
+<!--<div class="person-container selling">-->
+<!--    <div class="person-info">-->
+<!--        <div class="person-name-and-icon">-->
+<!--            <h5></h5>-->
+<!--        </div>-->
+<!--        <div class="book-name">-->
+<!--            <h6></h6>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+            <div id="people-select-container" class="row">
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Noah Tarr</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Noah Tarr</h5>
-                            <img class="col-2" src="images/icons/sell%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Calculus Early Transcendentals</h6>
+                        <div class="book-name">
+                            <h6>Calculus Early Transcendentals</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container active row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Juan Rios</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Juan Rios</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Physics for Scientists and Engineers</h6>
+                        <div class="book-name">
+                            <h6>Physics for Scientists and Engineers - Technology Updates</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Samara Yarnes</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Samara Yarnes</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Comparative Politics</h6>
+                        <div class="book-name">
+                            <h6>Comparative Politics</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>AvgName 15 Char</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">AvgName 15 Char</h5>
-                            <img class="col-2" src="images/icons/sell%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book Short Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book Short Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Longer then Avg Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Longer then Avg Name Ln</h5>
-                            <img class="col-2" src="images/icons/sell%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/sell%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-icon-container col-2">
-                        <div class="person-icon">
-                            <img src="images/icons/person%20icon.svg"/>
-                        </div>
-                    </div>
-                    <div class="person-info col-10">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10">Average Name Ln</h5>
-                            <img class="col-2" src="images/icons/buy%20arrow.svg"/>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with Long Name</h6>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-<!--***************************************-->
-<!--Section for people icons and data END-->
-<!--***************************************-->
-
         </div>
 
-        <div class="chat-container col-7  col-md-8">
-            <div class="chat-header row">
-                <div class="chat-person-book-info col-10 col-xl-11">
+        <div id="chat-container" class="col-12 col-sm-7 col-md-8">
+            <div id="chat-header" class="row">
+                <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
-                        <h4 class="col">Juan Rios</h4>
+                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
                     </div>
                     <div class="chat-book-info row">
-                        <h5 class="chat-buy-sell col-4 col-md-3 col-lg-2">Buying</h5>
-                        <h5 class="chat-book-name col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top" title="" data-original-title="Physics for Scientists and Engineers - Technology Updates">Physics for Scientists and Engineers - Technology Updates</h5>
+                        <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
+                        <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
                     </div>
                 </div>
-                <div class="chat-more-data col-2 col-xl-1">
-                    <a class="" href="#">
-                        <i class="fas fa-info-circle"></i>
-                    </a>
+                <div id="chat-header-btns" class="col-3 col-sm-2 col-xl-1">
+                    <i id="chat-more-info" class="fas fa-info-circle btn-icon"></i>
+                    <i id="expand-down" class="fas fa-angle-down d-block d-sm-none"></i>
                 </div>
             </div>
 
-            <div class="chat-messages-container row"></div>
+<!-- Example chat message card -->
+<!-- Needs to be inserted inside col-12 div -->
+<!--            <div class="chat-message-container sent">-->
+<!--                <div class="chat-message">-->
+<!--                    <div class="message-body"></div>-->
+<!--                    <div class="message-date"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div id="chat-messages-container" class="row">
+                <div class="col-12">
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/20/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container received">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit amet. At in tellus integer feugiat scelerisque varius morbi enim.</div>-->
+<!--                            <div class="message-date">6PM 8/21/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/22/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/23/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
 
-            <div class="chat-new-container row">
-                <form class="chat-input col-11">
-                    <input class="" type="text" placeholder="Type a message.."/>
+            <div id="chat-new-container" class="row">
+                <form id="chat-form" class="col-10 col-md-11">
+                    <input id="chat-input" type="text" placeholder="Type a message.."/>
                 </form>
-                <div class="chat-message-attach col-1">
-                    <a href="#">
-                        <i class="fas fa-plus"></i>
-                    </a>
+                <div id="chat-message-btn" class="col-2 col-md-1">
+                    <i id="addAttachment" class="fas fa-plus btn-icon"></i>
                 </div>
             </div>
         </div>
@@ -764,8 +713,8 @@
                 <div class="single-footer">
                     <h5>Account</h5>
                     <ul class="pl-0 mb-0">
-                            <li> <a href="/profile">Profile</a> </li>
-                            <li> <a href="/signout">Log Out</a> </li>
+                        <li> <a href="/profile">Profile</a> </li>
+                        <li> <a href="/signout">Log Out</a> </li>
 
 
 

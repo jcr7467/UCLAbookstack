@@ -96,14 +96,17 @@ router.post('/ajaxsendmessage', (request, response, next) => {
     let { msgObj } = request.body;
     let { penpalusername } = msgObj;
     let { username } = msgObj;
-    let { room } = request.body;
+    let { room } = msgObj;
     let { time } = msgObj;
     let { date } = msgObj;
 
-
+    // It starts by finding the conversation between the two users
+    // (this room is just a concatination of their user id's)
     Conversation.findOne({room: room})
         .then((conversation) => {
-            if (conversation === null){
+
+
+            if (conversation === null){ // If the conversation does not exist, then create one
 
                 let conversationData = {
                     room: room,
@@ -120,7 +123,8 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
                 Conversation.create(conversationData);
                 return false
-            }else {
+
+            }else { // If it does exist, then just push the message into the conversation model's messages array
                 conversation.messages.push({
                     text: msgObj.text,
                     msgSentByMe: username,
@@ -132,9 +136,10 @@ router.post('/ajaxsendmessage', (request, response, next) => {
                 return true
             }
         })
-        .then(conversationFoundBool => {
+        .then(conversationFoundBool => { // We just pass along this bool which states if the conversation was found
 
 
+            // Returns the array with the user's objects passed in also
             return Promise.all([conversationFoundBool, User.findById(username), User.findById(penpalusername)])
 
 
@@ -143,8 +148,9 @@ router.post('/ajaxsendmessage', (request, response, next) => {
         })
         .then(([conversationFoundBool, currentUser, penpalUser]) => {
 
+            // Using the passed along bool, if the conversation was not found, then push
+            // the penpal's id into the current user's 'hasConversationsWith' array
             if(!conversationFoundBool){
-
                 currentUser.hasConversationsWith.push({
                     thePenPal: penpalusername
                 })
@@ -158,6 +164,8 @@ router.post('/ajaxsendmessage', (request, response, next) => {
         })
         .then(([conversationFoundBool, currentUser, penpalUser]) => {
 
+            // Using the passed along bool, if the conversation was not found, then push
+            // the current user's id into the penpal's 'hasConversationsWith' array
             if (!conversationFoundBool){
                 penpalUser.hasConversationsWith.push({
                     thePenPal: username
@@ -171,8 +179,10 @@ router.post('/ajaxsendmessage', (request, response, next) => {
         })
         .then(([currentUser, penpalUser]) => {
 
+            // This gets sent to app.js where it then gets sent to client.js
+            // This is what 'response' object will look like
             response.send({
-                currentUserid: currentUser._id,
+                currentUserid:  currentUser._id,
                 currentUserfirstname: currentUser.firstname,
                 penpalUserid: penpalUser._id,
                 penpalUserfirstname: penpalUser.firstname,

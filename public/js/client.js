@@ -99,6 +99,9 @@ const socket = io();
 const chatform = $("#send-message-form");
 let chatmessages = $(".chat-messages-container")
 
+let theirUserID,
+    myUserID;
+
 
 let outputAJAXMessages = (msgObj) => {
     // msgObj looks like
@@ -110,29 +113,28 @@ let outputAJAXMessages = (msgObj) => {
 
     $(".chat-messages-container").empty()
     console.log(msgObj)
-    for(let i = 0 ; i < msgObj.messages.length ; i++){
-        const div = document.createElement('div');
-        div.classList.add("chat-message")
+    for (let i = 0; i < msgObj.messages.length; i++) {
 
-        if(msgObj.messages[i].msgSentByMe == msgObj.thisuserId){
-            div.innerHTML = `<div style="width: 100%" class="message">
-                            <p class="meta">${msgObj.thisuserFirstname} <span>${msgObj.messages[i].timeSentText}</span> <span>${msgObj.messages[i].dateSentText}</span></p>
-                            <p class="text">
-                              ${msgObj.messages[i].text}
-                            </p>
-                    </div><br>`;
-        }else{
-            div.innerHTML = `<div style="width: 100%" class="message">
-                            <p class="meta">${msgObj.myPenpal.firstname} <span>${msgObj.messages[i].timeSentText}</span> <span>${msgObj.messages[i].dateSentText}</span></p>
-                            <p class="text">
-                              ${msgObj.messages[i].text}
-                            </p>
-                    </div><br>`;
-        }
 
-        document.querySelector('.chat-messages-container').appendChild(div);
+        const messageContainerDiv = document.createElement('div');
+        $(messageContainerDiv).addClass("chat-message-container")
 
-        $("#theirUserID").val(msgObj.myPenpal._id)
+        const messageDiv = document.createElement('div');
+        $(messageDiv).addClass('chat-message');
+
+        if (msgObj.messages[i].msgSentByMe === myUserID)
+            $(messageContainerDiv).addClass('sent');
+        else
+            $(messageContainerDiv).addClass('received');
+
+        $(messageDiv).append(`<div class="message-body">${msgObj.messages[i].text}</div>
+                              <div class="message-date">${msgObj.messages[i].timeSentText} ${msgObj.messages[i].dateSentText}</div>`);
+
+        $(messageContainerDiv).append(messageDiv);
+        $("#chat-messages-container .col-12").append(messageContainerDiv);
+
+        $('#theirUserID').attr('value', msgObj.myPenpal._id);
+
         $(".replace-name").text(msgObj.myPenpal.firstname);
         $(".hideme").show()
 
@@ -141,9 +143,15 @@ let outputAJAXMessages = (msgObj) => {
 
 }
 
-$(".chatdivlink").click((event) => {
-    let theirUserID = $(event.currentTarget).find(".theirUserID").text();
-    let myUserID = $(event.currentTarget).find(".myUserID").text();
+function setupChatMessages() {
+//Chat messages setup
+    $('#chat-messages-container .chat-message-container').addClass('row');
+    $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
+}
+
+$(".person-container").click((event) => {
+    theirUserID = $(event.currentTarget).find(".theirUserID").text();
+    myUserID = $(event.currentTarget).find(".myUserID").text();
 
 
     let userIDs = [myUserID, theirUserID]
@@ -161,7 +169,7 @@ $(".chatdivlink").click((event) => {
         data: { myUserID: myUserID, theirUserID: theirUserID }
     }).done(function( res ) {
 
-        outputAJAXMessages(res)
+        outputAJAXMessages(res, myUserID, theirUserID)
     });
 
 
@@ -174,21 +182,36 @@ $(".chatdivlink").click((event) => {
 
 let outputSocketMessage = (msg) => {
 
+    /* This is what the msg object looks like
+                    {
+                        msgObj: msgObj,
+                        currentUserid: response.data.currentUserid,
+                        currentUserfirstname: response.data.currentUserfirstname,
+                        penpalUserid: response.data.penpalUserId,
+                        penpalUserfirstname: response.data.penpalUserfirstname
+                    }
+    * */
+
+
+    const messageContainerDiv = document.createElement('div');
+    $(messageContainerDiv).addClass("chat-message-container")
+
+
     const div = document.createElement('div');
 
     //div.classList.add('message');
 
-    div.innerHTML = `<div class="message">
-                        <p class="meta">${msg.currentUserfirstname} <span>${msg.messageObject.time}</span> <span>${msg.messageObject.date}</span></p>
-                        <p class="text">
-                         ${msg.messageObject.text}
-                        </p>
-                    </div>`;
 
-    $(".chat-messages-container").append(div)
-    chatmessages.scrollTop = chatmessages.scrollHeight;
+    if(msg.msgObj.username === myUserID)
+        $(messageContainerDiv).addClass('sent');
+    else
+        $(messageContainerDiv).addClass('received');
 
+    $(messageDiv).append(`<div class="message-body">${msg.msgObj.text}</div>
+        <div class="message-date">${msg.msgObj.time} ${msg.msgObj.date}</div>`);
 
+    //This was used before to autoscroll on new message
+    //chatmessages.scrollTop = chatmessages.scrollHeight;
 }
 
 

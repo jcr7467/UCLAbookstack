@@ -245,7 +245,7 @@ router.route('/reset')
         ], function (err) {
             if(err){request.flash('error', err.message + ' Error code: ' + err.status); return response.redirect(request.body.url)}
             request.flash('success', 'Successfully updated password');
-            return response.redirect('/search/1?query=');
+            return response.redirect('/signin');
         });
 
 

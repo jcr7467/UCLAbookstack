@@ -74,7 +74,11 @@ Removing packages with **_NPM_**
 ##### **_npm uninstall --save-exact --save-dev nodemon_**
 
 
+Making Pull Requests
+----------------------
 
+##### When making a pull request, always make them to **_review-branch_**.
+##### This gives me a chance to review the changes and run them on my end before merging them into the production version (master)
 
 
 

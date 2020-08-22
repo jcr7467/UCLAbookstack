@@ -43,7 +43,7 @@ Getting the required environmental variables
 
 Accessing Database
 -----------------
-#####I will also have to whitelist your IP address on the MongoDB database in order for you to access it, this is moreso a reminder for me
+##### I will also have to whitelist your IP address on the MongoDB database in order for you to access it, this is moreso a reminder for me
 
 Running Development Server
 ---------------------------

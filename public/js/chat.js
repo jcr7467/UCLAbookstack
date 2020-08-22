@@ -27,11 +27,49 @@ $(document).ready(function(){
             $(this).css('position', 'relative');
         });
     }
+
+    $('.chat-messages-container').scrollTop($('.chat-messages-container').prop('scrollHeight'));
 });
 
+let resizeTimer;
 $(window).resize(function() {
     fixChatWrapperHeight();
-})
+
+    $('.chat-wrapper').addClass('resize-animation-stopper');
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        $('.chat-wrapper').removeClass('resize-animation-stopper');
+    }, 400);
+});
+
+let $msgCntnr = $('#message-container');
+let $clpseLeftBtn = $('#collapse-left');
+let $xpndRightBtn = $('#expand-right');
+let $xpndRightCntnr = $('#expand-right-container');
+let $chatCntnr = $('#chat-container');
+$clpseLeftBtn.click(function() {
+    //.outWidth() misses 0.005 for whatever reason so this fixes that.
+    $msgCntnr.css('margin-left', -$msgCntnr.outerWidth(true) - 0.005);
+    $chatCntnr.toggleClass('col-12 col-sm-7 col-md-8');
+    $xpndRightCntnr.css('display', 'flex');
+
+    setTimeout(function () {
+        $chatCntnr.css('border-left', 'none');
+        $xpndRightCntnr.css('opacity', 1);
+    }, 350);
+
+});
+
+$xpndRightBtn.click(function() {
+    $xpndRightCntnr.hide();
+    $xpndRightCntnr.css('opacity', '');
+
+    setTimeout(function () {
+        $chatCntnr.toggleClass('col-12 col-sm-7 col-md-8');
+        $chatCntnr.css('border-left', '');
+        $msgCntnr.css('margin-left', 0);
+    }, 1);
+});
 
 $('.filter-button').click(function () {
     $('.filter-button').each(function(){
@@ -45,4 +83,16 @@ $('.person-container').click(function () {
         $(this).removeClass('active');
     });
     $(this).addClass('active');
+});
+
+let $chatInp = $('#chat-input');
+$chatInp.on('input', function() {
+    if ($chatInp.val() !== "") {
+        $('#chat-message-btn i').removeClass('fa-plus');
+        $('#chat-message-btn i').addClass('fa-paper-plane');
+    }
+    else {
+        $('#chat-message-btn i').addClass('fa-plus');
+        $('#chat-message-btn i').removeClass('fa-paper-plane');
+    }
 });

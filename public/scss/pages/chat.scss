@@ -78,13 +78,13 @@ body {
 
   /* Track */
   ::-webkit-scrollbar-track {
-    background: $white;
+    background: $gray-200;
   }
 
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: $gray-400;
-    //border-radius: 10px;
+    border-radius: 20px;
   }
 
   /* Handle on hover */
@@ -94,6 +94,7 @@ body {
 }
 
 #message-container {
+  margin-top: 0;
   transition: margin 0.35s ease;
 
   .message-header {
@@ -115,7 +116,8 @@ body {
     display: flex;
     align-items: center;
 
-    .message-search {
+    #message-search {
+      width: 90%;
       margin: auto;
       height: 30px;
       border: none;
@@ -147,9 +149,10 @@ body {
     }
   }
 
-  .people-select-container {
+  #people-select-container {
     overflow-y: scroll;
     overflow-x: hidden;
+    align-content: flex-start;
 
     .person-container {
       border-bottom: $border-width solid $border-color;
@@ -160,22 +163,11 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        .person-icon {
-          height: 40px;
-          width: 40px;
-          border-radius: 50%;
-          overflow: hidden;
-
-          img {
-            height: auto;
-            width: 100%;
-          }
-        }
       }
 
       .person-info {
         align-self: center;
+        padding: 0.5rem;
 
         .person-name-and-icon {
           align-items: center;
@@ -231,8 +223,8 @@ body {
       left: 4em;
     }
 
-    .message-search {
-      width: 80%;
+    #message-search {
+      width: 80% !important;
     }
   }
 
@@ -269,8 +261,8 @@ body {
       text-align: right;
     }
 
-    .message-search {
-      width: 90%;
+    #message-search {
+      width: 90% !important;
     }
   }
 }
@@ -283,24 +275,41 @@ body {
   transition: all 0.35s ease;
   border-left: 1px solid $gray-500;
 
-  .chat-header {
+  #chat-header {
+    height: 68px;
     background-color: $gray-200;
     border-top-right-radius: 20px;
     border-bottom: $border-width solid $border-color;
     margin-right: -16px;
 
-    .chat-person-book-info {
+    #chat-person-book-info {
 
       h4 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         margin-bottom: 0;
       }
 
-      .chat-buy-sell {
+      #chat-buy-sell {
         font-family: "Montserrat-Bold", sans-serif;
-        color: $orange;
+
+        &.buying {
+          &::before {
+            color: $orange;
+            content: 'Buying';
+          }
+        }
+
+        &.selling {
+          &::before {
+            color: $green;
+            content: 'Selling';
+          }
+        }
       }
 
-      .chat-book-name {
+      #chat-book-name {
         font-family: "Montserrat-Regular", sans-serif;
         color: $gray-600;
         white-space: nowrap;
@@ -310,7 +319,7 @@ body {
       }
     }
 
-    .chat-more-data {
+    #chat-header-btns {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -319,9 +328,15 @@ body {
         font-size: 30px
       }
     }
+
+    @include media-breakpoint-down(xs) {
+      #chat-header-btns {
+        justify-content: space-between;
+      }
+    }
   }
 
-  .chat-messages-container {
+  #chat-messages-container {
     overflow-y: scroll;
     overflow-x: hidden;
 
@@ -364,10 +379,22 @@ body {
           color: $gray-500;
         }
       }
+
+      @include media-breakpoint-down(md) {
+        .chat-message {
+          max-width: 80%;
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
+        .chat-message {
+          max-width: 90%;
+        }
+      }
     }
   }
 
-  .chat-new-container {
+  #chat-new-container {
     height: 40px;
     margin-bottom: 0;
     border-top: $border-width solid $border-color;
@@ -398,8 +425,14 @@ body {
       border-left: $border-width solid $border-color;
 
       i {
-          font-size: 30px;
+          font-size: 22px;
       }
     }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  #chat-container {
+    border: none;
   }
 }

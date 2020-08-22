@@ -1,141 +1,257 @@
 
-
 <div class="container d-flex justify-content-center mt-5">
     <div class="chat-wrapper row">
 
-        <div class="message-container col-5 col-md-4">
+        <div id="expand-right-container">
+            <i id="expand-right" class="fas fa-angle-double-right btn-icon d-none d-sm-flex"></i>
+        </div>
 
+        <div id="message-container" class="col-12 col-sm-5 col-md-4">
             <div class="message-header row">
-                <div class="col-9 col-lg-10">
+                <div class="col-10 col-sm-8 col-md-9">
                     <h4>Messages</h4>
                 </div>
-
+                <div class="col-2 col-sm-4 col-md-3 justify-content-end">
+                    <i id="collapse-left" class="fas fa-angle-double-left btn-icon d-none d-sm-inline-block"></i>
+                </div>
             </div>
 
             <div class="message-search-container row">
-                <i class="fa fa-search col-2"></i>
-                <input class="message-search col-9 pl-0" type="text" placeholder="Search People"/>
-            </div>
-
-
-
-
-
-
-
-            <!--***************************************-->
-            <!--Section for people icons and data START-->
-            <!--***************************************-->
-            <div class="people-select-container row">
-
-
-{{#if  (notHelper currentUserObject.emailverified)}}
-    <div style="margin: 70px">
-        <hr>
-        <p>Well this is awkward... Please verify your email in profile before sending messages :)</p>
-        <hr>
-    </div>
-{{else if (equal_strings penpalCount 0)}}
-        <div style="margin: 70px">
-            <hr>
-            <p>Hmmm... you don't seem to have any messages yet :/</p>
-            <hr>
-        </div>
-{{else}}
-
-
-    <!-- only bc this is a 2d array , second array only has one element-->
-    {{#each myPenPals}}
-        {{#each this }}
-
-        <div class="person-container row no-gutters chatdivlink">
-            <div class="person-icon-container col-2">
-                <div class="person-icon">
-                    <img src="{{ penpalObject.profilePictureURL }}"/>
+                <div class="col">
+                    <i class="fa fa-search"></i>
+                    <input id="message-search" type="text" placeholder="Search People..."/>
                 </div>
             </div>
-            <div class="person-info col-10">
-                <div class="person-name-and-icon row">
-                    <h5 class="col-10">{{ penpalFirstName}} {{ penpalLastName }}</h5>
-                    <p class="theirUserID">{{ penpalUserId }}</p>
-                    <p class="myUserID">{{ ../../currentUser }}</p>
-                </div>
-                <div class="book-name row">
 
+            <div class="message-filter-select row">
+                <div id="buying-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                    <i class="far fa-arrow-alt-circle-left"></i>
+                    <p>Buying</p>
                 </div>
+                <div id="selling-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                    <i class="far fa-arrow-alt-circle-right"></i>
+                    <p>Selling</p>
+                </div>
+                <div id="all-filter" class="filter-button btn btn-light swipe-to-top col-lg-4 active">
+                    <i class="fas fa-arrows-alt-h"></i>
+                    <p>All</p>
+                </div>
+            </div>
+
+
+            <!-- Example card for person -->
+            <!-- Needs to be inserted in people-select-container div-->
+            <!--<div class="person-container selling">-->
+            <!--    <div class="person-info">-->
+            <!--        <div class="person-name-and-icon">-->
+            <!--            <h5></h5>-->
+            <!--        </div>-->
+            <!--        <div class="book-name">-->
+            <!--            <h6></h6>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div>-->
+            <div id="people-select-container" class="row">
+<!--When person-container is selected an ajax server request is submitted. Event located in client.js-->
+            {{#each myPenPals}}
+                {{#each this }}
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>{{ penpalFirstName}} {{ penpalLastName }}</h5>
+                            <p class="theirUserID">{{ penpalUserId }}</p>
+                            <p class="myUserID">{{ ../../currentUser }}</p>
+                        </div>
+                        <div class="book-name">
+                            <h6>testestset</h6>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            {{/each}}
             </div>
         </div>
 
-        {{/each}}
-
-    {{/each}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-{{/if}}
-
-
-
-
-
-            </div>
-            <!--***************************************-->
-            <!--Section for people icons and data END-->
-            <!--***************************************-->
-
-        </div>
-
-        <div class="chat-container col-7  col-md-8">
-            <div class="chat-header row">
-                <div class="chat-person-book-info col-10 col-xl-11">
+        <div id="chat-container" class="col-12 col-sm-7 col-md-8">
+            <div id="chat-header" class="row">
+                <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
-                        {{#if bookOwner }}
-                            <h4 class="col replace-name">New Message</h4>
-                        {{else}}
-                            <h4 class="col replace-name">Messages</h4>
-                        {{/if}}
+                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
                     </div>
                     <div class="chat-book-info row">
-
+                        <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
+                        <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
                     </div>
                 </div>
-
+                <div id="chat-header-btns" class="col-3 col-sm-2 col-xl-1">
+                    <i id="chat-more-info" class="fas fa-info-circle btn-icon"></i>
+                    <i id="expand-down" class="fas fa-angle-down d-block d-sm-none"></i>
+                </div>
             </div>
 
+            <!-- Example chat message card -->
+            <!-- Needs to be inserted inside col-12 div -->
+            <!--            <div class="chat-message-container sent">-->
+            <!--                <div class="chat-message">-->
+            <!--                    <div class="message-body"></div>-->
+            <!--                    <div class="message-date"></div>-->
+            <!--                </div>-->
+            <!--            </div>-->
+            <div id="chat-messages-container" class="row">
+                <div class="col-12">
+                </div>
+            </div>
 
-            <!--This div contains all messages-->
-            <div class="chat-messages-container row"></div>
-
-            <div class="chat-new-container row">
-                <form id="send-message-form" class="hideme chat-input col-10">
-                    <input id="sendMessageInput" class="" type="text" placeholder="Type a message.."/>
+            <div id="chat-new-container" class="row">
+                <form id="chat-form" class="col-10 col-md-11">
+                    <input id="chat-input" type="text" placeholder="Type a message.."/>
                     <input type="text"  value="{{ currentUserObject._id }}" id="myUserID">
                     {{#if bookOwner }}
                         <input type="text"  value="{{ bookOwner }}" id="theirUserID">
                     {{else}}
                         <input type="text"  value="" id="theirUserID">
                     {{/if}}
-
                 </form>
-                <div  id="sendMessageButtonWrapper" class="hideme chat-message-attach col-2">
-                    <a id="sendMessageButton">
-
-                        <i class="fas fa-plus"></i>
+                <div id="chat-message-btn" class="col-2 col-md-1">
+                    <a class="addAttachment">
+                        <i class="fas fa-plus btn-icon"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+<!--<div class="container d-flex justify-content-center mt-5">-->
+<!--    <div class="chat-wrapper row">-->
+
+<!--        <div class="message-container col-5 col-md-4">-->
+
+<!--            <div class="message-header row">-->
+<!--                <div class="col-9 col-lg-10">-->
+<!--                    <h4>Messages</h4>-->
+<!--                </div>-->
+
+<!--            </div>-->
+
+<!--            <div class="message-search-container row">-->
+<!--                <i class="fa fa-search col-2"></i>-->
+<!--                <input class="message-search col-9 pl-0" type="text" placeholder="Search People"/>-->
+<!--            </div>-->
+
+
+
+
+
+
+
+<!--            &lt;!&ndash;***************************************&ndash;&gt;-->
+<!--            &lt;!&ndash;Section for people icons and data START&ndash;&gt;-->
+<!--            &lt;!&ndash;***************************************&ndash;&gt;-->
+<!--            <div class="people-select-container row">-->
+
+
+<!--{{#if  (notHelper currentUserObject.emailverified)}}-->
+<!--    <div style="margin: 70px">-->
+<!--        <hr>-->
+<!--        <p>Well this is awkward... Please verify your email in profile before sending messages :)</p>-->
+<!--        <hr>-->
+<!--    </div>-->
+<!--{{else if (equal_strings penpalCount 0)}}-->
+<!--        <div style="margin: 70px">-->
+<!--            <hr>-->
+<!--            <p>Hmmm... you don't seem to have any messages yet :/</p>-->
+<!--            <hr>-->
+<!--        </div>-->
+<!--{{else}}-->
+
+
+<!--    &lt;!&ndash; only bc this is a 2d array , second array only has one element&ndash;&gt;-->
+<!--    {{#each myPenPals}}-->
+<!--        {{#each this }}-->
+<!--        <div class="person-container row no-gutters chatdivlink">-->
+<!--            <div class="person-info col-10">-->
+<!--                <div class="person-name-and-icon row">-->
+<!--                    <h5 class="col-10">{{ penpalFirstName}} {{ penpalLastName }}</h5>-->
+<!--                    <p class="theirUserID">{{ penpalUserId }}</p>-->
+<!--                    <p class="myUserID">{{ ../../currentUser }}</p>-->
+<!--                </div>-->
+<!--                <div class="book-name row">-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        {{/each}}-->
+
+<!--    {{/each}}-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--{{/if}}-->
+
+
+
+
+
+<!--            </div>-->
+<!--            &lt;!&ndash;***************************************&ndash;&gt;-->
+<!--            &lt;!&ndash;Section for people icons and data END&ndash;&gt;-->
+<!--            &lt;!&ndash;***************************************&ndash;&gt;-->
+
+<!--        </div>-->
+
+<!--        <div class="chat-container col-7  col-md-8">-->
+<!--            <div class="chat-header row">-->
+<!--                <div class="chat-person-book-info col-10 col-xl-11">-->
+<!--                    <div class="row">-->
+<!--                        {{#if bookOwner }}-->
+<!--                            <h4 class="col replace-name">New Message</h4>-->
+<!--                        {{else}}-->
+<!--                            <h4 class="col replace-name">Messages</h4>-->
+<!--                        {{/if}}-->
+<!--                    </div>-->
+<!--                    <div class="chat-book-info row">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+<!--            &lt;!&ndash;This div contains all messages&ndash;&gt;-->
+<!--            <div class="chat-messages-container row"></div>-->
+
+<!--            <div class="chat-new-container row">-->
+<!--                <form id="send-message-form" class="hideme chat-input col-10">-->
+<!--                    <input id="sendMessageInput" class="" type="text" placeholder="Type a message.."/>-->
+<!--                    <input type="text"  value="{{ currentUserObject._id }}" id="myUserID">-->
+<!--                    {{#if bookOwner }}-->
+<!--                        <input type="text"  value="{{ bookOwner }}" id="theirUserID">-->
+<!--                    {{else}}-->
+<!--                        <input type="text"  value="" id="theirUserID">-->
+<!--                    {{/if}}-->
+
+<!--                </form>-->
+<!--                <div  id="sendMessageButtonWrapper" class="hideme chat-message-attach col-2">-->
+<!--                    <a id="sendMessageButton">-->
+
+<!--                        <i class="fas fa-plus"></i>-->
+<!--                    </a>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 

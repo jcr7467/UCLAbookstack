@@ -426,251 +426,233 @@
             <div class="message-search-container row">
                 <div class="col">
                     <i class="fa fa-search"></i>
-                    <input class="message-search" type="text" placeholder="Search People..."/>
+                    <input id="message-search" type="text" placeholder="Search People..."/>
                 </div>
             </div>
 
             <div class="message-filter-select row">
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                <div id="buying-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
                     <i class="far fa-arrow-alt-circle-left"></i>
                     <p>Buying</p>
                 </div>
-                <div class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
+                <div id="selling-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
                     <i class="far fa-arrow-alt-circle-right"></i>
                     <p>Selling</p>
                 </div>
-                <div class="filter-button btn btn-light swipe-to-top col-lg-4 active">
+                <div id="all-filter" class="filter-button btn btn-light swipe-to-top col-lg-4 active">
                     <i class="fas fa-arrows-alt-h"></i>
                     <p>All</p>
                 </div>
             </div>
 
-            <!--***************************************-->
-            <!--Section for people icons and data START-->
-            <!--***************************************-->
 
-            <!--OLD Person Container Style-->
-            <!--<div class="person-container active row no-gutters">-->
-            <!--<div class="person-icon-container col-2">-->
-            <!--<div class="person-icon">-->
-            <!--<img src="images/icons/person%20icon.svg"/>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="person-info col-10">-->
-            <!--<div class="person-name-and-icon row">-->
-            <!--<h5 class="col-10">Juan Rios</h5>-->
-            <!--<img class="col-2" src="images/icons/buy%20arrow.svg"/>-->
-            <!--</div>-->
-            <!--<div class="book-name row">-->
-            <!--<h6 class="col-12">Physics for Scientists and Engineers</h6>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <div class="people-select-container row">
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Noah Tarr</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+<!-- Example card for person -->
+<!-- Needs to be inserted in people-select-container div-->
+<!--<div class="person-container selling">-->
+<!--    <div class="person-info">-->
+<!--        <div class="person-name-and-icon">-->
+<!--            <h5></h5>-->
+<!--        </div>-->
+<!--        <div class="book-name">-->
+<!--            <h6></h6>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+            <div id="people-select-container" class="row">
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Noah Tarr</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Calculus Early Transcendentals</h6>
+                        <div class="book-name">
+                            <h6>Calculus Early Transcendentals</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters active">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Juan Rios</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Juan Rios</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Physics for Scientists and Engineers</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Samara Yarnes</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Comparative Politics</h6>
+                        <div class="book-name">
+                            <h6>Physics for Scientists and Engineers - Technology Updates</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">AvgName 15 Char</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Samara Yarnes</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book Short Name</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Longer then Avg Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Comparative Politics</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>AvgName 15 Char</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book Short Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Longer then Avg Name Ln</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-right col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
-                        </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
-                <div class="person-container row no-gutters">
-                    <div class="person-info col-12 p-2">
-                        <div class="person-name-and-icon row">
-                            <h5 class="col-10 col-sm-9 col-md-10 col-lg-11">Average Name Ln</h5>
-                            <i class="far fa-arrow-alt-circle-left col-2 col-sm-3 col-md-2 col-lg-1 p-md-0"></i>
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
                         </div>
-                        <div class="book-name row">
-                            <h6 class="col-12">Temp Book with a Long Name</h6>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
                         </div>
                     </div>
                 </div>
 
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
+                        </div>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
+                        </div>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="person-container selling">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
+                        </div>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
+                        </div>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="person-container buying">
+                    <div class="person-info">
+                        <div class="person-name-and-icon">
+                            <h5>Average Name Ln</h5>
+                        </div>
+                        <div class="book-name">
+                            <h6>Temp Book with a Long Name</h6>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!--***************************************-->
-            <!--Section for people icons and data END-->
-            <!--***************************************-->
         </div>
 
-        <div id="chat-container" class="col-sm-7 col-md-8 d-none d-sm-flex">
-            <div class="chat-header row">
-                <div class="chat-person-book-info col-10 col-xl-11">
+        <div id="chat-container" class="col-12 col-sm-7 col-md-8">
+            <div id="chat-header" class="row">
+                <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
-                        <h4 class="col">Juan Rios</h4>
+                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
                     </div>
                     <div class="chat-book-info row">
-                        <h5 class="chat-buy-sell col-5 col-sm-4 col-md-3 col-lg-2">Buying</h5>
-                        <h5 class="chat-book-name col-7 col-sm-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top" title="" data-original-title="Physics for Scientists and Engineers - Technology Updates">Physics for Scientists and Engineers - Technology Updates</h5>
+                        <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
+                        <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
                     </div>
                 </div>
-                <div class="chat-more-data col-2 col-xl-1">
-                    <a data-toggle="collapse" href="#" aria-expanded="true" aria-controls="message-container">
-                        <i class="fas fa-info-circle btn-icon"></i>
-                    </a>
+                <div id="chat-header-btns" class="col-3 col-sm-2 col-xl-1">
+                    <i id="chat-more-info" class="fas fa-info-circle btn-icon"></i>
+                    <i id="expand-down" class="fas fa-angle-down d-block d-sm-none"></i>
                 </div>
             </div>
 
-            <div class="chat-messages-container row">
+<!-- Example chat message card -->
+<!-- Needs to be inserted inside col-12 div -->
+<!--            <div class="chat-message-container sent">-->
+<!--                <div class="chat-message">-->
+<!--                    <div class="message-body"></div>-->
+<!--                    <div class="message-date"></div>-->
+<!--                </div>-->
+<!--            </div>-->
+            <div id="chat-messages-container" class="row">
                 <div class="col-12">
-                    <div class="row chat-message-container sent">
-                        <div class="col chat-message">
-                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>
-                            <div class="message-date">5PM 8/20/20</div>
-                        </div>
-                    </div>
-                    <div class="row chat-message-container received">
-                        <div class="col chat-message">
-                            <div class="message-body">Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit amet. At in tellus integer feugiat scelerisque varius morbi enim.</div>
-                            <div class="message-date">6PM 8/21/20</div>
-                        </div>
-                    </div>
-                    <div class="row chat-message-container sent">
-                        <div class="col chat-message">
-                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>
-                            <div class="message-date">5PM 8/22/20</div>
-                        </div>
-                    </div>
-                    <div class="row chat-message-container sent">
-                        <div class="col chat-message">
-                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>
-                            <div class="message-date">5PM 8/23/20</div>
-                        </div>
-                    </div>
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/20/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container received">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit amet. At in tellus integer feugiat scelerisque varius morbi enim.</div>-->
+<!--                            <div class="message-date">6PM 8/21/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/22/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="chat-message-container sent">-->
+<!--                        <div class="chat-message">-->
+<!--                            <div class="message-body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Pellentesque elit eget gravida cum sociis natoque. Eu non diam phasellus vestibulum lorem sed risus ultricies tristique. Donec massa sapien faucibus et. Dui id ornare arcu odio ut sem nulla. Vulputate odio ut enim blandit. Mattis nunc sed blandit libero volutpat sed cras ornare.</div>-->
+<!--                            <div class="message-date">5PM 8/23/20</div>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
             </div>
 
-            <div class="chat-new-container row">
+            <div id="chat-new-container" class="row">
                 <form id="chat-form" class="col-10 col-md-11">
                     <input id="chat-input" type="text" placeholder="Type a message.."/>
                 </form>
                 <div id="chat-message-btn" class="col-2 col-md-1">
-                    <i class="fas fa-plus btn-icon"></i>
+                    <i id="addAttachment" class="fas fa-plus btn-icon"></i>
                 </div>
             </div>
         </div>

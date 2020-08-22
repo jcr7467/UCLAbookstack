@@ -41,6 +41,10 @@ Getting the required environmental variables
 ##### Without them, the application won't work fully.
 #### **Ask me for these variables and I will send you the file**
 
+Accessing Database
+-----------------
+#####I will also have to whitelist your IP address on the MongoDB database in order for you to access it, this is moreso a reminder for me
+
 Running Development Server
 ---------------------------
 ###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient)

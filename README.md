@@ -35,6 +35,12 @@ Getting Started
 ##### **_npm install_**
 
 
+Getting the required environmental variables
+--------------------------------------------
+##### The last step is getting the required environmental variables
+##### Without them, the application won't work fully.
+#### **Ask me for these variables and I will send you the file**
+
 Running Development Server
 ---------------------------
 ###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient)

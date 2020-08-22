@@ -213,16 +213,15 @@ router.route('/reset')
             },
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
-                    bcryptjs.hash(request.body.password, 10, (err, hash) => {
-                        if (err) {return next(err);}
-                        User.update({resetPasswordToken: request.body.token}, {$set: {password: hash}},
-                            function (err) {
-                                if(err){return callback(err, null);}
-                                request.session.userId = user._id;      //Gives unique user._id number to cookie on browser(Logs them in)
-                                request.session.userObject = user
-                                return callback(null, user);
-                            });
+                    console.log(request.body.password, "pass")
+
+                    User.findOne({resetPasswordToken: request.body.token}).then((user) => {
+                        user.password = request.body.password;
+                        user.save()
+
+                        return callback(null, user)
                     });
+
                 } else {
                     let err = new Error('Passwords do not match');
                     err.status = 401;
@@ -291,7 +290,7 @@ router.get('/verify/sendemail',(request, response, next) => {
                         from: 'BookStack <teambookstackucla@gmail.com>',
                         to: user.email,
                         subject: 'Email Confirmation',
-                        text: 'Dear ' + user.firstname + '\n\n' +
+                        text: 'Hey ' + user.firstname + '\n\n' +
                             'Please click the following link to confirm your email address:\n\n' +
                             'http://' + request.headers.host + '/verify/verifyemail?token=' + token +
                             '&salt=' + request.session.userId

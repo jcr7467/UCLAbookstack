@@ -114,13 +114,21 @@ let outputAJAXMessages = (msgObj) => {
         const div = document.createElement('div');
         div.classList.add("chat-message")
 
-
-        div.innerHTML = `<div class="message">
-                            <p class="meta">${msgObj.thisuser} <span>${msgObj.messages[i].timeSentText}</span> <span>${msgObj.messages[i].dateSentText}</span></p>
+        if(msgObj.messages[i].msgSentByMe == msgObj.thisuserId){
+            div.innerHTML = `<div style="width: 100%" class="message">
+                            <p class="meta">${msgObj.thisuserFirstname} <span>${msgObj.messages[i].timeSentText}</span> <span>${msgObj.messages[i].dateSentText}</span></p>
                             <p class="text">
                               ${msgObj.messages[i].text}
                             </p>
-                    </div>`;
+                    </div><br>`;
+        }else{
+            div.innerHTML = `<div style="width: 100%" class="message">
+                            <p class="meta">${msgObj.myPenpal.firstname} <span>${msgObj.messages[i].timeSentText}</span> <span>${msgObj.messages[i].dateSentText}</span></p>
+                            <p class="text">
+                              ${msgObj.messages[i].text}
+                            </p>
+                    </div><br>`;
+        }
 
         document.querySelector('.chat-messages-container').appendChild(div);
 
@@ -133,18 +141,18 @@ let outputAJAXMessages = (msgObj) => {
 
 }
 
-$(".chatdivlink").click(() => {
-    let theirUserID = $(".chatdivlink").find(".theirUserID").text()
-    let myUserID = $(".chatdivlink").find(".myUserID").text()
+$(".chatdivlink").click((event) => {
+    let theirUserID = $(event.currentTarget).find(".theirUserID").text();
+    let myUserID = $(event.currentTarget).find(".myUserID").text();
+
 
     let userIDs = [myUserID, theirUserID]
     userIDs.sort();
     let room = userIDs[0].concat(userIDs[1])
-    let username = myUserID;
-
 
     //join chatroom
     socket.emit('joinRoom', {myUserID, theirUserID, room});
+
 
 
     $.ajax({

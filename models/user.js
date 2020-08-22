@@ -30,11 +30,14 @@ let UserSchema = new mongoose.Schema({
     resetPasswordTokenValid: Boolean,
     profilePictureURL: {
         type: String,
-        default: '/images/profile/default-profile.png'
+        //This is the entire URL, but if an image is not imported,
+        // we don't have a AWS S3 link to refer to, so we use the default
+        default: '/images/profile/default-profile-icon.svg'
+
     },
     profilePictureKey: {
         type: String,
-        default: '/images/profile/default-profile.png'
+        default: '/images/profile/default-profile-icon.svg'
     },
     emailverified:{
         type: Boolean,
@@ -81,14 +84,27 @@ UserSchema.statics.authenticate = (email, password, callback) =>{
 
 ////Hash password before saving to database
 UserSchema.pre('save', function(next){
-    let user = this;
-    bcryptjs.hash(user.password, 10, (err, hash) => {
-        if(err){
-            return next(err);
-        }
-        user.password = hash;
+
+    //If email is updated
+    if (this.isModified('email')){
+
+        this.emailverified = false;
+    }
+
+    if (this.isModified('password')){
+        let user = this;
+        bcryptjs.hash(user.password, 10, (err, hash) => {
+            if(err){
+                return next(err);
+            }
+            user.password = hash;
+            next();
+        });
+    }else{
         next();
-    });
+    }
+
+
 });
 
 

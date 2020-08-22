@@ -32,7 +32,7 @@ $primary-dark:  #000;
 $primary-light: #444;
 
 $primary:       #333333 !default;  // Main color or Primary color of the website
-$secondary: #3776d5 !default;  // Main color for buttons
+$secondary:     #2D68C4 !default;  // Main color for buttons
 $success:       $green !default;
 $info:          $blue !default;
 $warning:       $yellow !default;
@@ -90,19 +90,19 @@ $input-border-color:                    $border-color !default;
 
 @font-face {
     font-family: 'Montserrat-Regular';
-    src: url('../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),  url('../fonts/Montserrat-Regular/Montserrat-Regular.woff') format('woff'), url('../fonts/Montserrat-Regular/Montserrat-Regular.ttf')  format('truetype'), url('../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+    src: url('../../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),  url('../../fonts/Montserrat-Regular/Montserrat-Regular.woff') format('woff'), url('../../fonts/Montserrat-Regular/Montserrat-Regular.ttf')  format('truetype'), url('../../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Montserrat-ExtraBold';
-    src: url('../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix') format('embedded-opentype'),  url('../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff') format('woff'), url('../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf')  format('truetype'), url('../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold') format('svg');
+    src: url('../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix') format('embedded-opentype'),  url('../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff') format('woff'), url('../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf')  format('truetype'), url('../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold') format('svg');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Montserrat-Bold';
-    src: url('../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),  url('../fonts/Montserrat-Bold/Montserrat-Bold.woff') format('woff'), url('../fonts/Montserrat-Bold/Montserrat-Bold.ttf')  format('truetype'), url('../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
+    src: url('../../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),  url('../../fonts/Montserrat-Bold/Montserrat-Bold.woff') format('woff'), url('../../fonts/Montserrat-Bold/Montserrat-Bold.ttf')  format('truetype'), url('../../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
     font-weight: normal;
     font-style: normal;
 }

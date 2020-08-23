@@ -85,14 +85,15 @@ let outputSocketMessage = (msg) => {
     $(messageContainerDiv).append(messageDiv);
     $("#chat-messages-container .col-12").append(messageContainerDiv);
 
-    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
     setupChatMessages();
 }
 
 
 
-$(".sendMessageButton").click(() => {
-    chatform.submit();
+$("#sendMessageButton").click(() => {
+    $('#addAttachmentButton').removeClass('d-none');
+    $('#sendMessageButton').addClass('d-none');
+    $("#chat-form").submit();
 });
 
 
@@ -141,4 +142,5 @@ function setupChatMessages() {
 //Chat messages setup
     $('#chat-messages-container .chat-message-container').addClass('row');
     $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
+    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
 }

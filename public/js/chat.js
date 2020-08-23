@@ -1,6 +1,5 @@
 $(document).ready(function(){
     setupPeopleSelect();
-    setupChatMessages();
     fixChatAndPplCntrHeights();
 
     //Fix issues associated with internet explorer
@@ -11,16 +10,6 @@ $(document).ready(function(){
 
         $('.chat-message-container .chat-message').each(function() {
             $(this).css('max-width', '100%');
-        });
-    }
-
-    //Force the messages containers scroll bar to the bottom on load
-    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
-
-    //Remove active person on page load
-    if ($(window).width() < 576) {
-        $('.person-container').each(function(){
-            $(this).removeClass('active');
         });
     }
 });
@@ -92,11 +81,12 @@ function setupPeopleSelect() {
     $('.person-container i').addClass('col-2 col-sm-3 col-md-2 col-lg-1 p-md-0');
 }
 
-function setupChatMessages() {
-//Chat messages setup
-    $('#chat-messages-container .chat-message-container').addClass('row');
-    $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
-}
+//This was moved to client.js
+// function setupChatMessages() {
+// //Chat messages setup
+//     $('#chat-messages-container .chat-message-container').addClass('row');
+//     $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
+// }
 //**********************************
 //Setup END
 //**********************************
@@ -253,16 +243,12 @@ function populateActivePersonData(activePersonCntr) {
 let $chatInp = $('#chat-input');
 $chatInp.on('input', function() {
     if ($chatInp.val() !== "") {
-        $('#chat-message-btn i').removeClass('fa-plus');
-        $('#chat-message-btn i').addClass('fa-paper-plane');
-        $('#chat-message-btn a i').parent().removeClass('addAttachment');
-        $('#chat-message-btn a i').parent().addClass('sendMessageButton');
+        $('#addAttachmentButton').addClass('d-none');
+        $('#sendMessageButton').removeClass('d-none');
     }
     else {
-        $('#chat-message-btn i').addClass('fa-plus');
-        $('#chat-message-btn i').removeClass('fa-paper-plane');
-        $('#chat-message-btn a i').parent().addClass('addAttachment');
-        $('#chat-message-btn a i').parent().removeClass('sendMessageButton');
+        $('#addAttachmentButton').removeClass('d-none');
+        $('#sendMessageButton').addClass('d-none');
     }
 });
 //**********************************

@@ -123,19 +123,19 @@ socket.on('serverToClientMessage', (message) => {
 
 
 
-$(document).ready(
-    function() {
-        //Shown in conversation list inside every person's name
-        $('.theirUserID').hide();
-        $('.myUserID').hide();
+$(document).ready(function() {
+    //Shown in conversation list inside every person's name
+    $('.theirUserID').hide();
+    $('.myUserID').hide();
 
 
-        //Used in the row when user is about to send message
-        $('#theirUserID').hide();
-        $('#myUserID').hide();
-        $('.hideme').hide();
-    }
-);
+    //Used in the row when user is about to send message
+    $('#theirUserID').hide();
+    $('#myUserID').hide();
+    $('.hideme').hide();
+
+    $('.person-container').first().trigger('click');
+});
 
 
 function setupChatMessages() {

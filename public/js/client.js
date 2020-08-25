@@ -96,6 +96,16 @@ $("#sendMessageButton").click(() => {
     $("#chat-form").submit();
 });
 
+$("#chat-input").keypress(function(e) {
+    let keycode = e.keyCode ? e.keyCode : e.which;
+    //keycode 13 is 'Enter' key
+    if (keycode == '13') {
+        $('#addAttachmentButton').removeClass('d-none');
+        $('#sendMessageButton').addClass('d-none');
+        $("#chat-form").submit();
+    }
+});
+
 
 chatform.submit((e) => {
     e.preventDefault();

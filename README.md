@@ -35,6 +35,16 @@ Getting Started
 ##### **_npm install_**
 
 
+Getting the required environmental variables
+--------------------------------------------
+##### The last step is getting the required environmental variables
+##### Without them, the application won't work fully.
+#### **Ask me for these variables and I will send you the file**
+
+Accessing Database
+-----------------
+##### I will also have to whitelist your IP address on the MongoDB database in order for you to access it, this is moreso a reminder for me
+
 Running Development Server
 ---------------------------
 ###### Once you have installed all the packages necessary, nodemon will automatically restart server any time changes are made to the files (super convenient)
@@ -57,12 +67,13 @@ Adding new packages with **_NPM_**
 ###### For the purpose of this project, say we want to install a new module (e.g. express)
 ###### Always pass in **_--save-exact_** flag in order for modules to not auto update to newer version and risk breaking stuff
 ###### If the package/module just makes development easier but not necessarily needed to host the application, (like **_nodemon_**) then pass in **_--save-dev_** flag
+###### https://www.youtube.com/watch?v=rv2xcy0u3y8 <- watch this to understand npm versioning
 
 
 ##### **_npm install --save-exact express_**
 ##### **_npm install --save-exact --save-dev nodemon_**
 
-###### We can check that we saved exact version by verifying that a carret '^' is not next to the version
+###### We can check that we saved exact version by verifying that a caret '^' is not next to the version
 ###### **_Good_**:    "express": "4.17.1"   Will not update automatically
 ###### **_Bad_**:    "express": "^4.17.1"   Will update automatically, happens by default if we pass in only **_--save_** flag
 
@@ -73,7 +84,11 @@ Removing packages with **_NPM_**
 ##### **_npm uninstall --save-exact --save-dev nodemon_**
 
 
+Making Pull Requests
+----------------------
 
+##### When making a pull request, always make them to **_review-branch_**.
+##### This gives me a chance to review the changes and run them on my end before merging them into the production version (master)
 
 
 

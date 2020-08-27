@@ -199,21 +199,31 @@ io.on('connection', socket => {
         if (currentRoom == null){
             socket.join(room)
             currentRoom = room
-        }else{
-            socket.leave(currentRoom)
-            socket.join(room);
-            currentRoom = room;
-        }
 
+        }else{
+
+            let switchRooms = new Promise((resolve, reject) => {
+                socket.leave(currentRoom)
+                // This command removes the listeners from everyone in that room that was looking for it
+                // Without this, duplicate messages would be sent and sometimes to the wrong people if
+                // We switched between rooms bc the event listener would still be there.
+                socket.removeAllListeners('chatMessage');
+                resolve();
+            })
+
+            switchRooms.then(() => {
+                socket.join(room);
+                currentRoom = room;
+            })
+        }
 
 
         socket.on('chatMessage', (msg) => {
 
-            let messageObject = formatMessage(msg, username, penpalusername);
+            let msgObj = formatMessage(msg, username, penpalusername, room);
             //Made this environmental bc axios required it to be a full hard coded link
             axios.post(process.env.MYFULLMESSAGEPATH, {
-                msgObj: messageObject,
-                room: room
+                msgObj: msgObj
             })
                 .then(response => {
 
@@ -221,7 +231,7 @@ io.on('connection', socket => {
 
                     //io.emit('serverObject', retVal)
                     io.in(currentRoom).emit('serverToClientMessage', {
-                        messageObject: messageObject,
+                        msgObj: msgObj,
                         currentUserid: response.data.currentUserid,
                         currentUserfirstname: response.data.currentUserfirstname,
                         penpalUserid: response.data.penpalUserId,

@@ -3,8 +3,10 @@ const socket = io();
 const chatform = $("#chat-form");
 let chatmessages = $("#chat-messages-container");
 
+
 let theirUserID,
     myUserID;
+
 
 
 let outputAJAXMessages = (msgObj) => {
@@ -26,13 +28,14 @@ let outputAJAXMessages = (msgObj) => {
         const messageDiv = document.createElement('div');
         $(messageDiv).addClass('chat-message');
 
-        if(msgObj.messages[i].msgSentByMe == msgObj.thisuserId)
+        if(msgObj.messages[i].msgSentByMe === msgObj.thisuserId)
             $(messageContainerDiv).addClass('sent');
         else
             $(messageContainerDiv).addClass('received');
 
         $(messageDiv).append(`<div class="message-body">${msgObj.messages[i].text}</div>
                               <div class="message-date">${msgObj.messages[i].timeSentText} ${msgObj.messages[i].dateSentText}</div>`);
+
 
         $(messageContainerDiv).append(messageDiv);
         $("#chat-messages-container .col-12").append(messageContainerDiv);
@@ -56,8 +59,6 @@ $(".person-container").click((event) => {
     theirUserID = $(event.currentTarget).find(".theirUserID").text();
     myUserID = $(event.currentTarget).find(".myUserID").text();
 
-
-
     let userIDs = [myUserID, theirUserID]
     userIDs.sort();
     let room = userIDs[0].concat(userIDs[1])
@@ -79,6 +80,7 @@ $(".person-container").click((event) => {
 
 
 let outputSocketMessage = (msg) => {
+
     /* This is what the msg object looks like
                 {
                     msgObj: msgObj,
@@ -112,14 +114,31 @@ let outputSocketMessage = (msg) => {
     setupChatMessages();
 
 
+    $(messageContainerDiv).append(messageDiv);
+    $("#chat-messages-container .col-12").append(messageContainerDiv);
+
     //This was used before to autoscroll on new message, now lays unused, here for future reference
     //chatmessages.scrollTop = chatmessages.scrollHeight;
+
 }
 
 
 
-$(".sendMessageButton").click(() => {
-    chatform.submit();
+
+$("#sendMessageButton").click(() => {
+    $('#addAttachmentButton').removeClass('d-none');
+    $('#sendMessageButton').addClass('d-none');
+    $("#chat-form").submit();
+});
+
+$("#chat-input").keypress(function(e) {
+    let keycode = e.keyCode ? e.keyCode : e.which;
+    //keycode 13 is 'Enter' key
+    if (keycode == '13') {
+        $('#addAttachmentButton').removeClass('d-none');
+        $('#sendMessageButton').addClass('d-none');
+        $("#chat-form").submit();
+    }
 });
 
 
@@ -149,18 +168,27 @@ socket.on('serverToClientMessage', (message) => {
 
 
 
-$(document).ready(
-    function() {
-        //Shown in conversation list inside every person's name
-        $('.theirUserID').hide();
-        $('.myUserID').hide();
+
+$(document).ready(function() {
+    //Shown in conversation list inside every person's name
+    $('.theirUserID').hide();
+    $('.myUserID').hide();
 
 
-        //Used in the row when user is about to send message
-        $('#theirUserID').hide();
-        $('#myUserID').hide();
-        $('.hideme').hide();
-    }
-);
+    //Used in the row when user is about to send message
+    $('#theirUserID').hide();
+    $('#myUserID').hide();
+    $('.hideme').hide();
 
 
+    $('.person-container').first().trigger('click');
+});
+
+
+
+function setupChatMessages() {
+//Chat messages setup
+    $('#chat-messages-container .chat-message-container').addClass('row');
+    $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
+    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
+}

@@ -63,7 +63,9 @@
                             <p class="myUserID">{{ ../../currentUser }}</p>
                         </div>
                         <div class="book-name">
-                            <h6>testestset</h6>
+
+                            <h6>Temp bookname - Book name missing from penpal object</h6>
+
                         </div>
                     </div>
                 </div>
@@ -112,10 +114,11 @@
                         <input type="text"  value="" id="theirUserID">
                     {{/if}}
                 </form>
-                <div id="chat-message-btn" class="sendMessageButton col-2 col-md-1">
-                    <a class="addAttachment">
-                        <i class="fas fa-plus btn-icon"></i>
-                    </a>
+
+                <div id="chat-message-btn" class="col-2 col-md-1">
+                    <i id="addAttachmentButton" class="fas fa-plus btn-icon"></i>
+                    <i id="sendMessageButton" class="fas fa-paper-plane btn-icon d-none"></i>
+
                 </div>
             </div>
         </div>

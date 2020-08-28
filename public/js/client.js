@@ -74,6 +74,9 @@ $(".person-container").click((event) => {
 
         outputAJAXMessages(res, myUserID, theirUserID)
     });
+    let msg = $("#chat-input");
+    msg.val('');
+    msg.focus();
 });
 
 

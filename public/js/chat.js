@@ -1,3 +1,4 @@
+let screenWidth;
 $(document).ready(function(){
     setupPeopleSelect();
     fixChatAndPplCntrHeights();
@@ -12,6 +13,18 @@ $(document).ready(function(){
             $(this).css('max-width', '100%');
         });
     }
+
+    //Force the messages containers scroll bar to the bottom on load
+    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
+
+    //Remove active person on page load
+    if ($(window).width() < 576) {
+        $('.person-container').each(function(){
+            $(this).removeClass('active');
+        });
+    }
+
+    screenWidth = $(window).width();
 });
 
 
@@ -37,8 +50,13 @@ $(window).resize(function() {
         });
     }
 
-    //Reset margin on message container
-    $msgCntnr.css('margin-top', '');
+    //Reset margin on message container only if the screen width changed.
+    //This is required for mobile devices otherwise scrolling up/down on mobile and expanding/contracting the
+    //search bar at the top of the screen will cause the message container position to move.
+    if (screenWidth != $(window).width()) {
+        screenWidth = $(window).width();
+        $msgCntnr.css('margin-top', '');
+    }
 });
 
 
@@ -80,13 +98,6 @@ function setupPeopleSelect() {
     $('<i class="far fa-arrow-alt-circle-right"></i>').insertAfter('.person-container.selling h5');
     $('.person-container i').addClass('col-2 col-sm-3 col-md-2 col-lg-1 p-md-0');
 }
-
-//This was moved to client.js
-// function setupChatMessages() {
-// //Chat messages setup
-//     $('#chat-messages-container .chat-message-container').addClass('row');
-//     $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
-// }
 //**********************************
 //Setup END
 //**********************************

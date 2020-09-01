@@ -67,6 +67,12 @@ $(".person-container").click((event) => {
         outputAJAXMessages(res, myUserID, theirUserID)
     });
 
+    // This is placed here just in case we have just made a new conversation, where the div loads in automatically
+    // with "New Conversation", but click on a new person-container.
+    // If we didn't have this, the newconversation div would remain there
+    let $newConvoDiv = $(".new-conversation-div");
+    $newConvoDiv.hide();
+
     let msg = $("#chat-input");
     msg.val('');
     if ($(window).width() >= 576)
@@ -146,7 +152,7 @@ $chatform.submit((e) => {
 
 
 socket.on('serverToClientMessage', (message) => {
-    console.log(message);
+
     outputSocketMessage(message);
 });
 
@@ -163,11 +169,15 @@ $(document).ready(function() {
     $('#myUserID').hide();
     $('.hideme').hide();
 
-    //Forces the first person container to be clicked resulting in the message container being populated
-    //with the messages of the top person container so it is not empty
-    //If on mobile, screen width < 576px, this does not occur.
-    if ($(window).width() >= 576)
-        $('.person-container').first().trigger('click');
+
+    // This was moved to it's own javascript file, selectTopConverseation.js, in order to
+    // only use it if we aren't coming from a new conversation
+
+    // //Forces the first person container to be clicked resulting in the message container being populated
+    // //with the messages of the top person container so it is not empty
+    // //If on mobile, screen width < 576px, this does not occur.
+    // if ($(window).width() >= 576)
+    //     $('.person-container').first().trigger('click');
 });
 
 

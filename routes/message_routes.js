@@ -212,7 +212,12 @@ router.route('/conversations').get((request, response, next) => {
         let cameFromBookPage = false
     }
 
+    // If this object was passed in, this means that we are creating a new conversation,
+    // and can't just select one from the left menu. If we just click on the conversations tab,
+    // then this value will be null.
     let {bookOwner} = request.query;
+
+
 
 
 
@@ -273,15 +278,40 @@ router.route('/conversations').get((request, response, next) => {
                     }else{
                         penpalCount = userMap[0].length
                     }
-                    //console.log(userMap)
 
 
-                    response.render('conversation_list', {
-                        title: 'Messages',
-                        myPenPals: userMap,
-                        penpalCount: penpalCount,
-                        bookOwner : bookOwner
-                    })
+
+
+
+
+
+                    return Promise.all([userMap, penpalCount])
+
+
+
+                }).then(([userMap, penpalCount]) => {
+                    console.log(bookOwner)
+                    if (bookOwner){
+                        User.findById(bookOwner).then(penpal => {
+                            response.render('conversation_list', {
+                                title: 'Messages',
+                                myPenPals: userMap,
+                                penpalCount: penpalCount,
+                                bookOwner : bookOwner,
+                                newPenpalFirstname: penpal.firstname,
+                                newPenpalLastname: penpal.lastname
+                            })
+                        }).catch(err => {
+                            next(err)
+                        })
+                    }else{
+                        response.render('conversation_list', {
+                            title: 'Messages',
+                            myPenPals: userMap,
+                            penpalCount: penpalCount,
+                            bookOwner : bookOwner
+                        })
+                    }
 
 
 

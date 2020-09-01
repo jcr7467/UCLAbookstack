@@ -18,6 +18,7 @@ let outputAJAXMessages = (msgObj) => {
 
     $chatMessagesCntr.empty();
     console.log(msgObj);
+
     for(let i = 0 ; i < msgObj.messages.length ; i++){
         const messageContainerDiv = document.createElement('div');
         $(messageContainerDiv).addClass("chat-message-container")
@@ -45,11 +46,6 @@ let outputAJAXMessages = (msgObj) => {
 }
 
 
-function setupChatMessages() {
-//Chat messages setup
-    $('#chat-messages-container .chat-message-container').addClass('row');
-    $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
-}
 
 $(".person-container").click((event) => {
     theirUserID = $(event.currentTarget).find(".theirUserID").text();
@@ -70,12 +66,12 @@ $(".person-container").click((event) => {
 
         outputAJAXMessages(res, myUserID, theirUserID)
     });
+
     let msg = $("#chat-input");
     msg.val('');
     if ($(window).width() >= 576)
         msg.focus();
 });
-
 
 
 
@@ -91,26 +87,24 @@ let outputSocketMessage = (msg) => {
     * */
 
 
-    // Create a new message div
+    const messageContainerDiv = document.createElement('div');
+    $(messageContainerDiv).addClass("chat-message-container row")
+
     const messageDiv = document.createElement('div');
-    $(messageDiv).addClass('chat-message');
+    $(messageDiv).addClass('chat-message col');
+
+    if(msg.msgObj.username === myUserID)
+        $(messageContainerDiv).addClass('sent');
+    else
+        $(messageContainerDiv).addClass('received');
+
     $(messageDiv).append(`<div class="message-body">${msg.msgObj.text}</div>
         <div class="message-date">${msg.msgObj.time} ${msg.msgObj.date}</div>`);
 
-    // Create a container for the message div above and append the message to this container
-    const messageContainerDiv = document.createElement('div');
-    $(messageContainerDiv).addClass("chat-message-container")
     $(messageContainerDiv).append(messageDiv);
-    if(msg.msgObj.username === myUserID){
-        $(messageContainerDiv).addClass('sent');
-    } else{
-        $(messageContainerDiv).addClass('received');
-    }
-
-    // Append the container above into the outermost container
     $chatMessagesCntr.append(messageContainerDiv);
 
-    setupChatMessages();
+    $chatmessages.scrollTop($chatmessages.prop('scrollHeight'));
 }
 
 
@@ -134,6 +128,7 @@ $("#chat-input").keypress(function(e) {
 });
 
 
+
 $chatform.submit((e) => {
     e.preventDefault();
 
@@ -144,16 +139,15 @@ $chatform.submit((e) => {
 
     //Clear input
     msg.val('');
-    msg.focus();
-
+    if ($(window).width() >= 576)
+        msg.focus();
 });
 
 
-socket.on('serverToClientMessage', (message) => {
-    console.log(message)
-    outputSocketMessage(message)
 
-    //console.log(message)
+socket.on('serverToClientMessage', (message) => {
+    console.log(message);
+    outputSocketMessage(message);
 });
 
 

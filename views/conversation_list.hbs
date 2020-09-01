@@ -63,7 +63,9 @@
                             <p class="myUserID">{{ ../../currentUser }}</p>
                         </div>
                         <div class="book-name">
-                            <h6>Temp bookname - Book name missing from penpal object</h6>
+
+                            <!-- <h6>Temp bookname - Book name missing from penpal object</h6> -->
+
                         </div>
                     </div>
                 </div>
@@ -76,11 +78,21 @@
             <div id="chat-header" class="row">
                 <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
-                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
+                        {{#if bookOwner}}
+                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top">{{newPenpalFirstname}} {{newPenpalLastname}}</h4>
+                        {{else}}
+                            <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
+                        {{/if}}
                     </div>
                     <div class="chat-book-info row">
-                        <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
-                        <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
+                        {{#if bookOwner}}
+                            <h5 id="chat-buy-sell" class="new-conversation-div col-12 col-md-12 col-lg-12">New Conversation</h5>
+
+                        {{else}}
+                            <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
+                            <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
+                        {{/if}}
+
                     </div>
                 </div>
                 <div id="chat-header-btns" class="col-3 col-sm-2 col-xl-1">

@@ -11,6 +11,8 @@
 
 * */
 
+
+
 let express = require("express"),
     router  = express.Router();
 let Promise = require('bluebird')
@@ -83,8 +85,8 @@ router.post('/chat', mid.mustHaveEmailVerified,  (request, response, next) => {
 
 
 
-
-router.post('/sendmessage', (request, response, next) => {
+//if we change this we must change the environmental variable also
+router.post('/ajaxsendmessage', (request, response, next) => {
     /*
     * This post request comes from app.js, and is not directly submitted by the user
     * because of this, we do not have the request.session variables, like the userID
@@ -94,14 +96,17 @@ router.post('/sendmessage', (request, response, next) => {
     let { msgObj } = request.body;
     let { penpalusername } = msgObj;
     let { username } = msgObj;
-    let { room } = request.body;
+    let { room } = msgObj;
     let { time } = msgObj;
     let { date } = msgObj;
 
-
+    // It starts by finding the conversation between the two users
+    // (this room is just a concatination of their user id's)
     Conversation.findOne({room: room})
         .then((conversation) => {
-            if (conversation === null){
+
+
+            if (conversation === null){ // If the conversation does not exist, then create one
 
                 let conversationData = {
                     room: room,
@@ -118,7 +123,8 @@ router.post('/sendmessage', (request, response, next) => {
 
                 Conversation.create(conversationData);
                 return false
-            }else {
+
+            }else { // If it does exist, then just push the message into the conversation model's messages array
                 conversation.messages.push({
                     text: msgObj.text,
                     msgSentByMe: username,
@@ -130,9 +136,10 @@ router.post('/sendmessage', (request, response, next) => {
                 return true
             }
         })
-        .then(conversationFoundBool => {
+        .then(conversationFoundBool => { // We just pass along this bool which states if the conversation was found
 
 
+            // Returns the array with the user's objects passed in also
             return Promise.all([conversationFoundBool, User.findById(username), User.findById(penpalusername)])
 
 
@@ -141,8 +148,9 @@ router.post('/sendmessage', (request, response, next) => {
         })
         .then(([conversationFoundBool, currentUser, penpalUser]) => {
 
+            // Using the passed along bool, if the conversation was not found, then push
+            // the penpal's id into the current user's 'hasConversationsWith' array
             if(!conversationFoundBool){
-
                 currentUser.hasConversationsWith.push({
                     thePenPal: penpalusername
                 })
@@ -156,6 +164,8 @@ router.post('/sendmessage', (request, response, next) => {
         })
         .then(([conversationFoundBool, currentUser, penpalUser]) => {
 
+            // Using the passed along bool, if the conversation was not found, then push
+            // the current user's id into the penpal's 'hasConversationsWith' array
             if (!conversationFoundBool){
                 penpalUser.hasConversationsWith.push({
                     thePenPal: username
@@ -169,8 +179,10 @@ router.post('/sendmessage', (request, response, next) => {
         })
         .then(([currentUser, penpalUser]) => {
 
+            // This gets sent to app.js where it then gets sent to client.js
+            // This is what 'response' object will look like
             response.send({
-                currentUserid: currentUser._id,
+                currentUserid:  currentUser._id,
                 currentUserfirstname: currentUser.firstname,
                 penpalUserid: penpalUser._id,
                 penpalUserfirstname: penpalUser.firstname,
@@ -191,6 +203,18 @@ router.post('/sendmessage', (request, response, next) => {
 
 
 router.route('/conversations').get((request, response, next) => {
+    //If this was even passed in, doesnt matter what it is, then
+    // it means they came from book page, and we need to manually find the user,
+    // bc they wont already have a conversation with them
+    if (request.query.newconvo){
+        let cameFromBookPage = true
+    }else{
+        let cameFromBookPage = false
+    }
+
+    let {bookOwner} = request.query;
+
+
 
     User.findById(request.session.userId).lean()
         .then(user => {
@@ -201,6 +225,7 @@ router.route('/conversations').get((request, response, next) => {
              * if accum is not an array, make it one
              * return accum
              */
+
             let push_penpal_to_userMap = (penpalObj, userMap) => {
                 // on first pass, accum will be undefined, so make it an array
                 let penPalUserId = penpalObj.thePenPal
@@ -218,6 +243,7 @@ router.route('/conversations').get((request, response, next) => {
                                 penpalFirstName: penpal.firstname,
                                 penpalLastName: penpal.lastname
                             })
+
 
                             resolve(userMap)
                         }
@@ -237,7 +263,7 @@ router.route('/conversations').get((request, response, next) => {
                     // results will contain the accumulated results from all
                     // the mapped operations
 
-
+                    // console.log('start', userMap, 'end')
                     //For some reason, this userMap is a two dimensional array,
                     // So in handlebars, we must have a two dimmensional array for each loop
                     //
@@ -247,12 +273,17 @@ router.route('/conversations').get((request, response, next) => {
                     }else{
                         penpalCount = userMap[0].length
                     }
-                    penpalCount =
+                    //console.log(userMap)
+
+
                     response.render('conversation_list', {
                         title: 'Messages',
-                        myPenPals: userMap[0],
-                        penpalCount: penpalCount
+                        myPenPals: userMap,
+                        penpalCount: penpalCount,
+                        bookOwner : bookOwner
                     })
+
+
 
                 })
                 .catch(err => {
@@ -267,6 +298,49 @@ router.route('/conversations').get((request, response, next) => {
 
 
 
+router.post('/ajaxmessageload', (request, response, next) => {
 
+
+    // In order to make the room deterministic, we take both the user's ids, and sort them.
+    // We then concatinate the ids and use this as the room number
+    let userIDs = [request.session.userId, request.body.theirUserID];
+    userIDs.sort();
+    let room = userIDs[0].concat(userIDs[1]);
+    //console.log(room, userIDs)
+
+
+    // Lean command in order for handlebars to read it.
+    // In order to turn it into a json object
+    Conversation.findOne({room: room }).lean()
+    .then(conversation => {
+
+            return Promise.all([conversation, User.findById(request.body.theirUserID).lean()])
+
+
+    }).then(([conversation, penpal]) => {
+        if(conversation == null){
+
+            //If there are no messages, dont send a null object
+            return response.send({
+                myPenpal: penpal,
+                thisuser: request.session.userId
+            })
+
+        }else{
+
+            return response.send({
+                myPenpal: penpal,
+                messages: conversation.messages,
+                thisuserId: request.session.userId,
+                thisuserFirstname: request.session.userObject.firstname
+            })
+
+        }
+
+    }).catch(err => {
+        next(err);
+    })
+
+})
 
 module.exports = router;

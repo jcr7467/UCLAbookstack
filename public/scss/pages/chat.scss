@@ -1,0 +1,438 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
+:root {
+  --dark-color-a: #2D68C4;
+  --dark-color-b: #2D68C4;
+  --light-color: #a6c4db;
+  --success-color: #5cb85c;
+  --error-color: #d9534f;
+  --back-color: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  background: var(--back-color);
+}
+
+.resize-animation-stopper * {
+  animation: none !important;
+  transition: none !important;
+}
+
+.chat-wrapper {
+  width: 100%;
+  height: 75vh;
+  min-height: 400px;
+  border-radius: 20px;
+  border: $border-width solid $border-color;
+  overflow: hidden;
+
+  i {
+    color: $blue;
+    font-size: 12pt;
+
+    &.btn-icon:hover {
+      cursor: pointer;
+      color: lighten($blue, 10%);
+    }
+  }
+
+  i.fa-arrow-alt-circle-left {
+    color: $orange;
+  }
+
+  i.fa-arrow-alt-circle-right {
+    color: $teal;
+  }
+
+  h4 {
+    font-family: "Montserrat-Bold", sans-serif;
+    font-size: 16pt;
+  }
+
+  #expand-right-container {
+    position: absolute;
+    width: 50px;
+    display: none;
+    opacity: 0;
+    justify-content: center;
+    margin-top: -30px;
+    transition: opacity .35s ease;
+
+    i {
+      font-size: 22px;
+    }
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $gray-200;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $gray-400;
+    border-radius: 20px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $gray-500;
+  }
+}
+
+#message-container {
+  margin-top: 0;
+  transition: margin 0.35s ease;
+
+  .message-header {
+    border-bottom: $border-width solid $border-color;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      i {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .message-search-container {
+    height: 40px;
+    border-bottom: $border-width solid $border-color;
+    display: flex;
+    align-items: center;
+
+    #message-search {
+      width: 90%;
+      margin: auto;
+      height: 30px;
+      border: none;
+      outline: none;
+    }
+  }
+
+  .message-filter-select {
+    min-height: 25px;
+
+    .filter-button {
+      height: 25px;
+      width: 100%;
+      outline: none;
+      border-bottom: $border-width solid $border-color;
+      border-top: none;
+      display: flex;
+      align-items: center;
+
+      i {
+        position: absolute;
+        left: .25em;
+      }
+
+      p {
+        margin: 0;
+        width: 100%;
+      }
+    }
+  }
+
+  #people-select-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    align-content: flex-start;
+
+    .person-container {
+      border-bottom: $border-width solid $border-color;
+      height: 60px;
+      width: 100%;
+
+      .person-icon-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .person-info {
+        align-self: center;
+        padding: 0.5rem;
+
+        .person-name-and-icon {
+          align-items: center;
+
+          h5 {
+            font-family: "Montserrat-Regular", sans-serif;
+            font-size: 1em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 0;
+          }
+
+          i ::before {
+            padding-right: 1em;
+          }
+        }
+
+        .book-name h6 {
+          font-family: "Montserrat-Regular", sans-serif;
+          font-size: .8em;
+          color: $gray-600;
+          line-height: 1.1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin-bottom: 0;
+          letter-spacing: 0;
+        }
+      }
+    }
+
+    .person-container:hover {
+      background-color: $gray-200;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: $gray-200;
+    }
+  }
+
+  @include media-breakpoint-down(md) {
+    .message-filter-select .filter-button {
+      height: 35px;
+
+      i {
+        left: .5em;
+      }
+    }
+
+    .filter-button:last-child i {
+      left: 4em;
+    }
+
+    #message-search {
+      width: 80% !important;
+    }
+  }
+
+  @include media-breakpoint-down(sm) {
+    .message-filter-select .filter-button {
+
+      p {
+        align-self: center;
+      }
+
+      i {
+        left: .25em;
+      }
+    }
+
+    .filter-button:last-child i {
+      left: 4em;
+    }
+
+  }
+
+  @include media-breakpoint-down(xs) {
+    .message-filter-select .filter-button {
+      i {
+        left: 1em;
+      }
+    }
+
+    .filter-button:last-child i {
+      left: 6em;
+    }
+
+    .person-name-and-icon i {
+      text-align: right;
+    }
+
+    #message-search {
+      width: 90% !important;
+    }
+  }
+}
+
+#chat-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.35s ease;
+  border-left: 1px solid $gray-500;
+
+  #chat-header {
+    height: 68px;
+    background-color: $gray-200;
+    border-top-right-radius: 20px;
+    border-bottom: $border-width solid $border-color;
+    margin-right: -16px;
+
+    #chat-person-book-info {
+
+      h4 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 0;
+      }
+
+      #chat-buy-sell {
+        font-family: "Montserrat-Bold", sans-serif;
+
+        &.buying {
+          &::before {
+            color: $orange;
+            content: 'Buying';
+          }
+        }
+
+        &.selling {
+          &::before {
+            color: $green;
+            content: 'Selling';
+          }
+        }
+      }
+
+      #chat-book-name {
+        font-family: "Montserrat-Regular", sans-serif;
+        color: $gray-600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        letter-spacing: 0;
+      }
+    }
+
+    #chat-header-btns {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      i {
+        font-size: 30px
+      }
+    }
+
+    @include media-breakpoint-down(xs) {
+      #chat-header-btns {
+        justify-content: space-between;
+      }
+    }
+  }
+
+  #chat-messages-container {
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    .chat-message-container {
+
+      &.sent {
+        justify-content: flex-end;
+
+        .message-body {
+          background-color: lighten($gray-400, 10%);
+        }
+
+        .message-date::before {
+          content: "Sent: ";
+        }
+      }
+
+      &.received {
+
+        .message-body {
+          background-color: darken($gray-400, 5%);
+        }
+
+        .message-date::before {
+          content: "Received: ";
+        }
+      }
+
+      .chat-message {
+        max-width: 70%;
+        margin: 1em 0;
+
+        .message-body {
+          padding: .5em;
+          border-radius: 5px;
+        }
+
+        .message-date {
+          font-size: 0.6em;
+          color: $gray-500;
+        }
+      }
+
+      @include media-breakpoint-down(md) {
+        .chat-message {
+          max-width: 80%;
+        }
+      }
+
+      @include media-breakpoint-down(sm) {
+        .chat-message {
+          max-width: 90%;
+        }
+      }
+    }
+  }
+
+  #chat-new-container {
+    height: 40px;
+    margin-bottom: 0;
+    border-top: $border-width solid $border-color;
+    margin-right: -16px;
+
+    .chat-input {
+      background-color: $gray-200;
+    }
+
+    #chat-form {
+      display: flex;
+
+      input {
+        background: rgba(216, 216, 216, 0);
+        margin: auto 0;
+        height: 30px;
+        border: none;
+        outline: none;
+        width: 100%;
+      }
+    }
+
+    #chat-message-btn {
+      background-color: $gray-200;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-left: $border-width solid $border-color;
+
+      i {
+          font-size: 22px;
+      }
+    }
+  }
+}
+
+@include media-breakpoint-down(xs) {
+  #chat-container {
+    border: none;
+  }
+}

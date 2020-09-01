@@ -180,28 +180,58 @@ app.use('/', message_routes);
 // Run when client connects
 io.on('connection', socket => {
 
-    //console.log(socket.handshake.headers.cookie);
+    //This variable will be used to track if a user is already in a room
+    // If this variable is not null, then we leave the room it is set to and set it to the new room
+    let currentRoom = null;
+
 
     socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
 
         let username = myUserID,
             penpalusername = theirUserID;
 
-        socket.join(room);
+
+        /*
+        If we are in a room, we first leave it.
+        There will only ever be one room because
+        everytime we join a new one we leave the old one
+        */
+        if (currentRoom == null){
+            socket.join(room)
+            currentRoom = room
+
+        }else{
+
+            let switchRooms = new Promise((resolve, reject) => {
+                socket.leave(currentRoom)
+                // This command removes the listeners from everyone in that room that was looking for it
+                // Without this, duplicate messages would be sent and sometimes to the wrong people if
+                // We switched between rooms bc the event listener would still be there.
+                socket.removeAllListeners('chatMessage');
+                resolve();
+            })
+
+            switchRooms.then(() => {
+                socket.join(room);
+                currentRoom = room;
+            })
+        }
+
 
         socket.on('chatMessage', (msg) => {
 
-            let messageObject = formatMessage(msg, username, penpalusername);
-
+            let msgObj = formatMessage(msg, username, penpalusername, room);
+            //Made this environmental bc axios required it to be a full hard coded link
             axios.post(process.env.MYFULLMESSAGEPATH, {
-                msgObj: messageObject,
-                room: room
+                msgObj: msgObj
             })
                 .then(response => {
 
+
+
                     //io.emit('serverObject', retVal)
-                    io.emit('message', {
-                        messageObject: messageObject,
+                    io.in(currentRoom).emit('serverToClientMessage', {
+                        msgObj: msgObj,
                         currentUserid: response.data.currentUserid,
                         currentUserfirstname: response.data.currentUserfirstname,
                         penpalUserid: response.data.penpalUserId,
@@ -215,9 +245,9 @@ io.on('connection', socket => {
 
                 console.log(error)
             });
+            /*
 
-
-
+         */
         });
     });
 
@@ -237,7 +267,7 @@ let deleteOldUnverifiedUsers = () => {
 
 
     User.find({emailverified: false}).then(users => {
-        //console.log(users)
+
         for(let i = 0 ; i < users.length ; i++){
             //600,000 is 10 minutes in milliseconds,
             let fourWeeksInMilliseconds = 2419200000
@@ -264,38 +294,18 @@ let deleteOldUnverifiedUsers = () => {
 // This should not be an issue because we are only deleting messages older than a month
 // and we run this function once a week
 let deleteOldMessages = () => {
-//when date.now - 30000 is greater than date.thencreated
-/*
-    let dateValid = Date.now() - 300000;
-    console.log(Date.now() > Date.now() + 4000)
-    Conversation.updateMany({}, {$pull: {messages: {dateSentFromServer: {$lt: dateValid}}  }}, {safe: true}, (err, obj) => {
-        if(err){console.log('houston we have a problem')}
-        else{console.log('I guess not', obj.nModified)}
-    })
-    console.log('yes baby')
-*/
 
     let timeValidFor = 2419200000 // 28 days, or four weeks
 
     Conversation.find({}).then(conversations => {
 
         if (conversations){ // if not equal to null
-            console.log('in here!')
+
             for (let i = 0 ; i < conversations.length ; i++){
 
                 for (let j = 0 ; j < conversations[i].messages.length ; j ++){
                     //We need to call getTime in order to conver the object/string into seconds since 1970 and then compare those
                     let expires = conversations[i].messages[j].dateSentFromServer.getTime() + timeValidFor;
-
-
-
-                    console.log(conversations[i].messages[j].text)
-                    //let expires = new Date(Date.now() + timeValidFor)
-
-
-
-
-                    console.log(expires < Date.now())
 
                     if (expires < Date.now()){
 
@@ -304,30 +314,17 @@ let deleteOldMessages = () => {
 
                                 return new Promise((resolve, reject) => {
                                     conversations[conversationIndex].messages.splice(messageIndex, 1)//We give the index and how many elements we want to remove
-
-                                    console.log("we removed a message")
-
-                                    console.log(conversations[conversationIndex].messages)
-
                                     conversations[conversationIndex].save((err) => {
                                         if(err){reject(false)}else{resolve(true)}
                                     })
                                 })
                             }
 
-
-
-
-
-
                             let finished = deleteMe(i, j);
 
                         }
 
                         atomicallyRemove()
-
-
-
                     }
                 }
             }

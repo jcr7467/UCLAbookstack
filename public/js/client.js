@@ -1,12 +1,11 @@
 const socket = io();
 
-const chatform = $("#chat-form");
-let chatmessages = $("#chat-messages-container");
-
+const $chatform = $("#chat-form");
+let $chatmessages = $("#chat-messages-container");
+const $chatMessagesCntr = $("#chat-messages-container .col-12");
 
 let theirUserID,
     myUserID;
-
 
 
 let outputAJAXMessages = (msgObj) => {
@@ -17,13 +16,11 @@ let outputAJAXMessages = (msgObj) => {
     //     thisuser: request.session.userId
     // }
 
-
-    $("#chat-messages-container .col-12").empty();
+    $chatMessagesCntr.empty();
     console.log(msgObj);
     for(let i = 0 ; i < msgObj.messages.length ; i++){
         const messageContainerDiv = document.createElement('div');
         $(messageContainerDiv).addClass("chat-message-container")
-
 
         const messageDiv = document.createElement('div');
         $(messageDiv).addClass('chat-message');
@@ -36,9 +33,8 @@ let outputAJAXMessages = (msgObj) => {
         $(messageDiv).append(`<div class="message-body">${msgObj.messages[i].text}</div>
                               <div class="message-date">${msgObj.messages[i].timeSentText} ${msgObj.messages[i].dateSentText}</div>`);
 
-
         $(messageContainerDiv).append(messageDiv);
-        $("#chat-messages-container .col-12").append(messageContainerDiv);
+        $chatMessagesCntr.append(messageContainerDiv);
 
         $('#theirUserID').attr('value', msgObj.myPenpal._id);
         $(".replace-name").text(msgObj.myPenpal.firstname);
@@ -76,14 +72,14 @@ $(".person-container").click((event) => {
     });
     let msg = $("#chat-input");
     msg.val('');
-    msg.focus();
+    if ($(window).width() >= 576)
+        msg.focus();
 });
 
 
 
 
 let outputSocketMessage = (msg) => {
-
     /* This is what the msg object looks like
                 {
                     msgObj: msgObj,
@@ -112,27 +108,20 @@ let outputSocketMessage = (msg) => {
     }
 
     // Append the container above into the outermost container
-    $("#chat-messages-container .col-12").append(messageContainerDiv);
-    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
+    $chatMessagesCntr.append(messageContainerDiv);
+
     setupChatMessages();
-
-
-    $(messageContainerDiv).append(messageDiv);
-    $("#chat-messages-container .col-12").append(messageContainerDiv);
-
-    //This was used before to autoscroll on new message, now lays unused, here for future reference
-    //chatmessages.scrollTop = chatmessages.scrollHeight;
-
 }
-
 
 
 
 $("#sendMessageButton").click(() => {
     $('#addAttachmentButton').removeClass('d-none');
     $('#sendMessageButton').addClass('d-none');
-    $("#chat-form").submit();
+    $chatform.submit();
 });
+
+
 
 $("#chat-input").keypress(function(e) {
     let keycode = e.keyCode ? e.keyCode : e.which;
@@ -145,7 +134,7 @@ $("#chat-input").keypress(function(e) {
 });
 
 
-chatform.submit((e) => {
+$chatform.submit((e) => {
     e.preventDefault();
 
     let msg = $("#chat-input");
@@ -165,10 +154,7 @@ socket.on('serverToClientMessage', (message) => {
     outputSocketMessage(message)
 
     //console.log(message)
-    //This scrolls the messages window down when we get a new message
-    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
 });
-
 
 
 
@@ -183,15 +169,19 @@ $(document).ready(function() {
     $('#myUserID').hide();
     $('.hideme').hide();
 
-
-    $('.person-container').first().trigger('click');
+    //Forces the first person container to be clicked resulting in the message container being populated
+    //with the messages of the top person container so it is not empty
+    //If on mobile, screen width < 576px, this does not occur.
+    if ($(window).width() >= 576)
+        $('.person-container').first().trigger('click');
 });
 
 
-
+//This steps through all message div's and add's their needed classes
+//Most of these added classes are for successful use with bootstrap
+//It also forces the messages to scroll to the bottom
 function setupChatMessages() {
-//Chat messages setup
     $('#chat-messages-container .chat-message-container').addClass('row');
     $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
-    $('#chat-messages-container').scrollTop($('#chat-messages-container').prop('scrollHeight'));
+    $chatmessages.scrollTop($chatmessages.prop('scrollHeight'));
 }

@@ -19,6 +19,7 @@
                             <a href="javascript:void(0);" class="dropdown-toggle">
                                 Account
                             </a>
+
                             <div class="dropdown-menu" >
                                 {{#if (user_is_logged_in currentUser)}}
                                     <a class="dropdown-item" href="/profile">Profile</a>
@@ -77,7 +78,7 @@
                                 </select>
                             </div>
                             <div class="search-field-wrap">
-                                <input  name="query" autocomplete="off" type="search" placeholder="Search Products..." data-toggle="tooltip" data-placement="bottom" title="search item">
+                                <input  name="query" autocomplete="off" type="search" placeholder="Leave empty for all results..." data-toggle="tooltip" data-placement="bottom" title="search item">
                                 <button class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="Search Products">
                                     <i class="fa fa-search"></i></button>
                             </div>

@@ -143,7 +143,7 @@ $chatform.submit((e) => {
     let msg = $("#chat-input");
     //socket.emit('chatMessage', msg);
 
-    socket.emit('chatMessage', msg.val());
+    socket.emit('clientToServerMessage', msg.val());
 
     //Clear input
     msg.val('');

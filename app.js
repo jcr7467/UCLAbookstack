@@ -31,7 +31,9 @@
 */
 
 
-
+/*
+* Dependencies
+* */
 let express = require("express"),
     http    = require("http"),
     path    = require("path"),
@@ -48,30 +50,53 @@ const server = http.createServer(app);
 const io    = require("socket.io")(server);
 const formatMessage = require("./util/messages");
 const flash = require("connect-flash");
+
+
+
+/*
+* Models for our database objects
+* */
+
 const User = require("./models/user")
 const Conversation = require('./models/conversation');
 
 
 
 
-
-// Gives access to environmental variables
+/*
+* Gives application access to environmental variables
+* */
 require('dotenv').config();
 
 
-// Redirects all http traffic to https version
+
+
+/*
+* Redirects all http traffic to https version of site
+* */
 app.use(sslRedirect());
 
-////////////////////////////////////////////////
-//DATABASE DRIVER CODE
 
-//URI: The uri given to us by MongoDb in order to remotely connect to our DB
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////
+* DATABASE DRIVER CODE
+* */
+
+/*
+* Connect to database using environmental variables
+* URI: The uri given to us by MongoDb in order to remotely connect to our DB
+*/
+
 const URI = `mongodb+srv://${process.env.DBUSERNAME}:${process.env.DBPASSWORD}@basebookstack-zx7sx.mongodb.net/${process.env.DBDATABASE}?retryWrites=true&w=majority`;
 mongoose.connect(URI, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false});
+
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Error connecting to mongodb'));
 
-//Use sessions for tracking logins
+
+/*
+* Use sessions for maintaining logins
+* */
 app.use(session({
     secret: 'Server initialized',
     resave: false,
@@ -81,18 +106,35 @@ app.use(session({
     })
 }));
 
+
+
+
+
+
+
+
+/*
+* Use flash in order to prompt messages to user from server.
+* e.g. when an incorrect email/password is passed in and we flash a red banner message saying:
+* "Incorrect email/password"
+ */
 app.use(flash())
 
 
-////////////////////////////////////////////////////////////////
 
+/*
+*
+* SET USER VARIABLES TO USE IN TEMPLATES
+* 1. Sets user's admin level
+* 2. Sets the id of the current user
+* 3. Sets the user object of the current user
+* 4. Sets the types of flash messages that will be flashed
+*   e.g. 'Successfully changed password' -> green
+*        'Incorrect email' -> red
+*
+*
+* */
 
-// SET USER VARIABLES TO USE IN TEMPLATES
-// 1. Makes user's admin level
-// 2. Sets the id of the current user
-// 3. Sets the user object of the current user
-// 4. Sets the flash messages that will be flashed
-//    e.g. 'Successfully changed password'
 app.use((request, response, next) => {
     response.locals.admin_level = request.session.admin_level;
     response.locals.currentUser = request.session.userId;
@@ -109,6 +151,11 @@ app.use((request, response, next) => {
 
 
 // PARSE INCOMING REQUESTS
+/*
+* Parse incoming requests.
+* i.e. allow us to read form data by accessing
+* request.body.<dataname> and request.query.<dataname> in routes
+* */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -130,8 +177,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //// SERVE STATIC FILES
+/*
+* Serves static files.
+* This is the section that allows us to access everything in /public
+* */
 app.use(express.static(path.join(__dirname, '/public')));
 
+
+
+/*
+* Serve handlebars files
+* handlebars is a html template engine we use to pass in variables to html/hbs files
+* Note: we pass in the paths of every partial html/hbs file we have
+* */
 let hbs = exphbs.create({
     extname: 'hbs',
     defaultLayout: 'layout',
@@ -146,7 +204,12 @@ let hbs = exphbs.create({
 });
 
 
-//// SET VIEW ENGINE
+/*
+* Set view engine to handlebars
+*
+* Note we retrieve handlebars files from /views
+*
+* */
 app.engine('hbs', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -154,8 +217,10 @@ app.set('view engine', 'hbs');
 
 
 
-
-//// INCLUDE ROUTES
+/*
+* Include every routing file from /routes
+* this is where the server calls are handled, the main bulk of the project
+* */
 let routes = require('./routes/routes.js');
 let account_routes = require('./routes/account_routes');
 let profile_routes = require('./routes/profile_routes');
@@ -176,6 +241,10 @@ app.use('/', message_routes);
 
 // SOCKET HANDLING
 
+/*
+* This is probably the least readable part of this file. But as of now, I have not found a better way to write it
+* I have tried separating things into functions but it breaks the functionality of the messaging
+* */
 
 // Run when client connects
 io.on('connection', socket => {
@@ -184,12 +253,12 @@ io.on('connection', socket => {
     // If this variable is not null, then we leave the room it is set to and set it to the new room
     let currentRoom = null;
 
-
     socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
 
-        let username = myUserID,
-            penpalusername = theirUserID;
 
+        /*
+        * This section simply keeps track of rooms and leaves one room when another one is joined
+        * */
 
         /*
         If we are in a room, we first leave it.
@@ -202,12 +271,15 @@ io.on('connection', socket => {
 
         }else{
 
+            /*
+            * This is a promise because we first want to leave the room, and then join the next one
+            * */
             let switchRooms = new Promise((resolve, reject) => {
                 socket.leave(currentRoom)
                 // This command removes the listeners from everyone in that room that was looking for it
                 // Without this, duplicate messages would be sent and sometimes to the wrong people if
                 // We switched between rooms bc the event listener would still be there.
-                socket.removeAllListeners('chatMessage');
+                socket.removeAllListeners('clientToServerMessage');
                 resolve();
             })
 
@@ -218,18 +290,42 @@ io.on('connection', socket => {
         }
 
 
-        socket.on('chatMessage', (msg) => {
 
+
+
+
+
+
+
+
+
+
+        /*
+        * This section handles the actual messaging input and output
+        * */
+
+
+
+
+        /*
+        * When we receive a message from the client, we want to package it properly to
+        * send to our route which will store the message in the database
+        * */
+        let username = myUserID,
+            penpalusername = theirUserID;
+        socket.on('clientToServerMessage', (msg) => {
             let msgObj = formatMessage(msg, username, penpalusername, room);
+
             //Made this environmental bc axios required it to be a full hard coded link
             axios.post(process.env.MYFULLMESSAGEPATH, {
                 msgObj: msgObj
             })
                 .then(response => {
 
-
-
-                    //io.emit('serverObject', retVal)
+                    /*
+                    * after we receive a response from the route, meaning we stored the message in the database,
+                    * we just return the same message with additional variables to populate the front end
+                    * */
                     io.in(currentRoom).emit('serverToClientMessage', {
                         msgObj: msgObj,
                         currentUserid: response.data.currentUserid,
@@ -239,12 +335,8 @@ io.on('connection', socket => {
                     });
                 })
                 .catch(error => {
-
-                    //io.emit('serverObject', error)
-
-
-                console.log(error)
-            });
+                    console.log(error)
+                });
             /*
 
          */
@@ -255,12 +347,18 @@ io.on('connection', socket => {
 
 
 
-//////////////////////////////
 
-// This setInterval function will clean our database every set amount of time
-// This is mostly because we are using cheap online services with limited resources, we have to delete where we can
-// In this implementation, we check every week for accounts that are older than 4 weeks(1 month). It will also remove messages that are older than 1 month because those will take the most amount of storage
 
+
+
+
+/*
+*
+* deleteOldUnverifiedUsers:
+* This function will delete user's who's emails have not been verified.
+* If the account is older than a month and they still have not verified their accounts, delete it
+*
+* */
 
 let deleteOldUnverifiedUsers = () => {
 
@@ -289,10 +387,18 @@ let deleteOldUnverifiedUsers = () => {
 }
 
 
-// This function does have a weakness, where it doesn't necessarily delete the
-// oldest as a guarantee because the for loop is still asynchronous
-// This should not be an issue because we are only deleting messages older than a month
-// and we run this function once a week
+
+
+/*
+* deleteOldMessages:
+* This function will delete messages that are older than
+*
+* This function does have a weakness, where it doesn't necessarily delete the
+* oldest as a guarantee because the for loop is still asynchronous
+* This should not be an issue because we are only deleting messages older than a month
+* and we run this function once a week
+* */
+
 let deleteOldMessages = () => {
 
     let timeValidFor = 2419200000 // 28 days, or four weeks
@@ -340,14 +446,39 @@ let intervalFunc = () => {
     console.log("interval function ran")
 }
 
-setInterval(intervalFunc, 604800000); //1 week is 604800000 milliseconds
+/*
+*
+* This setInterval function will clean our database every set amount of time
+* This is mostly because we are using cheap online services with limited resources, we have to delete where we can
+* In this implementation, we check every week for accounts that are older than 4 weeks(1 month).
+* It will also remove messages that are older than 1 month because those will take the most amount of storage
+*  1 week is 604800000 milliseconds
+* */
+setInterval(intervalFunc, 604800000);
 
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////HANDLE ERROR
 
-// catch 404 and forward to error handler
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+*
+* When we call next from the route files, the next(error) function call passes through here,
+* and sets the error message if a 404 is encountered i.e. if the route doesn't exist/invalid link
+*
+* After this, we arrive at the error handler described below
+*
+* */
 app.use((request, response, next) => {
     let err = new Error('File Not Found');
     err.status = 404;
@@ -355,28 +486,40 @@ app.use((request, response, next) => {
 });
 
 
-// error handler
-// define as the last app.use callback
+/*
+* Error handler
+*
+* When we call next from the route files, this is where the next call arrives to
+*
+* Here we call the 'error.hbs' file and pass in the error message and status
+* */
 app.use((err, request, response, next) => {
     response.status(err.status || 500);
     response.render('error', {
         message: err.message,
         error: {},
         error_code: err.status,
-        title: 'Error',
-        navbar:'clear'
+        title: 'Error'
     });
 });
 
 
 
 
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-//// CREATE SERVER
+
+
+
+
+/*
+* Create Server
+* */
+
 server.listen((process.env.PORT || PORT), () => {
     console.log("BookStack is running in port " + PORT);
 });
+
+
+
 
 
 

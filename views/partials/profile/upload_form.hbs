@@ -39,26 +39,12 @@
 
                 <div class="input-group col-12">
 
+                    <select id="upload-categories" class="form-control" name="subject[]" form="listABookForm" multiple="multiple" style="width: 500px" required>
+                        {{!-- The [] after subject, i.e. 'name="subject[]"' make this form always pass in an array, even if the array is only 1 item. Without this,
+                        it will only send a single item if only one is selected but an array if more than 1 are. This is simpler to deal with --}}
+                        {{!-- Handlebars comment: This select will be dynamically populated from /json/upload-categories.json --}}
 
 
-
-                    <select class="form-control" id="subjectChosen" name="subject" form="listABookForm" required>
-                        <option value="" selected >Select Category</option>
-                        <option value="Art" >Art</option>
-                        <option value="Business &amp; Economics">Business & Economics</option>
-                        <option value="Cooking">Cooking</option>
-                        <option value="English">English</option>
-                        <option value="Foreign Language">Foreign Language</option>
-                        <option value="Health and Fitness">Health & Fitness</option>
-                        <option value="History">History</option>
-                        <option value="Law and Political Science">Law & Political Science</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Medical">Medical</option>
-                        <option value="Performing Arts">Performing Arts</option>
-                        <option value="Philosophy and Social Science">Philosphy & Social Science</option>
-                        <option value="Science">Science</option>
-                        <option value="Technology and Engineering">Technology & Engineering</option>
-                        <option value="Other">Other</option>
                     </select>
 
                 </div>
@@ -82,8 +68,6 @@
 
                 </div>
             </div>
-
-
             <div class="from-group row mb-4">
 
                 <div class="input-group col-12">
@@ -96,6 +80,9 @@
 
                 </div>
             </div>
+
+
+
 
 
 

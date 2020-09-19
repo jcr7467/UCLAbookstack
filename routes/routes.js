@@ -184,6 +184,10 @@ router.get('/search/:pagenumber', (request,response, next) => {
             title: {$regex: userSearchTerm, $options: 'i'}
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
+
+                // If the length/amount of books on this page is zero, and the pagenumber
+                // is not the first page, redirect to the first page
+                // I.e. if an invalid page number is passed in, then just redirect the user to the first page
                 if (books.docs.length === 0 && pagenumber != 1){
 
                     let redirectURL = '/search/' + books.totalPages.toString() + '?query=' + userSearchTerm + '&subject=' + subject.toString()
@@ -192,7 +196,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                 }
 
                 let numOfBooks = books.totalDocs;
-                lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+                    lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
                     upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
                 //^  Subtracts any pages that are missing to render the correct last item  ^
 
@@ -219,16 +223,16 @@ router.get('/search/:pagenumber', (request,response, next) => {
         });
     }else{
         Book.paginate({
-            title: {$regex: userSearchTerm, $options: 'i'},
-            subject: subject
+            title: {$regex: userSearchTerm, $options: 'i'}, // We use regex to match the search term anywhere in the title
+            subject: {$in: subject} // Our 'subject' is an array of subjects, so any subject that is in this subject array
         }, {lean: true, page:pagenumber, limit:15})
             .then((books) => {
 
                 let numOfBooks = books.docs.length
 
                 response.render('search_for_books', {
-                    array: books.docs,
-                    subject: subject,
+                    array: books.docs, // array of the actual books. books.docs refers to the actual books
+                    subject: subject, // This is also an array of subjects
                     searchedTerm: userSearchTerm,
                     title: userSearchTerm,
                     currentPagenumber:books.page,
@@ -248,7 +252,10 @@ router.get('/search/:pagenumber', (request,response, next) => {
 });
 
 
-
+// These two routes are simply used to create an error if they are ever reached.
+// These routes would only be encoountered if an incompatible file type is passed into our upload book form
+// We also check for file type on the backend, but these routes are quickly accessed on the front end without
+// taking the time to first upload the image. Hopefully protecting our server
 router.get('/invalidheic', (request, response, next) => {
     let err = new Error("These are HEIC images! Check out our guide on how to fix this issue");
     err.status = 400
@@ -267,12 +274,6 @@ router.get('/invalidfiletype', (request, response, next) => {
 
 
 
-
-
-
-router.get('/chattest', (request, response, next) => {
-    response.render('chattest')
-})
 
 
 

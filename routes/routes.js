@@ -274,6 +274,12 @@ router.get('/invalidfiletype', (request, response, next) => {
 
 
 
+router.get('/test', (request, response, next) => {
+
+    console.log(request.query.testme)
+    console.log(request.query.testme[0])
+    response.render('test')
+})
 
 
 

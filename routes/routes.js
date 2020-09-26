@@ -162,11 +162,15 @@ router.get('/search/:pagenumber', (request,response, next) => {
     }
 
     userSearchTerm = userSearchTerm.toString();
-
-
-
-
-
+    splitUserSearchTerm = userSearchTerm.split(' ');
+    regexSearchTerm = ""
+    var i;
+    for(i = 0; i < splitUserSearchTerm.length; i++) {
+        regexSearchTerm += "\\b" + splitUserSearchTerm[i] + "\\b";
+        if(i+1 < splitUserSearchTerm.length) {
+            regexSearchTerm += "|";
+        }
+    }
 
 
     if (pagenumber === undefined){pagenumber = 1}
@@ -181,7 +185,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
     if (subject === 'All'){
 
         Book.paginate({
-            title: {$regex: userSearchTerm, $options: 'i'}
+            title: {$regex: regexSearchTerm, $options: 'i'}
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
 
@@ -223,7 +227,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
         });
     }else{
         Book.paginate({
-            title: {$regex: userSearchTerm, $options: 'i'}, // We use regex to match the search term anywhere in the title
+            title: {$regex: regexSearchTerm, $options: 'i'}, // We use regex to match the search term anywhere in the title
             subject: {$in: subject} // Our 'subject' is an array of subjects, so any subject that is in this subject array
         }, {lean: true, page:pagenumber, limit:15})
             .then((books) => {

@@ -161,11 +161,16 @@ router.get('/search/:pagenumber', (request,response, next) => {
         next(limitError);
     }
 
+    // Parse to RegEx
     userSearchTerm = userSearchTerm.toString();
     splitUserSearchTerm = userSearchTerm.split(' ');
     regexSearchTerm = ""
-    var i;
+    let i;
     for(i = 0; i < splitUserSearchTerm.length; i++) {
+        // Unsure how double spaces affect
+        if(splitUserSearchTerm[i] == "") {
+            continue;
+        }
         regexSearchTerm += "\\b" + splitUserSearchTerm[i] + "\\b";
         if(i+1 < splitUserSearchTerm.length) {
             regexSearchTerm += "|";

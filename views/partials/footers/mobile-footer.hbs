@@ -39,7 +39,22 @@
                         <div class="pro-newsletter">
                             <h5><a class="my-footer-element" href="/signup">Sign up now</a></h5>
 
-                            <form class="form-inline" method="post" action="signup">
+                            {{!-- Inline script(s) for validating footer fields --}}
+                            <script type="text/javascript">
+                                function validateConfirmPW() {
+                                    var password = document.getElementById("password").value;
+                                    var confirmPassword = document.getElementById("password_confirm").value;
+                                    if (password != confirmPassword) {
+                                        document.getElementById("passwordConfirmErrMsg").style.color="Red";
+                                        document.getElementById("passwordConfirmErrMsg").innerHTML="Passwords do not match"
+                                        return false;
+                                    }
+                                    document.getElementById("passwordConfirmErrMsg").innerHTML=""
+                                    return true;
+                                }
+                            </script>
+
+                            <form class="form-inline" method="post" action="signup" onSubmit="return validateConfirmPW()">
 
                                 <div class="search">
                                     <input  type="text" placeholder="First Name" name="firstname" required>
@@ -54,7 +69,12 @@
                                 </div>
 
                                 <div class="search">
-                                    <input  type="password" placeholder="Password" name="password" minlength="6" required>
+                                    <input  type="password" placeholder="Password" name="password" minlength="5" id="password" required>
+                                </div>
+
+                                <div class="search">
+                                    <input  type="password" placeholder="Confirm Password" name="password_confirm" id="password_confirm" minlength="5" oninput="validateConfirmPW()" required>
+                                    <p id="passwordConfirmErrMsg"></p>
                                 </div>
 
                                 <div class="search">

@@ -784,13 +784,17 @@ jQuery(document).ready(function(){
         password: {
           required: true,
           minlength: 5
-        }
+        },
+        confirm_password: {
+            required: true,
+            equalTo: "#inlineFormInputGroup1"
+        },
       },
       // Specify validation error messages
       messages: {
-        fullname: "Please enter your fullname",
-        firstname: "Please enter your firstname",
-        lastname: "Please enter your lastname",
+        fullname: "Please enter your full name",
+        firstname: "Please enter your first name",
+        lastname: "Please enter your last name",
         address: "Please enter your address",
 
         SelectName: { valueNotEquals: "Please select an Option!" },
@@ -803,6 +807,10 @@ jQuery(document).ready(function(){
         password: {
           required: "Please provide a password",
           minlength: "Your password must be at least 5 characters long"
+        },
+        confirm_password: {
+            required: "Please confirm your password",
+            equalTo: "Your passwords do not match"
         },
         email: "Please enter a valid email address"
       },

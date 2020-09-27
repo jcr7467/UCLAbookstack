@@ -70,7 +70,22 @@
                     <div class="pro-newsletter">
                         <h5>Sign up now</h5>
 
-                        <form class="form-inline" method="post" action="signup">
+                        {{!-- Inline script(s) for validating footer fields --}}
+                        <script type="text/javascript">
+                            function ValidateConfirmPassword() {
+                                var password = document.getElementById("pw").value;
+                                var confirmPassword = document.getElementById("pw_confirm").value;
+                                if (password != confirmPassword) {
+                                    document.getElementById("pwConfirmErrMsg").style.color="Red";
+                                    document.getElementById("pwConfirmErrMsg").innerHTML="Passwords do not match"
+                                    return false;
+                                }
+                                document.getElementById("pwConfirmErrMsg").innerHTML=""
+                                return true;
+                            }
+                        </script>
+
+                        <form class="form-inline" method="post" action="signup" onSubmit="return ValidateConfirmPassword()">
 
                             <div class="search">
                                 <input  type="text" placeholder="First Name" name="firstname" required>
@@ -85,12 +100,16 @@
                             </div>
 
                             <div class="search">
-                                <input  type="password" placeholder="Password" name="password" minlength="6" required>
+                                <input  type="password" placeholder="Password" name="password" id="pw" minlength="5" required>
+                            </div>
+
+                            <div class="search">
+                                <input  type="password" placeholder="Confirm Password" name="password_confirm" id="pw_confirm" minlength="5" oninput="ValidateConfirmPassword()" required>
+                                <p id="pwConfirmErrMsg"></p>
                             </div>
 
                             <div class="search">
                                 <p class="terms" ><input  type="checkbox" name="terms" required="required"/> I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</p>
-
                             </div>
 
 
@@ -102,7 +121,7 @@
 
 
                             <div class="search">
-                                <input id="signupButton"  type="submit" valuer="Sign up" >
+                                <input id="signupButton" type="submit" valuer="Sign up">
 
                             </div>
 

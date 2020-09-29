@@ -8,9 +8,17 @@
             padding: 0;
             background-color: transparent;
             border: none;
-            a{
+
+            //This is for the header, where we have labeled all the 'categories'
+            .accordian-header{
                 font-family: $font-family-base-bold;
                 font-size:($font-size-base + 0.3125rem);
+            }
+            // This is for the title of the nested dropdown menu, inside of the categories^
+            .dropdown-category{
+                font-family: $font-family-base-bold;
+                font-size:($font-size-base + 0.06rem);
+
             }
             a[aria-expanded="true"]:after{
                 content: "\f077";
@@ -26,6 +34,10 @@
             }
         }
         .card-body{
+            // For the labels next to each checkbox for each subject area
+            label{
+                font-size:($font-size-base + 0.05rem);
+            }
             ul{
                 padding-left: 0;
                 margin-bottom: 0;
@@ -138,3 +150,26 @@
 
 
 
+
+
+
+.subject-areas-dropdown-link{
+        color: black;
+        text-decoration: none;
+}
+
+.subject-areas-dropdown-link:hover{
+        color: black;
+        text-decoration: none;
+}
+
+
+
+.card-body{
+    label {
+        display: inline;
+    }
+    input[type=checkbox] {
+        display: inline;
+    }
+}

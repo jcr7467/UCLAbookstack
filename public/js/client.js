@@ -177,9 +177,9 @@ $(document).ready(function() {
     $.getJSON("/json/upload-categories.json", function(data, err){
 
         $.each(data, function(key, value) {
-            console.log(key)
+
             let categoryGroup = document.createElement('optgroup');
-            categoryGroup.setAttribute('label',key);
+            categoryGroup.setAttribute('label', key);
             $.each(value, function(index, JSONcategory) {
                 let categoryElement = document.createElement("option");
                 categoryElement.value = JSONcategory["category"]
@@ -187,7 +187,7 @@ $(document).ready(function() {
                 categoryGroup.append(categoryElement)
             })
             $('#upload-categories').append(categoryGroup)
-            console.log('appended')
+
             //Turns our select element which has all our categories into a manageable searchable set
             $('#upload-categories').select2({
                 placeholder: 'Search for applicable categories',

@@ -1,11 +1,9 @@
-
-
-<!-- Shop Page One content -->
+<!-- Products content -->
 <div class="container-fuild">
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item active"><a href="/">Home</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Search {{ title }}</li>
             </ol>
         </div>
@@ -15,334 +13,207 @@
 
 
 <section class="pro-content shop-content shop-special">
-
     <div class="container">
         <div class="row">
             <div class="pro-heading-title">
-                <h1>
+                <h1> {{! 'title' will be the search query entered by the user. If we search for all books, then it will be null, and it will just say results }}
                     Results: {{ title }}
                 </h1>
             </div>
         </div>
-        <div class="products-area">
-            <div class="top-bar">
-                <div class="row">
-                    <div class="col-12 col-lg-12">
-                        <div class="row align-items-center">
-                            <div class="col-12 col-lg-2">
-                                <div class="block">
-                                    <label>Display</label>
-                                    <div class="buttons">
-                                        <a href="javascript:void(0);" id="grid_4column" class="fas fa-th-large active"></a>
-                                        <a href="javascript:void(0);" id="list_4column" class="fas fa-list"></a>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-6">
-                                <form class="form-inline justify-content-center">
-                                    <div class="form-group ">
-                                        <label>Category:</label>
-                                        <label> {{ subject}} </label>
-
-
-                                    </div>
-
-
-                                    <!--
-                                    <div class="form-group ">
-                                        <label>Price</label>
-                                        <div class="select-control">
-                                            <select class="form-control ">
-
-                                                <option value="1">$1001-$2500</option>
-                                                <option value="2">$501-$1000</option>
-                                                <option value="3">0-$500</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group ">
-                                        <label>Size</label>
-                                        <div class="select-control">
-                                            <select class="form-control ">
-
-
-                                                <option value="1">Medium</option>
-                                                <option value="2">Large</option>
-                                                <option value="3">Small</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    -->
-
-                                </form>
-                            </div>
-
-
-                            <div class="col-12 col-lg-4">
-                                <form class="form-inline justify-content-end">
-
-                                    <div class="form-group">
-                                        <label>Items per page</label>
-                                        <div class="select-control">
-                                            {{#selectSelectedByID itemOnPageLimit}}
-                                                <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                                    <option id="12" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=12">12</option>
-                                                    <option id="32" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=32">32</option>
-                                                    <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=80">80</option>-->
-                                                </select>
-                                            {{/selectSelectedByID}}
-                                        </div>
-
-                                    </div>
-
-
-
-
-                                </form>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+        <div class="top-bar">
             <div class="row">
-                <div id="swap" class="col-12 col-sm-12">
-                    <div class="row">
-
-                    {{#if (greater_than_zero numOfBooks) }}
-                        {{#each array}}
-                            <div class="col-12 col-sm-6  col-lg-3">
-                                <div class="product">
-                                    <article>
-
-
-                                        <div class="pro-thumb pro-list-thumb">
-
-
-
-                                            <a href="/search/book?id={{ this._id }}">
-                                                <span class="pro-image"><img  class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
-                                                <span class="pro-image-hover swipe-to-top  d-none d-lg-block d-xl-block"><img  class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
-                                            </a>
-                                            <div class="pro-buttons d-none d-lg-block d-xl-block">
-
-
-
-
-                                                <button type="button" class="btn btn-secondary btn-block swipe-to-top" onclick="notificationCart();">
-                                                    <a style="color: white" href="/search/book?id={{ this._id }}">View</a></button>
-                                            </div>
-
-                                        </div>
-
-
-                                        <div class="pro-description">
-
-                                            <h2 class="pro-title"><a href="/search/book?id={{ this._id }}">{{ this.title }}</a></h2>
-
-                                            <div class="pro-price">
-                                                <ins>${{ this.price }}</ins>
-                                            </div>
-                                            <div class="list2">
-                                                {{#unless (equal_strings this.description "") }}
-                                                <div class="pro-options">
-
-                                                    <div class="size-selection">
-                                                        <h4>Description: </h4>
-
-                                                        <p>{{ this.description }}</p>
-
-                                                    </div>
-                                                </div>
-
-                                                {{/unless}}
-
-                                            </div>
-                                            <div class="pro-mobile-buttons d-lg-none d-xl-none">
-                                                <button type="button" class="btn btn-secondary btn-block swipe-to-top" >
-                                                    <a style="color: white" href="/search/book?id={{ this._id }}">View</a>
-                                                </button>
-
-
-                                            </div>
-
-                                        </div>
-
-                                    </article>
+                <div class="col-12 col-lg-12">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-lg-2">
+                            <div class="block">
+                                <label>Display</label>
+                                <div class="buttons">
+                                    <a href="javascript:void(0);" id="grid_3column" class="fas fa-th-large active"></a>
+                                    <a href="javascript:void(0);" id="list_3column" class="fas fa-list"></a>
                                 </div>
                             </div>
-                        {{/each}}
-                        <div class="pagination justify-content-between ">
-
-
-                            <label  class="col-form-label">Showing {{ lowerRange }}&ndash;<span class="showing_record">{{ upperRange }}</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ numOfBooks }}</span>&nbsp;results.</label>
-
-                            <div class="col-12 col-sm-6">
-                                <ol class="loader-page">
-                                    {{# if hasPrevPage }}
-                                        <li class="loader-page-item "><a href="/search/1?query={{ title }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">
-                                            <i class="fa fa-angle-double-left " style="font-size:12px"></i></a>
-                                        </li>
-
-
-                                        <li  class="loader-page-item "><a href="/search/{{ previouspage }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ previouspage }}</a></li>
-                                    {{/if}}
-                                    <li  class="loader-page-item "><a href="/search/{{ currentPageNumber }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ currentPageNumber }}</a></li>
-                                    {{# if hasNextPage }}
-                                        <li  class="loader-page-item "><a href="/search/{{ nextpage }}?query={{ userSearchedTerm }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">{{ nextpage }}</a></li>
-
-
-                                        <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}&subject={{ subject }}&limit={{ itemOnPageLimit }}">
-                                            <i class="fa fa-angle-double-right " style="font-size:12px"></i></a>
-                                        </li>
-                                    {{/if}}
-
-                                </ol>
-                            </div>
                         </div>
-                    {{else}}
-                        <p>Sorry, no matches! As more users post items, more will become available for you</p>
 
-
-                    {{/if}}
-
-
-
+                        <div class="col-12 col-lg-6">
+                            {{!-- Left here so that spacing is even for the surrounding 2 elements --}}
+                        </div>
+                        <div class="col-12 col-lg-4">
+                            <form class="form-inline justify-content-end">
 
 
 
+                                <div class="form-group">
+                                    <label>Items per page</label>
+                                    <div class="select-control">
+                                        {{#selectSelectedByID itemOnPageLimit}}
+                                            <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                                <option id="12" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=12">12</option>
+                                                <option id="32" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=32">32</option>
+                                                <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=80">80</option>-->
+                                            </select>
+                                        {{/selectSelectedByID}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
+        <div class="row">
+
+            <div class="col-12 col-lg-3  d-lg-block d-xl-block right-menu">
+
+                {{!-- This dropdown menu, 'categories' will be populated dynamically from our json file in order to maintain scalability from our /json/upload-categories.json --}}
+                <div class="accordion shop-bar-categories" >
+                    <div class="card">
+                        <div class="card-header" id="CardOne">
+                            <a href="#collapseOne" class="subject-areas-dropdown-link accordian-header mb-0"  data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                Subject Areas
+                            </a>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="CardOne" data-parent="#accordionExample1">
+                            <div class="card-body" id="all-categories-dropdown">
+
+                                {{!-- CATEGORIES WILL BE DYNAMICALLY RENDERED HERE, function found in 'search-page.js --}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
 
 
+            </div>
+            <div class="col-12 col-lg-9">
 
+                <div class="products-area">
+
+                    <div class="row">
+                        <div id="swap" class="col-12 col-sm-12">
+                            <div class="row">
+
+
+                                {{! If there was results for this particular search, then they will pop up here,
+                                if not then we just display a message saying that no results were found}}
+                                {{#if (greater_than_zero numOfBooks)}}
+
+                                    {{#each array}}
+
+                                    <div class="col-12 col-sm-6  col-lg-4">
+                                        <div class="product">
+                                            <article>
+
+
+                                                <div class="pro-thumb ">
+
+
+                                                    <a href="product-page1.html">
+                                                        <span class="pro-image"><img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
+                                                        <span class="pro-image-hover swipe-to-top  d-none d-lg-block d-xl-block"><img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
+                                                    </a>
+                                                    <div class="pro-buttons d-none d-lg-block d-xl-block">
+
+
+
+                                                        <button type="button" class="btn btn-secondary btn-block swipe-to-top" >
+                                                            <a style="color: white" href="/search/book?id={{ this._id }}">View</a>
+                                                        </button>
+                                                    </div>
+
+                                                </div>
+                                                <div class="pro-description">
+                                                  {{! could be used in the future/ just comment out
+                                                  <span class="pro-info">
+                                                      Ring Collectionaaa
+                                                  </span>
+                                                  }}
+                                                    <h2 class="pro-title"><a href="/search/book?id={{ this._id }}">{{ this.title }}</a></h2>
+
+                                                    <div class="pro-price">
+                                                        <ins>${{ this.price }}</ins>
+                                                    </div>
+                                                    <div class="list2">
+
+                                                        <div class="pro-options">
+                                                            <div class="color-selection">
+
+                                                                <h4>{{ this.description }}</h4>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="pro-mobile-buttons d-lg-none d-xl-none">
+                                                        <button type="button" class="btn btn-secondary btn-block swipe-to-top" >
+                                                            <a style="color: white" href="/search/book?id={{ this._id }}">View</a>
+                                                        </button>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                            </article>
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                {{else}}
+                                    <p>Sorry, no matches! As more users post items, more will become available for you</p>
+                                {{/if}}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                {{#if (greater_than_zero numOfBooks)}}
+                    <div class="pagination justify-content-between ">
+
+
+                    <label  class="col-form-label">Showing {{ lowerRange }}&ndash;<span class="showing_record">{{ upperRange }}</span>&nbsp;of&nbsp;<span class="showing_total_record">{{ numOfBooks }}</span>&nbsp;results.</label>
+
+                    <div class="col-12 col-sm-6">
+
+                        <ol class="loader-page">
+                            {{# if hasPrevPage }}
+                                <li class="loader-page-item "><a href="/search/1?query={{ title }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit={{ itemOnPageLimit }}">
+                                    <i class="fa fa-angle-double-left " style="font-size:12px"></i></a>
+                                </li>
+
+
+                                <li  class="loader-page-item "><a href="/search/{{ previouspage }}?query={{ userSearchedTerm }}&limit={{ itemOnPageLimit }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}">{{ previouspage }}</a></li>
+                            {{/if}}
+
+                            <li  class="loader-page-item "><a href="/search/{{ currentPageNumber }}?query={{ userSearchedTerm }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit={{ itemOnPageLimit }}">{{ currentPageNumber }}</a></li>
+
+                            {{# if hasNextPage }}
+                                <li  class="loader-page-item "><a href="/search/{{ nextpage }}?query={{ userSearchedTerm }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit={{ itemOnPageLimit }}">{{ nextpage }}</a></li>
+
+
+                                <li  class="loader-page-item "><a href="/search/{{ numberOfPages }}?query={{ title }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit={{ itemOnPageLimit }}">
+                                    <i class="fa fa-angle-double-right " style="font-size:12px"></i></a>
+                                </li>
+                            {{/if}}
+
+                        </ol>
+                    </div>
+                </div>
+                {{/if}}
+
+
+            </div>
+        </div>
     </div>
 </section>
 
 
+<script src="/js/search-page.js"></script>
 
 
-
-
-
-
-
-
-
-<!-- Product Modal -->
-<div class="modal fade" id="quickViewModal" tabindex="-1" role="dialog" aria-hidden="true">
-
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-12 col-md-6">
-                            <div class="row ">
-                                <div id="quickViewCarousel" class="carousel slide" data-ride="carousel">
-                                    <!-- The slideshow -->
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_01.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
-
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_02.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
-
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_03.jpg" alt="image">
-                                        </div>
-                                        <div class="carousel-item">
-
-                                            <img class="img-fluid" src="images/gallery/preview/Product_image_04.jpg" alt="image">
-                                        </div>
-                                    </div>
-                                    <!-- Left and right controls -->
-                                    <a class="carousel-control-prev" href="#quickViewCarousel" data-slide="prev">
-                                        <span class="fas fa-angle-left "></span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#quickViewCarousel" data-slide="next">
-                                        <span class="fas fa-angle-right "></span>
-                                    </a>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="pro-description">
-                                <h2 class="pro-title">Stylish Necklace Women Heart</h2>
-
-                                <div class="pro-price">
-                                    <del>$120</del><ins>$110</ins>
-                                </div>
-
-                                <div class="pro-infos">
-                                    <div class="pro-single-info"><b>Product ID :</b>1004</div>
-                                    <div class="pro-single-info"><b>Categroy :</b><a href="#">Rings</a></div>
-                                    <div class="pro-single-info">
-                                        <b>Tags :</b>
-                                        <ul>
-                                            <li><a href="#">bracelets</a></li>
-                                            <li><a href="#">diamond</a></li>
-                                            <li><a href="#">ring</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pro-single-info"><b>Available :</b><span class="text-secondary">InStock</span></div>
-                                </div>
-
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                    sed do eiusmod tempor. oh yeah
-                                </p>
-                                <div class="pro-counter">
-                                    <div class="input-group item-quantity">
-
-                                        <input type="text" id="quantity1" name="quantity" class="form-control" value="10">
-
-                                        <span class="input-group-btn">
-                                          <button type="button" value="quantity1" class="quantity-plus btn" data-type="plus" data-field="">
-                                              <i class="fas fa-plus"></i>
-                                          </button>
-
-                                          <button type="button" value="quantity1" class="quantity-minus btn" data-type="minus" data-field="">
-                                              <i class="fas fa-minus"></i>
-                                          </button>
-                                      </span>
-                                    </div>
-                                    <button type="button" class="btn btn-secondary btn-lg swipe-to-top" onclick="notificationCart();">Add to Cart</button>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="mobile-overlay"></div>
-<a href="#" id="back-to-top" class="swipe-to-top" title="Back to top">&uarr;</a>

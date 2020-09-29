@@ -114,6 +114,39 @@ module.exports = {
     },
     notHelper: function(bool){
         return !bool;
+    },
+    turnSubjectAreaArrayIntoURLParameters: function(arrayOfSAs){
+        // If it is an array, then there are multiple subject Areas
+        if (Array.isArray(arrayOfSAs)){
+
+            if (arrayOfSAs.length === 1 && arrayOfSAs[0] !== 'All'){
+                return 'subject=' + arrayOfSAs[0]
+            }
+
+            let parameterArray = []
+
+            for (let i = 0 ; i < arrayOfSAs.length ; i ++){
+                let subjectAreaPrefix = 'subject=';
+                let subjectAreaFull;
+                if (i !== arrayOfSAs.length - 1){
+                    subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i] + '&';
+                }else{
+                    subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i];
+                }
+                parameterArray.push(subjectAreaFull)
+
+            }
+
+            return parameterArray.join('')
+
+        }else if (arrayOfSAs !== 'All'){//If there it is not, then there is only one subject area
+            //But only return if the subject is not 'all' because if we have all as a parameter
+            // as well as other subjects, then it's the same as just asking for all the books
+            // If it is all, then the url will look something like '/search/1?query=&&limit=12' with 2 &'s
+            return 'subject=' + arrayOfSAs
+        }
+
+
     }
 
 }

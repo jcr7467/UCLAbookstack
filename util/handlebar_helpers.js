@@ -128,13 +128,18 @@ module.exports = {
             for (let i = 0 ; i < arrayOfSAs.length ; i ++){
                 let subjectAreaPrefix = 'subject=';
                 let subjectAreaFull;
-                if (i !== arrayOfSAs.length - 1){
-                    subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i] + '&';
-                }else{
-                    subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i];
-                }
-                parameterArray.push(subjectAreaFull)
 
+                // We have this check so that we don't append 'all' to the url.
+                // This would cause an issue with autochecking each subject inside the url to the collapse menu
+                //because 'All' is not a checkbox, it would throw an error and not continue the autochecking on reload
+                if (arrayOfSAs[i] !== 'All'){
+                    if (i !== arrayOfSAs.length - 1){
+                        subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i] + '&';
+                    }else{
+                        subjectAreaFull = subjectAreaPrefix + arrayOfSAs[i];
+                    }
+                    parameterArray.push(subjectAreaFull)
+                }
             }
 
             return parameterArray.join('')

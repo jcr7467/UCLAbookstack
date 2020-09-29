@@ -232,20 +232,24 @@ let renderSubjectAreasDynamically_Promise = new Promise(function (resolve, rejec
 * */
 function expandParentAccordian(checkboxDiv){
 
-
     // Make sure that if a checkbox is checked, that it's accordian is dropped down
 
-    let parentCardDiv = checkboxDiv.closest('.card');
-    let relativeCardHeaderDiv = parentCardDiv.find('.dropdown-category');
-    relativeCardHeaderDiv[0].setAttribute('aria-expanded', 'true')
+    //We have this try catch just in case an invalid subject area is passed into the url
+    // The most common case is when subject=all is in the url, since 'all' is not a checkbox in our collapse div
+    try {
+        let parentCardDiv = checkboxDiv.closest('.card');
+        let relativeCardHeaderDiv = parentCardDiv.find('.dropdown-category');
+        relativeCardHeaderDiv[0].setAttribute('aria-expanded', 'true')
 
 
-    //For some reason this 'closest' function returns an array with 1 element in it, our result
-    let parentCollapseDiv = checkboxDiv.closest('.collapse');
-    if (!parentCollapseDiv[0].classList.contains('show')){
-        parentCollapseDiv[0].classList.add('show');
+        //For some reason this 'closest' function returns an array with 1 element in it, our result
+        let parentCollapseDiv = checkboxDiv.closest('.collapse');
+        if (!parentCollapseDiv[0].classList.contains('show')){
+            parentCollapseDiv[0].classList.add('show');
+        }
+    }catch (err) {
+        console.log(err)
     }
-
 }
 
 

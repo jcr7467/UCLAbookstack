@@ -48,8 +48,8 @@
                                     <div class="select-control">
                                         {{#selectSelectedByID itemOnPageLimit}}
                                             <select class="form-control" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                                                <option id="12" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=12">12</option>
-                                                <option id="32" value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=32">32</option>
+                                                <option id="12" value="/search/1?query={{ userSearchedTerm }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit=12">12</option>
+                                                <option id="32" value="/search/1?query={{ userSearchedTerm }}&{{ turnSubjectAreaArrayIntoURLParameters subject }}&limit=32">32</option>
                                                 <!--<option value="/search/1?query={{ userSearchedTerm }}&subject={{ subject }}&limit=80">80</option>-->
                                             </select>
                                         {{/selectSelectedByID}}

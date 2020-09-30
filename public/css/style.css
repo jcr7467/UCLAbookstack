@@ -11051,9 +11051,12 @@ body:not(.touch-device).modal-open {
     padding: 0;
     background-color: transparent;
     border: none; }
-    .shop-bar-categories .card .card-header a {
+    .shop-bar-categories .card .card-header .accordian-header {
       font-family: "Montserrat-Bold", sans-serif;
       font-size: 1.1875rem; }
+    .shop-bar-categories .card .card-header .dropdown-category {
+      font-family: "Montserrat-Bold", sans-serif;
+      font-size: 0.935rem; }
     .shop-bar-categories .card .card-header a[aria-expanded="true"]:after {
       content: "\f077";
       font-family: "Font Awesome 5 Free";
@@ -11066,6 +11069,8 @@ body:not(.touch-device).modal-open {
       font-weight: 900;
       color: #000;
       font-size: 0.8125rem; }
+  .shop-bar-categories .card .card-body label {
+    font-size: 0.925rem; }
   .shop-bar-categories .card .card-body ul {
     padding-left: 0;
     margin-bottom: 0; }
@@ -11123,6 +11128,20 @@ body:not(.touch-device).modal-open {
 .right-menu .img-main {
   border: 1px solid #dee2e6;
   margin-top: 15px; }
+
+.subject-areas-dropdown-link {
+  color: black;
+  text-decoration: none; }
+
+.subject-areas-dropdown-link:hover {
+  color: black;
+  text-decoration: none; }
+
+.card-body label {
+  display: inline; }
+
+.card-body input[type=checkbox] {
+  display: inline; }
 
 .top-bar {
   margin-bottom: 30px;

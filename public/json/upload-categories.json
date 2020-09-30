@@ -48,7 +48,6 @@
     { "category" : "Molecular and Medical Pharmacology (M PHARM)" },
     { "category" : "Neurobiology (NEURBIO)" },
     { "category" : "Neurology (NEURLGY)" },
-    { "category" : "Neuroscience (Graduate) (NEURO)" },
     { "category" : "Neuroscience (NEUROSC)" },
     { "category" : "Neurosurgery (NEURSGY)" },
     { "category" : "Nursing" },
@@ -66,8 +65,7 @@
   "Sciences": [
     { "category" : "Astronomy (ASTR)" },
     { "category" : "Atmospheric and Oceanic Sciences (A&O SCI)" },
-    { "category" : "Bioinformatics (Graduate) (BIOINFO)" },
-    { "category" : "Bioinformatics (Undergraduate) (BIOINFR)" },
+    { "category" : "Bioinformatics (BIOINFR)" },
     { "category" : "Biological Chemistry (BIOL CH)" },
     { "category" : "Biomathematics (BIOMATH)" },
     { "category" : "Biostatistics (BIOSTAT)" },

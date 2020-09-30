@@ -1,4 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "../private/variables";
+@import "../../../node_modules/bootstrap/scss/functions";
+@import "../../../node_modules/bootstrap/scss/variables";
+@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+
+
 
 :root {
   --dark-color-a: #2D68C4;
@@ -8,6 +15,7 @@
   --error-color: #d9534f;
   --back-color: #ffffff;
 }
+
 
 * {
   box-sizing: border-box;
@@ -425,7 +433,7 @@ body {
       border-left: $border-width solid $border-color;
 
       i {
-          font-size: 22px;
+        font-size: 22px;
       }
     }
   }

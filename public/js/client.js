@@ -174,6 +174,32 @@ $(document).ready(function() {
 
 
 
+    $.getJSON("/json/upload-categories.json", function(data, err){
+
+        $.each(data, function(key, value) {
+
+            let categoryGroup = document.createElement('optgroup');
+            categoryGroup.setAttribute('label', key);
+            $.each(value, function(index, JSONcategory) {
+                let categoryElement = document.createElement("option");
+                categoryElement.value = JSONcategory["category"]
+                categoryElement.innerHTML = JSONcategory["category"]
+                categoryGroup.append(categoryElement)
+            })
+            $('#upload-categories').append(categoryGroup)
+
+            //Turns our select element which has all our categories into a manageable searchable set
+            $('#upload-categories').select2({
+                placeholder: 'Search for applicable categories',
+                maximumSelectionLength: 10
+            });
+        })
+    })
+
+
+
+
+
 
     // //Forces the first person container to be clicked resulting in the message container being populated
     // //with the messages of the top person container so it is not empty
@@ -191,3 +217,13 @@ function setupChatMessages() {
     $('#chat-messages-container .chat-message-container .chat-message').addClass('col');
     $chatmessages.scrollTop($chatmessages.prop('scrollHeight'));
 }
+
+
+
+
+
+
+
+
+
+

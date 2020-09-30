@@ -290,7 +290,7 @@ router.route('/conversations').get((request, response, next) => {
 
 
                 }).then(([userMap, penpalCount]) => {
-                    console.log(bookOwner)
+
                     if (bookOwner){
                         User.findById(bookOwner).then(penpal => {
                             response.render('conversation_list', {
@@ -305,6 +305,8 @@ router.route('/conversations').get((request, response, next) => {
                             next(err)
                         })
                     }else{
+
+                        console.log(userMap)
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,

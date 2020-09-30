@@ -24,7 +24,12 @@ let BookSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    subject: String,
+    subject: { // Subject is an array of strings, the subject field is required
+        type: [{
+            type: String
+        }],
+        required: true
+    },
     pictureURLs: {
         type: Array
     },
@@ -57,10 +62,6 @@ BookSchema.pre("save", function (next) {
 
     next();
 });
-
-
-
-
 
 
 

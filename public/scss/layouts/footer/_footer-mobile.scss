@@ -156,13 +156,24 @@ $footer-bg : $gray-100;
                     width: 46px;
                     padding: 0;
                     
-                }              
+                }
+                
+                .terms-container {
+                    display: flex;
+
+                    .terms-checkbox {
+                        margin-right: 1em;
+                        margin-left: 1em;
+                        width: 10px;
+                    }
+                }
               
             }
             p{
                 font-size: $font-size-sm;
                 color: $body-color-secondary;
             }
+
 
         }
     }

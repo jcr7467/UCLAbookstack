@@ -77,12 +77,13 @@
                                     <p id="passwordConfirmErrMsg"></p>
                                 </div>
 
+                                {{!-- TODO: refactor inline styling to its respective file --}}
                                 <div class="search">
-                                    <p class="terms" ><input  type="checkbox" name="terms" required="required"/> I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</p>
-
+                                    <div class="terms" style="display: flex; height: 2em;">
+                                        <input style="width:  20px; margin-right: 1em; margin-left: 5px; order : -1" type="checkbox" name="terms" required="required"/>
+                                        <span style="align-self:center" class = "terms-text">I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</span>
+                                    </div>
                                 </div>
-
-
 
                                 <div class="search"  id="formfilt">
                                     <input type="text" placeholder="email" name="formfilt">

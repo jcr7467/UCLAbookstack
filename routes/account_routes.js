@@ -75,6 +75,14 @@ router.route('/signup')
                 request.body.lastname){
 
 
+
+                /*We only want users with UCLA emails to be able to make an account, so no one can troll and spam our website*/
+                if (!(request.body.email.endsWith("@ucla.edu")) || request.body.email.endsWith("@g.ucla.edu")){
+                    let err = new Error("Please use your UCLA email (:")
+                    return next(err);
+                }
+
+
                 //Creates Javascript object with form input data
                 let userData = {
                     email: request.body.email,

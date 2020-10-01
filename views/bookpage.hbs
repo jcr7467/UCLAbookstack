@@ -41,11 +41,7 @@
                                         <ins>${{ book.price }}</ins>
                                     </div>
 
-                                    <div class="pro-infos">
 
-                                        <div class="pro-single-info"><b>Category :</b><a href="/search/1?subject={{book.subject}}&query=">{{book.subject}}</a></div>
-
-                                    </div>
 
 
 
@@ -121,6 +117,20 @@
                                                     <td>{{ convertToStringMonth monthAdded }} {{ dayOfMonthAdded }} {{ yearAdded }}</td>
 
                                                 </tr>
+
+
+                                                <tr>
+                                                    <th scope="row">Categories:</th>
+                                                    <td> </td>
+                                                </tr>
+
+                                                {{#each book.subject}}
+                                                    <tr>
+                                                        <th scope="row"> </th>
+                                                        <td>{{ this }}</td>
+
+                                                    </tr>
+                                                {{/each}}
 
 
                                                 </tbody>

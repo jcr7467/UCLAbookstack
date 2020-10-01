@@ -11,13 +11,6 @@
   ],
   "Business and Economics": [
     { "category" : "Management (MGMT)" },
-    { "category" : "Management-Executive MBA (MGMTEX)" },
-    { "category" : "Management-Full-Time MBA (MGMTFT)" },
-    { "category" : "Management-Fully Employed MBA (MGMTFE)" },
-    { "category" : "Management-Global Executive MBA Asia Pacific (MGMTGEX)" },
-    { "category" : "Management-Master of Financial Engineering (MGMTMFE)" },
-    { "category" : "Management-Master of Science in Business Analytics (MGMTMSA)" },
-    { "category" : "Management-PhD (MGMTPHD)" },
     { "category" : "Economics (ECON)" }
   ],
   "Engineering": [
@@ -55,7 +48,6 @@
     { "category" : "Molecular and Medical Pharmacology (M PHARM)" },
     { "category" : "Neurobiology (NEURBIO)" },
     { "category" : "Neurology (NEURLGY)" },
-    { "category" : "Neuroscience (Graduate) (NEURO)" },
     { "category" : "Neuroscience (NEUROSC)" },
     { "category" : "Neurosurgery (NEURSGY)" },
     { "category" : "Nursing" },
@@ -73,8 +65,7 @@
   "Sciences": [
     { "category" : "Astronomy (ASTR)" },
     { "category" : "Atmospheric and Oceanic Sciences (A&O SCI)" },
-    { "category" : "Bioinformatics (Graduate) (BIOINFO)" },
-    { "category" : "Bioinformatics (Undergraduate) (BIOINFR)" },
+    { "category" : "Bioinformatics (BIOINFR)" },
     { "category" : "Biological Chemistry (BIOL CH)" },
     { "category" : "Biomathematics (BIOMATH)" },
     { "category" : "Biostatistics (BIOSTAT)" },
@@ -197,7 +188,6 @@
   ],
   "Law": [
     { "category" : "Law" },
-    { "category" : "Law (Undergraduate) (UG-LAW)" },
     { "category" : "Political Science (POL SCI)" },
     { "category" : "Public Affairs (PUB AFF)" },
     { "category" : "Public Policy (PUB PLC)" }

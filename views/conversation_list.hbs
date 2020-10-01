@@ -23,6 +23,10 @@
                 </div>
             </div>
 
+
+
+
+            {{! This is the select option which filters the conversations by buying and selling
             <div class="message-filter-select row">
                 <div id="buying-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
                     <i class="far fa-arrow-alt-circle-left"></i>
@@ -37,6 +41,8 @@
                     <p>All</p>
                 </div>
             </div>
+
+             }}
 
 
             {{!-- Example card for person -->
@@ -208,8 +214,9 @@
 
 
                         {{else}}
+                            {{! This will come back when we have implemented the 'who is buyer who is seller' feature
                             <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
-                            <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
+                            <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>}}
                         {{/if}}
 
                     </div>

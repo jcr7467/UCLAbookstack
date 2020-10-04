@@ -44,7 +44,7 @@
   "scripts": {
     "start": "node app.js",
     "dev-server": "nodemon app.js",
-    "compile-scss": "node-sass public/scss -o public/css --source-map public/css"
+    "compile-scss": "node-sass public/scss -o public/css --source-map public/css; grunt cssmin"
   },
   "keywords": [],
   "author": "BookStack",

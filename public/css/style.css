@@ -15805,6 +15805,16 @@ body {
   .bodyrtl .registration-process .input-group .input-group-prepend .input-group-text {
     border-left: 0;
     border-right: 1px solid #dee2e6; }
+  .bodyrtl .registration-process .terms {
+    display: flex;
+    height: 2em; }
+    .bodyrtl .registration-process .terms .terms-checkbox {
+      width: 20px;
+      margin-right: 1em;
+      margin-left: 5px;
+      order: -1; }
+    .bodyrtl .registration-process .terms .terms-text {
+      align-self: center; }
   .bodyrtl .registration-socials .right {
     text-align: left; }
   .bodyrtl .order-one-content .list-group {

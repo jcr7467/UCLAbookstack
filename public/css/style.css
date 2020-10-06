@@ -12540,6 +12540,18 @@ body:not(.touch-device).modal-open {
 .login-content label.error {
   right: 15px; }
 
+.login-content .terms-container {
+  display: flex;
+  height: 2em; }
+  .login-content .terms-container .terms-checkbox {
+    margin-right: 1em;
+    margin-left: 5px;
+    width: 30px;
+    height: 100%; }
+  .login-content .terms-container .terms-text {
+    align-self: center;
+    font-size: small; }
+
 .center-content-page .pro-heading-title {
   padding-left: 0; }
 

@@ -144,10 +144,29 @@ $footer-bg : $gray-100;
                     bottom: 0;
                     height: 100%;
                     width: 46px;
-                    padding: 0;
-                    
+                    padding: 0;                    
                 }              
-              
+
+                .terms-container {
+                    display: flex;
+                    height: 2em;
+
+                    .terms-checkbox {
+                        margin-right: 1em;
+                        margin-left: 5px;
+                        width: 30px;
+                        height: 100%;
+                    }
+                    
+                    .terms-text {
+                        align-self: center;
+                        font-size: small;
+                    }
+                }
+
+                #signupButton {
+                    padding: 0;
+                }
             }
             p{
                 font-size: $font-size-sm;

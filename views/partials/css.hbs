@@ -1,17 +1,23 @@
+{{! Note that all these CSS imports have two rel attributes, one with stylesheet and one with preload.
+ This is more of a precaution, if the browser our website is viewed on supports it, preload will make our page load faster
+ For browsers that dont support it, then we can just use it as a normal css file
+ }}
+
+
 {{!-- Put bootstrap css above style and index.css to not overwrite styles --}}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <!-- Fontawesome CSS Files -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
-<!-- Core CSS Files -->
-<link rel="stylesheet" type="text/css" href="/css/style.css">
-<link rel="stylesheet" href="/css/index.css">
 
+<!-- Core CSS Files -->
+<link rel="stylesheet" type="text/css" href="/css/style.min.css">
+<link rel="stylesheet" type="text/css" href="/css/index.min.css">
 
 
 <!--For select2 which turns our 150+ categories/majors into manageable options-->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" />
 
 
 

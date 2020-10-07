@@ -144,7 +144,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 
 
-
+// TODO: Find why it returns nil
 router.get('/search/:pagenumber', (request,response, next) => {
 
     let { subject } = request.query,
@@ -193,7 +193,6 @@ router.get('/search/:pagenumber', (request,response, next) => {
             title: {$regex: regexSearchTerm, $options: 'i'}
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
-
                 // If the length/amount of books on this page is zero, and the pagenumber
                 // is not the first page, redirect to the first page
                 // I.e. if an invalid page number is passed in, then just redirect the user to the first page
@@ -204,7 +203,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     return response.redirect(redirectURL)
                 }
 
-                let numOfBooks = books.totalDocs;
+                let numOfBooks = books.totalDocs,
                     lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
                     upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
                 //^  Subtracts any pages that are missing to render the correct last item  ^
@@ -234,10 +233,12 @@ router.get('/search/:pagenumber', (request,response, next) => {
         Book.paginate({
             title: {$regex: regexSearchTerm, $options: 'i'}, // We use regex to match the search term anywhere in the title
             subject: {$in: subject} // Our 'subject' is an array of subjects, so any subject that is in this subject array
-        }, {lean: true, page:pagenumber, limit:15})
+        }, {lean: true, page:pagenumber, limit:itemOnPageLimit})
             .then((books) => {
 
-                let numOfBooks = books.docs.length
+                let numOfBooks = books.docs.length,
+                    lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+                    upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
 
                 response.render('search_for_books', {
                     array: books.docs, // array of the actual books. books.docs refers to the actual books
@@ -248,7 +249,9 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     numberofPages:books.totalPages,
                     previouspage: previouspage,
                     nextpage:nextpage,
-                    numOfBooks: numOfBooks
+                    numOfBooks: numOfBooks,
+                    lowerRange: lowerRange,
+                    upperRange: upperRange
                 })
             }).catch((err) => {
             next(err);

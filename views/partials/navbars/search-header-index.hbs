@@ -11,9 +11,9 @@
                 <div class="col-12 col-md-12">
                     <div class="pro-header-options">
                         <div class="dropdown">
-
-                            <a class="pro-avatar">Hi&nbsp;{{ currentUserObject.firstname }}!</a>
-
+                            {{#if (user_is_logged_in currentUser)}}
+                                <a class="pro-avatar">Hi&nbsp;{{ currentUserObject.firstname }}!</a>
+                            {{/if}}
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle">

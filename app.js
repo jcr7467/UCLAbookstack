@@ -51,32 +51,21 @@ const io    = require("socket.io")(server);
 const formatMessage = require("./util/messages");
 const flash = require("connect-flash");
 
-
-
 /*
 * Models for our database objects
 * */
-
 const User = require("./models/user")
 const Conversation = require('./models/conversation');
-
-
-
 
 /*
 * Gives application access to environmental variables
 * */
 require('dotenv').config();
 
-
-
-
 /*
 * Redirects all http traffic to https version of site
 * */
 app.use(sslRedirect());
-
-
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////
 * DATABASE DRIVER CODE
@@ -107,20 +96,12 @@ app.use(session({
 }));
 
 
-
-
-
-
-
-
 /*
 * Use flash in order to prompt messages to user from server.
 * e.g. when an incorrect email/password is passed in and we flash a red banner message saying:
 * "Incorrect email/password"
  */
 app.use(flash())
-
-
 
 /*
 *
@@ -147,9 +128,6 @@ app.use((request, response, next) => {
     next();
 });
 
-
-
-
 // PARSE INCOMING REQUESTS
 /*
 * Parse incoming requests.
@@ -160,30 +138,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //// SERVE STATIC FILES
 /*
 * Serves static files.
 * This is the section that allows us to access everything in /public
 * */
 app.use(express.static(path.join(__dirname, '/public')));
-
-
 
 /*
 * Serve handlebars files
@@ -194,7 +154,7 @@ let hbs = exphbs.create({
     extname: 'hbs',
     defaultLayout: 'layout',
     layoutsDir: path.join(__dirname + '/views/layouts'),
-    helpers: require('./util/handlebar_helpers.js'),
+    helpers: require('./util/handlebar_helpers.js'), 
     partialsDir: [
         './views/partials/',
         './views/partials/navbars/',
@@ -202,20 +162,9 @@ let hbs = exphbs.create({
         './views/partials/profile/'
     ]
 });
-
-
-/*
-* Set view engine to handlebars
-*
-* Note we retrieve handlebars files from /views
-*
-* */
 app.engine('hbs', hbs.engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
-
-
 
 /*
 * Include every routing file from /routes
@@ -230,10 +179,6 @@ app.use('/', routes);
 app.use('/', account_routes);
 app.use('/', profile_routes);
 app.use('/', message_routes);
-
-
-
-
 
 //////////////////////////////////
 ////////////////////////
@@ -254,7 +199,6 @@ io.on('connection', socket => {
     let currentRoom = null;
 
     socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
-
 
         /*
         * This section simply keeps track of rooms and leaves one room when another one is joined
@@ -289,23 +233,9 @@ io.on('connection', socket => {
             })
         }
 
-
-
-
-
-
-
-
-
-
-
-
         /*
         * This section handles the actual messaging input and output
         * */
-
-
-
 
         /*
         * When we receive a message from the client, we want to package it properly to
@@ -345,13 +275,6 @@ io.on('connection', socket => {
 
 });
 
-
-
-
-
-
-
-
 /*
 *
 * deleteOldUnverifiedUsers:
@@ -385,9 +308,6 @@ let deleteOldUnverifiedUsers = () => {
         console.log(err)
     })
 }
-
-
-
 
 /*
 * deleteOldMessages:
@@ -456,21 +376,6 @@ let intervalFunc = () => {
 * */
 setInterval(intervalFunc, 604800000);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 *
 * When we call next from the route files, the next(error) function call passes through here,
@@ -484,7 +389,6 @@ app.use((request, response, next) => {
     err.status = 404;
     next(err);
 });
-
 
 /*
 * Error handler
@@ -502,13 +406,6 @@ app.use((err, request, response, next) => {
         title: 'Error'
     });
 });
-
-
-
-
-
-
-
 
 /*
 * Create Server

@@ -71,16 +71,12 @@ router.get('/privacyPolicy', (request, response) => {
     });
 });
 
-
-
-
 // Renders informational page of an email where we can be reached
 router.get('/contact', (request, response) => {
     response.render('contact', {
         title: 'Contact Us'
     });
 });
-
 
 router.get('/heicimages', (request, response, next) => {
     response.render('heic_issues', {
@@ -257,12 +253,17 @@ router.get('/search/:pagenumber', (request,response, next) => {
             next(err);
         });
     }
-
-
-
-
 });
 
+/**
+ * Admin Page
+ */
+router.get('/admintest', (request, response, next) => {
+    response.render('adminpage', {
+        title: "Adminpage",
+        layout: "admin-layout"
+    })
+})
 
 // These two routes are simply used to create an error if they are ever reached.
 // These routes would only be encoountered if an incompatible file type is passed into our upload book form
@@ -279,9 +280,6 @@ router.get('/invalidfiletype', (request, response, next) => {
     err.status = 400
     next(err);
 })
-
-
-
 
 
 

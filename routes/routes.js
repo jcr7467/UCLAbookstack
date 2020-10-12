@@ -258,7 +258,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
 /**
  * Admin Page
  */
-router.get('/admintest', mid.requiresLogin,(request, response, next) => {
+router.get('/admintest', mid.adminOnly, mid.requiresLogin,(request, response, next) => {
     response.render('adminpage', {
         title: "Adminpage",
         layout: "admin-layout"

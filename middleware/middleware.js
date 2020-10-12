@@ -19,10 +19,10 @@ let requiresLogin = (request, response, next) => {
 
 
 let adminOnly = (request, response, next) => {
-    if(request.session.admin === true){
+    if(request.session.admin === 1){
         return next();
     }else{
-        let err = new Error('Access denied');
+        let err = new Error('Insufficient Permissions');
         err.status = 401;
         return next(err);
     }

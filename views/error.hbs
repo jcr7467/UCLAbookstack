@@ -10,10 +10,12 @@
                 <div class="pro-empty-page">
                     <h2 >Error {{ error_code }}</h2>
                     <h1 >{{ message }}</h1>
+                    {{#if (equal_strings_soft error_code "404")}}
                     <p>
                         We looked everywhere for this page. Are you sure the website URL is correct?
 
                     </p>
+                    {{/if}}
                 </div>
 
             </div>

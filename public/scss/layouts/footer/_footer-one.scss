@@ -120,60 +120,34 @@ $footer-bg : $gray-100;
                 }
             }
 
-            .search {
-                        
-                position: relative;
-                margin-bottom: 15px;
-                width: 100%;
-                
-                
-                input {
-                    float: right;
-                    height: 40px;
-                    padding: 8px 98px 8px 10px;
-                    width: 100%;
-                    border-radius: 0;
-                    outline: none !important;
-                    border: $border-width solid $border-color;
-                }
-                
-                .btn{
-                    position: absolute;
-                    right: 0;
-                    top: 0;
-                    bottom: 0;
-                    height: 100%;
-                    width: 46px;
-                    padding: 0;                    
-                }              
-
-                .terms-container {
-                    display: flex;
-                    height: 2em;
-
-                    .terms-checkbox {
-                        margin-right: 1em;
-                        margin-left: 5px;
-                        width: 30px;
-                        height: 100%;
-                    }
-                    
-                    .terms-text {
-                        align-self: center;
-                        font-size: small;
-                    }
-                }
-
-                #signupButton {
-                    padding: 0;
-                }
-            }
             p{
                 font-size: $font-size-sm;
                 color: $body-color-secondary;
             }
 
         }
+
+
+        .pro-signup {
+
+            .terms-container {
+                display: flex;
+                height: 2em;
+
+                .terms-checkbox {
+                    margin-right: 1em;
+                    margin-left: 5px;
+                    width: 20px;
+                    height: 100%;
+                }
+
+                .terms-text {
+                    align-self: center;
+                    font-size: small;
+                }
+            }
+        }
+
     }
     .copyright-content{
         background-color:$primary;
@@ -195,7 +169,7 @@ $footer-bg : $gray-100;
         }
         
     } 
-} 
+}
 
 
 .alert-cookie{

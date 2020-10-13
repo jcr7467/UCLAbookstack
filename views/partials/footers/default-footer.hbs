@@ -49,15 +49,9 @@
                             <li> <a href="/profile">Profile</a> </li>
                             <li> <a href="/signout">Log Out</a> </li>
                         {{else}}
-
                             <li> <a href="/signin">Log In</a> </li>
                             <li> <a href="/signup">Sign Up</a> </li>
-
                         {{/if}}
-
-
-
-
                     </ul>
                 </div>
             </div>
@@ -65,8 +59,6 @@
             {{#unless (user_is_logged_in currentUser) }}
                 <div class="col-12 col-lg-4">
                 <div class="single-footer">
-
-
 
                         <h5>Sign up now</h5>
 
@@ -85,13 +77,11 @@
                             }
                         </script>
 
-                        <form class="" method="post" action="signup" onSubmit="return ValidateConfirmPassword()">
+                        <form class="pro-signup" method="post" action="/signup" onSubmit="return ValidateConfirmPassword()">
 
                             <div class="form-group">
                                 <input class="form-control" type="text" placeholder="First Name" name="firstname" required>
                             </div>
-
-
 
                             <div class="form-group">
                                 <input class="form-control" type="text" placeholder="Last Name" name="lastname" required>
@@ -100,10 +90,6 @@
                             <div class="form-group">
                                 <input class="form-control" type="email" placeholder="Email" name="email" required>
                             </div>
-
-
-
-
 
                             <div class="form-group">
                                 <input  class="form-control" type="password" placeholder="Password" name="password" id="pw" minlength="5" required>
@@ -114,11 +100,9 @@
                                 <p id="pwConfirmErrMsg"></p>
                             </div>
 
-                            <div class="search">
-                                <div class="terms-container">
-                                    <input class = "terms-checkbox" type="checkbox" name="terms" required="required"/>
-                                    <span class = "terms-text">I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</span>
-                                </div>
+                            <div class="form-group terms-container">
+                                <input class="terms-checkbox" type="checkbox" name="terms" required="required"/>
+                                <div class="terms-text">I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</div>
                             </div>
 
 
@@ -134,10 +118,6 @@
                             </div>
 
                         </form>
-
-                    <small id="emailHelp" class="form-text text-muted">By entering your email, you agree to our Terms of Service and Privacy Policy.</small>
-
-
 
                 </div>
             </div>

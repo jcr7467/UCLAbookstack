@@ -7,6 +7,8 @@
 
         {{#if (equal_strings 'Home' title)}}
             <title> BookStack </title>
+        {{else if (equal_strings '' title)}}
+            <title> BookStack </title>
         {{else}}
             <title> BookStack | {{ title }}</title>
         {{/if}}

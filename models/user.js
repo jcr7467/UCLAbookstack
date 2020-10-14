@@ -49,7 +49,8 @@ let UserSchema = new mongoose.Schema({
     },
     major: String,
     hasConversationsWith: [{
-        thePenPal: String
+        thePenPal: String,
+        theSeller: String
     }],
     appearAnonymousInPosts: {
         type: Boolean,

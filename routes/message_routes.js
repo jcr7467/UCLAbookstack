@@ -152,9 +152,12 @@ router.post('/ajaxsendmessage', (request, response, next) => {
             // the penpal's id into the current user's 'hasConversationsWith' array
             if(!conversationFoundBool){
                 currentUser.hasConversationsWith.push({
-                    thePenPal: penpalusername
+                    thePenPal: penpalusername,
+                    theSeller: username
                 })
                 currentUser.save()
+                // We reset the session user because we need to update it
+                // currentUser.save() does not update the one we track in a cookie throughout the site
                 request.session.user = currentUser;
             }
 
@@ -168,7 +171,8 @@ router.post('/ajaxsendmessage', (request, response, next) => {
             // the current user's id into the penpal's 'hasConversationsWith' array
             if (!conversationFoundBool){
                 penpalUser.hasConversationsWith.push({
-                    thePenPal: username
+                    thePenPal: username,
+                    theSeller: username
                 })
                 penpalUser.save()
             }
@@ -203,14 +207,7 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
 
 router.route('/conversations').get((request, response, next) => {
-    //If this was even passed in, doesnt matter what it is, then
-    // it means they came from book page, and we need to manually find the user,
-    // bc they wont already have a conversation with them
-    if (request.query.newconvo){
-        let cameFromBookPage = true
-    }else{
-        let cameFromBookPage = false
-    }
+
 
     // If this object was passed in, this means that we are creating a new conversation,
     // and can't just select one from the left menu. If we just click on the conversations tab,
@@ -234,6 +231,7 @@ router.route('/conversations').get((request, response, next) => {
             let push_penpal_to_userMap = (penpalObj, userMap) => {
                 // on first pass, accum will be undefined, so make it an array
                 let penPalUserId = penpalObj.thePenPal
+                let theSeller = penpalObj.theSeller
                 userMap = Array.isArray(userMap) ? userMap : []
 
                 return new Promise((resolve, reject) => {
@@ -246,7 +244,8 @@ router.route('/conversations').get((request, response, next) => {
                                 penpalObject: penpal,
                                 penpalUserId: penpal._id,
                                 penpalFirstName: penpal.firstname,
-                                penpalLastName: penpal.lastname
+                                penpalLastName: penpal.lastname,
+                                theSeller: theSeller
                             })
 
 

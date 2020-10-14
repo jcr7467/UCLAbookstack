@@ -26,7 +26,7 @@
 
 
 
-            {{! This is the select option which filters the conversations by buying and selling
+            {{! This is the select option which filters the conversations by buying and selling}}
             <div class="message-filter-select row">
                 <div id="buying-filter" class="filter-button btn btn-light swipe-to-top col-6 col-lg-4">
                     <i class="far fa-arrow-alt-circle-left"></i>
@@ -42,7 +42,7 @@
                 </div>
             </div>
 
-             }}
+
 
 
             {{!-- Example card for person -->
@@ -61,7 +61,8 @@
             {{!--When person-container is selected an ajax server request is submitted. Event located in client.js--}}
             {{#each myPenPals}}
                 {{#each this }}
-                <div class="person-container selling">
+
+                <div class="person-container {{#if (equal_strings ../../currentUser theSeller)}} selling {{else}} buying {{/if}}">
                     <div class="person-info">
                         <div class="person-name-and-icon">
                             <h5>{{ penpalFirstName}} {{ penpalLastName }}</h5>
@@ -209,15 +210,15 @@
                         {{/if}}
                     </div>
                     <div class="chat-book-info row">
-                        {{#if bookOwner}}
-                            <h5 id="chat-buy-sell" class="new-conversation-div col-12 col-md-12 col-lg-12">New Conversation</h5>
 
+                            {{! This only happens when a new conversation is made (by clicking 'send message' from a post.
+                             Here, I am making the assumption that the person clicking it is buying the item,
+                             so the person they would be talking to, is the seller. Thus, adding the selling class.
+                              bookOwner is only passed in if we come from a post page. Not from clicking the chats button}}
 
-                        {{else}}
-                            {{! This will come back when we have implemented the 'who is buyer who is seller' feature
-                            <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
-                            <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>}}
-                        {{/if}}
+                            <h5 id="chat-buy-sell"  class="{{#if bookOwner}}selling{{/if}} col-4 col-md-3 col-lg-2"></h5>
+                            <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>
+
 
                     </div>
                 </div>

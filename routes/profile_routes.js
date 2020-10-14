@@ -413,7 +413,11 @@ router.route('/profile/settings')
             { lastname } = request.body,
             { email } = request.body;
 
-
+        if(!(email.endsWith("@ucla.edu") || email.endsWith("@g.ucla.edu"))){
+            let err = new Error("Please use your UCLA email (:")
+            return next(err);
+        }
+        
         User.findOne({_id: request.session.userId})
             .then(user=> {
                 user.firstname = firstname;

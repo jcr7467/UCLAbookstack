@@ -6,7 +6,9 @@ let ifLoggedOut = (request, response, next) => {
     return next();
 };
 
-
+/**
+ * Middleware function for authorized user routes
+ */
 let requiresLogin = (request, response, next) => {
     if(request.session && request.session.userId){
         return next();
@@ -15,9 +17,9 @@ let requiresLogin = (request, response, next) => {
     }
 };
 
-
-
-
+/**
+ * Middleware function for admin only routes
+ */
 let adminOnly = (request, response, next) => {
     if(request.session.admin === 1){
         return next();
@@ -41,7 +43,9 @@ let setFlash = (request, response, next) => {
 };
 
 
-
+/**
+ * Middleware function for users with email verified only routes
+ */
 let mustHaveEmailVerified = (request, response, next) => {
 
     if (response.locals.currentUserObject.emailverified === false){

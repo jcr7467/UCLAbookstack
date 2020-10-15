@@ -3,8 +3,12 @@
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Search {{ title }}</li>
+                <li class="breadcrumb-item active">
+                    <a href="/"><span class="header-text">Home</span></a>
+                </li>
+                <li class="header-text breadcrumb-item active" aria-current="page">
+                    Search {{ title }}
+                </li>
             </ol>
         </div>
     </nav>
@@ -106,16 +110,10 @@
                                     <div class="col-12 col-sm-6  col-lg-4">
                                         <div class="product">
                                             <article>
-
-
-                                                <div class="">
-
-
+                                                <div>
                                                     <a href="/search/book?id={{ this._id }}">
-                                                        <img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image">
+                                                        <img class="post-container" src="{{ this.mainpicURL }}" alt="Product Image">
                                                     </a>
-
-
                                                 </div>
                                                 <div class="pro-description">
                                                   {{! could be used in the future/ just comment out

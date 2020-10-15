@@ -24,10 +24,6 @@
     PORT:           The default port number that the server will run on if there is no environmental
                     variable configured (which would happen when deployed on heroku)
     formatMessage:  A utility function that returns a formatted message easy for the client code to use.
-
-
-
-
 */
 
 

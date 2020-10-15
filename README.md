@@ -1,5 +1,6 @@
 # General
 * Homepage: https://www.uclabookstack.com
+* Wiki: https://github.com/jcr7467/UCLAbookstack/wiki
 
 ## About
 BookStack a textbook exchange application built for students by students. We understand the financial struggle of purchasing expensive textbooks year after year only to sell them back to the school for a greatly reduced price. This is where BookStack comes in to play. Rather than unloading your book back to the school for pennies on the dollar why not throw in the on the stack for another student to buy from you. You can make a listing for your book and set an asking price then negotiate with other students. You're almost guaranteed to make more money when selling the book and save money when buying books off the stack from other students.

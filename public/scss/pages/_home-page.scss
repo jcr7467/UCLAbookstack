@@ -1,33 +1,4 @@
-// <!-- Home Page 1 -->
-.pro-tab-content{
-    .pro-heading-title{
-        padding-left: 0;
-        padding-bottom: 35px;
-        
-    }
-    .nav{
-        justify-content: center;
-        margin-top: -25px;
-        margin-bottom: 25px;
-        
-        .nav-link{
-            font-family: $font-family-base-bold;
-            font-size: $font-size-base;
-            text-transform: uppercase;
-            letter-spacing: normal;
 
-            &:hover{
-                color: $body-color;
-            }
-            &.active{
-                color: $secondary;
-            }
-        }
-        
-    }
-
-
-}
 
 // Popular Products
 .popular-product {        
@@ -704,28 +675,7 @@
                 text-decoration: none;
             }
         }
-        .pro-timer{
-            position: static;
-            justify-content: start;
-            padding: 0;
-            margin:30px 0 0 0;
-            background-color: transparent;
 
-            span{
-                
-                background-color: rgba(0,0,0,0.60);
-                font-size: ($font-size-lg + 0.75);
-                margin-left: 0;
-                margin-right: 30px;
-                width: 80px;
-                height: 80px;
-                padding-top: 6px;
-
-                small{
-                    color: $white;
-                }
-            }
-        }
 
         .pro-btns{
             margin-top: 30px;
@@ -1088,17 +1038,7 @@
     .pro-sp-content{
         .pro-description{
             margin-top: 30px;
-            .pro-timer {
-                span{
-                    margin-right: 10px;
-                    
 
-                    &:last-child{
-                        margin-right: 0;
-                        min-width: 55px;
-                    }
-                }
-            }
         }
         .pro-thumb {
             img{

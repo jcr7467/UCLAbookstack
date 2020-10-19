@@ -1392,7 +1392,7 @@ website:    http://www.themepunch.com
   transition:all 0.3s;
   -webkit-transform-style:flat;
   transform-style:flat;
-  perspective:600;
+  perspective: 600;
   -webkit-perspective:600;
   transform: scale(0);
   -webkit-transform: scale(0);

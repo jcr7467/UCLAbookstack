@@ -5,7 +5,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-12 col-lg-2">
+            <div class="col-12 col-lg-3">
 
                 <div class=" single-footer">
 
@@ -13,7 +13,7 @@
 
                 </div>
             </div>
-            <div class="col-12 col-lg-2">
+            <div class="col-12 col-lg-3">
 
                 <div class=" single-footer">
 
@@ -21,92 +21,25 @@
 
                 </div>
             </div>
-            <div class="col-12 col-lg-2">
+            <div class="col-12 col-lg-3">
 
                 <div class=" single-footer">
 
                     <h5 ><a class="my-footer-element" href="/howtofindisbn">How to find ISBN</a></h5>
 
                 </div>
+
             </div>
 
 
             {{#unless (user_is_logged_in currentUser) }}
-                <div class="col-12 col-lg-3">
-                    <div class="single-footer">
 
-
-                        <div class="pro-newsletter">
-                            <h5><a class="my-footer-element" href="/signup">Sign up now</a></h5>
-
-                            {{!-- Inline script(s) for validating footer fields --}}
-                            <script type="text/javascript">
-                                function validateConfirmPW() {
-                                    var password = document.getElementById("password").value;
-                                    var confirmPassword = document.getElementById("password_confirm").value;
-                                    if (password != confirmPassword) {
-                                        document.getElementById("passwordConfirmErrMsg").style.color="Red";
-                                        document.getElementById("passwordConfirmErrMsg").innerHTML="Passwords do not match"
-                                        return false;
-                                    }
-                                    document.getElementById("passwordConfirmErrMsg").innerHTML=""
-                                    return true;
-                                }
-                            </script>
-
-                            <form class="form-inline" method="post" action="signup" onSubmit="return validateConfirmPW()">
-
-                                <div class="search">
-                                    <input  type="text" placeholder="First Name" name="firstname" required>
-                                </div>
-
-                                <div class="search">
-                                    <input  type="text" placeholder="Last Name" name="lastname" required>
-                                </div>
-
-                                <div class="search">
-                                    <input  type="email" placeholder="Email" name="email" required>
-                                </div>
-
-                                <div class="search">
-                                    <input  type="password" placeholder="Password" name="password" minlength="5" id="password" required>
-                                </div>
-
-                                <div class="search">
-                                    <input  type="password" placeholder="Confirm Password" name="password_confirm" id="password_confirm" minlength="5" oninput="validateConfirmPW()" required>
-                                    <p id="passwordConfirmErrMsg"></p>
-                                </div>
-
-                                <div class="search">
-                                    <p class="terms" ><input  type="checkbox" name="terms" required="required"/> I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</p>
-
-                                </div>
-
-
-
-                                <div class="search"  id="formfilt">
-                                    <input type="text" placeholder="email" name="formfilt">
-
-                                </div>
-
-
-                                <div class="search">
-                                    <input id="signupButton"  type="submit" valuer="Sign up" >
-
-                                </div>
-
-
-                            </form>
-
-                            <p>By entering your email, you agree to our Terms of Service and Privacy Policy.</p>
-                        </div>
-
-
-
-
-
-                    </div>
+            <div class="col-12 col-lg-3">
+                <div class="single-footer">
+                    <h5><a class="my-footer-element" href="/signup">Sign up now</a></h5>
                 </div>
+            </div>
+
             {{/unless}}
         </div>
     </div>

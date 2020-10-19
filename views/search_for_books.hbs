@@ -3,8 +3,12 @@
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Search {{ title }}</li>
+                <li class="breadcrumb-item active">
+                    <a href="/"><span class="header-text">Home</span></a>
+                </li>
+                <li class="header-text breadcrumb-item active" aria-current="page">
+                    Search {{ title }}
+                </li>
             </ol>
         </div>
     </nav>
@@ -106,24 +110,10 @@
                                     <div class="col-12 col-sm-6  col-lg-4">
                                         <div class="product">
                                             <article>
-
-
-                                                <div class="pro-thumb ">
-
-
-                                                    <a href="product-page1.html">
-                                                        <span class="pro-image"><img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
-                                                        <span class="pro-image-hover swipe-to-top  d-none d-lg-block d-xl-block"><img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image"></span>
+                                                <div>
+                                                    <a href="/search/book?id={{ this._id }}">
+                                                        <img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image">
                                                     </a>
-                                                    <div class="pro-buttons d-none d-lg-block d-xl-block">
-
-
-
-                                                        <button type="button" class="btn btn-secondary btn-block swipe-to-top" >
-                                                            <a style="color: white" href="/search/book?id={{ this._id }}">View</a>
-                                                        </button>
-                                                    </div>
-
                                                 </div>
                                                 <div class="pro-description">
                                                   {{! could be used in the future/ just comment out
@@ -162,8 +152,11 @@
                                         </div>
                                     </div>
                                     {{/each}}
+
                                 {{else}}
-                                    <p>Sorry, no matches! As more users post items, more will become available for you</p>
+                                    <div class="col-md-2"></div>
+                                    <div class="col-md-8"><p>Sorry, no matches! As more users post items, more will become available for you</p></div>
+                                    <div class="col-md-2"></div>
                                 {{/if}}
 
                             </div>

@@ -71,16 +71,12 @@ router.get('/privacyPolicy', (request, response) => {
     });
 });
 
-
-
-
 // Renders informational page of an email where we can be reached
 router.get('/contact', (request, response) => {
     response.render('contact', {
         title: 'Contact Us'
     });
 });
-
 
 router.get('/heicimages', (request, response, next) => {
     response.render('heic_issues', {
@@ -144,7 +140,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 
 
-
+// TODO: Find why it returns nil
 router.get('/search/:pagenumber', (request,response, next) => {
 
     let { subject } = request.query,
@@ -193,7 +189,6 @@ router.get('/search/:pagenumber', (request,response, next) => {
             title: {$regex: regexSearchTerm, $options: 'i'}
         }, {lean: true, page:pagenumber, limit: itemOnPageLimit})
             .then((books) => {
-
                 // If the length/amount of books on this page is zero, and the pagenumber
                 // is not the first page, redirect to the first page
                 // I.e. if an invalid page number is passed in, then just redirect the user to the first page
@@ -204,7 +199,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     return response.redirect(redirectURL)
                 }
 
-                let numOfBooks = books.totalDocs;
+                let numOfBooks = books.totalDocs,
                     lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
                     upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
                 //^  Subtracts any pages that are missing to render the correct last item  ^
@@ -234,10 +229,12 @@ router.get('/search/:pagenumber', (request,response, next) => {
         Book.paginate({
             title: {$regex: regexSearchTerm, $options: 'i'}, // We use regex to match the search term anywhere in the title
             subject: {$in: subject} // Our 'subject' is an array of subjects, so any subject that is in this subject array
-        }, {lean: true, page:pagenumber, limit:15})
+        }, {lean: true, page:pagenumber, limit:itemOnPageLimit})
             .then((books) => {
 
-                let numOfBooks = books.docs.length
+                let numOfBooks = books.docs.length,
+                    lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
+                    upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
 
                 response.render('search_for_books', {
                     array: books.docs, // array of the actual books. books.docs refers to the actual books
@@ -248,18 +245,25 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     numberofPages:books.totalPages,
                     previouspage: previouspage,
                     nextpage:nextpage,
-                    numOfBooks: numOfBooks
+                    numOfBooks: numOfBooks,
+                    lowerRange: lowerRange,
+                    upperRange: upperRange
                 })
             }).catch((err) => {
             next(err);
         });
     }
-
-
-
-
 });
 
+/**
+ * Admin Page
+ */
+router.get('/admintest', mid.adminOnly, mid.requiresLogin,(request, response, next) => {
+    response.render('adminpage', {
+        title: "Adminpage",
+        layout: "admin-layout"
+    })
+})
 
 // These two routes are simply used to create an error if they are ever reached.
 // These routes would only be encoountered if an incompatible file type is passed into our upload book form
@@ -276,9 +280,6 @@ router.get('/invalidfiletype', (request, response, next) => {
     err.status = 400
     next(err);
 })
-
-
-
 
 
 

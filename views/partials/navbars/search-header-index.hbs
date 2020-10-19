@@ -11,9 +11,9 @@
                 <div class="col-12 col-md-12">
                     <div class="pro-header-options">
                         <div class="dropdown">
-
-                            <a class="pro-avatar">Hi&nbsp;{{ currentUserObject.firstname }}!</a>
-
+                            {{#if (user_is_logged_in currentUser)}}
+                                <a class="pro-avatar">Hi&nbsp;{{ currentUserObject.firstname }}!</a>
+                            {{/if}}
                         </div>
                         <div class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle">
@@ -57,7 +57,7 @@
                         <div class="search-field-module">
 
                             <div class="search-field-wrap">
-                                <input  name="query" autocomplete="off" type="search" placeholder="Search for results..." data-toggle="tooltip" data-placement="bottom" title="search item">
+                                <input  name="query" autocomplete="off" type="search" placeholder="Leave empty for all results.." data-toggle="tooltip" data-placement="bottom" title="search item">
                                 <button class="btn btn-secondary swipe-to-top" data-toggle="tooltip" data-placement="bottom" title="Search Products">
                                     <i class="fa fa-search"></i></button>
                             </div>

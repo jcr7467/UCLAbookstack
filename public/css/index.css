@@ -323,4 +323,7 @@ label {
 input[type=checkbox] {
   display: inline; }
 
+.header-text {
+  font-size: large; }
+
 /*# sourceMappingURL=index.css.map */

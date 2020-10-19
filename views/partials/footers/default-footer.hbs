@@ -3,7 +3,7 @@
 <footer id="footerOne" class="footer-area footer-one footer-desktop d-none d-lg-block d-xl-block">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-lg-3">
+            <div class="col-12 col-lg-2">
                 <div class="single-footer">
 
                     <div class="pro-about">
@@ -49,25 +49,17 @@
                             <li> <a href="/profile">Profile</a> </li>
                             <li> <a href="/signout">Log Out</a> </li>
                         {{else}}
-
                             <li> <a href="/signin">Log In</a> </li>
                             <li> <a href="/signup">Sign Up</a> </li>
-
                         {{/if}}
-
-
-
-
                     </ul>
                 </div>
             </div>
 
             {{#unless (user_is_logged_in currentUser) }}
-                <div class="col-12 col-lg-3">
+                <div class="col-12 col-lg-4">
                 <div class="single-footer">
 
-
-                    <div class="pro-newsletter">
                         <h5>Sign up now</h5>
 
                         {{!-- Inline script(s) for validating footer fields --}}
@@ -85,55 +77,47 @@
                             }
                         </script>
 
-                        <form class="form-inline" method="post" action="signup" onSubmit="return ValidateConfirmPassword()">
+                        <form class="pro-signup" method="post" action="/signup" onSubmit="return ValidateConfirmPassword()">
 
-                            <div class="search">
-                                <input  type="text" placeholder="First Name" name="firstname" required>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="First Name" name="firstname" required>
                             </div>
 
-                            <div class="search">
-                                <input  type="text" placeholder="Last Name" name="lastname" required>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="Last Name" name="lastname" required>
                             </div>
 
-                            <div class="search">
-                                <input  type="email" placeholder="Email" name="email" required>
+                            <div class="form-group">
+                                <input class="form-control" type="email" placeholder="Email" name="email" required>
                             </div>
 
-                            <div class="search">
-                                <input  type="password" placeholder="Password" name="password" id="pw" minlength="5" required>
+                            <div class="form-group">
+                                <input  class="form-control" type="password" placeholder="Password" name="password" id="pw" minlength="5" required>
                             </div>
 
-                            <div class="search">
-                                <input  type="password" placeholder="Confirm Password" name="password_confirm" id="pw_confirm" minlength="5" oninput="ValidateConfirmPassword()" required>
+                            <div class="form-group">
+                                <input  class="form-control" type="password" placeholder="Confirm Password" name="password_confirm" id="pw_confirm" minlength="5" oninput="ValidateConfirmPassword()" required>
                                 <p id="pwConfirmErrMsg"></p>
                             </div>
 
-                            <div class="search">
-                                <p class="terms" ><input  type="checkbox" name="terms" required="required"/> I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</p>
+                            <div class="form-group terms-container">
+                                <input class="terms-checkbox" type="checkbox" name="terms" required="required"/>
+                                <div class="terms-text">I've read & agree with the <a href="/termsOfUse">Terms</a> and <a href="/privacypolicy">Privacy</a>.</div>
                             </div>
 
 
-
-                            <div class="search"  id="formfilt">
-                                <input type="text" placeholder="email" name="formfilt">
-
+                            {{! This form field is actually not real. We use this just in case robots crawl our website, and so they can't fill out our forms
+                             How it works: this form has the id: "formfilt". All this does is make this field invisible to humans. But the html is still there
+                             So, if a robot crawls our site, they will see it, but a human wont. So if this field is filled out at all, we do not make an account}}
+                            <div class="form-group"  id="formfilt">
+                                <input class="form-control" type="text" placeholder="email" name="formfilt">
                             </div>
 
-
-                            <div class="search">
-                                <input id="signupButton" type="submit" valuer="Sign up">
-
+                            <div class="form-group">
+                                <button id="signupButton" class="btn btn-secondary swipe-to-top">Create Account</button>
                             </div>
-
 
                         </form>
-
-                        <p>By entering your email, you agree to our Terms of Service and Privacy Policy.</p>
-                    </div>
-
-
-
-
 
                 </div>
             </div>

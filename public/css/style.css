@@ -12433,10 +12433,6 @@ body {
     width: calc(100% - 150px); } }
 
 @media only screen and (min-width: 1200px) {
-  .padding-r0 {
-    padding-right: 0; }
-  .padding-l0 {
-    padding-left: 0; }
   .footer-one .single-footer .newsletter .block .form-inline .search .subscribe {
     display: block; }
   .footer-one .single-footer .newsletter .block .form-inline .search .fa-location-arrow {
@@ -12462,31 +12458,14 @@ body {
     padding-bottom: 15px; }
   .sticky-header .header-maxi nav .navbar-collapse ul li {
     margin-right: 30px; }
-  .padding-r0 {
-    padding-right: 0; }
-  .padding-l0 {
-    padding-left: 0; }
   .rev_slider_wrapper li img {
     width: 100%;
     height: 100%; }
-  .checkout-area .checkout-module .checkoutd-nav .nav-item {
-    width: 23%;
-    margin-right: 15px;
-    margin-bottom: 15px; }
   /* shop page */
   .right-menu .main-manu {
     font-size: 12px; }
   .right-menu .sub-manu .unorder-list .list-item a {
-    font-size: 12px; }
-  .ban-img {
-    height: 311px; }
-  .caption3 {
-    position: absolute;
-    top: 20%;
-    right: 0px;
-    width: 77% !important; }
-  .caption-lb1 {
-    width: 247px; } }
+    font-size: 12px; } }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .modal .modal-dialog {
@@ -12501,38 +12480,6 @@ body {
       margin-left: auto;
       margin-right: auto;
       height: 100%; }
-  .product article .timer-tag {
-    bottom: -19px; }
-  .product article .upcomming-tag {
-    bottom: -19px; }
-  .product article .mobile-icons {
-    position: absolute;
-    left: 7px; }
-    .product article .mobile-icons .icon-liked {
-      position: relative; }
-      .product article .mobile-icons .icon-liked .badge {
-        font-family: "Roboto", sans-serif;
-        border-radius: 0;
-        position: absolute;
-        right: -10px;
-        top: -6px; }
-    .product article .mobile-icons .icon {
-      background-color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 35px;
-      width: 35px;
-      border: 1px solid #dddddd;
-      border-radius: 0;
-      font-size: 1rem;
-      color: #2D68C4;
-      text-decoration: none;
-      margin-bottom: 7px;
-      cursor: pointer; }
-      .product article .mobile-icons .icon:hover {
-        background-color: #e9ecef;
-        color: #1d1d1d; }
   .product article .mobile-buttons {
     text-align: center; }
     .product article .mobile-buttons a.btn {
@@ -12550,10 +12497,6 @@ body {
       margin-bottom: 15px; }
   .footer-mobile .single-footer .links-list li a {
     font-size: 0.775rem; }
-  .checkout-area .checkout-module .checkoutd-nav .nav-item {
-    width: 23%;
-    margin-right: 15px;
-    margin-bottom: 15px; }
   .click-btn .input-group {
     margin-bottom: 15px; }
   .align-right {
@@ -12769,27 +12712,12 @@ body {
   #back-to-top {
     bottom: 15px;
     right: 15px; }
-  #newsletterModal .promo-box {
-    padding: 30px 0 30px 0; }
-  .pro-mini-content .pro-banner-text {
-    padding: 15px; }
-    .pro-mini-content .pro-banner-text img {
-      width: 124px; }
   .login-content .registration-process:first-child {
     margin-bottom: 30px; }
   .login-content .registration-socials {
     padding: 0; }
     .login-content .registration-socials .btn {
       margin-bottom: 10px; }
-  .blog-content .blog-col {
-    justify-content: center;
-    display: flex; }
-  .products-content .products-area .owl-carousel {
-    width: 220px;
-    margin-left: auto;
-    margin-right: auto; }
-  .category-area article {
-    padding: 0; }
   .product article .cat-title {
     font-size: 10px !important; }
   .footer-mobile .display-mobile {
@@ -12809,23 +12737,6 @@ body {
       line-height: normal; }
   .heading hr:before {
     display: none; }
-  .product-2x {
-    height: auto; }
-    .product-2x article .module {
-      position: static;
-      text-align: center; }
-      .product-2x article .module .title {
-        margin-top: 0; }
-      .product-2x article .module .price {
-        margin-top: 0; }
-      .product-2x article .module .list {
-        display: none; }
-    .product-2x article .thumb {
-      position: static;
-      margin-top: 42px;
-      width: 100%; }
-    .product-2x article .buttons .btn {
-      width: 49%; }
   .products-area .nav-pills .nav-link {
     width: 32.60%;
     font-size: 10px; }
@@ -12855,50 +12766,9 @@ body {
     padding: 30px; }
     .shop-content .breadcum-area .breadcrumb-item {
       padding-left: 0;
-      width: 100%; }
-  .shipping-content .list-group {
-    margin-bottom: 15px; }
-  .shipping-content .shipping-table tbody tr {
-    display: flex;
-    flex-direction: column; }
-  .shipping-content .main-form form .btn {
-    width: 100%; }
-  .order-table thead {
-    display: none; }
-  .order-table tbody tr {
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px; }
-    .order-table tbody tr td {
-      display: flex;
-      flex-direction: column;
-      padding-left: 15px; }
-      .order-table tbody tr td span {
-        font-weight: 700; }
-  .aboutus-content .media-col {
-    margin-bottom: 25px;
-    border: none; }
-  .aboutus-content .media {
-    display: block;
-    text-align: center; }
-    .aboutus-content .media .rounded-circle {
-      margin-right: 0;
-      margin-bottom: 15px; }
-  .aboutus-content .accordion-container {
-    padding-bottom: 30px;
-    padding-top: 30px; }
-    .aboutus-content .accordion-container .accordions {
-      padding-bottom: 35px; } }
+      width: 100%; } }
 
 @media only screen and (max-width: 576px) {
-  .pro-category-content {
-    padding-top: 0;
-    padding-bottom: 30px; }
-    .pro-category-content .pro-heading-subtitle {
-      padding-top: 30px; }
-  .pro-category-content .pro-category-items .pro-single-item .pro-description .pro-info {
-    font-size: 11px; }
   .slider-wrapper .slider-for {
     margin-bottom: 0; }
   .profile-content .media .media-body p {
@@ -12907,8 +12777,6 @@ body {
     padding-bottom: 0px; }
   .sticky-header {
     display: none !important; }
-  .registration-socials .btn {
-    width: 100%; }
   .pagination {
     display: block;
     text-align: center; }

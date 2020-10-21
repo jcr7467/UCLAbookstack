@@ -544,38 +544,6 @@ nav[aria-label="breadcrumb"]{
     }
 }
 
-.pro-timer{
-    z-index: 1;
-    display: flex;
-    justify-content: center;
-    background-color: rgba(0,0,0,0.60);
-    position: absolute;
-    left: 0;
-    bottom: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: calc(100% - 20px);
-    padding:10px 0;
-    .days,
-    .hours,
-    .mintues,
-    .seconds{
-        float: left;
-        padding:10px 12px;
-        font-family: $font-family-base-bold;
-        font-size: $font-size-lg;
-        color: $white;
-
-        text-align: center;
-
-        small{
-            display: block;
-            font-family: $font-family-base;
-            font-size: $font-size-sm;
-        }
-    }
-   
-}
 
 
 .item-quantity{

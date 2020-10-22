@@ -323,6 +323,10 @@ label {
 input[type=checkbox] {
   display: inline; }
 
+.book-container {
+  width: 200px;
+  height: 270px; }
+
 .header-text {
   font-size: large; }
 

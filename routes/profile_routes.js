@@ -353,7 +353,7 @@ router.route('/profile/edit')
             },
             function (err, doc) {
                 request.flash('success', 'Book successfully updated');
-                return response.redirect('/mybooks');
+                return response.redirect('/profile');
             });
     });
 

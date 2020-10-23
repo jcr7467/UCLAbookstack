@@ -7,6 +7,8 @@
 
         {{#if (equal_strings 'Home' title)}}
             <title> BookStack </title>
+        {{else if (equal_strings '' title)}}
+            <title> BookStack </title>
         {{else}}
             <title> BookStack | {{ title }}</title>
         {{/if}}
@@ -22,7 +24,6 @@
         {{! Here we link bootstrap css again to apply to the collapsable menu in search_for_books,
         the only place it causes interferences with styles is index.css, the 'we use cookies' banner }}
         {{! It actually also doesnt allow the sticky dropdown menu to dropdown. This is an issue needing fixing. But we need this in order to use collapsable menu }}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js" integrity="sha512-v8ng/uGxkge3d1IJuEo6dJP8JViyvms0cly9pnbfRxT6/31c3dRWxIiwGnMSWwZjHKOuY3EVmijs7k1jz/9bLA==" crossorigin="anonymous"></script>
     </head>
 

@@ -640,33 +640,4 @@ $bg-nav-bar: #fff;
         }
     }
 
-    .bodyrtl{
-        .header-mobile .header-maxi .cart-dropdown {
-            float: left;
-            margin-left: 15px;
-
-            .cart-dropdown-toggle {
-        
-
-                .badge {
-                    
-                    left: 0;
-                    right: auto;
-                }
-            }
-        }
-        
-        .header-mobile .header-mini .navbar-lang .dropdown {
-            margin-left: 15px;
-            margin-right: 0;
-            padding-right: 0;
-            padding-left: 12px;
-
-            .dropdown-menu{
-                text-align: right;
-                right: -28px;
-                left: auto;
-            }
-        }
-    }
 }

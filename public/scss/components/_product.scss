@@ -284,26 +284,6 @@
 }
 
 
-.mobile-pro-icons{
-    position: absolute;
-    top: 40px;
-    right: 5px;
-    top: 5px;
-    z-index: 9;
-        .icon{
-            position: relative;
-            background-color: #c29958;
-            color: #fff;
-            display: flex;
-            width: 40px;
-            margin-bottom: 10px;
-            height: 40px;
-            justify-content: center;
-            align-items: center;
-            text-decoration: none;
-            overflow: visible;
-        }
-}
 
 .listing{
     .list2{
@@ -318,10 +298,10 @@
            
             .pro-description{
                 padding-left: 15px;
-    width: 100%;
-    border: 1px solid $border-color;
-    margin: 0;
-    padding: 30px;
+                width: 100%;
+                border: 1px solid $border-color;
+                margin: 0;
+                padding: 30px;
                 
             }
             .discount-tag{
@@ -402,7 +382,3 @@
         }
     }
 }
-
-
-
-

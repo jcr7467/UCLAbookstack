@@ -8331,25 +8331,6 @@ body:not(.touch-device).modal-open {
 .product:hover .product-hover {
   opacity: 1; }
 
-.mobile-pro-icons {
-  position: absolute;
-  top: 40px;
-  right: 5px;
-  top: 5px;
-  z-index: 9; }
-  .mobile-pro-icons .icon {
-    position: relative;
-    background-color: #c29958;
-    color: #fff;
-    display: flex;
-    width: 40px;
-    margin-bottom: 10px;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    overflow: visible; }
-
 .listing .list2 {
   display: block !important; }
 
@@ -10227,34 +10208,6 @@ body:not(.touch-device).modal-open {
     text-decoration: line-through;
     margin-right: 10px; }
 
-.product-content .product-detail-info .pro-rating .fas {
-  color: #ffba0a; }
-
-.product-content .product-detail-info .pro-rating .btn-link {
-  font-weight: 800;
-  color: #b8b8b8;
-  margin-left: 10px; }
-
-.product-content .product-detail-info .pro-infos {
-  margin-top: 15px;
-  margin-bottom: 15px; }
-  .product-content .product-detail-info .pro-infos .pro-single-info {
-    display: flex;
-    line-height: 24px; }
-    .product-content .product-detail-info .pro-infos .pro-single-info b {
-      font-family: "Montserrat-Bold", sans-serif;
-      font-size: 0.875rem;
-      color: #000;
-      margin-right: 10px; }
-    .product-content .product-detail-info .pro-infos .pro-single-info ul {
-      display: inline-block;
-      padding-left: 0;
-      margin-bottom: 0; }
-      .product-content .product-detail-info .pro-infos .pro-single-info ul li {
-        display: inline-block; }
-        .product-content .product-detail-info .pro-infos .pro-single-info ul li:after {
-          content: ","; }
-
 .product-content .product-detail-info .pro-sub-buttons {
   display: block;
   margin-top: 24px;
@@ -10305,26 +10258,6 @@ body:not(.touch-device).modal-open {
     margin-bottom: 5px; }
   .product-content .product-detail-info .reviews .review-bubbles .review-bubble-single span {
     color: #b8b8b8; }
-
-.product-content .product-detail-info .pro-banner-detial {
-  padding: 30px 18px 0 18px;
-  background-color: #f8f9fa;
-  text-align: center; }
-  .product-content .product-detail-info .pro-banner-detial .banner-single {
-    margin-bottom: 30px; }
-    .product-content .product-detail-info .pro-banner-detial .banner-single .fas {
-      color: #2D68C4;
-      font-size: 1.53125rem;
-      margin-bottom: 0.5rem; }
-    .product-content .product-detail-info .pro-banner-detial .banner-single .block {
-      font-size: 12px;
-      font-weight: 600; }
-      .product-content .product-detail-info .pro-banner-detial .banner-single .block h4 {
-        font-family: "Montserrat-Bold", sans-serif;
-        font-size: 0.875rem; }
-      .product-content .product-detail-info .pro-banner-detial .banner-single .block p {
-        font-family: "Montserrat-Regular", sans-serif;
-        font-size: 0.8125rem; }
 
 .product-content .related-product-content {
   margin-top: 100px; }

@@ -327,6 +327,11 @@ input[type=checkbox] {
   width: 200px;
   height: 270px; }
 
+.warning-pop-up {
+  background-color: red;
+  color: "white";
+  padding: 1em 0; }
+
 .header-text {
   font-size: large; }
 

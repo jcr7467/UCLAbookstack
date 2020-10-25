@@ -74,6 +74,9 @@ module.exports = {
 
         return month_string
     },
+
+    //Files used in:
+    // views/search_for_books.hbs, to select the page limit dynamically
     selectSelected:function(selected, options) {
 
         return options.fn(this).replace(

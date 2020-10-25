@@ -1,35 +1,31 @@
-<form method="POST" id="listABookForm"  enctype="multipart/form-data"  name="general-form">
+<form id="listABookForm" method="post" enctype="multipart/form-data" action="/profile/edit" name="general-form">
     <div class="row">
 
-        <div class="col-12 col-md-7 ">
-            <h5>Edit Form</h5>
-            <a href="/bookformtips" target="_blank">Tips for uploading books</a>
+        <div class="col-12 col-md-7">
+            <h5>Edit</h5>
+
             <div class="from-group row mb-4 pt-3">
-
-                <label for="title">Title</label>
                 <div class="input-group col-12">
 
-                    <input required autocomplete="off" type="text" value="{{ book.title }}" name="title" class="form-control" id="inlineFormInputGroup0" placeholder="Title">
+                    <input required autocomplete="off" value="{{book.title}}" type="text" name="title" class="form-control" id="inlineFormInputGroup0" placeholder="Title">
                 </div>
             </div>
             <div class="from-group row mb-4">
 
-                <label for="author">Author</label>
                 <div class="input-group col-12">
 
-                    <input type="text" autocomplete="off" value="{{ book.bookAuthor }}" class="form-control" id="inlineFormInputGroup1" placeholder="Author" name="author">
+                    <input type="text" autocomplete="off" value="{{book.bookAuthor}}" class="form-control" id="inlineFormInputGroup1" placeholder="Author" name="author">
                 </div>
             </div>
-
+            <a href="/howToFindISBN" target="_blank">What's this?</a>
             <div class="from-group row mb-4">
-                <label for="isbn">ISBN</label>
 
                 <div class="input-group col-12">
 
-                    <input type="text" autocomplete="off" value="{{ book.isbn }}" name="isbn" class="form-control" id="inlineFormInputGroup2" placeholder="ISBN">
+                    <input type="text" autocomplete="off" value="{{book.isbn}}" name="isbn" class="form-control" id="inlineFormInputGroup2" placeholder="ISBN">
 
                 </div>
-                <a href="/howToFindISBN" target="_blank">What's this?</a>
+
 
             </div>
 
@@ -38,56 +34,46 @@
 
 
             <div class="from-group row mb-4">
-                <label for="subject">Category</label>
+
                 <div class="input-group col-12">
-                    {{#selectSelected book.subject }}
-                    <select class="form-control" id="subjectChosen" name="subject" form="listABookForm" required>
-                        <option value="" >Select Category</option>
-                        <option value="Art" >Art</option>
-                        <option value="Business &amp; Economics">Business & Economics</option>
-                        <option value="Cooking">Cooking</option>
-                        <option value="English">English</option>
-                        <option value="Foreign Language">Foreign Language</option>
-                        <option value="Health and Fitness">Health & Fitness</option>
-                        <option value="History">History</option>
-                        <option value="Law and Political Science">Law & Political Science</option>
-                        <option value="Mathematics">Mathematics</option>
-                        <option value="Medical">Medical</option>
-                        <option value="Performing Arts">Performing Arts</option>
-                        <option value="Philosophy and Social Science">Philosphy & Social Science</option>
-                        <option value="Science">Science</option>
-                        <option value="Technology and Engineering">Technology & Engineering</option>
-                        <option value="Other">Other</option>
+                    <select id="upload-categories" class="form-control" name="subject[]" form="listABookForm" multiple="multiple" style="width: 500px" required>
+                        {{!-- The [] after subject, i.e. 'name="subject[]"' make this form always pass in an array, even if the array is only 1 item. Without this,
+                        it will only send a single item if only one is selected but an array if more than 1 are. This is simpler to deal with --}}
+                        {{!-- Handlebars comment: This select will be dynamically populated from /json/upload-categories.json --}}
+
+
                     </select>
-                    {{/selectSelected}}
+
 
                 </div>
             </div>
 
 
             <div class="from-group row mb-4">
-                <label for="price">Price</label>
+
                 <div class="input-group col-12">
-                    <input min="0" type="number" value="{{ book.price }}" name="price" id="price" step="0.01"  class="form-control" placeholder="Price" required>
+                    <input min="0" value="{{book.price}}" type="number" name="price" id="price" step="0.01"  class="form-control" placeholder="Price" required autocomplete="off">
                 </div>
             </div>
 
 
 
             <div class="from-group row mb-4">
-                <label for="description">Description</label>
+
                 <div class="input-group col-12">
 
-                    <textarea autocomplete="off" class="form-control" id="description" type="text" name="description" form="listABookForm" placeholder="Description">{{ book.description }}
-                    </textarea>
+                    <textarea autocomplete="off" class="form-control" id="description" type="text" name="description" form="listABookForm" placeholder="Description">{{book.description}}</textarea>
 
                 </div>
             </div>
 
 
+            {{! This is to keep send the ID associated with the post as well, so we know which book to edit}}
             <div class="from-group row mb-4">
-                <label for="images">Images</label>
                 <div class="input-group col-12">
+                    <input min="0" value="{{book._id}}" type="text" name="id" id="id"   class="form-control" placeholder="ID" required autocomplete="off" hidden>
+                </div>
+            </div>
 
 
                     <input class="form-control-file" type="file" name="images" multiple="multiple" />
@@ -98,6 +84,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Upload</button>
+            <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Edit</button>
 
         </div>
         <div class="col-12 col-md-5">
@@ -107,6 +94,14 @@
                 </li>
                 <li>
                     Fill out fields that apply to your item.
+                </li>
+                <li>
+                    Tips:
+                    <br>
+                    <a href="/bookformtips" target="_blank">Tips for uploading books</a>
+                    <br>
+                    <a href="/heicimages" target="_blank">Uploading HEIC images</a>
+
                 </li>
 
             </ul>

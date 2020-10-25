@@ -270,8 +270,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-router.route('/profile/edit')
-    .get(mid.requiresLogin, (request, response, next) => {
+router.route('/profile/edit', mid.requiresLogin)
+    .get((request, response, next) => {
 
 
         let {id} = request.query;

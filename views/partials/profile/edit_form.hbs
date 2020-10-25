@@ -36,7 +36,6 @@
             <div class="from-group row mb-4">
 
                 <div class="input-group col-12">
-                    {{#selectSelected_for_Arr book.subject}}{{/selectSelected_for_Arr}}
                     <select id="upload-categories" class="form-control" name="subject[]" form="listABookForm" multiple="multiple" style="width: 500px" required>
                         {{!-- The [] after subject, i.e. 'name="subject[]"' make this form always pass in an array, even if the array is only 1 item. Without this,
                         it will only send a single item if only one is selected but an array if more than 1 are. This is simpler to deal with --}}

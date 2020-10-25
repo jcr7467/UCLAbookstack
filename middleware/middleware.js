@@ -1,3 +1,13 @@
+/**
+ * Middleware function to protect routes from logged in users
+ */
+let ifLoggedIn = (request, response, next) => {
+    if(request.session && request.session.userId){
+        request.flash('error', 'Invalid route for signed in users');
+        return response.redirect('/profile');
+    }
+    return next();
+}
 
 let ifLoggedOut = (request, response, next) => {
     if(request.session && request.session.userId){
@@ -50,7 +60,7 @@ let mustHaveEmailVerified = (request, response, next) => {
 
     if (response.locals.currentUserObject.emailverified === false){
 
-        request.flash('error', 'Please verify your email first you do that!')
+        request.flash('notice', 'Please verify your email first you do that!')
         return response.redirect('/profile/uploadbook')
     }else{
         return next();
@@ -59,10 +69,9 @@ let mustHaveEmailVerified = (request, response, next) => {
 
 };
 
-
-
 module.exports.mustHaveEmailVerified = mustHaveEmailVerified;
 module.exports.setFlash = setFlash;
 module.exports.adminOnly = adminOnly;
 module.exports.ifLoggedOut = ifLoggedOut;
 module.exports.requiresLogin = requiresLogin;
+module.exports.ifLoggedIn = ifLoggedIn;

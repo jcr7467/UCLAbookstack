@@ -5,6 +5,8 @@ const User = require('../models/user');
 
 let crypto = require('crypto');
 
+const mid = require('../middleware/middleware');
+
 let bcryptjs = require('bcryptjs');
 
 //OUR GMAIL SERVICE ONLY ALLOWS 500 EMAILS A DAY AS OF 06/20/20
@@ -25,7 +27,7 @@ let async = require('async')
 
 
 router.route('/signin')
-    .get((request, response, next) => {
+    .get(mid.ifLoggedIn, (request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
             layout: 'home-layout.hbs'
@@ -54,7 +56,7 @@ router.route('/signin')
 
 
 router.route('/signup')
-    .get((request, response, next) => {
+    .get(mid.ifLoggedIn, (request, response, next) => {
         let error = null
         if (request.query.valid) error = "Email is already taken"
         response.render('partials/signinout/signup', {
@@ -121,7 +123,7 @@ router.route('/signup')
 
 
 router.route('/forgot')
-    .get((request, response, next) => {
+    .get(mid.ifLoggedIn, (request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
             title: 'Forgot password'
         });

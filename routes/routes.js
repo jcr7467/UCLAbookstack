@@ -106,6 +106,7 @@ router.get('/heicimages', (request, response, next) => {
 
 router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
+
     let { id } = request.query;
 
 
@@ -142,7 +143,6 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 // TODO: Find why it returns nil
 router.get('/search/:pagenumber', (request,response, next) => {
-
     let { subject } = request.query,
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;

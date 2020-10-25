@@ -270,8 +270,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-router.route('/profile/edit')
-    .get(mid.requiresLogin, (request, response, next) => {
+router.route('/profile/edit', mid.requiresLogin)
+    .get((request, response, next) => {
 
 
         let {id} = request.query;
@@ -353,7 +353,7 @@ router.route('/profile/edit')
             },
             function (err, doc) {
                 request.flash('success', 'Book successfully updated');
-                return response.redirect('/mybooks');
+                return response.redirect('/profile');
             });
     });
 

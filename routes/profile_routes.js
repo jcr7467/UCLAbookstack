@@ -20,11 +20,14 @@ require('dotenv').config();
 
 /* Convert the image Like a boss */
 async function heicToJpeg(inputBuffer) {
+    /* heic-convert takes up the workload here */
     const outputBuffer = await convert({
         buffer: inputBuffer, // the HEIC file buffer
         format: 'JPEG', // output format
         quality: 1
     });
+
+    /* Instead of creating a file, just return the buffer so we don't have to do anything else */
     return outputBuffer;
 }
 
@@ -152,6 +155,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
         async.waterfall([
+            /* Needs to be async bc we need an 'await' */
             async function fileType(callback){
                 let allImages = true;
                 if(file_entries > 0) {
@@ -167,28 +171,46 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
 
+                        /* This means we have to edit the image */
                         if (picextension.toLowerCase() === ".heic"){
                             // console.log(request.files[i]);
+
+                            /* Get the new filename by taking old filename and replacing 'heic' with 'jpg' */
                             let newFilename = request.files[i].originalname.split('.').slice(0, -1).join('.') + '.jpg'
                             // console.log(request.files[i].originalname)
+
+                            /* Store output buffer, but pass in file buffer, await to get buffer data */
                             let outputBuffer = await heicToJpeg(request.files[i].buffer);
+
+                            /* Replace metadata in this */
                             request.files[i].originalname = newFilename;
                             request.files[i].mimetype = 'image/jpeg';
                             request.files[i].buffer = outputBuffer;
+
+                            /* Old error, commented for testing purposes */
                             // throw new Error('All uploaded files must be images');
                         }
                         // console.log(request.files[i]);
                     }
                 }
                 
-
+                 /* 
+                  * Check images, since it is now async, callbacks don't exist 
+                  * Throw errors
+                  * Return arrays
+                  */
                 if(allImages === false){
                     throw new Error('All uploaded files must be images');
                 }else{
-                    return ['dummy'];
+                    /* 
+                     * An empty return makes this fail, 
+                     * so don't return empty 
+                     */
+                    return ['dummy']; 
                 }
 
             },
+            /* Added a variable here [arg], mainly for dummy parameter from above */
             function getDetails([arg], callback) {
                 if (request.body.title  && request.body.price && request.body.subject){
 

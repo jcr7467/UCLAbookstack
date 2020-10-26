@@ -32,15 +32,16 @@ control.addEventListener("change", function(event) {
                     case "ffd8ffe8":
                         type = "image/jpeg";
                         break;
+                    case "00018":
                     case "00020":
                         type = "image/heic"
-                        window.location.replace("/invalidheic");
+                        // window.location.replace("/invalidheic");
                         console.log(window.location.hostname)
                         break;
                     default:
                         type = "unknown"; // Or you can use the blob.type as fallback
 
-                        window.location.replace("/invalidfiletype")
+                        window.location.replace("/" + header)
 
                         break;
                 }

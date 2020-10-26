@@ -55,9 +55,12 @@ router.route('/signin')
 
 router.route('/signup')
     .get((request, response, next) => {
+        let error = null
+        if (request.query.valid) error = "Email is already taken"
         response.render('partials/signinout/signup', {
             title: 'Sign Up',
-            layout: 'home-layout.hbs'
+            layout: 'home-layout.hbs',
+            error
         });
     })
     .post((request, response, next) => {
@@ -92,7 +95,10 @@ router.route('/signup')
 
                 //Uses schema's 'create' method to insert document into Mongo
                 User.create(userData, (error, user) => {
-                    if (error){ return next(error);}
+                    if (error) { 
+                        var string = encodeURIComponent('email taken');
+                        return response.redirect('/signup?valid=' + string);
+                    }
                     request.session.userId = user._id; // By setting this, we are "logging" them in
                     request.session.admin_level = user.admin_level
                     request.session.userObject = user;

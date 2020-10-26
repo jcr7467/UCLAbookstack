@@ -8331,25 +8331,6 @@ body:not(.touch-device).modal-open {
 .product:hover .product-hover {
   opacity: 1; }
 
-.mobile-pro-icons {
-  position: absolute;
-  top: 40px;
-  right: 5px;
-  top: 5px;
-  z-index: 9; }
-  .mobile-pro-icons .icon {
-    position: relative;
-    background-color: #c29958;
-    color: #fff;
-    display: flex;
-    width: 40px;
-    margin-bottom: 10px;
-    height: 40px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-    overflow: visible; }
-
 .listing .list2 {
   display: block !important; }
 

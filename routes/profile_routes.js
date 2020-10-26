@@ -4,8 +4,7 @@ const User = require('../models/user');
 const Book = require('../models/book');
 const mid = require('../middleware/middleware');
 const async = require('async');
-
-
+const convert = require('heic-convert');
 
 
 // For uploading pictures to AWS S3 for storage
@@ -19,6 +18,15 @@ let storage = multer.memoryStorage(),
 
 require('dotenv').config();
 
+/* Convert the image Like a boss */
+async function heicToJpeg(inputBuffer) {
+    const outputBuffer = await convert({
+        buffer: inputBuffer, // the HEIC file buffer
+        format: 'JPEG', // output format
+        quality: 1
+    });
+    return outputBuffer;
+}
 
 AWS.config.credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -144,7 +152,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
         async.waterfall([
-            function fileType(callback){
+            async function fileType(callback){
                 let allImages = true;
                 if(file_entries > 0) {
 
@@ -160,22 +168,28 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                         let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
 
                         if (picextension.toLowerCase() === ".heic"){
-                            console.log(request.files[i].originalname)
-                            return callback(new Error('Image was HEIC'), null)
+                            // console.log(request.files[i]);
+                            let newFilename = request.files[i].originalname.split('.').slice(0, -1).join('.') + '.jpg'
+                            // console.log(request.files[i].originalname)
+                            let outputBuffer = await heicToJpeg(request.files[i].buffer);
+                            request.files[i].originalname = newFilename;
+                            request.files[i].mimetype = 'image/jpeg';
+                            request.files[i].buffer = outputBuffer;
+                            // throw new Error('All uploaded files must be images');
                         }
-
+                        // console.log(request.files[i]);
                     }
                 }
-
+                
 
                 if(allImages === false){
-                    return callback(new Error('All uploaded files must be images'), null);
+                    throw new Error('All uploaded files must be images');
                 }else{
-                    return callback(null);
+                    return ['dummy'];
                 }
 
             },
-            function getDetails(callback) {
+            function getDetails([arg], callback) {
                 if (request.body.title  && request.body.price && request.body.subject){
 
 
@@ -199,7 +213,6 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         picURLs.push(amazonBucket + key);   // Makes an array of all the photo-storage-location references
                         picKeys.push(key);
-
 
                         if(file_entries > 0) {
                             let receivingparams = {
@@ -252,7 +265,6 @@ router.route('/profile/uploadbook', mid.requiresLogin)
             },
             function createBook(bookData, callback){
                 //uses schema's 'create' method to insert document into Mongo
-
                 Book.create(bookData, (error) => {
                     if (error) {return callback(error);}else{
                         return callback(null);

@@ -41,7 +41,7 @@ control.addEventListener("change", function(event) {
                     default:
                         type = "unknown"; // Or you can use the blob.type as fallback
 
-                        window.location.replace("/" + header)
+                        window.location.replace("/invalidheic");
 
                         break;
                 }

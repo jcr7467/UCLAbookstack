@@ -255,7 +255,7 @@ function populateActivePersonData(activePersonCntr) {
 //**********************************
 let $chatInp = $('#chat-input');
 $chatInp.on('input', function() {
-    if ($chatInp.val() !== "") {
+    if ($chatInp.val().trim() !== "") {
         $('#addAttachmentButton').addClass('d-none');
         $('#sendMessageButton').removeClass('d-none');
     }
@@ -282,7 +282,7 @@ $("#sendMessageButton").click(() => {
 $("#chat-input").keypress(function(e) {
     let keycode = e.keyCode ? e.keyCode : e.which;
     //keycode 13 is 'Enter' key
-    if (keycode == '13' && $('#chat-input').val() !== "") {
+    if (keycode == '13' && $('#chat-input').val().trim() !== "") {
         $('#addAttachmentButton').removeClass('d-none');
         $('#sendMessageButton').addClass('d-none');
         $("#chat-form").submit();

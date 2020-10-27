@@ -5,13 +5,20 @@
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Signup</li>
+                <li class="breadcrumb-item"><a href="/"><span class="header-text">Home</span></a></li>
+                <li class="header-text breadcrumb-item active" aria-current="page">Signup</li>
             </ol>
         </div>
     </nav>
 </div>
 
+{{#if error}}
+<div class="warning-pop-up container-fluid">
+    <div class="container">
+        Email is already taken. Please use another email.
+    </div>
+</div>
+{{/if}}
 <section class="pro-content login-content">
     <div class="container">
 

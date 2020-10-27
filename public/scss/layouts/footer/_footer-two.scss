@@ -152,15 +152,7 @@ $footer-bg : $gray-100;
     } 
 } 
 
-.bodyrtl{
-    .footer-two {
-        .single-footer .pro-socials{
-            p{
-                direction: ltr;
-            }
-        }
-    }
-}
+
 
 
 @media only screen and (max-width:1025px){

@@ -1,4 +1,5 @@
 .product-content{
+
     h2{
         font-family: $font-family-base-bold;
         font-size: $font-size-lg;
@@ -59,47 +60,8 @@
                 }
             }
       
-        .pro-rating{
-            .fas{
-                color: #ffba0a;
-            }
-            .btn-link{
-                font-weight: $font-weight-bolder;
-                color: rgb(184, 184, 184);
-                margin-left: 10px;
-            }
-        }
-        .pro-infos{
-            margin-top: 15px;
-            margin-bottom: 15px;
 
-            .pro-single-info{
-                display: flex;
-                line-height: 24px;
 
-                b{
-                    font-family: $font-family-base-bold;
-                    font-size: $font-size-base;
-                    color:$body-color;
-                    margin-right: 10px;
-                }
-
-                ul{
-                    display: inline-block;
-                    padding-left: 0;
-                    margin-bottom: 0;
-
-                    li{
-                        display: inline-block;
-
-                        &:after{
-                            content: ",";
-                        }
-                    }
-                }
-            }
-            
-        }
         
         
         .pro-sub-buttons{
@@ -187,37 +149,7 @@
             
         
         
-        
 
-        
-        .pro-banner-detial {
-            padding: 30px 18px 0 18px;
-            background-color: #f8f9fa;
-            text-align: center;
-            .banner-single {
-                margin-bottom: 30px;
-                .fas{
-                    color: $secondary;
-                    font-size: 1.53125rem;
-                    margin-bottom: 0.5rem;
-                }
-                .block {
-                    font-size: 12px;
-                    font-weight: 600;
-                    h4 {
-                        font-family: $font-family-base-bold;
-                        font-size: $font-size-base;
-                    }
-                    p{
-                        font-family: $font-family-base;
-                        font-size: $font-size-sm;
-                    }
-                }
-            }
-        }
-        
-           
- 
      }
      .related-product-content{
          margin-top: 100px;
@@ -243,6 +175,8 @@
         margin-top: 15px !important;
     }
 }
+
+
 @media only screen and (min-width:768px) and (max-width:991px){
     .product-content  {
         .product-detail-info {

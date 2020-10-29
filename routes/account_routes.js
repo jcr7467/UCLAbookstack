@@ -79,15 +79,12 @@ router.route('/signup')
                 /* Necessary CAPTCHA Values */
                 const secretKey = process.env.CAPTCHA_SECRET_KEY;
                 let token = request.body.token;
-                // let token;
                 let uri = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + token;
                 let options = {
                     method: 'POST',
                     uri: uri,
                     json: true
                 };
-
-                console.log(token)
 
                 /* Check that token is not empty */
                 if(!token) {
@@ -115,8 +112,6 @@ router.route('/signup')
                  *     score: 0.9
                  * }
                  */
-
-                console.log(captcha)
 
                 /* Check CAPTCHA responses */
                 if(captcha.name) {

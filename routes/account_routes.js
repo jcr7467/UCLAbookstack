@@ -3,6 +3,8 @@ let express = require("express"),
 
 const User = require('../models/user');
 
+let rp = require("request-promise");
+
 let crypto = require('crypto');
 
 let bcryptjs = require('bcryptjs');
@@ -63,27 +65,76 @@ router.route('/signup')
             error
         });
     })
-    .post((request, response, next) => {
-
+    .post(async (request, response, next) => {
         if (request.body.formfilt){
             // This will hopefully filter bots out,
             // users will not see formfilt section, only robots will
             response.redirect('/');
-
-        }else{
-
+        } else{
             if (request.body.email &&
                 request.body.password &&
                 request.body.firstname &&
                 request.body.lastname){
 
+                /* Necessary CAPTCHA Values */
+                const secretKey = process.env.CAPTCHA_SECRET_KEY;
+                let token = request.body.token;
+                // let token;
+                let uri = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + token;
+                let options = {
+                    method: 'POST',
+                    uri: uri,
+                    json: true
+                };
+
+                console.log(token)
+
+                /* Check that token is not empty */
+                if(!token) {
+                    /* Return error bc call error */
+                    let err = new Error('Something went wrong, please try to reregister');
+                    err.status = 401;
+                    return next(err);
+                }
+
+                /* Request-Promise call */
+                /* Store in easy to understand variable */
+                let captcha = await rp(options).then(function(parsedBody) {
+                    return parsedBody;
+                })
+                .catch(async function(err) {
+                    return err;
+                });
+
+                /* options.name -> We have an error message */
+                /*  Standard response 
+                 * {
+                 *     success: true,
+                 *     challenge_ts: '2020-10-29T07:57:00Z',
+                 *     hostname: 'localhost',
+                 *     score: 0.9
+                 * }
+                 */
+
+                console.log(captcha)
+
+                /* Check CAPTCHA responses */
+                if(captcha.name) {
+                    /* Return error bc call error */
+                    let err = new Error('reCAPTCHA error');
+                    err.status = 400;
+                    return next(err);
+                } else if(captcha.success == false || captcha.score < 0.6) {
+                    /* Return error bc bot suspicion */
+                    let err = new Error('Your CAPTCHA score seems a bit low. Please try to reregister');
+                    return next(err);
+                }
 
                 /*We only want users with UCLA emails to be able to make an account, so no one can troll and spam our website*/
                 if (!(request.body.email.endsWith("@ucla.edu") || request.body.email.endsWith("@g.ucla.edu"))){
                     let err = new Error("Please use your UCLA email (:")
                     return next(err);
                 }
-
 
                 //Creates Javascript object with form input data
                 let userData = {
@@ -104,9 +155,7 @@ router.route('/signup')
                     request.session.userObject = user;
                     return response.redirect('/');
                 });
-
-            }else{
-
+            } else{
                 let err = new Error('All fields required');
                 err.status = 400;
                 return next(err);

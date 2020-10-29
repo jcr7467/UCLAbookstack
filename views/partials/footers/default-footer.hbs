@@ -62,22 +62,11 @@
 
                         <h5>Sign up now</h5>
 
-                        {{!-- Inline script(s) for validating footer fields --}}
-                        <script type="text/javascript">
-                            function ValidateConfirmPassword() {
-                                var password = document.getElementById("pw").value;
-                                var confirmPassword = document.getElementById("pw_confirm").value;
-                                if (password != confirmPassword) {
-                                    document.getElementById("pwConfirmErrMsg").style.color="Red";
-                                    document.getElementById("pwConfirmErrMsg").innerHTML="Passwords do not match"
-                                    return false;
-                                }
-                                document.getElementById("pwConfirmErrMsg").innerHTML=""
-                                return true;
-                            }
-                        </script>
-
                         <form class="pro-signup" method="post" action="/signup" onSubmit="return ValidateConfirmPassword()">
+                            {{!-- Google CAPTCHA v3 --}}
+                            <div class="form-group">
+                                <input class="g-recaptcha" type="hidden" id="g-recaptcha" name="token">
+                            </div>
 
                             <div class="form-group">
                                 <input class="form-control" type="text" placeholder="First Name" name="firstname" required>

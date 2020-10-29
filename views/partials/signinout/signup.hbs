@@ -36,6 +36,9 @@
                 <div class="registration-process">
                     <h2 >New Account</h2>
                     <form action="/signup" method="post" name="general-form">
+                        <div class="form-group">
+                            <input class="g-recaptcha" type="hidden" id="g-recaptcha" name="token">
+                        </div>
                         <div class="from-group row mb-4">
                             <div class="input-group col-12">
 
@@ -94,7 +97,7 @@
 
 
                         <div class="from-group">
-                            <button class="btn btn-secondary swipe-to-top">Create Account</button>
+                            <button onclick="createToken()" class="btn btn-secondary swipe-to-top">Create Account</button>
 
                         </div>
                     </form>

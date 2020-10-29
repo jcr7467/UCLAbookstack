@@ -2,7 +2,7 @@
 .shop-bar-categories{
     .card{
         border:none;
-        margin-bottom: 15px;
+        margin-bottom: 0.5rem;
         
         .card-header{
             padding: 0;
@@ -17,30 +17,42 @@
             // This is for the title of the nested dropdown menu, inside of the categories^
             .dropdown-category{
                 font-family: $font-family-base-bold;
-                font-size:($font-size-base + 0.06rem);
+                font-size: $font-size-sm;
+            }
+            //a[aria-expanded="true"]:after{
+            //    content: " \f077";
+            //    font-family: "Font Awesome 5 Free"; font-weight: 900;
+            //    color: $body-color-secondary;
+            //    font-size: $font-size-sm;
+            //}
+            //a[aria-expanded="false"]:after{
+            //    content: " \f078";
+            //    font-family: "Font Awesome 5 Free"; font-weight: 900;
+            //    color: $body-color-secondary;
+            //    font-size: $font-size-sm;
+            //}
 
-            }
-            a[aria-expanded="true"]:after{
+            a[aria-expanded="true"] i:before{
+                font-style: normal;
                 content: "\f077";
-                font-family: "Font Awesome 5 Free"; font-weight: 900;
-                color: $body-color-secondary;
-                font-size: $font-size-sm;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 1rem;
             }
-            a[aria-expanded="false"]:after{
+            a[aria-expanded="false"] i:before{
+                font-style: normal;
                 content: "\f078";
-                font-family: "Font Awesome 5 Free"; font-weight: 900;
-                color: $body-color-secondary;
-                font-size: $font-size-sm;
+                font-family: "Font Awesome 5 Free";
+                font-weight: 900;
+                font-size: 1rem;
             }
         }
         .card-body{
             // For the labels next to each checkbox for each subject area
+            padding: 0.625rem 0;
             label{
-                font-size:($font-size-base + 0.05rem);
-            }
-            ul{
-                padding-left: 0;
-                margin-bottom: 0;
+                font-size:$font-size-sm - 0.05rem;
+                border-bottom: 0;
             }
 
             .extra-controls.form-inline {
@@ -65,111 +77,101 @@
                     }
                 }
             }
-           
-            .pro-options .color-selection, .pro-options .size-selection {
-                margin-bottom: 0;
-            }
-            
-            .pro-options .color-selection ul, .pro-options .size-selection ul{
-                display: block;
+        }
+        //Style for the filter check boxes inside the drop down
+        .bookFilterCategories {
+            padding-left: .5rem;
 
-                li{
-                    display: inline-block;
-                    margin-bottom: 15px;
+            label {
+                letter-spacing: 0 !important;
+                margin-bottom: 0;
+                width: 100%;
+            }
+
+            .categoryContainerDiv {
+                display: flex;
+                align-items: center;
+                margin-bottom: .35rem;
+                cursor: pointer;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                input {
+                    margin-right: .25rem;
+                    cursor: pointer;
+                }
+
+                label {
+                    cursor: pointer;
                 }
             }
-            
-                
-                    .brands{
-                        
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
-                        li{
-                            a{
-                                padding-top: 0;
-                                padding-bottom: 0;
-                               .fas{
-                                   margin-right: 7px;
-                               }
-                               &:hover{
-                                   color:$secondary;
-                               }
-                            }
-                          
-                        }
-                    
-                    }
-              
-            
         }
     }
 }
+
 .right-menu{
 
-    
-
-.brands-main{
-    border: $border-width solid $gray-300;
-    padding: 20px 15px;
-    h2{
-        font-size: $font-size-base;
-        margin: 0;
-    }
-    .brands{
-        margin-top: 7px;
-        ul{
-            
-            list-style: none;
+    .brands-main{
+        border: $border-width solid $gray-300;
+        padding: 20px 15px;
+        h2{
+            font-size: $font-size-base;
             margin: 0;
-            padding: 0;
-            li{
-                a{
-                    padding-top: 0;
-                    padding-bottom: 0;
-                   .fas{
-                       margin-right: 7px;
-                   }
-                   &:hover{
-                       color:$secondary;
-                   }
+        }
+        .brands{
+            margin-top: 7px;
+            ul{
+
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                li{
+                    a{
+                        padding-top: 0;
+                        padding-bottom: 0;
+                       .fas{
+                           margin-right: 7px;
+                       }
+                       &:hover{
+                           color:$secondary;
+                       }
+                    }
+
                 }
-              
+
             }
-        
         }
     }
+
+    .img-main{
+        border: $border-width solid $gray-300;
+        margin-top: 15px;
+    }
 }
-
-.img-main{
-    border: $border-width solid $gray-300;
-    margin-top: 15px;
- 
-}
-}
-
-
-
 
 
 
 .subject-areas-dropdown-link{
-        color: black;
-        text-decoration: none;
+    color: black;
+    text-decoration: none;
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+    align-items: center;
 }
 
-.subject-areas-dropdown-link:hover{
-        color: black;
-        text-decoration: none;
-}
+.subject-areas-dropdown-link {
+    color: black !important;
+    text-decoration: none !important;
 
-
-
-.card-body{
-    label {
-        display: inline;
-    }
-    input[type=checkbox] {
-        display: inline;
+    .card-body{
+        label {
+            display: inline;
+        }
+        input[type=checkbox] {
+            display: inline;
+        }
     }
 }

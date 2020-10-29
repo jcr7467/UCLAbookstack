@@ -1,145 +1,3 @@
-/*
-*
-* This function finds if the specific combination of
-* 'parameter_name' with value of 'parameter_value' is found in the url.
-*
-* If it is found, it returns it's index within the other parameters
-* If it is not found, then it simply returns -1
-*
-* */
-function URLParametersContained_returnIndex(parameter_name, parameter_value){
-
-    let url = window.location.href;// Returns full URL (https://example.com/path/example.html)
-    let split_url = url.split('?');
-
-    // If there are no parameters
-    if (split_url.length === 1){
-        return -1;
-    }else{
-
-        let url_parameters = split_url[1];
-        let split_parameters = url_parameters.split('&');
-        let searchingForThisParameter = parameter_name + '=' + parameter_value;
-
-        // Returns what index our parameter we are searching for is located at
-        // If not in array, returns -1
-        return $.inArray(searchingForThisParameter, split_parameters)
-    }
-}
-
-
-
-
-
-/*
-* This function removes a url parameter at a specific index,
-*  and then returns a string representing the new parameters without the one we removed
-* */
-function removeURLParameterAtIndex_returnNewParameters(index){
-
-    let url = window.location.href;
-    let split_url = url.split('?');
-
-    if(split_url.length > 1){
-        let url_parameters = split_url[1];
-        let split_parameters = url_parameters.split('&');
-
-        // Start at index # 'index' and only delete 1
-        split_parameters.splice(index, 1)
-
-        return split_parameters.join('&')
-
-    }
-}
-
-
-
-
-
-/*
-*
-* This function is basically the wrapper function for all the functionality
-* This calls removeURLParameterAtIndex_returnNewParameters and calls URLParametersContain_returnIndex.
-* This function takes two parameters, a parameter name and a parameter value, and if that value is found in the url,
-*  it will remove it from the url and redirect to the new url without that parameter
-*
-* */
-function removeParameterIfFound_andRedirect(parameter_name_searched_for, parameter_value_searched_for){
-
-    //Because some subject areas' abbreviations include an amprisand, we need to replace all '&' with '%26' and search the url for that
-    parameter_value_searched_for = parameter_value_searched_for.replace(/&/g, '%26');
-    let parameter_found_at_index = URLParametersContained_returnIndex(parameter_name_searched_for, parameter_value_searched_for);
-
-    // Meaning, it was found
-    if (parameter_found_at_index !== -1){
-        let new_parameters = removeURLParameterAtIndex_returnNewParameters(parameter_found_at_index)
-        let pathname = window.location.pathname; // Returns path only (/path/example.html)
-        let origin   = window.location.origin;   // Returns base URL (https://example.com)
-        let new_url = origin + pathname + '?' + new_parameters
-        window.location.replace(new_url)
-
-    }
-}
-
-
-
-
-
-/*
-*
-* This function appends the requested parameter to the back of the current url and returns the new url
-*
-* */
-function addURLParameter_returnNewParameters(parameter_name_hoping_to_insert, parameter_value_hoping_to_insert){
-    let url = window.location.href;
-    let split_url = url.split('?');
-
-
-    if (split_url.length === 1){ // if length equals 1, meaning if only the pathname and origin are the first element, and there are no parameters
-
-        return parameter_name_hoping_to_insert + '=' + parameter_value_hoping_to_insert;
-
-    }else { // if there is at least one parameter
-        let url_parameters = split_url[1];
-
-        return url_parameters + '&' + parameter_name_hoping_to_insert + '=' + parameter_value_hoping_to_insert
-    }
-}
-
-
-
-
-
-/*
-*
-* This function searches to see if the parameter is already in the url, if not, it calls a function to append the parameter to the end of the url
-* It then redirects the page to the new url
-*
-* */
-function addParameterIfNotFound_andRedirect(parameter_name_hoping_to_insert, parameter_value_hoping_to_insert){
-
-    //Because some subject areas' abbreviations include an amprisand, we need to replace all those actual amprisands with their url equivalent
-    // '&' ->'%26'
-    parameter_value_hoping_to_insert = parameter_value_hoping_to_insert.replace(/&/g, '%26');
-
-    let parameter_found_at_index = URLParametersContained_returnIndex(parameter_name_hoping_to_insert, parameter_value_hoping_to_insert);
-
-    // Meaning, it was not found
-    if (parameter_found_at_index === -1){
-
-        let new_parameters = addURLParameter_returnNewParameters(parameter_name_hoping_to_insert, parameter_value_hoping_to_insert);
-        let pathname = window.location.pathname;
-        let origin = window.location.origin;
-
-        let new_url = origin + pathname + '?' + new_parameters
-
-        window.location.replace(new_url)
-    }
-}
-
-
-
-
 
 /*
 * This promise dynamically renders the subject areas from the /json/upload-categories.json file
@@ -159,66 +17,76 @@ let renderSubjectAreasDynamically_Promise = new Promise(function (resolve, rejec
 
 
             let cardHeaderElement = document.createElement('div');
-            cardHeaderElement.classList.add('card-header')
+            cardHeaderElement.classList.add('card-header');
             cardElement.append(cardHeaderElement);
 
 
-
             // This is because some of our categories have spaces, and we cannot have spaces as ID's
-            let bodyIDSplit = key.split(' ');
-            let bodyID = bodyIDSplit.join('_')
+            let bodyID = key.split(' ').join('_');
 
             let dropdownOuterCategoryLink = document.createElement('a');
-            dropdownOuterCategoryLink.classList.add('dropdown-category')
-            dropdownOuterCategoryLink.classList.add('subject-areas-dropdown-link')
-            dropdownOuterCategoryLink.classList.add('mb-0')
-            dropdownOuterCategoryLink.setAttribute('href', '#collapse' + bodyID)
-            dropdownOuterCategoryLink.setAttribute('data-toggle', 'collapse')
-            dropdownOuterCategoryLink.setAttribute('aria-expanded', 'false')
-            dropdownOuterCategoryLink.setAttribute('aria-controls', 'collapse' + bodyID)
-            dropdownOuterCategoryLink.innerHTML = key
-            cardHeaderElement.append(dropdownOuterCategoryLink)
+            $(dropdownOuterCategoryLink).addClass('dropdown-category');
+            $(dropdownOuterCategoryLink).addClass('subject-areas-dropdown-link');
+            dropdownOuterCategoryLink.setAttribute('href', '#collapse' + bodyID);
+            dropdownOuterCategoryLink.setAttribute('data-toggle', 'collapse');
+            dropdownOuterCategoryLink.setAttribute('aria-expanded', 'false');
+            dropdownOuterCategoryLink.setAttribute('aria-controls', 'collapse' + bodyID);
+            dropdownOuterCategoryLink.innerHTML = key + "<i></i>";
+            cardHeaderElement.append(dropdownOuterCategoryLink);
 
 
             let cardBodyElementWrapper = document.createElement('div');
-            cardBodyElementWrapper.classList.add('collapse');
-
-            cardBodyElementWrapper.setAttribute('id', 'collapse' + bodyID)
-            cardBodyElementWrapper.setAttribute('data-parent', 'accordian') //This is a dummy attribute, but accordian doesnt seem to work without it
-            cardElement.append(cardBodyElementWrapper)
+            $(cardBodyElementWrapper).addClass('collapse');
+            $(cardBodyElementWrapper).addClass('bookFilterCategories');
+            cardBodyElementWrapper.setAttribute('id', 'collapse' + bodyID);
+            cardBodyElementWrapper.setAttribute('data-parent', 'accordian'); //This is a dummy attribute, but accordian doesnt seem to work without it
+            cardElement.append(cardBodyElementWrapper);
 
 
             let cardBodyElement = document.createElement('div');
             cardBodyElement.classList.add('card-body');
-            cardBodyElementWrapper.append(cardBodyElement)
+            cardBodyElementWrapper.append(cardBodyElement);
+
+            let categoryAllCheckbox = document.createElement('input');
+            categoryAllCheckbox.setAttribute('type', 'checkbox');
+            $(categoryAllCheckbox).addClass('category-all-checkbox');
+            categoryAllCheckbox.setAttribute('value', key);
+            categoryAllCheckbox.setAttribute('id', 'allcheckbox' + bodyID);
+
+            let categoryLabelForAllCheckbox = document.createElement('label');
+            categoryLabelForAllCheckbox.innerHTML = 'All';
+            categoryLabelForAllCheckbox.setAttribute('for', 'allcheckbox' + bodyID);
+
+            let categoryContainerDiv = document.createElement('div');
+            $(categoryContainerDiv).addClass('categoryContainerDiv');
+
+            categoryContainerDiv.append(categoryAllCheckbox);
+            categoryContainerDiv.append(categoryLabelForAllCheckbox);
+            cardBodyElement.append(categoryContainerDiv);
 
             $.each(value, function(index, JSONcategory){
 
-                let checkboxCategoryIDSplit = JSONcategory['category'].split(' ');
-                let checkboxCategoryID = checkboxCategoryIDSplit.join('_')
-
+                let checkboxCategoryID = JSONcategory['category'].split(' ').join('_')
 
                 let categoryCheckbox = document.createElement('input');
                 categoryCheckbox.setAttribute('type', 'checkbox');
-                categoryCheckbox.classList.add('category-checkbox');
-                categoryCheckbox.setAttribute('value', JSONcategory['category'])
-                categoryCheckbox.setAttribute('id', 'checkbox' + checkboxCategoryID)
+                $(categoryCheckbox).addClass('category-checkbox');
+                categoryCheckbox.setAttribute('value', JSONcategory['category']);
+                categoryCheckbox.setAttribute('id', 'checkbox' + checkboxCategoryID);
 
                 let categoryLabelForCheckbox = document.createElement('label');
-                categoryLabelForCheckbox.innerHTML = ' ' + JSONcategory['category'] // We add a space so its not smushed next to checkbox
-                categoryLabelForCheckbox.setAttribute('for', 'checkbox' + checkboxCategoryID)
+                categoryLabelForCheckbox.innerHTML = JSONcategory['category'];
+                categoryLabelForCheckbox.setAttribute('for', 'checkbox' + checkboxCategoryID);
 
-                let categoryBreak = document.createElement('br');
+                let categoryContainerDiv = document.createElement('div');
+                $(categoryContainerDiv).addClass('categoryContainerDiv');
+                categoryContainerDiv.append(categoryCheckbox);
+                categoryContainerDiv.append(categoryLabelForCheckbox);
+                cardBodyElement.append(categoryContainerDiv);
+            });
 
-                cardBodyElement.append(categoryCheckbox)
-                cardBodyElement.append(categoryLabelForCheckbox)
-                cardBodyElement.append(categoryBreak)
-
-
-            })
-
-            $('#all-categories-dropdown').append(dropdownOuterCategoryAccordion)
-            resolve()
+            $('#all-categories-dropdown').append(dropdownOuterCategoryAccordion);
+            resolve();
         })
     })
 })
@@ -239,7 +107,7 @@ function expandParentAccordian(checkboxDiv){
     try {
         let parentCardDiv = checkboxDiv.closest('.card');
         let relativeCardHeaderDiv = parentCardDiv.find('.dropdown-category');
-        relativeCardHeaderDiv[0].setAttribute('aria-expanded', 'true')
+        relativeCardHeaderDiv[0].setAttribute('aria-expanded', 'true');
 
 
         //For some reason this 'closest' function returns an array with 1 element in it, our result
@@ -262,39 +130,54 @@ function expandParentAccordian(checkboxDiv){
 * */
 function checkCheckboxesFromURLQuery(){
     let url = window.location.href;
-    let split_url = url.split('?')
+    let split_url = url.split('?');
 
 
     //First in array will be the actual origin and pathname
-    if (split_url.length > 1){
+    if (split_url.length > 1) {
 
-        let url_parameters = split_url[1]
+        let url_parameters = split_url[1];
         let split_parameters = url_parameters.split('&');
 
         for (let i = 0 ; i < split_parameters.length ; i++){
             let parameterNameAndValue = split_parameters[i].split('=');
 
-            let parameterName = parameterNameAndValue[0]
+            let parameterName = parameterNameAndValue[0];
             if (parameterName === 'subject'){
-                let parameterValue = parameterNameAndValue[1]
+                let parameterValue = parameterNameAndValue[1];
 
                 // We do this because in the url, a '&' will be represented as '%26'. So we need to translate that back if it is in the string
                 parameterValue = parameterValue.replace(/%26/g, '&');
 
-                let checkboxSubjectIDJoinedByUnderscores = parameterValue.split('+').join('_')
+                let checkboxSubjectIDJoinedByUnderscores = parameterValue.split('+').join('_');
                 let checkMe = 'checkbox' + checkboxSubjectIDJoinedByUnderscores;
-                let currCheckbox = $("[id='" + checkMe + "']")
+                let currCheckbox = $("[id='" + checkMe + "']");
                 currCheckbox.prop( "checked", true );
 
                 // If the width of the window is greater than 995 px, then expand the accordian
                 // The reasoning is that on a mobile device, the already expanded accordians are annoying.
                 // We turn into mobile mode when we read 991 px
                 if ($(window).width() > 995){
-                    expandParentAccordian(currCheckbox)
+                    expandParentAccordian(currCheckbox);
                 }
             }
 
         }
+
+        // Check each all checkbox that has every checkbox in the same subject also checked
+        $('.category-all-checkbox').each(function() {
+            let allCategoryiesChecked = true;
+
+            $(this).parent().parent().find('.category-checkbox').each(function() {
+                if (allCategoryiesChecked !== $(this).prop('checked')) {
+                    allCategoryiesChecked = false;
+                    return false;
+                }
+            });
+
+            $(this).prop('checked', allCategoryiesChecked);
+
+        });
     }
 
 }
@@ -313,18 +196,47 @@ function reactToSubjectAreaCheckboxChange(){
     // This is because when we first load the page, the dynamically rendered
     // categories do not have an event handler without .on()
     // (e.g. if we use $$('.category-checkbox').on('change') <- this wont work)
+
+
+    // Uncheck category-all-checkbox if any of the checkboxes in its same category are unchecked
     $(document).on('change', '.category-checkbox', function () {
-
-        // We join with a '+' because that will be translated as a space ' ' by the query parser
-        let parameter_value = $(this).val().replace(/ /g, '+')
-        if($(this).is(":checked")) {
-
-            addParameterIfNotFound_andRedirect('subject', parameter_value)
-        }else{
-
-            removeParameterIfFound_andRedirect('subject', parameter_value)
+        if(!$(this).is(":checked")) {
+            $(this).parent().parent().find('.category-all-checkbox').prop('checked', false);
         }
-    })
+    });
+
+
+
+    // When the check value of the 'All' checkbox is changed,
+    // set all check boxes in the same category the its equivalent check value
+    $(document).on('change', '.category-all-checkbox', function () {
+        $(this).parent().parent().find('.category-checkbox').prop('checked', $(this).is(":checked"));
+    });
+
+
+
+    // Loop through and append the values of all checked check boxes to the url as a query
+    // when the submit button is pressed.
+    $('#submitShopBarCategories').click(function() {
+        let location   = window.location.origin;   // Returns base URL (https://example.com)
+        let pathname = window.location.pathname; // Returns path only (/path/example.html)
+        let queryName = '?query=';
+        let new_url = location + pathname + queryName;
+        $('.shop-bar-categories').find('.category-checkbox:checked').each(function() {
+            let parameter_value = $(this).val().replace(/ /g, '+').replace(/&/g, '%26');
+
+            new_url += '&' + 'subject' + '=' + parameter_value;
+        });
+        window.location.replace(new_url);
+    });
+
+
+
+    //Reset the url to its default value without any subject area filters checked
+    $('#resetShopBarCategories').click(function() {
+        let new_url = window.location.origin + window.location.pathname + '?query=';
+        window.location.replace(new_url);
+    });
 }
 
 
@@ -333,13 +245,10 @@ function reactToSubjectAreaCheckboxChange(){
 
 $(document).ready(function(){
 
-
-
     renderSubjectAreasDynamically_Promise.then(function(){
         checkCheckboxesFromURLQuery();
     })
 
-
-    reactToSubjectAreaCheckboxChange()
+    reactToSubjectAreaCheckboxChange();
 
 });

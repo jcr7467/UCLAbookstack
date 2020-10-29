@@ -3,12 +3,9 @@
     <nav aria-label="breadcrumb">
         <div class="container">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item active">
-                    <a href="/"><span class="header-text">Home</span></a>
-                </li>
-                <li class="header-text breadcrumb-item active" aria-current="page">
-                    Search {{ title }}
-                </li>
+                <li class="breadcrumb-item active"><a href="/"><span class="header-text">Home</span></a></li>
+                <li class="breadcrumb-item active header-text" aria-current="page">Search {{ title }}</li>
+                
             </ol>
         </div>
     </nav>
@@ -68,22 +65,38 @@
         </div>
         <div class="row">
 
-            <div class="col-12 col-lg-3  d-lg-block d-xl-block right-menu">
+            <div class="col-12 col-lg-3 no-gutters d-lg-block d-xl-block right-menu">
 
                 {{!-- This dropdown menu, 'categories' will be populated dynamically from our json file in order to maintain scalability from our /json/upload-categories.json --}}
                 <div class="accordion shop-bar-categories" >
                     <div class="card">
-                        <div class="card-header" id="CardOne">
-                            <a href="#collapseOne" class="subject-areas-dropdown-link accordian-header mb-0"  data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                        <div class="border-bottom d-none d-lg-block" id="CardOne">
+                            <h4 class="text-uppercase">
                                 Subject Areas
+                            </h4>
+                        </div>
+                        <div class="card-header d-block d-lg-none" id="CardOne">
+                            <a href="#collapseOne" class="subject-areas-dropdown-link accordian-header mb-0"  data-toggle="collapse" aria-expanded="true" aria-controls="collapseOne">
+                                <h4 class="text-uppercase">
+                                    Subject Areas
+                                </h4>
+                                <i></i>
                             </a>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="CardOne" data-parent="#accordionExample1">
+                        <div id="collapseOne" class="collapse show d-lg-block" aria-labelledby="CardOne" data-parent="#accordionExample1">
                             <div class="card-body" id="all-categories-dropdown">
 
                                 {{!-- CATEGORIES WILL BE DYNAMICALLY RENDERED HERE, function found in 'search-page.js --}}
 
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="d-flex flex-column" style="width:50%">
+                                    <button id="resetShopBarCategories" class="btn btn-primary swipe-to-top" value="resetShopBarCategories">Reset</button>
+                                </div>
+                                <div class="d-flex flex-column" style="width:50%">
+                                    <button id="submitShopBarCategories" class="btn btn-secondary swipe-to-top" value="submitShopBarCategories">Submit</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -110,10 +123,16 @@
                                     <div class="col-12 col-sm-6  col-lg-4">
                                         <div class="product">
                                             <article>
-                                                <div>
+
+
+                                                <div class="">
+
+
                                                     <a href="/search/book?id={{ this._id }}">
                                                         <img class="img-fluid" src="{{ this.mainpicURL }}" alt="Product Image">
                                                     </a>
+
+
                                                 </div>
                                                 <div class="pro-description">
                                                   {{! could be used in the future/ just comment out

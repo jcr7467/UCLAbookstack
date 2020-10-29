@@ -323,10 +323,6 @@ label {
 input[type=checkbox] {
   display: inline; }
 
-.book-container {
-  width: 200px;
-  height: 270px; }
-
 .warning-pop-up {
   background-color: red;
   color: "white";
@@ -335,4 +331,4 @@ input[type=checkbox] {
 .header-text {
   font-size: large; }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=../css;/index.css.map */

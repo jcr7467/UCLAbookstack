@@ -50,6 +50,9 @@ let BookSchema = new mongoose.Schema({
     dateAdded:{
         type: Date,
         default: Date.now()
+    },
+    condition:{
+        type: String
     }
 });
 

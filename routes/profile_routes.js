@@ -239,7 +239,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                                 pictureKeys: picKeys,
                                 email: user.email,
                                 subject: request.body.subject,
-                                mainpicURL: picURLs[0]
+                                mainpicURL: picURLs[0],
+                                quality: request.body.condition
                             };
                             callback(null, bookData)
                         }
@@ -296,7 +297,8 @@ router.route('/profile/edit', mid.requiresLogin)
             {price} = request.body,
             {mainpic} = request.body,
             {id} = request.body,
-            {files} = request;
+            {files} = request,
+            {condition} = request.body;
 
         if (files.length > 0){ //This code only executes if a file is uploaded
             for(let i = 0 ; i < files.length ; i++){
@@ -348,7 +350,8 @@ router.route('/profile/edit', mid.requiresLogin)
                     'description': description,
                     'price': price,
                     'subject': subject,
-                    'mainpic': mainpic
+                    'mainpic': mainpic,
+                    'condition' : condition
                 }
             },
             function (err, doc) {

@@ -86,6 +86,8 @@ router.route('/signup')
                     json: true
                 };
 
+                console.log(token);
+
                 /* Check that token is not empty */
                 if(!token) {
                     /* Return error bc call error */

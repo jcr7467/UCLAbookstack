@@ -61,7 +61,7 @@
             {{!--When person-container is selected an ajax server request is submitted. Event located in client.js--}}
             {{#each myPenPals}}
                 {{#each this }}
-                <div class="person-container selling">
+                <div class="person-container{{!-- either selling or buying needs to be here --}}">
                     <div class="person-info">
                         <div class="person-name-and-icon">
                             <h5>{{ penpalFirstName}} {{ penpalLastName }}</h5>
@@ -203,9 +203,9 @@
                 <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
                         {{#if bookOwner}}
-                        <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top">{{newPenpalFirstname}} {{newPenpalLastname}}</h4>
+                        <h4 id="chat-person-name" class="col">{{newPenpalFirstname}} {{newPenpalLastname}}</h4>
                         {{else}}
-                            <h4 id="chat-person-name" class="col" data-toggle="tooltip" data-placement="top"></h4>
+                            <h4 id="chat-person-name" class="col"></h4>
                         {{/if}}
                     </div>
                     <div class="chat-book-info row">

@@ -117,42 +117,6 @@ let outputSocketMessage = (msg) => {
 
 
 
-$("#sendMessageButton").click(() => {
-    $('#addAttachmentButton').removeClass('d-none');
-    $('#sendMessageButton').addClass('d-none');
-    $chatform.submit();
-});
-
-
-
-$("#chat-input").keypress(function(e) {
-    let keycode = e.keyCode ? e.keyCode : e.which;
-    //keycode 13 is 'Enter' key
-    if (keycode == '13') {
-        $('#addAttachmentButton').removeClass('d-none');
-        $('#sendMessageButton').addClass('d-none');
-        $("#chat-form").submit();
-    }
-});
-
-
-
-$chatform.submit((e) => {
-    e.preventDefault();
-
-    let msg = $("#chat-input");
-    //socket.emit('chatMessage', msg);
-
-    socket.emit('clientToServerMessage', msg.val());
-
-    //Clear input
-    msg.val('');
-    if ($(window).width() >= 576)
-        msg.focus();
-});
-
-
-
 socket.on('serverToClientMessage', (message) => {
 
     outputSocketMessage(message);

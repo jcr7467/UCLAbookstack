@@ -1,19 +1,19 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url("../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Montserrat-ExtraBold';
-  src: url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
+  src: url("../../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url("../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  src: url("../../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -29,11 +29,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  background: var(--back-color); }
 
 .resize-animation-stopper * {
   animation: none !important;
@@ -139,7 +134,6 @@ body {
           align-items: center; }
           #message-container #people-select-container .person-container .person-info .person-name-and-icon h5 {
             font-family: "Montserrat-Regular", sans-serif;
-            font-size: 1em;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -148,7 +142,6 @@ body {
             padding-right: 1em; }
         #message-container #people-select-container .person-container .person-info .book-name h6 {
           font-family: "Montserrat-Regular", sans-serif;
-          font-size: .8em;
           color: #6c757d;
           line-height: 1.1;
           white-space: nowrap;
@@ -214,7 +207,6 @@ body {
         color: #28a745;
         content: 'Selling'; }
     #chat-container #chat-header #chat-person-book-info #chat-book-name {
-      font-family: "Montserrat-Regular", sans-serif;
       color: #6c757d;
       white-space: nowrap;
       overflow: hidden;

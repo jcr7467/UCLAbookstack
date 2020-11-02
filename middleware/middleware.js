@@ -67,6 +67,5 @@ let mustHaveEmailVerified = (request, response, next) => {
 module.exports.mustHaveEmailVerified = mustHaveEmailVerified;
 module.exports.setFlash = setFlash;
 module.exports.adminOnly = adminOnly;
-module.exports.ifLoggedOut = ifLoggedOut;
+module.exports.onlyForLoggedOutUsers = onlyForLoggedOutUsers;
 module.exports.requiresLogin = requiresLogin;
-module.exports.ifLoggedIn = ifLoggedIn;

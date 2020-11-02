@@ -306,7 +306,6 @@ router.route('/conversations').get((request, response, next) => {
                         })
                     }else{
 
-                        console.log(userMap)
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,

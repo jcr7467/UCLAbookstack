@@ -235,7 +235,6 @@ router.get('/search/:pagenumber', (request,response, next) => {
                 let numOfBooks = books.docs.length,
                     lowerRange = (pagenumber - 1) * itemOnPageLimit + 1,
                     upperRange = (pagenumber) * itemOnPageLimit - (books.limit - books.docs.length);
-                    console.log(books.page)
 
                 response.render('search_for_books', {
                     array: books.docs, // array of the actual books. books.docs refers to the actual books

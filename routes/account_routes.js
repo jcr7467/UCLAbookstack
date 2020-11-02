@@ -29,7 +29,7 @@ let async = require('async')
 
 
 router.route('/signin')
-    .get(mid.ifLoggedIn, (request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
             layout: 'home-layout.hbs'
@@ -89,7 +89,7 @@ router.route('/signup')
                     json: true
                 };
 
-                console.log(token);
+
 
                 /* Check that token is not empty */
                 if(!token) {
@@ -170,7 +170,7 @@ router.route('/signup')
 
 
 router.route('/forgot')
-    .get(mid.ifLoggedIn, (request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
             title: 'Forgot password'
         });
@@ -275,7 +275,7 @@ router.route('/reset')
             },
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
-                    console.log(request.body.password, "pass")
+
 
                     User.findOne({resetPasswordToken: request.body.token}).then((user) => {
                         user.password = request.body.password;

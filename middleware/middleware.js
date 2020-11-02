@@ -1,7 +1,7 @@
 /**
  * Middleware function to protect routes from logged in users
  */
-let ifLoggedIn = (request, response, next) => {
+let onlyForLoggedOutUsers = (request, response, next) => {
     if(request.session && request.session.userId){
         request.flash('error', 'Invalid route for signed in users');
         return response.redirect('/profile');
@@ -9,12 +9,7 @@ let ifLoggedIn = (request, response, next) => {
     return next();
 }
 
-let ifLoggedOut = (request, response, next) => {
-    if(request.session && request.session.userId){
-        return response.redirect('/mybooks');
-    }
-    return next();
-};
+
 
 /**
  * Middleware function for authorized user routes

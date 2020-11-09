@@ -17,7 +17,8 @@ router.get('/', (request, response) => {
 
     response.render('index', {
         title: "Home",
-        layout: "home-layout"
+        layout: "home-layout",
+        css_stylesheet: "pages/bookstack-home-page.min.css"
     });
 });
 
@@ -126,7 +127,8 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
             soldByThisUser: soldByThisUser,
             monthAdded: book.dateAdded.getMonth(),
             dayOfMonthAdded: book.dateAdded.getDate(),
-            yearAdded: book.dateAdded.getFullYear()
+            yearAdded: book.dateAdded.getFullYear(),
+            css_stylesheet: "pages/posted-item.min.css"
 
         });
     }).catch((err) => {
@@ -220,7 +222,8 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     upperRange: upperRange,
                     hasNextPage: books.hasNextPage,
                     hasPrevPage: books.hasPrevPage,
-                    itemOnPageLimit: itemOnPageLimit
+                    itemOnPageLimit: itemOnPageLimit,
+                    css_stylesheet: "pages/search-page.min.css"
                 })
             }).catch((err) => {
             next(err);
@@ -247,7 +250,8 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     nextpage:nextpage,
                     numOfBooks: numOfBooks,
                     lowerRange: lowerRange,
-                    upperRange: upperRange
+                    upperRange: upperRange,
+                    css_stylesheet: "pages/search-page.min.css"
                 })
             }).catch((err) => {
             next(err);

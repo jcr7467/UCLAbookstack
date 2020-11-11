@@ -203,19 +203,8 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
 
 router.route('/conversations').get((request, response, next) => {
-    //If this was even passed in, doesnt matter what it is, then
-    // it means they came from book page, and we need to manually find the user,
-    // bc they wont already have a conversation with them
-    if (request.query.newconvo){
-        let cameFromBookPage = true
-    }else{
-        let cameFromBookPage = false
-    }
 
-    // If this object was passed in, this means that we are creating a new conversation,
-    // and can't just select one from the left menu. If we just click on the conversations tab,
-    // then this value will be null.
-    let {bookOwner} = request.query;
+
 
 
 
@@ -291,21 +280,6 @@ router.route('/conversations').get((request, response, next) => {
 
                 }).then(([userMap, penpalCount]) => {
 
-                    if (bookOwner){
-                        User.findById(bookOwner).then(penpal => {
-                            response.render('conversation_list', {
-                                title: 'Messages',
-                                myPenPals: userMap,
-                                penpalCount: penpalCount,
-                                bookOwner : bookOwner,
-                                newPenpalFirstname: penpal.firstname,
-                                newPenpalLastname: penpal.lastname
-                            })
-                        }).catch(err => {
-                            next(err)
-                        })
-                    }else{
-
                         console.log(userMap)
                         response.render('conversation_list', {
                             title: 'Messages',
@@ -313,9 +287,6 @@ router.route('/conversations').get((request, response, next) => {
                             penpalCount: penpalCount,
                             bookOwner : bookOwner
                         })
-                    }
-
-
 
                 })
                 .catch(err => {

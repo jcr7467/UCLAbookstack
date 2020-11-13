@@ -169,10 +169,10 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         }
 
-                        let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+                        let bufferHead = request.files[i].buffer.toString('hex').substring(0,8);
 
                         /* This means we have to edit the image */
-                        if (picextension.toLowerCase() === ".heic"){
+                        if (bufferHead == "00000018" || bufferHead == "00000020"){
                             // console.log(request.files[i]);
 
                             /* Get the new filename by taking old filename and replacing 'heic' with 'jpg' */

@@ -66,7 +66,6 @@
                     </a>
                 </div>
                 {{#if (user_is_logged_in currentUser) }}
-                {{#if currentUserObject.hasConversationsWith.length}}
                 <div class="col-2 pl-0">
                     <div class="cart-dropdown dropdown">
                         <a class="cart-dropdown-toggle" href="/conversations" role="button"  aria-haspopup="true" aria-expanded="false">
@@ -75,7 +74,6 @@
 
                     </div>
                 </div>
-                {{/if}}
                 {{/if}}
 
 

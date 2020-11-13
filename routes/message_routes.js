@@ -154,8 +154,9 @@ router.post('/ajaxsendmessage', (request, response, next) => {
                 currentUser.hasConversationsWith.push({
                     thePenPal: penpalusername
                 })
-                currentUser.save()
-                request.session.user = currentUser;
+
+                currentUser.save();
+
             }
 
             return Promise.all([conversationFoundBool, currentUser, penpalUser])
@@ -212,6 +213,17 @@ router.route('/conversations').get((request, response, next) => {
 
     User.findById(request.session.userId).lean()
         .then(user => {
+
+
+
+            // Basically check for new conversations, so we have current/accurate data in Handlebars template
+            // B/c what if a user receives a message while already logged in,
+            // and the currentUserObject (what it's called in front end, but called userObject here, will fix this also) does not update until
+            // the current user's account is updated by them. This way, it will update
+            // if someone else sends them a message.
+            request.session.admin_level = user.admin_level
+            request.session.userObject = user;
+
 
             /*
              * given a value and an optional array (accum),
@@ -284,8 +296,7 @@ router.route('/conversations').get((request, response, next) => {
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,
-                            penpalCount: penpalCount,
-                            bookOwner : bookOwner
+                            penpalCount: penpalCount
                         })
 
                 })

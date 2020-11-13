@@ -9,7 +9,12 @@ $(document).ready(function () {
 
     $("#send_new_message_from_post_button").click(function () {
         $('#newsletterModal').modal('show');
+
     });
+
+
+
+
 
     $("#new_message_modal_form").submit(function (e) {
 
@@ -23,10 +28,13 @@ $(document).ready(function () {
         let room = userIDs[0].concat(userIDs[1])
         let msg = $("#new_message_text_textarea");
 
-        //Join room and send message, then hide modal
-        socket.emit('joinRoom', {myUserID, theirUserID, room});
-        socket.emit('clientToServerMessage', msg.val());
-        $('#newsletterModal').modal('hide');
+        if (msg.val().trim() !== ""){
+            //Join room and send message, then hide modal
+            socket.emit('joinRoom', {myUserID, theirUserID, room});
+            socket.emit('clientToServerMessage', msg.val());
+            $('#newsletterModal').modal('hide');
+        }
+
     })
 
 

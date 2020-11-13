@@ -63,6 +63,22 @@ const Conversation = require('./models/conversation');
 require('dotenv').config();
 
 /*
+* Allows us to send an email to our business email when an error on the website occurs
+* */
+let nodemailer = require('nodemailer');
+let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        type: 'OAuth2',
+        user: 'teambookstackucla@gmail.com',
+        clientId: process.env.GMAIL_CLIENT_ID,
+        clientSecret: process.env.GMAIL_CLIENT_SECRET,
+        refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+        accessToken: process.env.GMAIL_ACCESS_TOKEN
+    }
+});
+
+/*
 * Redirects all http traffic to https version of site
 * */
 app.use(sslRedirect());
@@ -398,6 +414,35 @@ app.use((request, response, next) => {
 * Here we call the 'error.hbs' file and pass in the error message and status
 * */
 app.use((err, request, response, next) => {
+
+
+    if (process.env.THIS_IS_DEPLOYED === 'True'){
+        // Our email contains some redundant url information, but all those fields are in the request object,
+        // so better safe than sorry
+        // cannot JSON.stringify request.connection because there is a circular reference within it, causing an error
+        let mailOptions = {
+            from: 'BookStack <teambookstackucla@gmail.com>',
+            to: 'teambookstackucla@gmail.com',
+            subject: 'BookStack Deployed Error',
+            text: 'There was an error encountered on deployed BookStack!! :/\n\n\n' +
+                'Error:\n' + err + '\n\n\n'+
+                'Status Code:\n' + request.statusCode + '\n\n\n'+
+                'Status Message:\n' + request.statusMessage + '\n\n\n'+
+                'Session:\n' + JSON.stringify(request.session, null, 2) + '\n\n\n'+
+                'Request Body:\n' + JSON.stringify(request.body, null, 2) + '\n\n\n'+
+                'Request Parameters:\n' + JSON.stringify(request.params, null, 2) + '\n\n\n'+
+                'Request Query:\n' + JSON.stringify(request.query, null, 2) + '\n\n\n'+
+                'Request Method:\n' + request.method + '\n\n\n'+
+                'Request Parsed Original URL:\n' + JSON.stringify(request._parsedOriginalUrl, null, 2) + '\n\n\n'+
+                'Request Original URL:\n' + request.originalUrl + '\n\n\n'+
+                'Request Parsed URL:\n' + JSON.stringify(request._parsedUrl, null, 2) + '\n\n\n'+
+                'Connection:\n' + request.connection + '\n\n\n'
+        };
+        transporter.sendMail(mailOptions, function (err) {
+            if(err){console.log("Nodemailer error: ", err)}
+        });
+    }
+
     response.status(err.status || 500);
     response.render('error', {
         message: err.message,

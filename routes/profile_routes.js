@@ -452,7 +452,7 @@ router.route('/profile/settings')
             return next(err);
         }
 
-        let emailRegistered = await User.findOne({email: email})
+        let emailCanBeRegistered = await User.findOne({email: email})
             .then(function(result) {
                 if(result != null) {
                     request.flash('error', 'Email already registered');
@@ -469,13 +469,13 @@ router.route('/profile/settings')
                 user.firstname = firstname;
                 user.lastname  = lastname;
                 user.email     = email;
-                if(emailRegistered) {
+                if(emailCanBeRegistered) {
                     user.save();
                 }
                 request.session.userObject = user;
             })
             .then(() => {
-                if(emailRegistered) {
+                if(emailCanBeRegistered) {
                     request.flash('success', 'Successfully updated preferences');
                     response.redirect('/profile');
                 }

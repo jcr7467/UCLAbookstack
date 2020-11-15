@@ -474,10 +474,8 @@ router.route('/profile/settings')
               request.session.userObject = user;
             })
             .then(() => {
-              if(emailCanBeRegistered) {
                 request.flash('success', 'Successfully updated preferences');
                 response.redirect('/profile');
-              }
             })
             .catch(err => {
               next(err);

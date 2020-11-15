@@ -471,8 +471,8 @@ router.route('/profile/settings')
                 user.email     = email;
                 if(emailCanBeRegistered) {
                     user.save();
+                    request.session.userObject = user;
                 }
-                request.session.userObject = user;
             })
             .then(() => {
                 if(emailCanBeRegistered) {

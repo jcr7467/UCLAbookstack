@@ -464,25 +464,25 @@ router.route('/profile/settings')
                 next(err);
             })
 
-        User.findOne({_id: request.session.userId})
+      if(emailCanBeRegistered) {
+            User.findOne({_id: request.session.userId})
             .then(user=> {
-                user.firstname = firstname;
-                user.lastname  = lastname;
-                user.email     = email;
-                if(emailCanBeRegistered) {
-                    user.save();
-                    request.session.userObject = user;
-                }
+              user.firstname = firstname;
+              user.lastname  = lastname;
+              user.email     = email;
+              user.save();
+              request.session.userObject = user;
             })
             .then(() => {
-                if(emailCanBeRegistered) {
-                    request.flash('success', 'Successfully updated preferences');
-                    response.redirect('/profile');
-                }
+              if(emailCanBeRegistered) {
+                request.flash('success', 'Successfully updated preferences');
+                response.redirect('/profile');
+              }
             })
             .catch(err => {
-                next(err);
+              next(err);
             })
+      }
 
 
 

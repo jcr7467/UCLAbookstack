@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import "../private/variables";
+//@import "../../../node_modules/bootstrap/scss/functions";
+//@import "../../../node_modules/bootstrap/scss/variables";
+//@import "../../../node_modules/bootstrap/scss/mixins/breakpoints";
+
+// Custom variables
+
+
+// Bootstrap and its default variables
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom Css
+@import "../private/animation";
+@import "../private/base";
+@import "../private/button";
+@import "../private/mixins";
+
+
+
+
+@import "../layouts/header/sticky-header";
+@import "../layouts/header/header-one";
+@import "../layouts/header/header-mobile";
+@import "../layouts/footer/footer-one";
+@import "../layouts/footer/footer-mobile";
+@import "chat";
+
+
+@import "../_responsive";

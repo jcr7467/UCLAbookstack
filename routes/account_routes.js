@@ -30,7 +30,8 @@ router.route('/signin')
     .get((request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
-            layout: 'home-layout.hbs'
+            layout: 'home-layout.hbs',
+            css_for_this_page: 'pages/signinandout-page.min.css'
         });
     })
     .post((request, response, next) => {
@@ -61,6 +62,7 @@ router.route('/signup')
         if (request.query.valid) error = "Email is already taken"
         response.render('partials/signinout/signup', {
             title: 'Sign Up',
+            css_for_this_page: 'pages/signinandout-page.min.css',
             layout: 'home-layout.hbs',
             error
         });
@@ -169,7 +171,8 @@ router.route('/signup')
 router.route('/forgot')
     .get((request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
-            title: 'Forgot password'
+            title: 'Forgot password',
+            css_for_this_page: 'pages/signinandout-page.min.css'
         });
     })
     .post((request, response, next) => {
@@ -247,7 +250,8 @@ router.route('/reset')
                 response.render('partials/signinout/resetpassword', {
                     token: token,
                     url: request.originalUrl,
-                    title: 'Reset'
+                    title: 'Reset',
+                    css_for_this_page: 'pages/signinandout-page.min.css'
                 });
             }
         });

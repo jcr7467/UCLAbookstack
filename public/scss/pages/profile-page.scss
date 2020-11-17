@@ -1,0 +1,35 @@
+// Custom variables
+@import "../private/variables";
+
+// Bootstrap and its default variables
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom Css
+@import "../private/animation";
+@import "../private/base";
+@import "../private/button";
+@import "../private/mixins";
+
+
+
+
+
+@import "../components/pagination";
+
+
+
+
+
+@import "../layouts/header/sticky-header";
+@import "../layouts/header/header-one";
+@import "../layouts/header/header-mobile";
+@import "../layouts/footer/footer-one";
+@import "../layouts/footer/footer-mobile";
+
+
+@import "../pages/profile";// Finished?
+
+@import "../pages/wishlist"; //Finished?
+
+
+@import "../_responsive";

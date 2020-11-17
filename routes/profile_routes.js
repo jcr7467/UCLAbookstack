@@ -80,7 +80,8 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
                 upperRange: upperRange,
                 hasNextPage: books.hasNextPage,
                 hasPrevPage: books.hasPrevPage,
-                itemOnPageLimit: itemOnPageLimit
+                itemOnPageLimit: itemOnPageLimit,
+                css_for_this_page: 'pages/profile-page.min.css'
             })
 
 
@@ -142,7 +143,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
         response.render('partials/profile/myprofile', {
             title: 'Upload Book',
-            page: 'upload'
+            page: 'upload',
+            css_for_this_page: 'pages/profile-page.min.css'
         });
 
 
@@ -315,7 +317,8 @@ router.route('/profile/edit', mid.requiresLogin)
                 response.render('partials/profile/myprofile', {
                     title: 'Edit',
                     page: 'edit',
-                    book: book
+                    book: book,
+                    css_for_this_page: 'pages/profile-page.min.css'
                 });
             })
 
@@ -438,7 +441,8 @@ router.route('/profile/settings')
     .get(mid.requiresLogin, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',
-            page: 'settings'
+            page: 'settings',
+            css_for_this_page: 'pages/profile-page.min.css'
 
         });
     })

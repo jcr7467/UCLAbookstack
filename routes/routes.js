@@ -18,7 +18,7 @@ router.get('/', (request, response) => {
     response.render('index', {
         title: "Home",
         layout: "home-layout",
-        css_stylesheet: "pages/bookstack-home-page.min.css"
+        css_for_this_page: "pages/bookstack-home-page.min.css"
     });
 });
 
@@ -26,15 +26,17 @@ router.get('/', (request, response) => {
 // Renders informational page which displays how to upload multiple pictures on BookStack
 router.get('/uploadpics', (request, response) => {
     response.render('multiple_pics_guide', {
-        title: 'Upload Multiple Pictures'
-    })
+        title: 'Upload Multiple Pictures',
+        css_for_this_page: 'pages/general-css.min.css'
+    });
 });
 
 
 // Renders informational terms of use page
 router.get('/termsofuse', (request, response) => {
     response.render('terms_and_conditions',{
-        title: 'Terms and Conditions'
+        title: 'Terms and Conditions',
+        css_for_this_page: 'pages/general-css.min.css'
     });
 });
 
@@ -51,7 +53,8 @@ router.get('/howitworks', (request, response) => {
 // Renders informational page showing users what a isbn number is and how to generally find it
 router.get('/howToFindISBN', (request, response) => {
     response.render('findISBN', {
-        title: 'Find ISBN'
+        title: 'Find ISBN',
+        css_for_this_page: 'pages/general-css.min.css'
     });
 });
 
@@ -60,7 +63,8 @@ router.get('/howToFindISBN', (request, response) => {
 // Would ideally start speaking more about other items you can post, not just books
 router.get('/bookformtips',(request, response) => {
     response.render('bookformtips', {
-        title: 'Book Form Tips'
+        title: 'Book Form Tips',
+        css_for_this_page: 'pages/general-css.min.css'
     });
 });
 
@@ -68,20 +72,23 @@ router.get('/bookformtips',(request, response) => {
 // Renders informational page of the privacy policy
 router.get('/privacyPolicy', (request, response) => {
     response.render('privacy', {
-        title: 'Privacy Policy'
+        title: 'Privacy Policy',
+        css_for_this_page: 'pages/general-css.min.css'
     });
 });
 
 // Renders informational page of an email where we can be reached
 router.get('/contact', (request, response) => {
     response.render('contact', {
-        title: 'Contact Us'
+        title: 'Contact Us',
+        css_for_this_page: 'pages/general-css.min.css'
     });
 });
 
 router.get('/heicimages', (request, response, next) => {
     response.render('heic_issues', {
-        title: 'HEIC Images'
+        title: 'HEIC Images',
+        css_for_this_page: 'pages/general-css.min.css'
     })
 })
 
@@ -128,7 +135,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
             monthAdded: book.dateAdded.getMonth(),
             dayOfMonthAdded: book.dateAdded.getDate(),
             yearAdded: book.dateAdded.getFullYear(),
-            css_stylesheet: "pages/posted-item.min.css"
+            css_for_this_page: "pages/post-page.min.css"
 
         });
     }).catch((err) => {
@@ -223,7 +230,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     hasNextPage: books.hasNextPage,
                     hasPrevPage: books.hasPrevPage,
                     itemOnPageLimit: itemOnPageLimit,
-                    css_stylesheet: "pages/search-page.min.css"
+                    css_for_this_page: "pages/search-page.min.css"
                 })
             }).catch((err) => {
             next(err);
@@ -251,7 +258,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     numOfBooks: numOfBooks,
                     lowerRange: lowerRange,
                     upperRange: upperRange,
-                    css_stylesheet: "pages/search-page.min.css"
+                    css_for_this_page: "pages/search-page.min.css"
                 })
             }).catch((err) => {
             next(err);

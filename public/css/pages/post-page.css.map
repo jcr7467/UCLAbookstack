@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "post-page.css",
+	"sources": [
+		"../../scss/pages/post-page.scss"
+	],
+	"names": [],
+	"mappings": ""
+}

@@ -169,10 +169,10 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         }
 
-                        let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+                        let bufferHead = request.files[i].buffer.toString('hex').substring(0,8);
 
                         /* This means we have to edit the image */
-                        if (picextension.toLowerCase() === ".heic"){
+                        if (bufferHead == "00000018" || bufferHead == "00000020"){
                             // console.log(request.files[i]);
 
                             /* Get the new filename by taking old filename and replacing 'heic' with 'jpg' */
@@ -445,7 +445,7 @@ router.route('/profile/settings')
 
         });
     })
-    .post(mid.requiresLogin, (request, response, next) => {
+    .post(mid.requiresLogin, async (request, response, next) => {
         let { firstname } = request.body,
             { lastname } = request.body,
             { email } = request.body;
@@ -454,22 +454,36 @@ router.route('/profile/settings')
             let err = new Error("Please use your UCLA email (:")
             return next(err);
         }
-        
-        User.findOne({_id: request.session.userId})
-            .then(user=> {
-                user.firstname = firstname;
-                user.lastname  = lastname;
-                user.email     = email;
-                user.save();
-                request.session.userObject = user;
-            })
-            .then(() => {
-                request.flash('success', 'Successfully updated preferences')
-                response.redirect('/profile')
-            })
-            .catch(err => {
+
+        let emailCanBeRegistered = await User.findOne({email: email})
+            .then(function(result) {
+                if(result != null) {
+                    request.flash('error', 'Email already registered');
+                    response.redirect('/profile/settings');
+                    return false;
+                }
+                return true;
+            }).catch(err => {
                 next(err);
             })
+
+      if(emailCanBeRegistered) {
+            User.findOne({_id: request.session.userId})
+            .then(user=> {
+              user.firstname = firstname;
+              user.lastname  = lastname;
+              user.email     = email;
+              user.save();
+              request.session.userObject = user;
+            })
+            .then(() => {
+                request.flash('success', 'Successfully updated preferences');
+                response.redirect('/profile');
+            })
+            .catch(err => {
+              next(err);
+            })
+      }
 
 
 

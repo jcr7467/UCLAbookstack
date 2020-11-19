@@ -498,3 +498,32 @@ input[type=checkbox] {
 .header-text {
   font-size: large;
 }
+
+.condition-container {
+  position: absolute;
+  top:2px;
+  right:2px;
+  padding:0.5em;
+  border-radius: 0.5em;
+  border : solid 1px white;
+}
+
+.New {
+  background-color: green;
+  color: White;
+}
+
+.Like.New {
+  background-color: blue;
+  color: white;
+}
+
+.Good {
+  background-color: orange;
+  color: black;
+}
+
+.Acceptable {
+  background-color: yellow;
+  color: black;
+}

@@ -67,6 +67,5 @@ BookSchema.pre("save", function (next) {
 });
 
 
-
 let Book = mongoose.model('Book', BookSchema);
 module.exports = Book;

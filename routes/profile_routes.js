@@ -334,6 +334,7 @@ router.route('/profile/edit', mid.requiresLogin)
             {files} = request,
             {condition} = request.body;
 
+
         if (files.length > 0){ //This code only executes if a file is uploaded
             for(let i = 0 ; i < files.length ; i++){
 

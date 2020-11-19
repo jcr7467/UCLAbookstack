@@ -91,19 +91,6 @@ router.get('/heicimages', (request, response, next) => {
 // PAGES THAT DON'T HAVE POST REQUESTS
 //
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 
@@ -281,12 +268,6 @@ router.get('/invalidfiletype', (request, response, next) => {
     err.status = 400
     next(err);
 })
-
-
-
-
-
-
 
 
 

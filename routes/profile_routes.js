@@ -446,7 +446,7 @@ router.route('/profile/settings')
 
         });
     })
-    .post(mid.requiresLogin, (request, response, next) => {
+    .post(mid.requiresLogin, async (request, response, next) => {
         let { firstname } = request.body,
             { lastname } = request.body,
             { email } = request.body;
@@ -455,22 +455,36 @@ router.route('/profile/settings')
             let err = new Error("Please use your UCLA email (:")
             return next(err);
         }
-        
-        User.findOne({_id: request.session.userId})
-            .then(user=> {
-                user.firstname = firstname;
-                user.lastname  = lastname;
-                user.email     = email;
-                user.save();
-                request.session.userObject = user;
-            })
-            .then(() => {
-                request.flash('success', 'Successfully updated preferences')
-                response.redirect('/profile')
-            })
-            .catch(err => {
+
+        let emailCanBeRegistered = await User.findOne({email: email})
+            .then(function(result) {
+                if(result != null) {
+                    request.flash('error', 'Email already registered');
+                    response.redirect('/profile/settings');
+                    return false;
+                }
+                return true;
+            }).catch(err => {
                 next(err);
             })
+
+      if(emailCanBeRegistered) {
+            User.findOne({_id: request.session.userId})
+            .then(user=> {
+              user.firstname = firstname;
+              user.lastname  = lastname;
+              user.email     = email;
+              user.save();
+              request.session.userObject = user;
+            })
+            .then(() => {
+                request.flash('success', 'Successfully updated preferences');
+                response.redirect('/profile');
+            })
+            .catch(err => {
+              next(err);
+            })
+      }
 
 
 

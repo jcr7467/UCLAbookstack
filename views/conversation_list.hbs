@@ -58,25 +58,59 @@
             <!--    </div>-->
             <!--</div>--}}
             <div id="people-select-container" class="row">
-            {{!--When person-container is selected an ajax server request is submitted. Event located in client.js--}}
-            {{#each myPenPals}}
-                {{#each this }}
-                <div class="person-container{{!-- either selling or buying needs to be here --}}">
-                    <div class="person-info">
-                        <div class="person-name-and-icon">
-                            <h5>{{ penpalFirstName}} {{ penpalLastName }}</h5>
-                            <p class="theirUserID">{{ penpalUserId }}</p>
-                            <p class="myUserID">{{ ../../currentUser }}</p>
-                        </div>
-                        <div class="book-name">
 
-                            {{!-- <h6>Temp bookname - Book name missing from penpal object</h6> --}}
 
+            {{#unless currentUserObject.emailverified}}
+                        <div style="margin: 70px">
+                            <hr>
+                            {{#if myPenPals.length}}
+                                <p>It looks like you have new messages!<br> Please <a href="/profile/uploadbook">verify your email</a> before seeing your messages :)</p>
+                            {{else}}
+                                <p>Well this is awkward... <br> Please <a href="/profile/uploadbook">verify your email</a> before sending messages :)</p>
+                            {{/if}}
+
+                            <hr>
                         </div>
+            {{else}}
+
+                {{#unless myPenPals.length}}
+                    <div style="margin: 70px">
+                        <hr>
+                        <p>Hmm... looks like you don't have any messages! <br>If you receive a message from a user or send a message, it will appear here.</p>
+                        <hr>
                     </div>
-                </div>
-                {{/each}}
-            {{/each}}
+
+
+                {{else}}
+
+
+                {{!--When person-container is selected an ajax server request is submitted. Event located in client.js--}}
+                    {{#each myPenPals}}
+                        {{#each this }}
+                            <div class="person-container{{!-- either selling or buying needs to be here --}}">
+                                <div class="person-info">
+                                    <div class="person-name-and-icon">
+                                        <h5>{{ penpalFirstName}} {{ penpalLastName }}</h5>
+                                        <p class="theirUserID">{{ penpalUserId }}</p>
+                                        <p class="myUserID">{{ ../../currentUser }}</p>
+                                    </div>
+                                    <div class="book-name">
+
+                                        {{!-- <h6>Temp bookname - Book name missing from penpal object</h6> --}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/each}}
+
+
+
+                {{/unless}}
+
+            {{/unless}}
+
+
 
                 {{!--
                 <div class="person-container buying">
@@ -202,22 +236,16 @@
             <div id="chat-header" class="row">
                 <div id="chat-person-book-info" class="col-9 col-sm-10 col-xl-11">
                     <div class="row">
-                        {{#if bookOwner}}
-                        <h4 id="chat-person-name" class="col">{{newPenpalFirstname}} {{newPenpalLastname}}</h4>
-                        {{else}}
+
                             <h4 id="chat-person-name" class="col"></h4>
-                        {{/if}}
+
                     </div>
                     <div class="chat-book-info row">
-                        {{#if bookOwner}}
-                            <h5 id="chat-buy-sell" class="new-conversation-div col-12 col-md-12 col-lg-12">New Conversation</h5>
 
-
-                        {{else}}
                             {{! This will come back when we have implemented the 'who is buyer who is seller' feature
                             <h5 id="chat-buy-sell"  class="col-4 col-md-3 col-lg-2"></h5>
                             <h5 id="chat-book-name" class="col-8 col-md-9 col-lg-10" data-toggle="tooltip" data-placement="top"></h5>}}
-                        {{/if}}
+
 
                     </div>
                 </div>
@@ -244,11 +272,9 @@
                 <form id="chat-form" class="col-10 col-md-11">
                     <input id="chat-input" type="text" placeholder="Type a message.."/>
                     <input type="text"  value="{{ currentUserObject._id }}" id="myUserID">
-                    {{#if bookOwner }}
-                        <input type="text"  value="{{ bookOwner }}" id="theirUserID">
-                    {{else}}
+
                         <input type="text"  value="" id="theirUserID">
-                    {{/if}}
+
                 </form>
 
                 <div id="chat-message-btn" class="col-2 col-md-1">

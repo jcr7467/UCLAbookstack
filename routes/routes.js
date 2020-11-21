@@ -126,7 +126,8 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
             soldByThisUser: soldByThisUser,
             monthAdded: book.dateAdded.getMonth(),
             dayOfMonthAdded: book.dateAdded.getDate(),
-            yearAdded: book.dateAdded.getFullYear()
+            yearAdded: book.dateAdded.getFullYear(),
+            javascript_for_this_page: "newConvoFromBookPage.js"
 
         });
     }).catch((err) => {

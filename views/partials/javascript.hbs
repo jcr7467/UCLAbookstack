@@ -22,18 +22,9 @@
 <script src="/js/file-validation.js"></script>
 <script src="/js/chat.js"></script>
 <script src="/js/registration.js"></script>
+<script src="/js/{{javascript_for_this_page}}"></script>
 
 
-
-{{!--
-//If bookOwner is passed in, then this means this is a new conversation
-and we must run this script in order to properly show the new page to the new user
---}}
-{{#if bookOwner}}
-<script src="/js/newConvoFromBookPage.js"></script>
-{{else}}
-<script src="/js/selectTopConversation.js"></script>
-{{/if}}
 
 
 

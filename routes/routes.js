@@ -135,7 +135,7 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
             monthAdded: book.dateAdded.getMonth(),
             dayOfMonthAdded: book.dateAdded.getDate(),
             yearAdded: book.dateAdded.getFullYear(),
-            css_for_this_page: "pages/post-page.min.css",
+            css_for_this_page: 'pages/post-page.min.css',
             javascript_for_this_page: "newConvoFromBookPage.js"
 
 

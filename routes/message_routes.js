@@ -296,7 +296,8 @@ router.route('/conversations').get((request, response, next) => {
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,
-                            penpalCount: penpalCount
+                            penpalCount: penpalCount,
+                            css_for_this_page: 'pages/chat-page.min.css'
                         })
 
                 })

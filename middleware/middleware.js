@@ -3,7 +3,7 @@
  */
 let onlyForLoggedOutUsers = (request, response, next) => {
     if(request.session && request.session.userId){
-        request.flash('error', 'Invalid route for signed in users');
+        request.flash('notice', 'Invalid route for signed in users');
         return response.redirect('/profile');
     }
     return next();

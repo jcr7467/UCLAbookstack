@@ -203,7 +203,9 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
 
 
-router.route('/conversations').get((request, response, next) => {
+
+router.route('/conversations').get(mid.onlyForLoggedInUsers,(request, response, next) => {
+
 
 
 

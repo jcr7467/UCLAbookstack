@@ -1,15 +1,20 @@
-
-let ifLoggedOut = (request, response, next) => {
+/**
+ * Middleware function to protect routes from logged in users
+ */
+let onlyForLoggedOutUsers = (request, response, next) => {
     if(request.session && request.session.userId){
-        return response.redirect('/mybooks');
+        request.flash('notice', 'Invalid route for signed in users');
+        return response.redirect('/profile');
     }
     return next();
-};
+}
+
+
 
 /**
  * Middleware function for authorized user routes
  */
-let requiresLogin = (request, response, next) => {
+let onlyForLoggedInUsers = (request, response, next) => {
     if(request.session && request.session.userId){
         return next();
     } else{
@@ -59,10 +64,8 @@ let mustHaveEmailVerified = (request, response, next) => {
 
 };
 
-
-
 module.exports.mustHaveEmailVerified = mustHaveEmailVerified;
 module.exports.setFlash = setFlash;
 module.exports.adminOnly = adminOnly;
-module.exports.ifLoggedOut = ifLoggedOut;
-module.exports.requiresLogin = requiresLogin;
+module.exports.onlyForLoggedOutUsers = onlyForLoggedOutUsers;
+module.exports.onlyForLoggedInUsers = onlyForLoggedInUsers;

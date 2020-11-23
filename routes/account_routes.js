@@ -7,6 +7,8 @@ let rp = require("request-promise");
 
 let crypto = require('crypto');
 
+const mid = require('../middleware/middleware');
+
 let bcryptjs = require('bcryptjs');
 
 //OUR GMAIL SERVICE ONLY ALLOWS 500 EMAILS A DAY AS OF 06/20/20
@@ -27,7 +29,7 @@ let async = require('async')
 
 
 router.route('/signin')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
             layout: 'home-layout.hbs'
@@ -56,7 +58,8 @@ router.route('/signin')
 
 
 router.route('/signup')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
+
         let error = null
         if (request.query.valid) error = "Email is already taken"
         response.render('partials/signinout/signup', {
@@ -86,7 +89,7 @@ router.route('/signup')
                     json: true
                 };
 
-                console.log(token);
+
 
                 /* Check that token is not empty */
                 if(!token) {
@@ -167,7 +170,7 @@ router.route('/signup')
 
 
 router.route('/forgot')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
             title: 'Forgot password'
         });
@@ -272,7 +275,7 @@ router.route('/reset')
             },
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
-                    console.log(request.body.password, "pass")
+
 
                     User.findOne({resetPasswordToken: request.body.token}).then((user) => {
                         user.password = request.body.password;

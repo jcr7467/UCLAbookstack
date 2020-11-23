@@ -294,9 +294,7 @@ router.route('/conversations').get(mid.onlyForLoggedInUsers,(request, response, 
 
                 }).then(([userMap, penpalCount]) => {
 
-
                         console.log(userMap)
-
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,

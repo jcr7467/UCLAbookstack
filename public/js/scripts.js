@@ -570,9 +570,7 @@ jQuery('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
     
   })
 
-jQuery(window).on('load',function(){
-    jQuery('#newsletterModal').modal('show');
-});
+
 
 //sticky header
 

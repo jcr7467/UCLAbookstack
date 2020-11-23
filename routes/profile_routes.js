@@ -40,7 +40,7 @@ AWS.config.credentials = {
 let s3 = new AWS.S3({});
 
 
-router.get('/profile',mid.requiresLogin, (request, response, next) => {
+router.get('/profile',mid.onlyForLoggedInUsers, (request, response, next) => {
 
     let { pagenumber } = request.query;
     let itemOnPageLimit = 5;
@@ -135,7 +135,7 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 });
 
 
-router.route('/profile/uploadbook', mid.requiresLogin)
+router.route('/profile/uploadbook', mid.onlyForLoggedInUsers)
     .get((request, response, next) => {
 
 
@@ -148,7 +148,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
     })
-    .post(upload.array('images', 7), (request, response, next) => {
+    .post(upload.array('images', 5), (request, response, next) => {
         let {files} = request;
         let file_entries = request.files.length;
 
@@ -163,7 +163,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                     for (let i = 0; i < file_entries; i++) {
 
                         let fileType = request.files[i].mimetype.split('/')[0];
-                        // console.log(fileType)
+
                         if (fileType !== 'image') {
                             allImages = false;
 
@@ -173,11 +173,11 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         /* This means we have to edit the image */
                         if (bufferHead == "00000018" || bufferHead == "00000020"){
-                            // console.log(request.files[i]);
+
 
                             /* Get the new filename by taking old filename and replacing 'heic' with 'jpg' */
                             let newFilename = request.files[i].originalname.split('.').slice(0, -1).join('.') + '.jpg'
-                            // console.log(request.files[i].originalname)
+
 
                             /* Store output buffer, but pass in file buffer, await to get buffer data */
                             let outputBuffer = await heicToJpeg(request.files[i].buffer);
@@ -190,7 +190,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
                             /* Old error, commented for testing purposes */
                             // throw new Error('All uploaded files must be images');
                         }
-                        // console.log(request.files[i]);
+
                     }
                 }
                 
@@ -304,7 +304,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-router.route('/profile/edit', mid.requiresLogin)
+router.route('/profile/edit', mid.onlyForLoggedInUsers)
     .get((request, response, next) => {
 
 
@@ -321,7 +321,9 @@ router.route('/profile/edit', mid.requiresLogin)
 
 
     })
-    .post(upload.array('photos', 7),(request, response, next) => {
+    .post(upload.array('images', 5),(request, response, next) => {
+        // The name in upload.array('images') <-- 'images' has to be the same as
+        // the html element that we use to upload images
         let {isbn} = request.body,
             {title} = request.body,
             {author} = request.body,
@@ -331,6 +333,7 @@ router.route('/profile/edit', mid.requiresLogin)
             {mainpic} = request.body,
             {id} = request.body,
             {files} = request;
+
 
         if (files.length > 0){ //This code only executes if a file is uploaded
             for(let i = 0 ; i < files.length ; i++){
@@ -347,7 +350,7 @@ router.route('/profile/edit', mid.requiresLogin)
                 if (fileType !== 'image') { return next(new Error('File must be an image')); }
 
                 let receivingparams = {
-                    Bucket: "bookstackuploadedphotos",
+                    Bucket: process.env.S3_BUCKET,
                     Key: picturekey,
                     Body: request.files[i].buffer,
                     ACL: 'public-read'
@@ -359,17 +362,17 @@ router.route('/profile/edit', mid.requiresLogin)
 
                 Book.findByIdAndUpdate(id, {$push:
                             {pictureKeys: picturekey,
-                                pictureLocations:'https://bookstackrotatedphotos.s3.amazonaws.com/' + picturekey}
+                                pictureLocations: process.env.S3_URL_PREFIX_FOR_RETRIEVAL + picturekey}
                     }, {new: true},
                     function(err, book){
                         if(err){return next(new Error('An error occurred while updating book'));}
                     });
+
                 Book.findByIdAndUpdate(id, {$pull: {pictureLocations: '/img/no_image_available.jpeg'}}, //removes the default "No image available" jpg if no image was initially uploaded
                     {new: true},
                     function(err, book){
                         if(err){return next(new Error('An error occurred while updating book'))}
                     });
-
             }
         }
 
@@ -435,19 +438,22 @@ router.get('/profile/delete', (request, response, next) => {
 
 
 router.route('/profile/settings')
-    .get(mid.requiresLogin, (request, response, next) => {
+    .get(mid.onlyForLoggedInUsers, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',
             page: 'settings'
 
         });
     })
-    .post(mid.requiresLogin, async (request, response, next) => {
+
+    .post(mid.onlyForLoggedInUsers, async (request, response, next) => {
+
         let { firstname } = request.body,
             { lastname } = request.body,
             { email } = request.body;
 
-        if(!(email.endsWith("@ucla.edu") || email.endsWith("@g.ucla.edu"))){
+        //Made required emails an environmental variable, so that scaling to other schools/etc. will be a bit easier
+        if(!(email.endsWith(process.env.EMAIL1) || email.endsWith(process.env.EMAIL2))){
             let err = new Error("Please use your UCLA email (:")
             return next(err);
         }

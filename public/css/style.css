@@ -2,19 +2,19 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url("../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Montserrat-ExtraBold';
-  src: url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
+  src: url("../../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url("../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  src: url("../../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -7350,7 +7350,7 @@ html.boxed body {
     max-width: 1200px; } }
 
 * {
-  letter-spacing: 1px; }
+  letter-spacing: 0.5px; }
 
 #alert-box {
   display: none; }
@@ -9862,7 +9862,7 @@ body:not(.touch-device).modal-open {
 
 .shop-bar-categories .card {
   border: none;
-  margin-bottom: 15px; }
+  margin-bottom: 0.5rem; }
   .shop-bar-categories .card .card-header {
     padding: 0;
     background-color: transparent;
@@ -9872,54 +9872,54 @@ body:not(.touch-device).modal-open {
       font-size: 1.1875rem; }
     .shop-bar-categories .card .card-header .dropdown-category {
       font-family: "Montserrat-Bold", sans-serif;
-      font-size: 0.935rem; }
-    .shop-bar-categories .card .card-header a[aria-expanded="true"]:after {
+      font-size: 0.8125rem; }
+    .shop-bar-categories .card .card-header a[aria-expanded="true"] i:before {
+      font-style: normal;
       content: "\f077";
       font-family: "Font Awesome 5 Free";
       font-weight: 900;
-      color: #000;
-      font-size: 0.8125rem; }
-    .shop-bar-categories .card .card-header a[aria-expanded="false"]:after {
+      font-size: 1rem; }
+    .shop-bar-categories .card .card-header a[aria-expanded="false"] i:before {
+      font-style: normal;
       content: "\f078";
       font-family: "Font Awesome 5 Free";
       font-weight: 900;
-      color: #000;
-      font-size: 0.8125rem; }
-  .shop-bar-categories .card .card-body label {
-    font-size: 0.925rem; }
-  .shop-bar-categories .card .card-body ul {
-    padding-left: 0;
-    margin-bottom: 0; }
-  .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group {
-    display: flex; }
-    .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span span {
-      margin-top: 0;
-      margin-right: 7px;
-      margin-left: 7px; }
-    .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span .numaric1 .numaric2 {
-      float: left; }
-    .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span .form-control {
-      width: 80px; }
-    .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group .numaric2 {
-      margin: 0 0 5px 8px; }
-  .shop-bar-categories .card .card-body .pro-options .color-selection, .shop-bar-categories .card .card-body .pro-options .size-selection {
-    margin-bottom: 0; }
-  .shop-bar-categories .card .card-body .pro-options .color-selection ul, .shop-bar-categories .card .card-body .pro-options .size-selection ul {
-    display: block; }
-    .shop-bar-categories .card .card-body .pro-options .color-selection ul li, .shop-bar-categories .card .card-body .pro-options .size-selection ul li {
-      display: inline-block;
-      margin-bottom: 15px; }
-  .shop-bar-categories .card .card-body .brands {
-    list-style: none;
-    margin: 0;
-    padding: 0; }
-    .shop-bar-categories .card .card-body .brands li a {
-      padding-top: 0;
-      padding-bottom: 0; }
-      .shop-bar-categories .card .card-body .brands li a .fas {
-        margin-right: 7px; }
-      .shop-bar-categories .card .card-body .brands li a:hover {
-        color: #2D68C4; }
+      font-size: 1rem; }
+  .shop-bar-categories .card .card-body {
+    padding: 0.625rem 0; }
+    .shop-bar-categories .card .card-body label {
+      font-size: 0.7625rem;
+      border-bottom: 0; }
+    .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group {
+      display: flex; }
+      .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span span {
+        margin-top: 0;
+        margin-right: 7px;
+        margin-left: 7px; }
+      .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span .numaric1 .numaric2 {
+        float: left; }
+      .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group span .form-control {
+        width: 80px; }
+      .shop-bar-categories .card .card-body .extra-controls.form-inline .form-group .numaric2 {
+        margin: 0 0 5px 8px; }
+  .shop-bar-categories .card .bookFilterCategories {
+    padding-left: .5rem; }
+    .shop-bar-categories .card .bookFilterCategories label {
+      letter-spacing: 0 !important;
+      margin-bottom: 0;
+      width: 100%; }
+    .shop-bar-categories .card .bookFilterCategories .categoryContainerDiv {
+      display: flex;
+      align-items: center;
+      margin-bottom: .35rem;
+      cursor: pointer; }
+      .shop-bar-categories .card .bookFilterCategories .categoryContainerDiv:last-child {
+        margin-bottom: 0; }
+      .shop-bar-categories .card .bookFilterCategories .categoryContainerDiv input {
+        margin-right: .25rem;
+        cursor: pointer; }
+      .shop-bar-categories .card .bookFilterCategories .categoryContainerDiv label {
+        cursor: pointer; }
 
 .right-menu .brands-main {
   border: 1px solid #dee2e6;
@@ -9947,17 +9947,19 @@ body:not(.touch-device).modal-open {
 
 .subject-areas-dropdown-link {
   color: black;
-  text-decoration: none; }
+  text-decoration: none;
+  justify-content: space-between;
+  display: flex;
+  width: 100%;
+  align-items: center; }
 
-.subject-areas-dropdown-link:hover {
-  color: black;
-  text-decoration: none; }
-
-.card-body label {
-  display: inline; }
-
-.card-body input[type=checkbox] {
-  display: inline; }
+.subject-areas-dropdown-link {
+  color: black !important;
+  text-decoration: none !important; }
+  .subject-areas-dropdown-link .card-body label {
+    display: inline; }
+  .subject-areas-dropdown-link .card-body input[type=checkbox] {
+    display: inline; }
 
 .top-bar {
   margin-bottom: 30px;
@@ -10565,19 +10567,19 @@ body:not(.touch-device).modal-open {
 
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url("../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Montserrat-ExtraBold';
-  src: url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
+  src: url("../../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url("../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  src: url("../../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -10593,11 +10595,6 @@ body:not(.touch-device).modal-open {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
-
-body {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  background: var(--back-color); }
 
 .resize-animation-stopper * {
   animation: none !important;
@@ -10703,7 +10700,6 @@ body {
           align-items: center; }
           #message-container #people-select-container .person-container .person-info .person-name-and-icon h5 {
             font-family: "Montserrat-Regular", sans-serif;
-            font-size: 1em;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -10712,7 +10708,6 @@ body {
             padding-right: 1em; }
         #message-container #people-select-container .person-container .person-info .book-name h6 {
           font-family: "Montserrat-Regular", sans-serif;
-          font-size: .8em;
           color: #6c757d;
           line-height: 1.1;
           white-space: nowrap;
@@ -10778,7 +10773,6 @@ body {
         color: #28a745;
         content: 'Selling'; }
     #chat-container #chat-header #chat-person-book-info #chat-book-name {
-      font-family: "Montserrat-Regular", sans-serif;
       color: #6c757d;
       white-space: nowrap;
       overflow: hidden;
@@ -11698,19 +11692,19 @@ body {
 
 @font-face {
   font-family: 'Montserrat-Regular';
-  src: url("../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-
-@font-face {
-  font-family: 'Montserrat-ExtraBold';
-  src: url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
+  src: url("../../fonts/Montserrat-Regular/Montserrat-Regular.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.woff") format("woff"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.ttf") format("truetype"), url("../../fonts/Montserrat-Regular/Montserrat-Regular.svg#Montserrat-Regular") format("svg");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Montserrat-Bold';
-  src: url("../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  src: url("../../fonts/Montserrat-Bold/Montserrat-Bold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.woff") format("woff"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.ttf") format("truetype"), url("../../fonts/Montserrat-Bold/Montserrat-Bold.svg#Montserrat-Bold") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+
+@font-face {
+  font-family: 'Montserrat-ExtraBold';
+  src: url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.eot?#iefix") format("embedded-opentype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.woff") format("woff"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.ttf") format("truetype"), url("../../fonts/Montserrat-ExtraBold/Montserrat-ExtraBold.svg#Montserrat-ExtraBold") format("svg");
   font-weight: normal;
   font-style: normal; }
 

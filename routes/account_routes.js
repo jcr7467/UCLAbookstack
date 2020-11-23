@@ -3,7 +3,11 @@ let express = require("express"),
 
 const User = require('../models/user');
 
+let rp = require("request-promise");
+
 let crypto = require('crypto');
+
+const mid = require('../middleware/middleware');
 
 let bcryptjs = require('bcryptjs');
 
@@ -25,7 +29,7 @@ let async = require('async')
 
 
 router.route('/signin')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/signin', {
             title: 'Sign In',
             layout: 'home-layout.hbs'
@@ -54,33 +58,83 @@ router.route('/signin')
 
 
 router.route('/signup')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
+
+        let error = null
+        if (request.query.valid) error = "Email is already taken"
         response.render('partials/signinout/signup', {
             title: 'Sign Up',
-            layout: 'home-layout.hbs'
+            layout: 'home-layout.hbs',
+            error
         });
     })
-    .post((request, response, next) => {
-
+    .post(async (request, response, next) => {
         if (request.body.formfilt){
             // This will hopefully filter bots out,
             // users will not see formfilt section, only robots will
             response.redirect('/');
-
-        }else{
-
+        } else{
             if (request.body.email &&
                 request.body.password &&
                 request.body.firstname &&
                 request.body.lastname){
 
+                /* Necessary CAPTCHA Values */
+                const secretKey = process.env.CAPTCHA_SECRET_KEY;
+                let token = request.body.token;
+                let uri = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + token;
+                let options = {
+                    method: 'POST',
+                    uri: uri,
+                    json: true
+                };
+
+
+
+                /* Check that token is not empty */
+                if(!token) {
+                    /* Return error bc call error */
+                    let err = new Error('Something went wrong, please try to reregister');
+                    err.status = 401;
+                    return next(err);
+                }
+
+                /* Request-Promise call */
+                /* Store in easy to understand variable */
+                let captcha = await rp(options).then(function(parsedBody) {
+                    return parsedBody;
+                })
+                .catch(async function(err) {
+                    return err;
+                });
+
+                /* options.name -> We have an error message */
+                /*  Standard response 
+                 * {
+                 *     success: true,
+                 *     challenge_ts: '2020-10-29T07:57:00Z',
+                 *     hostname: 'localhost',
+                 *     score: 0.9
+                 * }
+                 */
+
+                /* Check CAPTCHA responses */
+                if(captcha.name) {
+                    /* Return error bc call error */
+                    let err = new Error('reCAPTCHA error');
+                    err.status = 400;
+                    return next(err);
+                } else if(captcha.success == false || captcha.score < 0.6) {
+                    /* Return error bc bot suspicion */
+                    let err = new Error('Your CAPTCHA score seems a bit low. Please try to reregister');
+                    return next(err);
+                }
 
                 /*We only want users with UCLA emails to be able to make an account, so no one can troll and spam our website*/
                 if (!(request.body.email.endsWith("@ucla.edu") || request.body.email.endsWith("@g.ucla.edu"))){
                     let err = new Error("Please use your UCLA email (:")
                     return next(err);
                 }
-
 
                 //Creates Javascript object with form input data
                 let userData = {
@@ -92,15 +146,16 @@ router.route('/signup')
 
                 //Uses schema's 'create' method to insert document into Mongo
                 User.create(userData, (error, user) => {
-                    if (error){ return next(error);}
+                    if (error) { 
+                        var string = encodeURIComponent('email taken');
+                        return response.redirect('/signup?valid=' + string);
+                    }
                     request.session.userId = user._id; // By setting this, we are "logging" them in
                     request.session.admin_level = user.admin_level
                     request.session.userObject = user;
                     return response.redirect('/');
                 });
-
-            }else{
-
+            } else{
                 let err = new Error('All fields required');
                 err.status = 400;
                 return next(err);
@@ -115,7 +170,7 @@ router.route('/signup')
 
 
 router.route('/forgot')
-    .get((request, response, next) => {
+    .get(mid.onlyForLoggedOutUsers, (request, response, next) => {
         response.render('partials/signinout/forgot_password.hbs', {
             title: 'Forgot password'
         });
@@ -220,7 +275,7 @@ router.route('/reset')
             },
             function updatePassword(user, callback){
                 if (request.body.password === request.body.confirmpassword) {
-                    console.log(request.body.password, "pass")
+
 
                     User.findOne({resetPasswordToken: request.body.token}).then((user) => {
                         user.password = request.body.password;

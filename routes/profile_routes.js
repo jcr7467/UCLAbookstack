@@ -4,8 +4,7 @@ const User = require('../models/user');
 const Book = require('../models/book');
 const mid = require('../middleware/middleware');
 const async = require('async');
-
-
+const convert = require('heic-convert');
 
 
 // For uploading pictures to AWS S3 for storage
@@ -19,6 +18,18 @@ let storage = multer.memoryStorage(),
 
 require('dotenv').config();
 
+/* Convert the image Like a boss */
+async function heicToJpeg(inputBuffer) {
+    /* heic-convert takes up the workload here */
+    const outputBuffer = await convert({
+        buffer: inputBuffer, // the HEIC file buffer
+        format: 'JPEG', // output format
+        quality: 1
+    });
+
+    /* Instead of creating a file, just return the buffer so we don't have to do anything else */
+    return outputBuffer;
+}
 
 AWS.config.credentials = {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -29,7 +40,7 @@ AWS.config.credentials = {
 let s3 = new AWS.S3({});
 
 
-router.get('/profile',mid.requiresLogin, (request, response, next) => {
+router.get('/profile',mid.onlyForLoggedInUsers, (request, response, next) => {
 
     let { pagenumber } = request.query;
     let itemOnPageLimit = 5;
@@ -124,7 +135,7 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 });
 
 
-router.route('/profile/uploadbook', mid.requiresLogin)
+router.route('/profile/uploadbook', mid.onlyForLoggedInUsers)
     .get((request, response, next) => {
 
 
@@ -137,45 +148,70 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
 
     })
-    .post(upload.array('images', 7), (request, response, next) => {
+    .post(upload.array('images', 5), (request, response, next) => {
         let {files} = request;
         let file_entries = request.files.length;
 
 
 
         async.waterfall([
-            function fileType(callback){
+            /* Needs to be async bc we need an 'await' */
+            async function fileType(callback){
                 let allImages = true;
                 if(file_entries > 0) {
 
                     for (let i = 0; i < file_entries; i++) {
 
                         let fileType = request.files[i].mimetype.split('/')[0];
-                        // console.log(fileType)
+
                         if (fileType !== 'image') {
                             allImages = false;
 
                         }
 
-                        let picextension = '.' + request.files[i].originalname.split('.')[request.files[i].originalname.split('.').length - 1];
+                        let bufferHead = request.files[i].buffer.toString('hex').substring(0,8);
 
-                        if (picextension.toLowerCase() === ".heic"){
-                            console.log(request.files[i].originalname)
-                            return callback(new Error('Image was HEIC'), null)
+                        /* This means we have to edit the image */
+                        if (bufferHead == "00000018" || bufferHead == "00000020"){
+
+
+                            /* Get the new filename by taking old filename and replacing 'heic' with 'jpg' */
+                            let newFilename = request.files[i].originalname.split('.').slice(0, -1).join('.') + '.jpg'
+
+
+                            /* Store output buffer, but pass in file buffer, await to get buffer data */
+                            let outputBuffer = await heicToJpeg(request.files[i].buffer);
+
+                            /* Replace metadata in this */
+                            request.files[i].originalname = newFilename;
+                            request.files[i].mimetype = 'image/jpeg';
+                            request.files[i].buffer = outputBuffer;
+
+                            /* Old error, commented for testing purposes */
+                            // throw new Error('All uploaded files must be images');
                         }
 
                     }
                 }
-
-
+                
+                 /* 
+                  * Check images, since it is now async, callbacks don't exist 
+                  * Throw errors
+                  * Return arrays
+                  */
                 if(allImages === false){
-                    return callback(new Error('All uploaded files must be images'), null);
+                    throw new Error('All uploaded files must be images');
                 }else{
-                    return callback(null);
+                    /* 
+                     * An empty return makes this fail, 
+                     * so don't return empty 
+                     */
+                    return ['dummy']; 
                 }
 
             },
-            function getDetails(callback) {
+            /* Added a variable here [arg], mainly for dummy parameter from above */
+            function getDetails([arg], callback) {
                 if (request.body.title  && request.body.price && request.body.subject){
 
 
@@ -199,7 +235,6 @@ router.route('/profile/uploadbook', mid.requiresLogin)
 
                         picURLs.push(amazonBucket + key);   // Makes an array of all the photo-storage-location references
                         picKeys.push(key);
-
 
                         if(file_entries > 0) {
                             let receivingparams = {
@@ -252,7 +287,6 @@ router.route('/profile/uploadbook', mid.requiresLogin)
             },
             function createBook(bookData, callback){
                 //uses schema's 'create' method to insert document into Mongo
-
                 Book.create(bookData, (error) => {
                     if (error) {return callback(error);}else{
                         return callback(null);
@@ -270,8 +304,8 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-router.route('/profile/edit')
-    .get(mid.requiresLogin, (request, response, next) => {
+router.route('/profile/edit', mid.onlyForLoggedInUsers)
+    .get((request, response, next) => {
 
 
         let {id} = request.query;
@@ -287,7 +321,9 @@ router.route('/profile/edit')
 
 
     })
-    .post(upload.array('photos', 7),(request, response, next) => {
+    .post(upload.array('images', 5),(request, response, next) => {
+        // The name in upload.array('images') <-- 'images' has to be the same as
+        // the html element that we use to upload images
         let {isbn} = request.body,
             {title} = request.body,
             {author} = request.body,
@@ -297,6 +333,7 @@ router.route('/profile/edit')
             {mainpic} = request.body,
             {id} = request.body,
             {files} = request;
+
 
         if (files.length > 0){ //This code only executes if a file is uploaded
             for(let i = 0 ; i < files.length ; i++){
@@ -313,7 +350,7 @@ router.route('/profile/edit')
                 if (fileType !== 'image') { return next(new Error('File must be an image')); }
 
                 let receivingparams = {
-                    Bucket: "bookstackuploadedphotos",
+                    Bucket: process.env.S3_BUCKET,
                     Key: picturekey,
                     Body: request.files[i].buffer,
                     ACL: 'public-read'
@@ -325,17 +362,17 @@ router.route('/profile/edit')
 
                 Book.findByIdAndUpdate(id, {$push:
                             {pictureKeys: picturekey,
-                                pictureLocations:'https://bookstackrotatedphotos.s3.amazonaws.com/' + picturekey}
+                                pictureLocations: process.env.S3_URL_PREFIX_FOR_RETRIEVAL + picturekey}
                     }, {new: true},
                     function(err, book){
                         if(err){return next(new Error('An error occurred while updating book'));}
                     });
+
                 Book.findByIdAndUpdate(id, {$pull: {pictureLocations: '/img/no_image_available.jpeg'}}, //removes the default "No image available" jpg if no image was initially uploaded
                     {new: true},
                     function(err, book){
                         if(err){return next(new Error('An error occurred while updating book'))}
                     });
-
             }
         }
 
@@ -353,7 +390,7 @@ router.route('/profile/edit')
             },
             function (err, doc) {
                 request.flash('success', 'Book successfully updated');
-                return response.redirect('/mybooks');
+                return response.redirect('/profile');
             });
     });
 
@@ -401,38 +438,55 @@ router.get('/profile/delete', (request, response, next) => {
 
 
 router.route('/profile/settings')
-    .get(mid.requiresLogin, (request, response, next) => {
+    .get(mid.onlyForLoggedInUsers, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',
             page: 'settings'
 
         });
     })
-    .post(mid.requiresLogin, (request, response, next) => {
+
+    .post(mid.onlyForLoggedInUsers, async (request, response, next) => {
+
         let { firstname } = request.body,
             { lastname } = request.body,
             { email } = request.body;
 
-        if(!(email.endsWith("@ucla.edu") || email.endsWith("@g.ucla.edu"))){
+        //Made required emails an environmental variable, so that scaling to other schools/etc. will be a bit easier
+        if(!(email.endsWith(process.env.EMAIL1) || email.endsWith(process.env.EMAIL2))){
             let err = new Error("Please use your UCLA email (:")
             return next(err);
         }
-        
-        User.findOne({_id: request.session.userId})
-            .then(user=> {
-                user.firstname = firstname;
-                user.lastname  = lastname;
-                user.email     = email;
-                user.save();
-                request.session.userObject = user;
-            })
-            .then(() => {
-                request.flash('success', 'Successfully updated preferences')
-                response.redirect('/profile')
-            })
-            .catch(err => {
+
+        let emailCanBeRegistered = await User.findOne({email: email})
+            .then(function(result) {
+                if(result != null) {
+                    request.flash('error', 'Email already registered');
+                    response.redirect('/profile/settings');
+                    return false;
+                }
+                return true;
+            }).catch(err => {
                 next(err);
             })
+
+      if(emailCanBeRegistered) {
+            User.findOne({_id: request.session.userId})
+            .then(user=> {
+              user.firstname = firstname;
+              user.lastname  = lastname;
+              user.email     = email;
+              user.save();
+              request.session.userObject = user;
+            })
+            .then(() => {
+                request.flash('success', 'Successfully updated preferences');
+                response.redirect('/profile');
+            })
+            .catch(err => {
+              next(err);
+            })
+      }
 
 
 

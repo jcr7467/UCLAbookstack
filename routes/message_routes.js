@@ -155,10 +155,12 @@ router.post('/ajaxsendmessage', (request, response, next) => {
                     thePenPal: penpalusername,
                     theSeller: username
                 })
+
                 currentUser.save()
                 // We reset the session user because we need to update it
                 // currentUser.save() does not update the one we track in a cookie throughout the site
                 request.session.user = currentUser;
+
             }
 
             return Promise.all([conversationFoundBool, currentUser, penpalUser])
@@ -206,13 +208,11 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
 
 
-router.route('/conversations').get((request, response, next) => {
+
+router.route('/conversations').get(mid.onlyForLoggedInUsers,(request, response, next) => {
 
 
-    // If this object was passed in, this means that we are creating a new conversation,
-    // and can't just select one from the left menu. If we just click on the conversations tab,
-    // then this value will be null.
-    let {bookOwner} = request.query;
+
 
 
 
@@ -220,6 +220,17 @@ router.route('/conversations').get((request, response, next) => {
 
     User.findById(request.session.userId).lean()
         .then(user => {
+
+
+
+            // Basically check for new conversations, so we have current/accurate data in Handlebars template
+            // B/c what if a user receives a message while already logged in,
+            // and the currentUserObject (what it's called in front end, but called userObject here, will fix this also) does not update until
+            // the current user's account is updated by them. This way, it will update
+            // if someone else sends them a message.
+            request.session.admin_level = user.admin_level
+            request.session.userObject = user;
+
 
             /*
              * given a value and an optional array (accum),
@@ -290,31 +301,12 @@ router.route('/conversations').get((request, response, next) => {
 
                 }).then(([userMap, penpalCount]) => {
 
-                    if (bookOwner){
-                        User.findById(bookOwner).then(penpal => {
-                            response.render('conversation_list', {
-                                title: 'Messages',
-                                myPenPals: userMap,
-                                penpalCount: penpalCount,
-                                bookOwner : bookOwner,
-                                newPenpalFirstname: penpal.firstname,
-                                newPenpalLastname: penpal.lastname
-                            })
-                        }).catch(err => {
-                            next(err)
-                        })
-                    }else{
-
                         console.log(userMap)
                         response.render('conversation_list', {
                             title: 'Messages',
                             myPenPals: userMap,
-                            penpalCount: penpalCount,
-                            bookOwner : bookOwner
+                            penpalCount: penpalCount
                         })
-                    }
-
-
 
                 })
                 .catch(err => {

@@ -13,24 +13,18 @@
 {{! <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script> }}
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+{{!-- reCAPTCHA v3 API --}}
+<script src="https://www.google.com/recaptcha/api.js?render=6LfETdwZAAAAAPCzh2iifnUayMlq_04G7Y1JkrD4"></script>
 
 {{!-- All custom scripts here --}}
 <script src="/js/scripts.js"></script>
 <script src="/js/client.js"></script>
 <script src="/js/file-validation.js"></script>
 <script src="/js/chat.js"></script>
+<script src="/js/registration.js"></script>
+<script src="/js/{{javascript_for_this_page}}"></script>
 
 
-
-{{!--
-//If bookOwner is passed in, then this means this is a new conversation
-and we must run this script in order to properly show the new page to the new user
---}}
-{{#if bookOwner}}
-<script src="/js/newConvoFromBookPage.js"></script>
-{{else}}
-<script src="/js/selectTopConversation.js"></script>
-{{/if}}
 
 
 

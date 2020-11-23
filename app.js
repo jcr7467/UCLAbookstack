@@ -448,7 +448,8 @@ app.use((err, request, response, next) => {
         message: err.message,
         error: {},
         error_code: err.status,
-        title: 'Error'
+        title: 'Error',
+        css_for_this_page: 'pages/error-landing-page.min.css'
     });
 });
 

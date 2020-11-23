@@ -76,11 +76,23 @@
             </div>
 
 
+            {{! -- We need to make changes to AWS first before we allow users to edit images. Ideally, we would want a
+            user to be able to delete an individual image, but we don't have the front end to handle that visual
+            --}}
+            {{! This input form NEEDS to have this ID, upload-files. We call a javascript file on it, so that
+            it checks what kind of file a user is uploading.
+            Checkout public/js/file-validation.js}}
+            {{!-- Commenting this out for now, waiting on front end design where a user can see all their currently uploaded images, so they can pick one as their main front picture
+            <input id="upload-files" class="form-control-file" type="file" name="images" multiple="multiple" />
+            <a href="/uploadpics" target="_blank">How do I upload multiple pictures?</a>
 
+            --}}
 
-            <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Edit</button>
+            <button type="submit" class="btn btn-secondary mt-3 swipe-to-top">Confirm Changes</button>
 
         </div>
+
+        {{!-- also commenting this out, they are tips for uploading images, which we can't do on edit page yet
         <div class="col-12 col-md-5">
             <ul>
                 <li>
@@ -100,6 +112,6 @@
 
             </ul>
         </div>
-
+        --}}
     </div>
 </form>

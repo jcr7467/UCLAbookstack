@@ -104,7 +104,8 @@ router.get('/heicimages', (request, response, next) => {
 
 
 
-router.get('/search/book', mid.requiresLogin, (request, response, next) => {
+router.get('/search/book', mid.onlyForLoggedInUsers, (request, response, next) => {
+
 
     let { id } = request.query;
 
@@ -143,7 +144,6 @@ router.get('/search/book', mid.requiresLogin, (request, response, next) => {
 
 // TODO: Find why it returns nil
 router.get('/search/:pagenumber', (request,response, next) => {
-
     let { subject } = request.query,
         userSearchTerm = request.query.query;
     let { pagenumber } = request.params;
@@ -242,7 +242,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
                     subject: subject, // This is also an array of subjects
                     searchedTerm: userSearchTerm,
                     title: userSearchTerm,
-                    currentPagenumber:books.page,
+                    currentPageNumber:books.page,
                     numberofPages:books.totalPages,
                     previouspage: previouspage,
                     nextpage:nextpage,
@@ -259,7 +259,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
 /**
  * Admin Page
  */
-router.get('/admintest', mid.adminOnly, mid.requiresLogin,(request, response, next) => {
+router.get('/admintest', mid.adminOnly, mid.onlyForLoggedInUsers,(request, response, next) => {
     response.render('adminpage', {
         title: "Adminpage",
         layout: "admin-layout"

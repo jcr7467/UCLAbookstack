@@ -202,7 +202,7 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
 
 
-router.route('/conversations').get((request, response, next) => {
+router.route('/conversations').get(mid.onlyForLoggedInUsers, (request, response, next) => {
     //If this was even passed in, doesnt matter what it is, then
     // it means they came from book page, and we need to manually find the user,
     // bc they wont already have a conversation with them

@@ -14,7 +14,7 @@ let onlyForLoggedOutUsers = (request, response, next) => {
 /**
  * Middleware function for authorized user routes
  */
-let requiresLogin = (request, response, next) => {
+let onlyForLoggedInUsers = (request, response, next) => {
     if(request.session && request.session.userId){
         return next();
     } else{
@@ -68,4 +68,4 @@ module.exports.mustHaveEmailVerified = mustHaveEmailVerified;
 module.exports.setFlash = setFlash;
 module.exports.adminOnly = adminOnly;
 module.exports.onlyForLoggedOutUsers = onlyForLoggedOutUsers;
-module.exports.requiresLogin = requiresLogin;
+module.exports.onlyForLoggedInUsers = onlyForLoggedInUsers;

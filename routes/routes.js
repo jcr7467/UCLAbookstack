@@ -104,7 +104,7 @@ router.get('/heicimages', (request, response, next) => {
 
 
 
-router.get('/search/book', mid.requiresLogin, (request, response, next) => {
+router.get('/search/book', mid.onlyForLoggedInUsers, (request, response, next) => {
 
 
     let { id } = request.query;
@@ -258,7 +258,7 @@ router.get('/search/:pagenumber', (request,response, next) => {
 /**
  * Admin Page
  */
-router.get('/admintest', mid.adminOnly, mid.requiresLogin,(request, response, next) => {
+router.get('/admintest', mid.adminOnly, mid.onlyForLoggedInUsers,(request, response, next) => {
     response.render('adminpage', {
         title: "Adminpage",
         layout: "admin-layout"

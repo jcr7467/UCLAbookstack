@@ -40,7 +40,7 @@ AWS.config.credentials = {
 let s3 = new AWS.S3({});
 
 
-router.get('/profile',mid.requiresLogin, (request, response, next) => {
+router.get('/profile',mid.onlyForLoggedInUsers, (request, response, next) => {
 
     let { pagenumber } = request.query;
     let itemOnPageLimit = 5;
@@ -135,7 +135,7 @@ router.get('/profile',mid.requiresLogin, (request, response, next) => {
 });
 
 
-router.route('/profile/uploadbook', mid.requiresLogin)
+router.route('/profile/uploadbook', mid.onlyForLoggedInUsers)
     .get((request, response, next) => {
 
 
@@ -304,7 +304,7 @@ router.route('/profile/uploadbook', mid.requiresLogin)
     });
 
 
-router.route('/profile/edit', mid.requiresLogin)
+router.route('/profile/edit', mid.onlyForLoggedInUsers)
     .get((request, response, next) => {
 
 
@@ -438,14 +438,14 @@ router.get('/profile/delete', (request, response, next) => {
 
 
 router.route('/profile/settings')
-    .get(mid.requiresLogin, (request, response, next) => {
+    .get(mid.onlyForLoggedInUsers, (request, response, next) => {
         response.render('partials/profile/myprofile', {
             title: 'Settings',
             page: 'settings'
 
         });
     })
-    .post(mid.requiresLogin, (request, response, next) => {
+    .post(mid.onlyForLoggedInUsers, (request, response, next) => {
         let { firstname } = request.body,
             { lastname } = request.body,
             { email } = request.body;

@@ -55,7 +55,7 @@ let mustHaveEmailVerified = (request, response, next) => {
 
     if (response.locals.currentUserObject.emailverified === false){
 
-        request.flash('notice', 'Please verify your email first you do that!')
+        request.flash('error', 'Please verify your email first you do that!')
         return response.redirect('/profile/uploadbook')
     }else{
         return next();

@@ -13,7 +13,7 @@ const mid = require('../middleware/middleware');
 
 
 //Renders the home page
-router.get('/', mid.mustHaveEmailVerified, (request, response) => {
+router.get('/', (request, response) => {
 
     response.render('index', {
         title: "Home",

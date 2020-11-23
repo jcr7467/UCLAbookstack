@@ -150,6 +150,7 @@ router.post('/ajaxsendmessage', (request, response, next) => {
 
             // Using the passed along bool, if the conversation was not found, then push
             // the penpal's id into the current user's 'hasConversationsWith' array
+            //We are saying that this user is the seller, because they are the one who is initiating the new conversation
             if(!conversationFoundBool){
                 currentUser.hasConversationsWith.push({
                     thePenPal: penpalusername,
@@ -172,6 +173,8 @@ router.post('/ajaxsendmessage', (request, response, next) => {
             // Using the passed along bool, if the conversation was not found, then push
             // the current user's id into the penpal's 'hasConversationsWith' array
             if (!conversationFoundBool){
+
+                //We are saying that this user is the seller, because they are the one who is initiating the new conversation
                 penpalUser.hasConversationsWith.push({
                     thePenPal: username,
                     theSeller: username
@@ -365,5 +368,53 @@ router.post('/ajaxmessageload', (request, response, next) => {
     })
 
 })
+
+
+
+
+router.get('/test', (request, response, next) => {
+
+
+
+    //5f75929865224f0004808c29
+
+    // User.findById(request.session.userId)
+    //     .then(user => {
+    //
+    //
+    //
+    //         // var photo = user.photos.filter(function (photo) {
+    //         //     return photo.title === 'My awesome photo';
+    //         // }).pop();
+    //         //
+    //         // console.log(photo); //logs { src: '/path/to/photo.png', title: 'My awesome photo' }
+    //
+    //         // let searchedConversation = user.hasConversationsWith.filter()
+    //
+    //
+    //
+    //
+    //
+    //         // response.send(user.hasConversationsWith)
+    //     })
+    //     .catch(err => {
+    //     next(err)
+    // })
+
+
+
+
+    let searched_penpal = ["5f75929865224f0004808c29"];
+    User.find(request.session.userId)
+        .populate('hasConversationsWith', null, { theSeller: { $in: searched_penpal } } )
+        .sort({'_id': 1})
+        .exec(function (err, users) {
+            users = users.filter(function(user){
+                return user.roles.length;
+            });
+            response.send(users, user.hasConversationsWith);
+        });
+
+});
 
 module.exports = router;

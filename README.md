@@ -27,11 +27,12 @@ BookStack runs for specific schools so all the books on the stack were put there
 *Major*: Mechanical Engineering  
 *School*: University of California, Los Angeles  
 *LinkedIn*: https://www.linkedin.com/in/bryan-simca/  
-  
+
+<!-- 
 ### Harry Ramli  
 *Major*: Computer Science    
 *School*: University of California, Los Angeles  
-*LinkedIn*: https://www.linkedin.com/in/harryramli/  
+*LinkedIn*: https://www.linkedin.com/in/harryramli/
   
 ### Moisey Alaev  
 *Major*: Mathematics of Computation  
@@ -46,4 +47,5 @@ BookStack runs for specific schools so all the books on the stack were put there
 ### Devin Yerasi  
 *Major*: Computer Science and Engineering  
 *School*: University of California, Los Angeles  
-*LinkedIn*: https://www.linkedin.com/in/dyerasi/  
+*LinkedIn*: https://www.linkedin.com/in/dyerasi/)
+-->

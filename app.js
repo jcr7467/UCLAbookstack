@@ -65,7 +65,7 @@ require('dotenv').config();
 /*
 * Redirects all http traffic to https version of site
 * */
-app.use(sslRedirect());
+//app.use(sslRedirect());
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////
 * DATABASE DRIVER CODE

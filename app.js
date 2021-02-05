@@ -54,6 +54,7 @@ const flash = require("connect-flash");
 /*
 * Models for our database objects
 * */
+
 const User = require("./models/user")
 const Conversation = require('./models/conversation');
 
@@ -61,6 +62,7 @@ const Conversation = require('./models/conversation');
 * Gives application access to environmental variables
 * */
 require('dotenv').config();
+
 
 /*
 * Allows us to send an email to our business email when an error on the website occurs
@@ -78,10 +80,12 @@ let transporter = nodemailer.createTransport({
     }
 });
 
+
 /*
 * Redirects all http traffic to https version of site
 * */
-app.use(sslRedirect());
+//app.use(sslRedirect());
+
 
 /* ////////////////////////////////////////////////////////////////////////////////////////////////
 * DATABASE DRIVER CODE
@@ -210,11 +214,20 @@ app.use('/', message_routes);
 // Run when client connects
 io.on('connection', socket => {
 
+    console.log("connected")
+
     //This variable will be used to track if a user is already in a room
     // If this variable is not null, then we leave the room it is set to and set it to the new room
     let currentRoom = null;
 
-    socket.on('joinRoom', ({myUserID, theirUserID, room}) => {
+    socket.on('joinRoom', (dormir) => {
+
+        console.log("joinedroom")
+        console.log(dormir.lng)
+
+        console.log("yeaea")
+        return
+
 
         /*
         * This section simply keeps track of rooms and leaves one room when another one is joined

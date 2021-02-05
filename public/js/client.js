@@ -55,6 +55,7 @@ $(".person-container").click((event) => {
     userIDs.sort();
     let room = userIDs[0].concat(userIDs[1])
 
+
     //join chatroom
     socket.emit('joinRoom', {myUserID, theirUserID, room});
 

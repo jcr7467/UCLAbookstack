@@ -286,6 +286,162 @@ router.get('/invalidfiletype', (request, response, next) => {
 
 
 
+router.post('/iossignin',(request, response, next) => {
+
+
+    console.log(request.body)
+
+
+
+
+    if (request.body.email && request.body.password) {
+        User.authenticate(request.body.email, request.body.password, (err, user) => {
+
+            if (err || !user) {
+
+                console.log("Failed")
+                response.status(404).send({"car":"carsss"})
+
+            } else {
+                request.session.userId = user._id;
+                request.session.admin_level = user.admin_level;
+                request.session.userObject = user;
+
+                response.send({
+                    "userID": user._id
+                });
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+})
+
+
+
+router.get('/iossignin',(request, response, next) => {
+
+
+
+    console.log("Q: ", request.query)
+
+
+
+
+    User.find({email: request.body.email}).then(user => {
+
+        let resp = {name: "BookStack", found: true};
+        let JSONresp = JSON.stringify(resp);
+
+        response.send(JSONresp)
+
+
+    }).catch(err => response.send(null))
+
+
+
+
+
+
+
+
+})
+
+
+router.get('/iosfetchprofileinfo', (request, response, next) => {
+
+    console.log(request.query)
+
+    User.findById(request.query.myID).then(user => {
+
+
+
+        response.send({
+            "userID": user._id,
+            "firstname": user.firstname,
+            "lastname": user.lastname
+
+        });
+
+    })
+
+    console.log("Lyin 100%")
+
+
+});
+
+
+
+router.get('/iosprofilesettings', (request, response, next) => {
+ // seems request.session is only persistent until app is restarted
+
+    console.log("come and go" , request.session.userId)
+    console.log("ohowowow,", request.query.userID)
+
+    User.findOne({_id: request.query.userID}).then(user => {
+
+        if (!user){
+
+            response.status(404).send({"error":"Error finding user"})
+            return
+
+        }
+
+        let jsonresponse = {
+            "email": user.email,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
+            "profilepicture": user.profilePictureURL
+        }
+
+        response.send(jsonresponse)
+        return
+
+    }).catch(err => {
+
+        response.status(500).send({"error":"Error finding user"})
+        return
+
+    })
+
+
+})
+
+
+
+router.get('/iosallposts', (request, response, next) => {
+    console.log("Hererere")
+
+
+    Book.find({}).then(books => {
+
+        //console.log(books)
+
+        return books
+
+    }).then(books => {
+        // console.log(books)
+        let JSONresp = JSON.stringify(books)
+
+        console.log("Sendinggg")
+        //console.log(books)
+        response.send(books)
+
+    }).catch(err => {
+        console.log(err)
+        response.send({"err":"err"})
+
+    })
+})
+
 
 
 
